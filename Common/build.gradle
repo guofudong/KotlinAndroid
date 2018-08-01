@@ -1,20 +1,15 @@
-if(isHomeModule.toBoolean()){//module
-    apply plugin: 'com.android.application'
-}else{//lib
-    apply plugin: 'com.android.library'
-}
-
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -30,10 +25,32 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation rootProject.ext.dependence.libSupportV7
+    implementation rootProject.ext.dependence.libKotlinJre7
+    implementation rootProject.ext.dependence.libDesign
+    implementation rootProject.ext.dependence.libRecyclerview
+
+    //glide
+    implementation rootProject.ext.dependence.libGlide
+    //retrofit
+    implementation rootProject.ext.dependence.libRetrofit
+    implementation rootProject.ext.dependence.libRetrofitConvert
+    implementation rootProject.ext.dependence.libRetrofitAdapter
+    //okhttp
+    implementation rootProject.ext.dependence.libOkhttp
+    implementation rootProject.ext.dependence.libokhttp3LoggingInterceptor
+    //rxkotlin
+    implementation rootProject.ext.dependence.libRxkotlin
+    //rxkotlin生命周期管理
+    implementation rootProject.ext.dependence.libRxlifecycle2
+    //dagger
+    implementation rootProject.ext.dependence.libDagger
+    //logger日志工具类
+    implementation rootProject.ext.dependence.libLogger
+
+
 }

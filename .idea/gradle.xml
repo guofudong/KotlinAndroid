@@ -10,6 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Common" />
             <option value="$PROJECT_DIR$/Home" />
+            <option value="$PROJECT_DIR$/Music" />
+            <option value="$PROJECT_DIR$/Player" />
+            <option value="$PROJECT_DIR$/Provider" />
+            <option value="$PROJECT_DIR$/User" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

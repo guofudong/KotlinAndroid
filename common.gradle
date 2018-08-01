@@ -1,0 +1,37 @@
+//第三方依赖库和版本号管理
+
+ext {
+    android = [compileSdkVersion: 28,
+               applicationId    : 'com.gradle.demo',
+               minSdkVersion    : 15,
+               targetSdkVersion : 28,
+               versionCode      : 1,
+               versionName      : '1.0.0',
+               multiDexEnabled  : true]
+
+    signConfigs = ['storeFile'    : 'sign.jks',
+                   'storePassword': '123456',
+                   'keyAlias'     : 'alias',
+                   'keyPassword'  : '123456']
+
+    java = ['javaVersion': JavaVersion.VERSION_1_7]
+
+
+    dependence = ['libSupportV7'                : 'com.android.support:appcompat-v7:28.0.0-beta01',
+                  'libOkhttp'                   : 'com.squareup.okhttp3:okhttp:3.11.0',
+                  'libKotlinJre7'               : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.30',
+                  'libRetrofit'                 : 'com.squareup.retrofit2:retrofit:2.4.0',
+                  'libRetrofitConvert'          : 'com.squareup.retrofit2:converter-gson:2.4.0',
+                  'libRetrofitAdapter'          : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+                  'libokhttp3LoggingInterceptor': 'com.squareup.okhttp3:logging-interceptor:3.11.0',
+                  'libRxkotlin'                 : 'io.reactivex:rxkotlin:2.0.0-RC1',
+                  'libDagger'                   : 'com.google.dagger:dagger:2.16',
+                  'libDaggerCompiler'           : 'com.google.dagger:dagger-compiler:2.16',
+                  'libRxlifecycle2'             : 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.2',
+                  'libGlide'                    : 'com.github.bumptech.glide:glide:4.7.1',
+                  'libRecyclerview'             : 'com.android.support:recyclerview-v7:28.0.0-beta01',
+                  'libDesign'                   : 'com.android.support:design:28.0.0-beta01',
+                  'libLogger'                   : 'com.orhanobut:logger:2.2.0']
+}
+
+

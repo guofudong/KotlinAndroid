@@ -1,2 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gfd.common" />
+    package="com.gfd.common" >
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+</manifest>
