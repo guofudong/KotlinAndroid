@@ -3,7 +3,7 @@ apply from: this.file('common.gradle')
 
 buildscript {
     ext.kotlin_version = '1.2.30'
-    ext.dagger_version = '2.16'
+    ext.dagger_version = '2.9'
     repositories {
         google()
         jcenter()
@@ -21,6 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 

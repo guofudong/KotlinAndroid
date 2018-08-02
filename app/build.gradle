@@ -31,16 +31,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api project(':Common')
     if(!isMusicModule.toBoolean()){
-        implementation project(':Music')
+        api project(':Music')
     }
     if(!isUserModule.toBoolean()){
-        implementation project(':User')
+        api project(':User')
     }
     if(!isPlayerModule.toBoolean()){
-        implementation project(':Player')
+        api project(':Player')
     }
     if(!isHomeModule.toBoolean()){
-        implementation project(':Home')
+        api project(':Home')
     }
 }

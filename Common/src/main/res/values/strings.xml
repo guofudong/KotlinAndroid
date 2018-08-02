@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Common</string>
+    <!--请求异常提示信息 -->
+    <string name="not_near_service_info2">敬请期待！</string>
+    <string name="connect_error">连接异常</string>
+    <string name="connect_timeout">连接超时</string>
+    <string name="bad_network">网络问题</string>
+    <string name="parse_error">解析异常</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="response_return_error">响应返回状态不为1，并且错误信息为空</string>
 </resources>

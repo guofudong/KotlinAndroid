@@ -18,6 +18,7 @@ ext {
 
 
     dependence = ['libSupportV7'                : 'com.android.support:appcompat-v7:28.0.0-beta01',
+                  'libSupportV4'                : 'com.android.support:support-v4:28.0.0-beta01',
                   'libOkhttp'                   : 'com.squareup.okhttp3:okhttp:3.11.0',
                   'libKotlinJre7'               : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.30',
                   'libRetrofit'                 : 'com.squareup.retrofit2:retrofit:2.4.0',
@@ -25,12 +26,13 @@ ext {
                   'libRetrofitAdapter'          : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
                   'libokhttp3LoggingInterceptor': 'com.squareup.okhttp3:logging-interceptor:3.11.0',
                   'libRxkotlin'                 : 'io.reactivex:rxkotlin:2.0.0-RC1',
-                  'libDagger'                   : 'com.google.dagger:dagger:2.16',
+                  'libDagger'                   : "com.google.dagger:dagger:${dagger_version}",
                   'libDaggerCompiler'           : 'com.google.dagger:dagger-compiler:2.16',
                   'libRxlifecycle2'             : 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.2',
-                  'libGlide'                    : 'com.github.bumptech.glide:glide:4.7.1',
+                  'libGlide'                    : "com.github.bumptech.glide:glide:3.7.0",
                   'libRecyclerview'             : 'com.android.support:recyclerview-v7:28.0.0-beta01',
                   'libDesign'                   : 'com.android.support:design:28.0.0-beta01',
+                  'libBottomBar'                : 'com.roughike:bottom-bar:2.3.1',
                   'libLogger'                   : 'com.orhanobut:logger:2.2.0']
 }
 

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -21,7 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -29,28 +29,31 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation rootProject.ext.dependence.libSupportV7
-    implementation rootProject.ext.dependence.libKotlinJre7
-    implementation rootProject.ext.dependence.libDesign
-    implementation rootProject.ext.dependence.libRecyclerview
+    api rootProject.ext.dependence.libSupportV7
+    api rootProject.ext.dependence.libSupportV4
 
+    api rootProject.ext.dependence.libKotlinJre7
+    api rootProject.ext.dependence.libDesign
+    api rootProject.ext.dependence.libRecyclerview
     //glide
-    implementation rootProject.ext.dependence.libGlide
+    api rootProject.ext.dependence.libGlide
     //retrofit
-    implementation rootProject.ext.dependence.libRetrofit
-    implementation rootProject.ext.dependence.libRetrofitConvert
-    implementation rootProject.ext.dependence.libRetrofitAdapter
+    api rootProject.ext.dependence.libRetrofit
+    api rootProject.ext.dependence.libRetrofitConvert
+    api rootProject.ext.dependence.libRetrofitAdapter
     //okhttp
-    implementation rootProject.ext.dependence.libOkhttp
-    implementation rootProject.ext.dependence.libokhttp3LoggingInterceptor
+    api rootProject.ext.dependence.libOkhttp
+    api rootProject.ext.dependence.libokhttp3LoggingInterceptor
     //rxkotlin
-    implementation rootProject.ext.dependence.libRxkotlin
+    api rootProject.ext.dependence.libRxkotlin
     //rxkotlin生命周期管理
-    implementation rootProject.ext.dependence.libRxlifecycle2
+    api rootProject.ext.dependence.libRxlifecycle2
     //dagger
-    implementation rootProject.ext.dependence.libDagger
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    api rootProject.ext.dependence.libDagger
     //logger日志工具类
-    implementation rootProject.ext.dependence.libLogger
-
+    api rootProject.ext.dependence.libLogger
+    //底部导航栏
+    api rootProject.ext.dependence.libBottomBar
 
 }

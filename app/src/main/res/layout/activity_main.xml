@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/rootLay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        app:bb_tabXmlResource="@xml/bottombar_tasb"
+        app:bb_inActiveTabColor="@color/tab_normal"
+        app:bb_activeTabColor="@color/tab_select"
+        app:bb_titleTextAppearance="@dimen/sp_14"/>
+
+
+</LinearLayout>

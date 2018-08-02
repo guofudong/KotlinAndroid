@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--主页底部tab文件颜色-->
+    <color name="tab_select">#ff4081</color>
+    <color name="tab_normal">#4b4a4a</color>
 </resources>
