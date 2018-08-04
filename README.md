@@ -1,5 +1,5 @@
 # VIPVideo
-基于模块化实现。
+基于组件化 + MVP + Retrofit + RxKotlin + Dagger2实现的一款用Kotlin语言实现的影视类应用。
 
 ## 模块化结构图
 
