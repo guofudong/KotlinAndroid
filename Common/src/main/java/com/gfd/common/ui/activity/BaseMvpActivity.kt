@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open abstract class BaseMvpActivity<T :BasePresenter>:BaseActivity(),BaseView{
+abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
@@ -23,7 +23,7 @@ open abstract class BaseMvpActivity<T :BasePresenter>:BaseActivity(),BaseView{
 
     lateinit var mProgressLoading: ProgressLoading
 
-    override fun initOperate(){
+    override fun initOperate() {
         initActivityInjection()
         injectComponent()
         mProgressLoading = ProgressLoading.create(this)

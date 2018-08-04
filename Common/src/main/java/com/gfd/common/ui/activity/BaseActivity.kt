@@ -10,13 +10,25 @@ import com.gfd.common.common.AppManager
  * @Email：878749089@qq.com
  * @descriptio：所有Activity的基类
  */
-open abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         AppManager.instance.addActivity(this)
         initOperate()
+        initView()
+        initData()
+        setListener()
+    }
+
+    abstract fun initView()
+
+    abstract fun initData()
+
+    /** 设置监听 */
+    open fun setListener() {
+
     }
 
     /**
