@@ -1,10 +1,10 @@
 package com.gfd.home
 
-import android.graphics.Color
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.GlideImageLoader
+import com.gfd.common.widgets.SpacesItemDecoration
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
@@ -14,18 +14,12 @@ import com.gfd.home.injection.DaggerVideoComponent
 import com.gfd.home.injection.VideoModule
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
-import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.github.jdsjlzx.recyclerview.ProgressStyle
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
-import com.github.jdsjlzx.ItemDecoration.SpacesItemDecoration
-import com.github.jdsjlzx.ItemDecoration.GridItemDecoration
-
-
-
-
 
 
 /**
@@ -44,6 +38,8 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     private lateinit var mVideoAdapter: VideoListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mBanner: Banner
+    private lateinit var imageDatas: List<BinnerData>
+    private lateinit var mVideoDatas: List<VideoItemData>
 
     override fun injectComponent() {
         DaggerVideoComponent.builder().activityComponent(mActivityComponent)
@@ -61,6 +57,8 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mVideoAdapter = VideoListAdapter(activity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         mRecyclerView.adapter = mLRecyclerViewAdapter
+        mRecyclerView.setLoadMoreEnabled(false)
+        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         //添加Head View
         val headView = LayoutInflater.from(context).inflate(R.layout.head_home, null, false)
         mBanner = headView.findViewById(R.id.mBanner)
@@ -69,12 +67,28 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
         mRecyclerView.addItemDecoration(SpacesItemDecoration.newInstance(
                 spacing, spacing, layoutManager.spanCount, resources.getColor(R.color.colorItemDecoration)))
-
     }
 
 
     override fun initData() {
         mPresenter.getVideoList()
+    }
+
+    override fun setListener() {
+        //轮播图点击事件
+        mBanner.setOnBannerListener {
+            val imgData = imageDatas.get(it)
+        }
+        //设置下拉刷新
+        mRecyclerView.setOnRefreshListener {
+            mRecyclerView.postDelayed({
+                mRecyclerView.refreshComplete(0)
+            }, 2 * 1000)
+        }
+        //item点击监听
+        mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
+            val itemData = mVideoDatas.get(position)
+        }
     }
 
     override fun showVideoList(data: VideoListData) {
@@ -86,15 +100,16 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
 
             override fun getSpanSize(gridLayoutManager: GridLayoutManager?, position: Int): Int {
                 val type = data.videoList.get(position).type
-                if(type == Concant.ITEM_TYPE_TITLE){
+                if (type == Concant.ITEM_TYPE_TITLE) {
                     return GRID_COLUMNS
-                }else{
+                } else {
                     return 1
                 }
             }
 
         })
-        mVideoAdapter.addAll(data.videoList)
+        mVideoDatas = data.videoList
+        mVideoAdapter.addAll(mVideoDatas)
         mLRecyclerViewAdapter.notifyDataSetChanged()
 
     }
@@ -104,6 +119,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
      * @param data VideoListData
      */
     private fun setBanner(data: List<BinnerData>) {
+        imageDatas = data
         val bannerImages = ArrayList<String>()
         val titles = ArrayList<String>()
         for (bannerUrl in data) {

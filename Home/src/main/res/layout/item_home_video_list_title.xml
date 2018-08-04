@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/dp_6"
-    android:paddingTop="@dimen/dp_6">
+    android:paddingTop="@dimen/dp_6"
+    android:paddingLeft="@dimen/dp_6"
+    android:paddingRight="@dimen/dp_6">
 
     <TextView
         android:id="@+id/tv_home_item_title"
