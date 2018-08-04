@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.gfd.common.injection.component.DaggerAppComponent
 import com.gfd.common.injection.module.AppMoudle
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+
+
 
 /**
  * @Author : 郭富东
@@ -17,6 +21,7 @@ open class BaseApplication : Application(){
     override fun onCreate() {
         super.onCreate()
         initInjection()
+        Logger.addLogAdapter(AndroidLogAdapter())
         context = this
     }
 

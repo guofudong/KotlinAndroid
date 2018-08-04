@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Home</string>
+    <string name="homeSerachHint">全网VIP影视搜索</string>
 </resources>

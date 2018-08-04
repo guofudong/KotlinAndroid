@@ -8,8 +8,7 @@ import com.gfd.common.mvp.view.BaseView
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open class BasePresenter<T : BaseView> {
+open interface BasePresenter{
 
-    lateinit var mView: T
 
 }

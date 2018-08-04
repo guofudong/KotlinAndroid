@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open abstract class BaseMvpActivity<T :BasePresenter<*>>:BaseActivity(),BaseView{
+open abstract class BaseMvpActivity<T :BasePresenter>:BaseActivity(),BaseView{
 
     @Inject
     lateinit var mPresenter: T

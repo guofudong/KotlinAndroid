@@ -1,6 +1,8 @@
 package com.gfd.common.ui.fragment
 
 import android.app.Activity
+import android.os.Bundle
+import android.view.View
 import com.gfd.common.common.BaseApplication
 import com.gfd.common.injection.component.DaggerActivityComponent
 import com.gfd.common.injection.module.ActivityMoudle
@@ -15,7 +17,7 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：MVP架构 Fragment的基类
  */
-open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
+open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
 
 
     @Inject
@@ -29,15 +31,28 @@ open abstract class BaseMvpFragment<T : BasePresenter<*>> : BaseFragment(), Base
         mProgressLoading = ProgressLoading.create(activity as Activity)
     }
 
-    private fun initActivityInjection() {
-        mActivityComponent = DaggerActivityComponent.builder()
-                .appComponent((activity?.application as BaseApplication).appComponent)
-                .activityMoudle(ActivityMoudle(activity  as Activity))
-                .build() as DaggerActivityComponent
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initData()
+        setListener()
     }
 
     /** 注册依赖关系 */
     abstract fun injectComponent()
+
+    abstract fun initView()
+
+    abstract fun initData()
+
+    open fun setListener() {}
+
+    private fun initActivityInjection() {
+        mActivityComponent = DaggerActivityComponent.builder()
+                .appComponent((activity?.application as BaseApplication).appComponent)
+                .activityMoudle(ActivityMoudle(activity as Activity))
+                .build() as DaggerActivityComponent
+    }
 
     override fun showLoading() {
         mProgressLoading.showLoading()

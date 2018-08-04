@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.youth.banner.Banner
+        android:id="@+id/mBanner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_220"
+        app:indicator_width ="@dimen/dp_6"
+        app:indicator_height="@dimen/dp_6"
+        app:indicator_drawable_selected="@drawable/sp_indicator_select"/>
+
+</RelativeLayout>

@@ -8,6 +8,6 @@ package com.gfd.common.common
  */
 open class BaseConstant{
     companion object {
-        const val BASE_URL = ""
+        const val BASE_URL = "http://www.vip-free.com/"
     }
 }

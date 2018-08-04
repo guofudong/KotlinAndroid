@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -55,5 +56,10 @@ dependencies {
     api rootProject.ext.dependence.libLogger
     //底部导航栏
     api rootProject.ext.dependence.libBottomBar
+    api rootProject.ext.dependence.libLRecyclerView
+    api rootProject.ext.dependence.libLJsoup
+    api rootProject.ext.dependence.libOkgo
+    api rootProject.ext.dependence.libBanner
+
 
 }
