@@ -14,5 +14,5 @@
 ![](/screenshot/mvp演示.png)
 
 ## 首页效果图
-![](/screenshot/home.mp4)
+![](/screenshot/home1.jpg) ![](/screenshot/home2.jpg)
 
