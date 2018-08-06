@@ -2,6 +2,7 @@ package com.gfd.home
 
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
+import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.GlideImageLoader
 import com.gfd.common.widgets.SpacesItemDecoration
@@ -14,6 +15,7 @@ import com.gfd.home.injection.DaggerVideoComponent
 import com.gfd.home.injection.VideoModule
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
+import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.github.jdsjlzx.recyclerview.ProgressStyle
 import com.orhanobut.logger.Logger
@@ -78,6 +80,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //轮播图点击事件
         mBanner.setOnBannerListener {
             val imgData = imageDatas.get(it)
+            toPlayer(imgData.link,imgData.imgUrl,imgData.name)
             Logger.e("banner ：${imgData.link}")
         }
         //设置下拉刷新
@@ -89,6 +92,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
             val itemData = mVideoDatas.get(position)
+            toPlayer(itemData.videoLink,itemData.videoImg,itemData.videoName)
             Logger.e("list ：${itemData.videoLink}")
         }
     }
@@ -148,5 +152,13 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mBanner.stopAutoPlay()
     }
 
+    fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
+        ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER)
+                .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
+                .withString(RouterPath.Player.KEY_IMAGE, videoImage)
+                .withString(RouterPath.Player.KEY_NAME, videoName)
+                .navigation()
+
+    }
 
 }

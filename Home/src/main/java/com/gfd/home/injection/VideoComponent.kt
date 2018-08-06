@@ -14,6 +14,5 @@ import dagger.Component
 @PerComponentScope
 @Component(modules = arrayOf(VideoModule::class),dependencies = arrayOf(ActivityComponent::class))
 interface VideoComponent{
-
     fun inject(fragment:HomeFragment)
 }

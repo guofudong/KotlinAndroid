@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -60,5 +61,7 @@ dependencies {
     api rootProject.ext.dependence.libLJsoup
     api rootProject.ext.dependence.libOkgo
     api rootProject.ext.dependence.libBanner
+    api rootProject.ext.dependence.libArouter
+
 
 }

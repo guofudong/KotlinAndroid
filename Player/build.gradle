@@ -3,16 +3,22 @@ if (isPlayerModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 android {
     compileSdkVersion 28
 
 
 
     defaultConfig {
-        if(isPlayerModule.toBoolean()){
+        if (isPlayerModule.toBoolean()) {
             applicationId "com.gfd.player"
         }
         minSdkVersion 15
@@ -31,15 +37,15 @@ android {
         }
     }
 
-    sourceSets{
-        main{
+    sourceSets {
+        main {
             //根据是module还是lib来选择加载的清单文件，lib的清单文件是不需要启动Activity
-            if(isHomeModule.toBoolean()){//module
+            if (isPlayerModule.toBoolean()) {//module
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            }else{
+            } else {
                 manifest.srcFile 'src/main/release/AndroidManifest.xml'
                 //release模式下排除debug下的所有的java文件
-                java{
+                java {
                     exclude 'debug/**'
                 }
             }
@@ -53,7 +59,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':Provider')
+    api project(':Provider')
+    implementation rootProject.ext.dependence.libQSVideoPlayer
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }
 repositories {
     mavenCentral()

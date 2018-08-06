@@ -1,5 +1,6 @@
 package com.gfd.video
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.common.BaseApplication
 
 /**
@@ -9,5 +10,11 @@ import com.gfd.common.common.BaseApplication
  * @descriptio：
  */
 class MainApplication : BaseApplication() {
+
+    override fun onCreate() {
+        super.onCreate()
+        ARouter.init(this)
+    }
+
 
 }

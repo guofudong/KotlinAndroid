@@ -4,4 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <org.song.videoplayer.DemoQSVideoView
+        android:id="@+id/homeVideoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_300"
+        android:background="@color/common_black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/common_black"
+        android:text="简介"
+        android:textStyle="bold"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"/>
+
+    <TextView
+        android:id="@+id/tvPlot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/common_black"
+        android:ellipsize="end"
+        android:padding="@dimen/dp_10"
+        android:lineSpacingMultiplier="1.5"/>
+
 </LinearLayout>
