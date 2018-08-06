@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+
 /**
  * @Author : 郭富东
  * @Date ：2018/8/2 - 11:26
  * @Email：878749089@qq.com
  * @descriptio：Fragment的基类
  */
+
 open abstract class BaseFragment : Fragment() {
 
     private var isFirstVisible: Boolean = true
@@ -40,6 +42,7 @@ open abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        applyPermission()
         if (isFirstResume) {
             isFirstResume = false
             return
@@ -47,6 +50,10 @@ open abstract class BaseFragment : Fragment() {
         if (userVisibleHint) {
             onUserVisible()
         }
+    }
+
+    private fun applyPermission() {
+
     }
 
     override fun onPause() {

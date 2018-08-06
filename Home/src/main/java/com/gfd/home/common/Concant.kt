@@ -13,6 +13,9 @@ class Concant {
         val ITEM_TYPE_TITLE = 0
         /** 图片类型*/
         val ITEM_TYPE_IMG = 1
+
+        /** json缓存key */
+        val KEY_JSON = "json"
     }
 
 }

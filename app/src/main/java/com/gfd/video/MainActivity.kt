@@ -17,8 +17,7 @@ class MainActivity : BaseActivity() {
         return R.layout.activity_main
     }
 
-    override fun initOperate() {
-        super.initOperate()
+    override fun initView() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.rootLay, HomeFragment())
         transaction.commit()
@@ -36,6 +35,8 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun initData() {
+    }
 
 }
 

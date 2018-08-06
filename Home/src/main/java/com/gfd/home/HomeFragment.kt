@@ -16,6 +16,7 @@ import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.github.jdsjlzx.recyclerview.ProgressStyle
+import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
@@ -69,7 +70,6 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
                 spacing, spacing, layoutManager.spanCount, resources.getColor(R.color.colorItemDecoration)))
     }
 
-
     override fun initData() {
         mPresenter.getVideoList()
     }
@@ -78,6 +78,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //轮播图点击事件
         mBanner.setOnBannerListener {
             val imgData = imageDatas.get(it)
+            Logger.e("banner ：${imgData.link}")
         }
         //设置下拉刷新
         mRecyclerView.setOnRefreshListener {
@@ -88,6 +89,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
             val itemData = mVideoDatas.get(position)
+            Logger.e("list ：${itemData.videoLink}")
         }
     }
 

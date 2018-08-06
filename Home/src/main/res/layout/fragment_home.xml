@@ -7,14 +7,15 @@
     android:paddingTop="@dimen/dp_4">
 
 
-    <EditText
+    <TextView
         android:id="@+id/edSearch"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_32"
         android:background="@drawable/sp_edit_search_bg"
         android:drawableLeft="@drawable/ic_search"
-        android:hint="@string/homeSerachHint"
+        android:text="@string/homeSerachHint"
         android:maxLines="1"
+        android:gravity="center_vertical"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginRight="@dimen/dp_8"
         android:drawablePadding="@dimen/dp_6"

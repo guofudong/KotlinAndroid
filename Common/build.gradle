@@ -61,5 +61,4 @@ dependencies {
     api rootProject.ext.dependence.libOkgo
     api rootProject.ext.dependence.libBanner
 
-
 }

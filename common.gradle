@@ -1,6 +1,7 @@
 //第三方依赖库和版本号管理
 
 ext {
+    permission_version = '4.0.0-alpha1'
     android = [compileSdkVersion: 28,
                applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
@@ -37,6 +38,8 @@ ext {
                   'libOkgo'                     : 'com.lzy.net:okgo:3.0.4',
                   'libLJsoup'                   : 'org.jsoup:jsoup:1.11.3',
                   'libBanner'                   : 'com.youth.banner:banner:1.4.10',
+                  'libPermission'               : "com.github.hotchemi:permissionsdispatcher:${permission_version}",
                   'libLogger'                   : 'com.orhanobut:logger:2.2.0']
+
 }
 

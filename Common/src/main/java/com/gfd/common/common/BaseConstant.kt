@@ -6,8 +6,8 @@ package com.gfd.common.common
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open class BaseConstant{
+open class BaseConstant {
     companion object {
-        const val BASE_URL = "http://www.vip-free.com/"
+        const val BASE_URL = "http://www.vip-free.com"
     }
 }

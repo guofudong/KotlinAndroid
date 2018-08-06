@@ -8,6 +8,7 @@ import com.gfd.home.entity.VideoItemData
 import com.gfd.home.entity.VideoListData
 import com.gfd.home.service.VideoService
 import com.google.gson.Gson
+import com.kotlin.base.utils.AppPrefsUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -22,8 +23,8 @@ import javax.inject.Inject
  * @descriptio：
  */
 class VideoServiceImpl @Inject constructor() : VideoService {
-
     override fun getVideoList(callBack: VideoService.GetVideoCallBack) {
+
         OkGo.get<String>(BaseConstant.BASE_URL)
                 .tag(this)
                 .execute(object : StringCallback() {
@@ -66,9 +67,10 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             val subE = element.selectFirst("a[href]")
                             val tag = element.selectFirst("span[class=score]").text()
                             val name = subE.attr("title")
-                            val link = subE.attr("href")
+                            val href = subE.attr("href")
+                            val link = href.substring(1, href.length)
                             val img = subE.attr("src")
-                            videoList.add(VideoItemData(tag,Concant.ITEM_TYPE_IMG,name,img,link))
+                            videoList.add(VideoItemData(tag, Concant.ITEM_TYPE_IMG, name, img, link))
                         }
 
                         //其他分类
@@ -78,33 +80,33 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             for (element in element.select("div[class=clearfix] > div")) {
                                 val subE = element.selectFirst("a[href]")
                                 val tagElement = element.selectFirst("span[class=score]")
-                                val tag = if(tagElement == null) "" else tagElement.text()
+                                val tag = if (tagElement == null) "" else tagElement.text()
                                 val title = subE.attr("title")
-                                val link = subE.attr("href")
+                                val href = subE.attr("href")
+                                val link = href.substring(1, href.length)
                                 val img = subE.attr("src")
                                 itemDatas.add(VideoData(img, title, tag, link))
                             }
-                            if(itemDatas.size > 3){
+                            if (itemDatas.size > 3) {
                                 //添加标题
                                 val itemTitle = VideoItemData()
                                 itemTitle.type = Concant.ITEM_TYPE_TITLE
                                 itemTitle.title = types[index++]
                                 videoList.add(itemTitle)
                                 //添加内容
-                                itemDatas.forEach{
-                                    videoList.add(VideoItemData(it.type,Concant.ITEM_TYPE_IMG,it.name,it.videoIcon,
+                                itemDatas.forEach {
+                                    videoList.add(VideoItemData(it.type, Concant.ITEM_TYPE_IMG, it.name, it.videoIcon,
                                             it.playUrl))
                                 }
                                 videoList.removeAt(videoList.size - 1)
                             }
                         }
                         val data = VideoListData(binners, videoList)
-                        Logger.e(Gson().toJson(data))
+                        val jsonData = Gson().toJson(data)
+                        Logger.e(jsonData)
                         callBack.onVideoDataSuccess(data)
                     }
                 })
-
     }
-
 
 }
