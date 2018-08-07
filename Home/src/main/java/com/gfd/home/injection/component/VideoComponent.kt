@@ -1,8 +1,9 @@
-package com.gfd.home.injection
+package com.gfd.home.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
-import com.gfd.home.HomeFragment
+import com.gfd.home.injection.module.VideoModule
+import com.gfd.home.ui.HomeFragment
 import dagger.Component
 
 /**
@@ -14,5 +15,5 @@ import dagger.Component
 @PerComponentScope
 @Component(modules = arrayOf(VideoModule::class),dependencies = arrayOf(ActivityComponent::class))
 interface VideoComponent{
-    fun inject(fragment:HomeFragment)
+    fun inject(fragment: HomeFragment)
 }

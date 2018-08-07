@@ -11,4 +11,6 @@
 
     <!--下拉刷新控件颜色 -->
     <color name="colorRefresh">#ea3471</color>
+
+    <color name="colorSearchItemBtn">#e29a0a</color>
 </resources>

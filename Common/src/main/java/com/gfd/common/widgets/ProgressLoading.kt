@@ -43,7 +43,9 @@ class ProgressLoading private constructor(context: Context, them: Int) : Dialog(
      * 显示对话框
      */
     fun showLoading() {
-        mDialog.show()
+        if(!mDialog.isShowing){
+            mDialog.show()
+        }
         animDrawable?.start()
     }
 
@@ -52,6 +54,7 @@ class ProgressLoading private constructor(context: Context, them: Int) : Dialog(
      */
     fun hideLoading() {
         mDialog.dismiss()
+        mDialog
         animDrawable?.stop()
     }
 

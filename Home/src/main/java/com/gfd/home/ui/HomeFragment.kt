@@ -1,6 +1,6 @@
-package com.gfd.home
+package com.gfd.home.ui
 
-import android.graphics.Color
+import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -8,16 +8,17 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.GlideImageLoader
 import com.gfd.common.widgets.SpacesItemDecoration
-import com.gfd.home.R.id.swipeRefresh
+import com.gfd.home.R
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.entity.VideoListData
-import com.gfd.home.injection.DaggerVideoComponent
-import com.gfd.home.injection.VideoModule
+import com.gfd.home.injection.component.DaggerVideoComponent
+import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
+import com.gfd.home.ui.activity.SearchActivity
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.github.jdsjlzx.recyclerview.ProgressStyle
@@ -106,6 +107,10 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
             }
             toPlayer(itemData.videoLink,itemData.videoImg,itemData.videoName)
             Logger.e("list ：${itemData.videoLink}")
+        }
+        //搜索
+        tvSearch.setOnClickListener{
+            startActivity(Intent(activity,SearchActivity::class.java))
         }
     }
 

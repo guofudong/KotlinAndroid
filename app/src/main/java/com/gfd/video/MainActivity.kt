@@ -1,7 +1,7 @@
 package com.gfd.video
 
 import com.gfd.common.ui.activity.BaseActivity
-import com.gfd.home.HomeFragment
+import com.gfd.home.ui.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 

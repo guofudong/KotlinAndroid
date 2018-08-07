@@ -45,6 +45,7 @@ class PlayServiceImpl @Inject constructor() : PlayService {
     }
 
     override fun getWebVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
+        Logger.e("解析地址：${BaseConstant.BASE_URL + url}")
         OkGo.get<String>(BaseConstant.BASE_URL + url)
                 .tag(this)
                 .execute(object : StringCallback() {

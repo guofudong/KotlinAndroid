@@ -46,7 +46,9 @@ class VideoListAdapter(private var context: Context?) : BaseMultiAdapter<VideoIt
     private fun bindImgItem(holder: BaseViewHolder, itemData: VideoItemData) {
         val ivVideo : ImageView = holder.getView(R.id.img_home_item_video)
         val tvName : TextView = holder.getView(R.id.tv_home_img_title)
+        val tvVideoTag : TextView = holder.getView(R.id.tvVideoTag)
         tvName.text = itemData.videoName
+        tvVideoTag.text = itemData.tagName
         ImageLoader.loadUrlImage(this!!.context!!,itemData.videoImg,ivVideo)
     }
 

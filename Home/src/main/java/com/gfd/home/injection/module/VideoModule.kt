@@ -1,4 +1,4 @@
-package com.gfd.home.injection
+package com.gfd.home.injection.module
 
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.service.VideoService

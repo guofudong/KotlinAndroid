@@ -20,4 +20,12 @@ object RouterPath {
             const val KEY_NAME = "videoName"
         }
     }
+
+    /** 首页模块*/
+    class Home {
+        companion object {
+            /** 视频搜索页面 */
+            const val PATH_SERACH = "/home/search"
+        }
+    }
 }
