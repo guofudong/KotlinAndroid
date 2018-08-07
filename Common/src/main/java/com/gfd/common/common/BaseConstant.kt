@@ -9,5 +9,6 @@ package com.gfd.common.common
 open class BaseConstant {
     companion object {
         const val BASE_URL = "http://www.vip-free.com"
+        const val URL_ANALYZE = "http://api.zuilingxian.com/jiexi.php?url="
     }
 }

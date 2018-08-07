@@ -2,6 +2,7 @@ package com.gfd.player.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
+import com.gfd.player.PlayWebActivity
 import com.gfd.player.PlayerActivity
 import com.gfd.player.injection.moudle.PlayMoudle
 import dagger.Component
@@ -17,5 +18,6 @@ import dagger.Component
 interface PlayComponent {
 
     fun inject(activity: PlayerActivity)
+    fun inject(activity: PlayWebActivity)
 
 }

@@ -14,7 +14,7 @@ import android.view.ViewGroup
  * @Email：878749089@qq.com
  * @descriptio：多种item类型的Recycleview的适配器的基类
  */
-open abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: Context?) : RecyclerView.Adapter<BaseMultiAdapter<T>.BaseViewHolder>() {
+open abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: Context?) : RecyclerView.Adapter<BaseViewHolder>() {
 
     protected val mDatas = ArrayList<T>()
     /** 存储不同类型的item布局*/
@@ -81,25 +81,6 @@ open abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: C
         mDatas.clear()
         mDatas.addAll(datas)
         notifyDataSetChanged()
-    }
-
-    /**
-     * ViewHolder的基类
-     * @property views SparseArray<View>
-     * @constructor
-     */
-    open inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val views: SparseArray<View> = SparseArray()
-
-        fun <T : View> getView(viewId: Int): T {
-            var view = views.get(viewId)
-            if (view == null) {
-                view = itemView.findViewById(viewId)
-                views.put(viewId, view)
-            }
-            return view as T
-        }
     }
 
 }

@@ -21,8 +21,8 @@ class VedioPresenter @Inject constructor() : VideoListContract.Presenter,VideoSe
     @Inject
     lateinit var mView : VideoListContract.View
 
-    override fun getVideoList() {
-        mView.showLoading()
+    override fun getVideoList(isLoading:Boolean) {
+        if(isLoading) mView.showLoading()
         videoService.getVideoList(this)
     }
 
@@ -30,6 +30,5 @@ class VedioPresenter @Inject constructor() : VideoListContract.Presenter,VideoSe
         mView.hideLoading()
         mView.showVideoList(data)
     }
-
 
 }

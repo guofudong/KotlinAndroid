@@ -2,6 +2,7 @@ package com.gfd.video
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.common.BaseApplication
+import com.tencent.smtt.sdk.QbSdk
 
 /**
  * @Author : 郭富东
@@ -14,6 +15,7 @@ class MainApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         ARouter.init(this)
+        QbSdk.initX5Environment(this,null)
     }
 
 

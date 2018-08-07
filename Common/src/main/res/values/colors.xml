@@ -15,7 +15,7 @@
     <color name="common_red">#f11919</color>
     <color name="common_white">#ffffff</color>
     <color name="common_yellow">#fe9c2f</color>
-
+    <color name="colorItemDecoration">#ffffff</color>
     <color name="text_dark">#999999</color>
     <color name="text_light_dark">#333333</color>
     <color name="text_normal">#666666</color>

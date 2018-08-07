@@ -1,10 +1,14 @@
 package com.gfd.player.service
 
 import com.gfd.common.common.BaseConstant
+import com.gfd.player.R.id.mWebView
+import com.gfd.player.entity.VideoItemData
+import com.google.gson.Gson
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import com.orhanobut.logger.Logger
+import kotlinx.android.synthetic.main.activity_play_webview.*
 import org.jsoup.Jsoup
 import javax.inject.Inject
 
@@ -17,18 +21,48 @@ import javax.inject.Inject
 class PlayServiceImpl @Inject constructor() : PlayService {
 
     override fun getVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
+        Logger.e("解析地址：${BaseConstant.BASE_URL + url}")
         OkGo.get<String>(BaseConstant.BASE_URL + url)
                 .tag(this)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
-                        Logger.e(BaseConstant.BASE_URL + url)
                         val json = response.body().toString()
                         val document = Jsoup.parse(json)
                         val plotText = document.selectFirst("div[class=plot]").text()
                         val src = document.selectFirst("iframe#video").attr("src")
-                        val videoUrl = src.split("url=")[2]
+                        Logger.e("解析出来的地址：$src")
+                        val split = src.split("url=")
+                        val videoUrl : String
+                        if(split.size < 3){
+                            videoUrl = src
+                        }else{
+                            videoUrl =split[2]
+                        }
                         Logger.e("播放地址：$videoUrl")
                         callBack.videoUrl(videoUrl,plotText)
+                    }
+                })
+    }
+
+    override fun getWebVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
+        OkGo.get<String>(BaseConstant.BASE_URL + url)
+                .tag(this)
+                .execute(object : StringCallback() {
+                    override fun onSuccess(response: Response<String>) {
+                        val json = response.body().toString()
+                        val document = Jsoup.parse(json)
+                        val plotText = document.selectFirst("div[class=plot]").text()
+                        val lis = document.select("div#playlist1 > ul > li")
+                        val videoDatas = ArrayList<VideoItemData>()
+                        lis.forEach{
+                            val a = it.selectFirst("a")
+                            val count = a.text()//集数
+                            var link = BaseConstant.URL_ANALYZE  + a.attr("href")
+                            videoDatas.add(VideoItemData(count,link))
+                        }
+                        val jsonData = Gson().toJson(videoDatas)
+                        Logger.e("解析出来的剧集地址：$jsonData")
+                        callBack.videoWebData(videoDatas,plotText)
                     }
                 })
     }

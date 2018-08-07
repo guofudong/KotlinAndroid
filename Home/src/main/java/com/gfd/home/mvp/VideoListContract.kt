@@ -21,6 +21,6 @@ interface VideoListContract {
     }
 
     interface Presenter : BasePresenter {
-        fun getVideoList()
+        fun getVideoList(isLoading:Boolean)
     }
 }

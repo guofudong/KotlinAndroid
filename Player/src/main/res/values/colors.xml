@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPlayWebItemBG">#e6e4e5</color>
+    <color name="colorPlayWebItemTextSelect">#f7ac0b</color>
+
+
 </resources>

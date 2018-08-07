@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
-import com.gfd.common.utils.ImageLoader
+import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
 import com.gfd.player.injection.moudle.PlayMoudle
 import com.gfd.player.mvp.PlayContract
@@ -88,6 +88,10 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         play(homeVideoPlayer, videoUrl)
     }
 
+    override fun playWebVideo(datas: List<VideoItemData>) {
+
+    }
+
     override fun showVideoPlot(plotText: String) {
         tvPlot.text = plotText
     }
@@ -100,9 +104,6 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         //是否非全屏下也可以手势调节进度
         demoVideoView.isWindowGesture = true
         //  demoVideoView.enterWindowFullscreen()
-        if (videoImg != null) {
-            ImageLoader.loadUrlImage(this, videoImg!!, demoVideoView.coverImageView)
-        }
         demoVideoView.setPlayListener(object : PlayListener {
             override fun onEvent(what: Int, vararg extra: Int?) {
                 if ((what == DemoQSVideoView.EVENT_CONTROL_VIEW) and (Build.VERSION.SDK_INT >= 19) and !demoVideoView.isWindowFloatMode())

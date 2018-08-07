@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseMultiAdapter
+import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
 import com.gfd.home.R
 import com.gfd.home.common.Concant

@@ -1,11 +1,14 @@
 package com.gfd.home
 
+import android.graphics.Color
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.GlideImageLoader
 import com.gfd.common.widgets.SpacesItemDecoration
+import com.gfd.home.R.id.swipeRefresh
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
@@ -43,6 +46,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     private lateinit var mBanner: Banner
     private lateinit var imageDatas: List<BinnerData>
     private lateinit var mVideoDatas: List<VideoItemData>
+    private lateinit var path :String
 
     override fun injectComponent() {
         DaggerVideoComponent.builder().activityComponent(mActivityComponent)
@@ -55,12 +59,16 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     override fun initView() {
+        //设置刷新
+        swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
+        swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT)
         val layoutManager = GridLayoutManager(activity, GRID_COLUMNS)
         mRecyclerView.layoutManager = layoutManager
         mVideoAdapter = VideoListAdapter(activity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         mRecyclerView.adapter = mLRecyclerViewAdapter
         mRecyclerView.setLoadMoreEnabled(false)
+        mRecyclerView.setPullRefreshEnabled(false)
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
         //添加Head View
         val headView = LayoutInflater.from(context).inflate(R.layout.head_home, null, false)
@@ -70,34 +78,41 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
         mRecyclerView.addItemDecoration(SpacesItemDecoration.newInstance(
                 spacing, spacing, layoutManager.spanCount, resources.getColor(R.color.colorItemDecoration)))
+
     }
 
     override fun initData() {
-        mPresenter.getVideoList()
+        mPresenter.getVideoList(true)
     }
 
     override fun setListener() {
         //轮播图点击事件
         mBanner.setOnBannerListener {
             val imgData = imageDatas.get(it)
+            path = RouterPath.Player.PATH_PLAYER
             toPlayer(imgData.link,imgData.imgUrl,imgData.name)
             Logger.e("banner ：${imgData.link}")
         }
-        //设置下拉刷新
-        mRecyclerView.setOnRefreshListener {
-            mRecyclerView.postDelayed({
-                mRecyclerView.refreshComplete(0)
-            }, 2 * 1000)
+        swipeRefresh.setOnRefreshListener {
+            mPresenter.getVideoList(false)
         }
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
             val itemData = mVideoDatas.get(position)
+            if(itemData.title == mVideoDatas.get(0).title){
+                path = RouterPath.Player.PATH_PLAYER
+            }else{
+                path =  RouterPath.Player.PATH_PLAYER_WEB
+            }
             toPlayer(itemData.videoLink,itemData.videoImg,itemData.videoName)
             Logger.e("list ：${itemData.videoLink}")
         }
     }
 
     override fun showVideoList(data: VideoListData) {
+        if (swipeRefresh.isRefreshing) {
+            swipeRefresh.isRefreshing = false
+        }
         videoDatas.addAll(data.videoList)
         //设置轮播图数据
         setBanner(data.bannerUrls)
@@ -115,7 +130,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
 
         })
         mVideoDatas = data.videoList
-        mVideoAdapter.addAll(mVideoDatas)
+        mVideoAdapter.updateData(mVideoDatas)
         mLRecyclerViewAdapter.notifyDataSetChanged()
 
     }
@@ -153,7 +168,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
-        ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER)
+        ARouter.getInstance().build(path)
                 .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
                 .withString(RouterPath.Player.KEY_IMAGE, videoImage)
                 .withString(RouterPath.Player.KEY_NAME, videoName)

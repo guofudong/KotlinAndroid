@@ -15,5 +15,9 @@
             android:name=".PlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".PlayWebActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
     </application>
 </manifest>

@@ -1,5 +1,6 @@
 package com.gfd.player.mvp.presenter
 
+import com.gfd.player.entity.VideoItemData
 import com.gfd.player.mvp.PlayContract
 import com.gfd.player.service.PlayService
 import javax.inject.Inject
@@ -21,10 +22,18 @@ class PlayPresenter @Inject constructor() : PlayContract.Presenter, PlayService.
     override fun getVideoUrl(url: String) {
         mPlayService.getVideoUrl(url, this)
     }
-
+    override fun getWebVideoUrl(url: String) {
+        mPlayService.getWebVideoUrl(url,this)
+    }
     override fun videoUrl(url: String, plotText: String) {
         mView.showVideoPlot(plotText)
         mView.playVideo(url)
     }
+
+    override fun videoWebData(datas: List<VideoItemData>, plotText: String) {
+        mView.showVideoPlot(plotText)
+        mView.playWebVideo(datas)
+    }
+
 
 }

@@ -5,7 +5,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorSearchShape">#eae9ea</color>
-    <color name="colorItemDecoration">#ffffff</color>
+
 
     <color name="colorItemTitle">#646162</color>
+
+    <!--下拉刷新控件颜色 -->
+    <color name="colorRefresh">#ea3471</color>
 </resources>
