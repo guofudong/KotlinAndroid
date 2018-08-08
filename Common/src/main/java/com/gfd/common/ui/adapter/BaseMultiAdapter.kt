@@ -83,4 +83,8 @@ open abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: C
         notifyDataSetChanged()
     }
 
+    fun getDatas():List<T>{
+        return mDatas
+    }
+
 }

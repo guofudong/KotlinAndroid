@@ -18,10 +18,12 @@ import com.gfd.home.injection.component.DaggerVideoComponent
 import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
+import com.gfd.home.ui.activity.CategoryActivity
 import com.gfd.home.ui.activity.SearchActivity
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.github.jdsjlzx.recyclerview.ProgressStyle
+import com.kotlin.base.utils.AppPrefsUtils
 import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
@@ -47,7 +49,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     private lateinit var mBanner: Banner
     private lateinit var imageDatas: List<BinnerData>
     private lateinit var mVideoDatas: List<VideoItemData>
-    private lateinit var path :String
+    private lateinit var path: String
 
     override fun injectComponent() {
         DaggerVideoComponent.builder().activityComponent(mActivityComponent)
@@ -89,28 +91,36 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     override fun setListener() {
         //轮播图点击事件
         mBanner.setOnBannerListener {
-            val imgData = imageDatas.get(it)
+            val imgData = imageDatas[it]
             path = RouterPath.Player.PATH_PLAYER
-            toPlayer(imgData.link,imgData.imgUrl,imgData.name)
+            toPlayer(imgData.link, imgData.imgUrl, imgData.name)
             Logger.e("banner ：${imgData.link}")
         }
         swipeRefresh.setOnRefreshListener {
+            AppPrefsUtils.remove(Concant.KEY_JSON)
             mPresenter.getVideoList(false)
         }
         //item点击监听
-        mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
-            val itemData = mVideoDatas.get(position)
-            if(itemData.title == mVideoDatas.get(0).title){
-                path = RouterPath.Player.PATH_PLAYER
-            }else{
-                path =  RouterPath.Player.PATH_PLAYER_WEB
+        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
+            val itemData = mVideoDatas[position]
+            if (itemData.getItemType() == Concant.ITEM_TYPE_TITLE) {//点击标题
+                val intent = Intent(activity, CategoryActivity::class.java)
+                intent.putExtra(Concant.CATEGORY, itemData.titleType)
+                startActivity(intent)
+                Logger.e("TitleType : ${itemData.titleType}")
+            } else {//点击图片
+                if (itemData.title == mVideoDatas[0].title) {
+                    path = RouterPath.Player.PATH_PLAYER
+                } else {
+                    path = RouterPath.Player.PATH_PLAYER_WEB
+                }
+                toPlayer(itemData.videoLink, itemData.videoImg, itemData.videoName)
+                Logger.e("list ：${itemData.videoLink}")
             }
-            toPlayer(itemData.videoLink,itemData.videoImg,itemData.videoName)
-            Logger.e("list ：${itemData.videoLink}")
         }
         //搜索
-        tvSearch.setOnClickListener{
-            startActivity(Intent(activity,SearchActivity::class.java))
+        tvSearch.setOnClickListener {
+            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 
@@ -122,18 +132,14 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //设置轮播图数据
         setBanner(data.bannerUrls)
         //设置列表数据
-        mLRecyclerViewAdapter.setSpanSizeLookup(object : LRecyclerViewAdapter.SpanSizeLookup {
-
-            override fun getSpanSize(gridLayoutManager: GridLayoutManager?, position: Int): Int {
-                val type = data.videoList.get(position).type
-                if (type == Concant.ITEM_TYPE_TITLE) {
-                    return GRID_COLUMNS
-                } else {
-                    return 1
-                }
+        mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
+            val type = data.videoList[position].type
+            if (type == Concant.ITEM_TYPE_TITLE) {
+                GRID_COLUMNS
+            } else {
+                1
             }
-
-        })
+        }
         mVideoDatas = data.videoList
         mVideoAdapter.updateData(mVideoDatas)
         mLRecyclerViewAdapter.notifyDataSetChanged()
@@ -178,7 +184,6 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
                 .withString(RouterPath.Player.KEY_IMAGE, videoImage)
                 .withString(RouterPath.Player.KEY_NAME, videoName)
                 .navigation()
-
     }
 
 }

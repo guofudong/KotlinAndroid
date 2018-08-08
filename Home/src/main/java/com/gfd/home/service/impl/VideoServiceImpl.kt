@@ -26,9 +26,9 @@ import javax.inject.Inject
 class VideoServiceImpl @Inject constructor() : VideoService {
     override fun getVideoList(callBack: VideoService.GetVideoCallBack) {
         val json = AppPrefsUtils.getString(Concant.KEY_JSON)
-        if(!TextUtils.isEmpty(json)){
-            callBack.onVideoDataSuccess(Gson().fromJson(json,VideoListData::class.java))
-        }else{
+        if (!TextUtils.isEmpty(json)) {
+            callBack.onVideoDataSuccess(Gson().fromJson(json, VideoListData::class.java))
+        } else {
             OkGo.get<String>(BaseConstant.BASE_URL)
                     .tag(this)
                     .execute(object : StringCallback() {
@@ -63,7 +63,7 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             val newVideoElement = document.selectFirst("div[class=hy-video-list cleafix]")
                                     .select("div[class=item] > div")
 
-                            val newItem = VideoItemData()
+                            val newItem = VideoItemData(Concant.CATEGORY_NEW)
                             newItem.type = Concant.ITEM_TYPE_TITLE
                             newItem.title = types[0]
                             videoList.add(newItem)
@@ -74,9 +74,10 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                 val href = subE.attr("href")
                                 val link = href.substring(1, href.length)
                                 val img = subE.attr("src")
-                                videoList.add(VideoItemData(tag, Concant.ITEM_TYPE_IMG, name, img, link,types[0]))
+                                videoList.add(VideoItemData(tag, Concant.ITEM_TYPE_IMG, name, img, link, types[0]))
                             }
 
+                            val titleTypes = arrayOf(Concant.CATEGORY_MOVIE, Concant.CATEGORY_DINASHI, Concant.CATEGORY_ZONGYI,0)
                             //其他分类
                             var index = 1
                             for (element in document.select("div[class=hy-layout clearfix]")) {
@@ -93,7 +94,7 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                 }
                                 if (itemDatas.size > 3) {
                                     //添加标题
-                                    val itemTitle = VideoItemData()
+                                    val itemTitle = VideoItemData(titleTypes[index - 1])
                                     itemTitle.type = Concant.ITEM_TYPE_TITLE
                                     itemTitle.title = types[index++]
                                     videoList.add(itemTitle)
@@ -107,7 +108,7 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             }
                             val data = VideoListData(binners, videoList)
                             val jsonData = Gson().toJson(data)
-                            AppPrefsUtils.putString(Concant.KEY_JSON,jsonData)
+                            AppPrefsUtils.putString(Concant.KEY_JSON, jsonData)
                             Logger.e(jsonData)
                             callBack.onVideoDataSuccess(data)
                         }

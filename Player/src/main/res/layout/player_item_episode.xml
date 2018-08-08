@@ -11,6 +11,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:padding="@dimen/dp_10"
+        android:maxLength="10"
         android:textColor="@drawable/select_item_episode_text"
         android:textSize="@dimen/sp_14" />
 
