@@ -13,4 +13,8 @@
     <color name="colorRefresh">#ea3471</color>
 
     <color name="colorSearchItemBtn">#e29a0a</color>
+
+    <color name="colorHistoryItemBG">#eff2f2</color>
+
+
 </resources>

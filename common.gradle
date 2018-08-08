@@ -43,6 +43,8 @@ ext {
                   'libPermission'               : "com.github.hotchemi:permissionsdispatcher:${permission_version}",
                   'libArouter'                  : "com.alibaba:arouter-api:$arouter_api_version",
                   'libQSVideoPlayer'            : 'com.github.tohodog:QSVideoPlayer:2.2.3',
+                  'libFlexbox'                  : 'com.google.android:flexbox:1.0.0',
+                  'libAnkoSqlite'                  :  'org.jetbrains.anko:anko-sqlite:0.10.5',
                   'libLogger'                   : 'com.orhanobut:logger:2.2.0']
 
 }

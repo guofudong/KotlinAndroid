@@ -3,7 +3,7 @@ package com.gfd.home.injection.component
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
 import com.gfd.home.injection.module.VideoModule
-import com.gfd.home.ui.HomeFragment
+import com.gfd.home.ui.fragment.HomeFragment
 import dagger.Component
 
 /**

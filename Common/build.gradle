@@ -62,5 +62,7 @@ dependencies {
     api rootProject.ext.dependence.libOkgo
     api rootProject.ext.dependence.libBanner
     api rootProject.ext.dependence.libArouter
+    api rootProject.ext.dependence.libFlexbox
+    api rootProject.ext.dependence.libAnkoSqlite
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
 }

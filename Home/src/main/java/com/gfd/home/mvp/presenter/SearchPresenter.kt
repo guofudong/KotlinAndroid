@@ -1,5 +1,6 @@
 package com.gfd.home.mvp.presenter
 
+import android.content.Context
 import com.gfd.home.entity.SearchItemData
 import com.gfd.home.mvp.SearchContract
 import com.gfd.home.service.SearchService
@@ -17,17 +18,29 @@ class SearchPresenter @Inject constructor() : SearchContract.Presenter, SearchSe
     lateinit var mSearchService: SearchService
 
     @Inject
-    lateinit var mView : SearchContract.View
+    lateinit var mView: SearchContract.View
 
     override fun onSearch(datas: List<SearchItemData>) {
         mView.hideLoading()
         mView.showSearchData(datas)
     }
 
-
-    override fun search(keyWord: String) {
+    override fun search(context: Context,keyWord: String) {
         mView.showLoading()
-        mSearchService.search(keyWord,this)
+        mSearchService.search(context,keyWord, this)
+    }
+
+    override fun getSearchHistory(context: Context) {
+        mView.showLoading()
+        mSearchService.getSearchHistory(context,this)
+    }
+
+    override fun deleteHistory(context: Context) {
+        mSearchService.deleteHistory(context,this)
+    }
+    override fun onHistory(history: List<String>) {
+        mView.hideLoading()
+        mView.showSearchHistory(history)
     }
 
 }

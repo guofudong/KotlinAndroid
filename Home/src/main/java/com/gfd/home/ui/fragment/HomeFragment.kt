@@ -1,4 +1,4 @@
-package com.gfd.home.ui
+package com.gfd.home.ui.fragment
 
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout

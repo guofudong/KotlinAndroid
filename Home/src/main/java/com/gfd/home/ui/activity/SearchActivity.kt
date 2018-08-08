@@ -2,11 +2,14 @@ package com.gfd.home.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
+import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.utils.ToastUtils
 import com.gfd.home.R
+import com.gfd.home.adapter.HistoryAdapter
 import com.gfd.home.adapter.SearchDataAdapter
 import com.gfd.home.entity.SearchItemData
 import com.gfd.home.injection.component.DaggerSearchComponent
@@ -16,7 +19,13 @@ import com.gfd.home.mvp.presenter.SearchPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.activity_serach.*
+import kotlinx.android.synthetic.main.layout_search_empty.*
+import kotlinx.android.synthetic.main.layout_serach_history.*
 
 
 /**
@@ -31,7 +40,10 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     private var isSearch = false
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mDataAdapter: SearchDataAdapter
-    private lateinit var mDatas : List<SearchItemData>
+    private lateinit var mDatas: List<SearchItemData>
+    private lateinit var mHistoryDatas: List<String>
+    private lateinit var mHistoryAdapter: HistoryAdapter
+
     override fun injectComponent() {
         DaggerSearchComponent.builder()
                 .activityComponent(mActivityComponent)
@@ -47,6 +59,74 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun initView() {
+        setSearchList()
+        setHistoryList()
+    }
+
+
+    override fun initData() {
+        mPresenter.getSearchHistory(this@SearchActivity)
+    }
+
+    override fun setListener() {
+        tvSearchBtn.setOnClickListener {
+            if (!isSearch) {
+                if (TextUtils.isEmpty(edSearch.text.toString())) {
+                    ToastUtils.instance.showToast("搜索内容不能为空")
+                    return@setOnClickListener
+                } else {
+                    serach(edSearch.text.toString())
+                }
+            }
+        }
+        //立即播放按钮
+        mDataAdapter.setOnPlayClickListener(object : SearchDataAdapter.OnPlayClickListener {
+            override fun onPlayClick(positon: Int) {
+                val data = mDatas[positon]
+                ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
+                        .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
+                        .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
+                        .withString(RouterPath.Player.KEY_NAME, data.name)
+                        .navigation()
+            }
+
+        })
+        mHistoryAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
+            override fun onClick(view: View, position: Int) {
+                serach(mHistoryDatas[position])
+            }
+        })
+        //删除历史搜索记录
+        historyDelete.setOnClickListener {
+            mPresenter.deleteHistory(this)
+        }
+    }
+
+    /**
+     * 以关键字进行搜索
+     * @param keyWord String
+     */
+    private fun serach(keyWord: String) {
+        isSearch = true
+        rootHistory.visibility = View.GONE
+        rootSearchEmpy.visibility = View.GONE
+        mVideoList.visibility = View.VISIBLE
+        mPresenter.search(this, keyWord)
+    }
+
+    /**设置搜索历史展示list*/
+    private fun setHistoryList() {
+        val flexManager = FlexboxLayoutManager(this@SearchActivity)
+        flexManager.flexDirection = FlexDirection.ROW
+        flexManager.alignItems = AlignItems.STRETCH
+        flexManager.flexWrap = FlexWrap.WRAP
+        historyList.layoutManager = flexManager
+        mHistoryAdapter = HistoryAdapter(this@SearchActivity)
+        historyList.adapter = mHistoryAdapter
+    }
+
+    /** 设置搜索结果展示List */
+    private fun setSearchList() {
         mVideoList.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
         mDataAdapter = SearchDataAdapter(this@SearchActivity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mDataAdapter)
@@ -62,42 +142,27 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         mVideoList.addItemDecoration(divider)
     }
 
-    override fun initData() {
-
-
-    }
-
-    override fun setListener() {
-        tvSearchBtn.setOnClickListener {
-            if (!isSearch) {
-                if (TextUtils.isEmpty(edSearch.text.toString())) {
-                    ToastUtils.instance.showToast("搜索内容不能为空")
-                    return@setOnClickListener
-                } else {
-                    isSearch = true
-                    mPresenter.search(edSearch.text.toString())
-                }
-            }
-        }
-        //立即播放按钮
-        mDataAdapter.setOnPlayClickListener(object :SearchDataAdapter.OnPlayClickListener{
-            override fun onPlayClick(positon: Int) {
-                val data = mDatas[positon]
-                ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
-                        .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
-                        .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
-                        .withString(RouterPath.Player.KEY_NAME, data.name)
-                        .navigation()
-            }
-
-        })
-    }
-
     override fun showSearchData(datas: List<SearchItemData>) {
         mDatas = datas
         isSearch = false//状态重置
-        mDataAdapter.addAll(datas)
-        mLRecyclerViewAdapter.notifyDataSetChanged()
+        if (mDatas.isEmpty()) {
+            rootSearchEmpy.visibility = View.VISIBLE
+            mVideoList.visibility = View.GONE
+        } else {
+            mDataAdapter.addAll(datas)
+            mLRecyclerViewAdapter.notifyDataSetChanged()
+        }
+
+    }
+
+    override fun showSearchHistory(historys: List<String>) {
+        mHistoryDatas = historys
+        if (mHistoryDatas.isEmpty()) {
+            rootHistory.visibility = View.GONE
+        } else {
+            rootHistory.visibility = View.VISIBLE
+        }
+        mHistoryAdapter.updateData(historys)
     }
 
 }
