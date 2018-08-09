@@ -17,18 +17,22 @@ class VedioPresenter @Inject constructor() : VideoListContract.Presenter,VideoSe
 
     @Inject
     lateinit var videoService: VideoService
+    private var isLoading = false
 
     @Inject
     lateinit var mView : VideoListContract.View
 
     override fun getVideoList(isLoading:Boolean) {
+        this.isLoading = isLoading
         if(isLoading) mView.showLoading()
         videoService.getVideoList(this)
     }
 
     override fun onVideoDataSuccess(data: VideoListData) {
-        mView.hideLoading()
         mView.showVideoList(data)
+        if(isLoading){
+            mView.hideLoading()
+        }
     }
 
 }

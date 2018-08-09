@@ -1,24 +1,22 @@
 package com.gfd.home.ui.fragment
 
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.GridLayoutManager
 import android.text.TextUtils
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.ToastUtils
-import com.gfd.common.widgets.SpacesItemDecoration
 import com.gfd.home.R
 import com.gfd.home.adapter.CategoryVideoAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.VideoItemData
+import com.gfd.home.ext.gridInit
 import com.gfd.home.injection.component.DaggerCategoryComponent
 import com.gfd.home.injection.module.CategoryModule
 import com.gfd.home.mvp.CategoryContract
 import com.gfd.home.mvp.presenter.CategoryPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import com.github.jdsjlzx.recyclerview.ProgressStyle
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -31,10 +29,12 @@ import kotlinx.android.synthetic.main.fragment_category.*
 class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.View {
 
     private var category = 0
+    /** 默认加载的页数*/
+    private val DEFAULTPAGER = 2
     private lateinit var videoUrl: String
     private lateinit var mVideoAdapter: CategoryVideoAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
-    private var currentPage = 1
+    private var currentPage = DEFAULTPAGER
     private val totalPager = 20
     private lateinit var path: String
     /** GridView 列表的列数 */
@@ -61,34 +61,29 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
 
 
     override fun initView() {
+        //设置刷新
+        categoryRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
+        categoryRefresh.setSize(SwipeRefreshLayout.DEFAULT)
+        mVideoAdapter = CategoryVideoAdapter(activity)
+        mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
+        categoryRecycler.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
+        categoryRecycler.setLoadMoreEnabled(true)
+
+    }
+
+    override fun initData() {
         category = arguments?.get(CATEGORY) as Int
         videoUrl = when (category) {
-            CATEGORY_NEW -> BaseConstant.URL_CHANNEL_NEW
+            CATEGORY_NEW -> {
+                BaseConstant.URL_CHANNEL_NEW
+            }
             CATEGORY_MOVIE -> BaseConstant.URL_CHANNEL_MOVIE
             CATEGORY_DINASHI -> BaseConstant.URL_CHANNEL_DIANSHI
             CATEGORY_ZONGYI -> BaseConstant.URL_CHANNEL_ZONGYI
             else -> ""
         }
-        //设置刷新
-        categoryRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
-        categoryRefresh.setSize(SwipeRefreshLayout.DEFAULT)
-        val layoutManager = GridLayoutManager(activity, GRID_COLUMNS)
-        categoryRecycler.layoutManager = layoutManager
-        mVideoAdapter = CategoryVideoAdapter(activity)
-        mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
-        categoryRecycler.adapter = mLRecyclerViewAdapter
-        categoryRecycler.setLoadMoreEnabled(true)
-        categoryRecycler.setPullRefreshEnabled(false)
-        categoryRecycler.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
-        //设置分割线
-        val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
-        categoryRecycler.addItemDecoration(SpacesItemDecoration.newInstance(
-                spacing, spacing, layoutManager.spanCount, resources.getColor(R.color.colorItemDecoration)))
-    }
-
-    override fun initData() {
         if (!TextUtils.isEmpty(videoUrl)) {
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH)
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH, true)
         } else {
             ToastUtils.instance.showToast("类型不匹配")
             activity?.finish()
@@ -100,14 +95,15 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         categoryRecycler.setOnLoadMoreListener {
             currentPage++
             if (currentPage <= totalPager) {
-                mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_LOADMORE)
+                mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_LOADMORE,false)
             } else {
                 categoryRecycler.setNoMore(true)
             }
         }
         //设置下拉刷新
         categoryRefresh.setOnRefreshListener {
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH)
+            currentPage = DEFAULTPAGER
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH,false)
         }
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->

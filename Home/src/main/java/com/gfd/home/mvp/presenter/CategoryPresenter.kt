@@ -16,17 +16,24 @@ class CategoryPresenter @Inject constructor() : CategoryContract.Presenter, Cate
     @Inject
     lateinit var mView: CategoryContract.View
 
+    private var isLoading = false
+
     @Inject
     lateinit var mService: CategoryService
 
-    override fun getCategoryVideos(url: String, page: Int,state:Int) {
-        //mView.showLoading()
-        mService.getCategoryVideos(url, page, state,this)
+    override fun getCategoryVideos(url: String, page: Int, state: Int, isLoading: Boolean) {
+        this.isLoading = isLoading
+        if (isLoading) {
+            mView.showLoading()
+        }
+        mService.getCategoryVideos(url, page, state, this)
     }
 
-    override fun onCategoryVideos(datas: List<VideoItemData>,state:Int) {
-       // mView.hideLoading()
-        mView.showVideos(datas,state)
+    override fun onCategoryVideos(datas: List<VideoItemData>, state: Int) {
+        mView.showVideos(datas, state)
+        if(isLoading){
+            mView.hideLoading()
+        }
     }
 
 }

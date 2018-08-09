@@ -19,6 +19,6 @@ interface CategoryContract {
     }
 
     interface Presenter : BasePresenter {
-        fun getCategoryVideos(url: String,page:Int,state:Int)
+        fun getCategoryVideos(url: String,page:Int,state:Int,isLoading:Boolean)
     }
 }

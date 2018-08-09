@@ -19,6 +19,9 @@ import com.gfd.player.mvp.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebView
+import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.activity_play_webview.*
 
 
@@ -34,12 +37,17 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     @Autowired(name = RouterPath.Player.KEY_PLAYER)
     @JvmField
     var analyzeUrl: String? = null
+
+    @Autowired(name = RouterPath.Player.KEY_NAME)
+    @JvmField
+    var videoName: String? = null
+
     /** 剧集列表列数*/
     private val SPAN_EPISODE = 6
-    private lateinit var episodeAdapter : EpisodeAdapter
-    private lateinit var mLRecyclerViewAdapter : LRecyclerViewAdapter
-    private lateinit var mDatas : List<VideoItemData>
-    private lateinit var mTvPlot :TextView
+    private lateinit var episodeAdapter: EpisodeAdapter
+    private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
+    private lateinit var mDatas: List<VideoItemData>
+    private lateinit var mTvPlot: TextView
 
 
     override fun getLayoutId(): Int {
@@ -59,7 +67,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         setWebView()
         ARouter.getInstance().inject(this)
         //设置剧集列表属性
-        episodeList.layoutManager = GridLayoutManager(this@PlayWebActivity,SPAN_EPISODE)
+        episodeList.layoutManager = GridLayoutManager(this@PlayWebActivity, SPAN_EPISODE)
         //设置分割线
         val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
         episodeList.addItemDecoration(SpacesItemDecoration.newInstance(
@@ -69,19 +77,31 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         episodeList.adapter = mLRecyclerViewAdapter
         episodeList.setLoadMoreEnabled(false)
         episodeList.setPullRefreshEnabled(false)
-        var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.head_playweb,null,false)
+        var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.head_playweb, null, false)
         mTvPlot = headView.findViewById<TextView>(R.id.tvPlot)
         mLRecyclerViewAdapter.addHeaderView(headView)
     }
 
     private fun setWebView() {
         window.setFormat(PixelFormat.TRANSLUCENT)
-        val webSettings = mWebView.getSettings()
+        val webSettings = mWebView.settings
         webSettings.javaScriptEnabled = true
         webSettings.useWideViewPort = true // 关键点
-        webSettings.allowFileAccess = true // 允许访问文件
-        webSettings.setSupportZoom(true) // 支持缩放
-        webSettings.loadWithOverviewMode = true
+        mWebView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                mWebView.loadUrl(url)
+                return true
+            }
+
+            override fun onPageFinished(p0: WebView?, p1: String?) {
+                super.onPageFinished(p0, p1)
+            }
+        }
+        mWebView.webChromeClient = object : WebChromeClient() {
+            override fun onReceivedTitle(view: WebView, title: String) {
+                super.onReceivedTitle(view, videoName)
+            }
+        }
     }
 
     override fun initData() {
@@ -89,13 +109,22 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun setListener() {
-        episodeAdapter.seOnClickListener(object :BaseAdapter.OnClickListener{
+        episodeAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, positon: Int) {
                 episodeAdapter.setSelect(positon)
                 mLRecyclerViewAdapter.notifyDataSetChanged()
                 mWebView.loadUrl(mDatas[positon].videoUrl)
             }
         })
+        //去掉qq浏览器的推广
+        window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val outView = ArrayList<View>()
+            window.decorView.findViewsWithText(outView, "QQ浏览器", View.FIND_VIEWS_WITH_TEXT)
+            if (outView.size > 0) {
+                outView[0].visibility = View.GONE
+            }
+        }
+
     }
 
 

@@ -2,7 +2,9 @@ package com.gfd.home.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
@@ -70,14 +72,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     override fun setListener() {
         tvSearchBtn.setOnClickListener {
-            if (!isSearch) {
-                if (TextUtils.isEmpty(edSearch.text.toString())) {
-                    ToastUtils.instance.showToast("搜索内容不能为空")
-                    return@setOnClickListener
-                } else {
-                    serach(edSearch.text.toString())
-                }
-            }
+            search()
         }
         //立即播放按钮
         mDataAdapter.setOnPlayClickListener(object : SearchDataAdapter.OnPlayClickListener {
@@ -99,6 +94,28 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         //删除历史搜索记录
         historyDelete.setOnClickListener {
             mPresenter.deleteHistory(this)
+        }
+        //监听回车键
+        edSearch.setOnEditorActionListener { _, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_SEND
+                    || actionId == EditorInfo.IME_ACTION_DONE
+                    || (keyEvent != null && KeyEvent.KEYCODE_ENTER == keyEvent.keyCode && KeyEvent.ACTION_DOWN == keyEvent.action)) {
+                search()
+            }
+            true
+        }
+
+    }
+
+    /** 搜索*/
+    private fun search() {
+        if (!isSearch) {
+            if (TextUtils.isEmpty(edSearch.text.toString())) {
+                ToastUtils.instance.showToast("搜索内容不能为空")
+                return
+            } else {
+                serach(edSearch.text.toString())
+            }
         }
     }
 

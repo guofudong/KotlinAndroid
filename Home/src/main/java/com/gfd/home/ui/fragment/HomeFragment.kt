@@ -2,18 +2,17 @@ package com.gfd.home.ui.fragment
 
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.GlideImageLoader
-import com.gfd.common.widgets.SpacesItemDecoration
 import com.gfd.home.R
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.entity.VideoListData
+import com.gfd.home.ext.gridInit
 import com.gfd.home.injection.component.DaggerVideoComponent
 import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
@@ -22,7 +21,6 @@ import com.gfd.home.ui.activity.CategoryActivity
 import com.gfd.home.ui.activity.SearchActivity
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import com.github.jdsjlzx.recyclerview.ProgressStyle
 import com.kotlin.base.utils.AppPrefsUtils
 import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
@@ -65,22 +63,13 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         //设置刷新
         swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
         swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT)
-        val layoutManager = GridLayoutManager(activity, GRID_COLUMNS)
-        mRecyclerView.layoutManager = layoutManager
         mVideoAdapter = VideoListAdapter(activity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
-        mRecyclerView.adapter = mLRecyclerViewAdapter
-        mRecyclerView.setLoadMoreEnabled(false)
-        mRecyclerView.setPullRefreshEnabled(false)
-        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader)
+        mRecyclerView.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         //添加Head View
         val headView = LayoutInflater.from(context).inflate(R.layout.head_home, null, false)
         mBanner = headView.findViewById(R.id.mBanner)
         mLRecyclerViewAdapter.addHeaderView(headView)
-        //设置分割线
-        val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
-        mRecyclerView.addItemDecoration(SpacesItemDecoration.newInstance(
-                spacing, spacing, layoutManager.spanCount, resources.getColor(R.color.colorItemDecoration)))
 
     }
 

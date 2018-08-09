@@ -88,28 +88,28 @@ open abstract class BaseFragment : Fragment() {
     /**
      * 用户第一次可见
      */
-    fun onFirstUserVisible() {
+    open fun onFirstUserVisible() {
 
     }
 
     /**
      * 用户第一次不可见
      */
-    fun onFirstUserInvisible() {
+    open fun onFirstUserInvisible() {
 
     }
 
     /**
      * 用户不可见
      */
-    fun onUserInvisible() {
+    open fun onUserInvisible() {
 
     }
 
     /**
      * 用户可见时调用
      */
-    fun onUserVisible() {
+    open fun onUserVisible() {
 
     }
 

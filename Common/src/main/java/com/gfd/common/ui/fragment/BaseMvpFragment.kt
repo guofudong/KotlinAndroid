@@ -8,6 +8,7 @@ import com.gfd.common.injection.component.DaggerActivityComponent
 import com.gfd.common.injection.module.ActivityMoudle
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
+import com.gfd.common.utils.LoadingHelper
 import com.gfd.common.widgets.ProgressLoading
 import javax.inject.Inject
 
@@ -28,7 +29,7 @@ open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseVie
     override fun initOperate() {
         initActivityInjection()
         injectComponent()
-        mProgressLoading = ProgressLoading.create(activity as Activity)
+        //mProgressLoading = ProgressLoading.create(activity as Activity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,11 +56,11 @@ open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseVie
     }
 
     override fun showLoading() {
-        mProgressLoading.showLoading()
+        LoadingHelper.showLoading(activity!!)
     }
 
     override fun hideLoading() {
-        mProgressLoading.hideLoading()
+        LoadingHelper.hideLoading(activity!!)
     }
 
 }

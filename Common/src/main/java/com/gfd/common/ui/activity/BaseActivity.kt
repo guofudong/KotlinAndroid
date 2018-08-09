@@ -1,10 +1,7 @@
 package com.gfd.common.ui.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.AttributeSet
-import android.view.View
 import com.gfd.common.common.AppManager
 
 /**

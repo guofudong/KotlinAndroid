@@ -1,8 +1,10 @@
 package com.gfd.home.service.impl
 
+import com.gfd.common.utils.encode
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.service.CategoryService
 import com.google.gson.Gson
+import com.kotlin.base.utils.AppPrefsUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -34,16 +36,17 @@ class CateGoryServiceImpl @Inject constructor() : CategoryService {
                             var link = a.attr("href")
                             if (!link.contains("vod")) {
                                 link = link.substring(1, link.length)
-                            }else{
+                            } else {
                                 link = "/$link"
                             }
                             videoDatas.add(VideoItemData(videoName = videoName, videoImg = imgUrl, videoLink = link))
                         }
-                        Logger.e("解析结果集：${Gson().toJson(videoDatas)}")
+                        var jsonData = Gson().toJson(videoDatas)
+                        AppPrefsUtils.putString(encode(url), jsonData)
+                        Logger.e("解析结果集：$jsonData")
                         callBack.onCategoryVideos(videoDatas, state)
                     }
                 })
     }
-
 
 }
