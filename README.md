@@ -16,5 +16,5 @@
 ## 效果图
 ![](/screenshot/home.png) ![](/screenshot/player.png)
 
-![](/screenshot/search2.png) ![](/screenshot/search2.png)
+![](/screenshot/search2.png) ![](/screenshot/search1.png)
 
