@@ -166,7 +166,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             rootSearchEmpy.visibility = View.VISIBLE
             mVideoList.visibility = View.GONE
         } else {
-            mDataAdapter.addAll(datas)
+            mDataAdapter.updateData(datas)
             mLRecyclerViewAdapter.notifyDataSetChanged()
         }
 
