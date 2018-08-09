@@ -13,6 +13,8 @@
 
 ![](/screenshot/mvp演示.png)
 
-## 首页效果图
-![](/screenshot/home1.jpg) ![](/screenshot/home2.jpg)
+## 效果图
+![](/screenshot/home.png) ![](/screenshot/player.png)
+
+![](/screenshot/search2.png) ![](/screenshot/search2.png)
 
