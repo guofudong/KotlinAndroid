@@ -20,16 +20,6 @@ import java.lang.reflect.Field
  * @descriptio：扩展
  */
 
-fun LRecyclerView.gridInit(context: Context, span: Int, adapter: LRecyclerViewAdapter) {
-    val layoutManager = GridLayoutManager(context, span)
-    this.layoutManager = layoutManager
-    this.adapter = adapter
-    this.setLoadMoreEnabled(false)
-    this.setPullRefreshEnabled(false)
-    val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
-    this.addItemDecoration(SpacesItemDecoration.newInstance(
-            spacing, spacing, span, resources.getColor(R.color.colorItemDecoration)))
-}
 
 fun TabLayout.init() {
     //将当前的tab文字放大

@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="styleMusicHead">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/dp_6</item>
+        <item name="android:background">@drawable/ic_recommend_head_itembg</item>
+    </style>
+
+    <style name="styleMusicHeadText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_2</item>
+        <item name="android:textColor">@color/common_black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
 </resources>

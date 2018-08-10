@@ -4,13 +4,13 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.text.TextUtils
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.common.BaseConstant
+import com.gfd.common.ext.gridInit
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.ToastUtils
 import com.gfd.home.R
 import com.gfd.home.adapter.CategoryVideoAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.VideoItemData
-import com.gfd.home.ext.gridInit
 import com.gfd.home.injection.component.DaggerCategoryComponent
 import com.gfd.home.injection.module.CategoryModule
 import com.gfd.home.mvp.CategoryContract

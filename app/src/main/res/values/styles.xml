@@ -10,7 +10,6 @@
 
     <style name="activityTheme" parent="@style/AppTheme">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@drawable/img_splash</item>
     </style>
 
 </resources>

@@ -24,8 +24,7 @@ object ImageLoader {
      */
     fun loadUrlImage(context: Context, url: String, imageView: ImageView) {
         Glide.with(context).load(url).placeholder(R.drawable.icon_default)
-                .error(R.drawable.icon_default)
-                .centerCrop().into(
+                .error(R.drawable.icon_default).into(
                         object : SimpleTarget<GlideDrawable>() {
                             override fun onResourceReady(resource: GlideDrawable?, glideAnimation: GlideAnimation<in GlideDrawable>?) {
                                 imageView.setImageDrawable(resource)

@@ -13,7 +13,7 @@ import dagger.Component
  * @descriptio：
  */
 @PerComponentScope
-@Component(dependencies = arrayOf(ActivityComponent::class), modules = arrayOf(CategoryModule::class))
+@Component(dependencies = [(ActivityComponent::class)], modules = [(CategoryModule::class)])
 interface CategoryComponent {
 
     fun inject(fragment: CategoryFragment)

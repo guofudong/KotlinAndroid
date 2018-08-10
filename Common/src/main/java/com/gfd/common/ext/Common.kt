@@ -1,7 +1,14 @@
 package com.gfd.common.ext
 
+import android.content.Context
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.GridLayoutManager
+import com.gfd.common.R
 import com.gfd.common.utils.FixedSpeedScroller
+import com.gfd.common.widgets.SpacesItemDecoration
+import com.github.jdsjlzx.recyclerview.LRecyclerView
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.youth.banner.Banner
 import java.lang.reflect.Field
 
 /**
@@ -16,4 +23,34 @@ fun ViewPager.noScroll() {
     mScroller!!.isAccessible = true
     val scroller = FixedSpeedScroller(this.context)
     mScroller.set(this, scroller)
+}
+
+fun LRecyclerView.gridInit(context: Context, span: Int = 3, adapter: LRecyclerViewAdapter) {
+    val layoutManager = GridLayoutManager(context, span)
+    this.layoutManager = layoutManager
+    this.adapter = adapter
+    this.setLoadMoreEnabled(false)
+    this.setPullRefreshEnabled(false)
+    val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
+    this.addItemDecoration(SpacesItemDecoration.newInstance(
+            spacing, spacing, span, resources.getColor(R.color.colorItemDecoration)))
+}
+
+var BANNER_TIME = 3 * 1000
+
+fun Banner.player(titles: List<String>?, bannerImages: List<String>) {
+
+    if(null != titles){
+        this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR_TITLE)
+        this.setBannerTitles(titles)
+    }else{
+        this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR)
+    }
+    this.setImageLoader(com.gfd.common.utils.GlideImageLoader())
+    this.setImages(bannerImages)
+    this.setDelayTime(BANNER_TIME)
+    this.isAutoPlay(true)
+    this.setIndicatorGravity(com.youth.banner.BannerConfig.CENTER)
+    this.setBannerAnimation(com.youth.banner.Transformer.Default)
+    this.start()
 }

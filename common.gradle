@@ -4,6 +4,7 @@ ext {
     permission_version = '4.0.0-alpha1'
     arouter_api_version = '1.3.1'
     arouter_compiler_version = '1.1.4'
+    supper_version = '28.0.0-beta01'
     android = [compileSdkVersion: 28,
                applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
@@ -20,8 +21,8 @@ ext {
     java = ['javaVersion': JavaVersion.VERSION_1_7]
 
 
-    dependence = ['libSupportV7'                : 'com.android.support:appcompat-v7:28.0.0-beta01',
-                  'libSupportV4'                : 'com.android.support:support-v4:28.0.0-beta01',
+    dependence = ['libSupportV7'                : "com.android.support:appcompat-v7:$supper_version",
+                  'libSupportV4'                : "com.android.support:support-v4:$supper_version",
                   'libOkhttp'                   : 'com.squareup.okhttp3:okhttp:3.11.0',
                   'libKotlinJre7'               : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30',
                   'libRetrofit'                 : 'com.squareup.retrofit2:retrofit:2.4.0',
@@ -33,8 +34,8 @@ ext {
                   'libDaggerCompiler'           : 'com.google.dagger:dagger-compiler:2.16',
                   'libRxlifecycle2'             : 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.2',
                   'libGlide'                    : "com.github.bumptech.glide:glide:3.7.0",
-                  'libRecyclerview'             : 'com.android.support:recyclerview-v7:28.0.0-beta01',
-                  'libDesign'                   : 'com.android.support:design:28.0.0-beta01',
+                  'libRecyclerview'             : "com.android.support:recyclerview-v7:$supper_version",
+                  'libDesign'                   : "com.android.support:design:$supper_version",
                   'libBottomBar'                : 'com.roughike:bottom-bar:2.3.1',
                   'libLRecyclerView'            : 'com.github.jdsjlzx:LRecyclerView:1.5.0',
                   'libOkgo'                     : 'com.lzy.net:okgo:3.0.4',
@@ -44,7 +45,8 @@ ext {
                   'libArouter'                  : "com.alibaba:arouter-api:$arouter_api_version",
                   'libQSVideoPlayer'            : 'com.github.tohodog:QSVideoPlayer:2.2.3',
                   'libFlexbox'                  : 'com.google.android:flexbox:1.0.0',
-                  'libAnkoSqlite'                  :  'org.jetbrains.anko:anko-sqlite:0.10.5',
+                  'libAnkoSqlite'               : 'org.jetbrains.anko:anko-sqlite:0.10.5',
+                  'libCardview'                 : "com.android.support:cardview-v7:$supper_version",
                   'libLogger'                   : 'com.orhanobut:logger:2.2.0']
 
 }

@@ -48,5 +48,4 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         AppManager.instance.finishActivity(this)
     }
-
 }

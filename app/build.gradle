@@ -9,10 +9,11 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false

@@ -62,7 +62,7 @@ object Api {
      * @param count Int ：要获取的数量
      * @return String
      */
-    fun getBanner(count: Int): String {
+    fun getBanner(count: Int = 4): String {
         return URL_BASE + URL_BANNER + count
     }
 

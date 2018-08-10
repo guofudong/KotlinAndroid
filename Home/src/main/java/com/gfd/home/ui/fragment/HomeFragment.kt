@@ -4,15 +4,15 @@ import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gfd.common.ext.gridInit
+import com.gfd.common.ext.player
 import com.gfd.common.ui.fragment.BaseMvpFragment
-import com.gfd.common.utils.GlideImageLoader
 import com.gfd.home.R
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.entity.VideoListData
-import com.gfd.home.ext.gridInit
 import com.gfd.home.injection.component.DaggerVideoComponent
 import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
@@ -24,8 +24,6 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.kotlin.base.utils.AppPrefsUtils
 import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
-import com.youth.banner.BannerConfig
-import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -147,17 +145,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
             bannerImages.add(bannerUrl.imgUrl)
             titles.add(bannerUrl.name)
         }
-        //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE)
-        mBanner.setBannerTitles(titles)
-        mBanner.setImageLoader(GlideImageLoader())
-        mBanner.setImages(bannerImages)
-        mBanner.setDelayTime(BANNER_TIME)
-        mBanner.setBannerTitles(titles)
-        mBanner.isAutoPlay(true)
-        mBanner.setIndicatorGravity(BannerConfig.CENTER)
-        mBanner.setBannerAnimation(Transformer.Default)
-        mBanner.start()
+        mBanner.player(titles, bannerImages)
     }
 
 

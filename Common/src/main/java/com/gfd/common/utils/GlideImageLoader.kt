@@ -18,7 +18,7 @@ class GlideImageLoader : ImageLoader() {
     //提供createImageView 方法，如果不用可以不重写这个方法，主要是方便自定义ImageView的创建
     override fun createImageView(context: Context): ImageView {
         val imageView = ImageView(context)
-        imageView.scaleType = ImageView.ScaleType.FIT_XY
+        imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
         return imageView
     }
 
