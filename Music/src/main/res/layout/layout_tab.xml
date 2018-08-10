@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tab_item_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/common_white"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="normal"
+        android:typeface="sans"/>
+
+    <View
+        android:id="@+id/view_music_indicator"
+        android:layout_width="@dimen/dp_36"
+        android:layout_height="2dp"
+        android:background="@color/common_white"
+        android:layout_marginTop="@dimen/dp_2"/>
+
+
+</LinearLayout>
+

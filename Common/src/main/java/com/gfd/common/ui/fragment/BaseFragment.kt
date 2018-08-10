@@ -28,6 +28,18 @@ open abstract class BaseFragment : Fragment() {
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initData()
+        setListener()
+    }
+    abstract fun initView()
+
+    abstract fun initData()
+
+    open fun setListener() {}
+
     /**
      * 进行初始化操作，在onCreateView中调用
      */

@@ -57,11 +57,4 @@ fun TabLayout.init() {
     })
 }
 
-fun ViewPager.noScroll() {
-    var mScroller: Field? = null
-    mScroller = ViewPager::class.java.getDeclaredField("mScroller")
-    mScroller!!.isAccessible = true
-    val scroller = FixedSpeedScroller(this.context)
-    mScroller.set(this, scroller)
-}
 

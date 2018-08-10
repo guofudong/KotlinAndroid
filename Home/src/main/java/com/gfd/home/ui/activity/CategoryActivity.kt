@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import com.gfd.common.ext.noScroll
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.home.R
 import com.gfd.home.adapter.CategoryPagerAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.ext.init
-import com.gfd.home.ext.noScroll
 import com.gfd.home.ui.fragment.CategoryFragment
 import kotlinx.android.synthetic.main.activity_category.*
 

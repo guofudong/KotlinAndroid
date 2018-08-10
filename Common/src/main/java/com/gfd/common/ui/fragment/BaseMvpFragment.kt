@@ -29,24 +29,10 @@ open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseVie
     override fun initOperate() {
         initActivityInjection()
         injectComponent()
-        //mProgressLoading = ProgressLoading.create(activity as Activity)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-        initData()
-        setListener()
     }
 
     /** 注册依赖关系 */
     abstract fun injectComponent()
-
-    abstract fun initView()
-
-    abstract fun initData()
-
-    open fun setListener() {}
 
     private fun initActivityInjection() {
         mActivityComponent = DaggerActivityComponent.builder()

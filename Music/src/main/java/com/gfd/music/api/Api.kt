@@ -137,7 +137,7 @@ object Api {
      * @return String
      */
     fun getIdSongList(id: Int): String {
-        return "${URL_BASE}${URL_ID_SONG_LIST}&listid=$id"
+        return "$URL_BASE$URL_ID_SONG_LIST&listid=$id"
     }
 
     /**
@@ -148,7 +148,7 @@ object Api {
      * @return String
      */
     fun getSearch(word: String, page: Int, pageSize: Int): String {
-        return URL_BASE + URL_SEARCH + "&query=$word&page_no=$page&page_size=$pageSize&type=-1&data_source=0"
+        return "$URL_BASE$URL_SEARCH&query=$word&page_no=$page&page_size=$pageSize&type=-1&data_source=0"
     }
 
     /**
@@ -166,7 +166,7 @@ object Api {
      * @return String
      */
     fun getChannelTag(page: Int, pageSize: Int): String {
-        return "${URL_BASE}${URL_CHANNELTA}&page_no=$page&page_size$pageSize"
+        return "$URL_BASE$URL_CHANNELTA&page_no=$page&page_size$pageSize"
     }
 
     /**
@@ -176,7 +176,7 @@ object Api {
      * @return String
      */
     fun getChannelSongList(tag: Int, count: Int): String {
-        return "${URL_BASE}${URL_CHANNEL_SONG_LIST}&tag_id=￥tag&num=$count"
+        return "$URL_BASE$URL_CHANNEL_SONG_LIST&tag_id=￥tag&num=$count"
     }
 
     /**
@@ -204,7 +204,7 @@ object Api {
      * @return String
      */
     fun getSongBaseInfo(songid: String): String {
-        return "${URL_BASE}${URL_SONG_BASE_INFO}&song_id=$songid"
+        return "$URL_BASE$URL_SONG_BASE_INFO&song_id=$songid"
     }
 
     fun encode(str: String?): String {
