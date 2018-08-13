@@ -44,15 +44,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initOperate() {
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-            val decorView = window.decorView
-            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            decorView.systemUiVisibility = option
-            window.statusBarColor = Color.TRANSPARENT
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-            val localLayoutParams = window.attributes
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
-        }*/
+        setStatusBar()
     }
 
     /**
@@ -73,18 +65,29 @@ class MainActivity : BaseActivity() {
 
     override fun setListener() {
         bottomBar.setOnTabSelectListener {
-            if (it == R.id.tab_home) {//首页
-                changeFragment(0)
-            } else if (it == R.id.tab_music) {//音乐
-                changeFragment(1)
-            } else if (it == R.id.tab_play) {//直播
+            when (it) {
+                R.id.tab_home -> {//首页
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    }
+                    changeFragment(0)
+                }
+                R.id.tab_music -> {//音乐
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    }
+                    changeFragment(1)
+                }
+                R.id.tab_play -> {//直播
 
-            } else if (it == R.id.tab_mine) {//我的
+                }
+                R.id.tab_mine -> {//我的
 
+                }
             }
-
         }
     }
+
 
 }
 

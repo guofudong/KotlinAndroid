@@ -51,7 +51,6 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                         Logger.e("推荐歌曲：$json")
                         val songDatas = Gson().fromJson(json, SongDto::class.java)
                         val datas = ArrayList<SongData>()
-                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌曲"))
                         val song_list = songDatas.content[0].song_list
                         for (i in 0..11) {
                             song_list.removeAt(0)
@@ -64,9 +63,10 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                             }
                             datas.add(SongData(Concant.ITEM_TYPE_IMG, "", "", value.recommend_reason,
                                     value.pic_huge, value.pic_premium, value.song_id, value.title, value.url,
-                                    value.file_duration))
+                                    value.file_duration,value.artist_id))
                         }
                         datas.reverse()
+                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
                         callBack.onSongList(datas)
                     }
                 })

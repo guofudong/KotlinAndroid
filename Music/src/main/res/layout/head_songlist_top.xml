@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:layout_marginTop="50dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    app:layout_collapseMode="parallax">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:layout_margin="@dimen/dp_10"
+            app:cardCornerRadius="@dimen/dp_2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tvSongTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/dp_2"
+                    android:drawableLeft="@drawable/ic_music_item_ej"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:paddingTop="2dp"
+                    android:textColor="@color/common_white"
+                    android:textSize="@dimen/sp_12" />
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/common_white"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center"
+                android:drawableLeft="@drawable/ic_songlist_type"
+                android:textColor="@color/common_white"
+                android:drawablePadding="@dimen/dp_2"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/styleSongListHead"
+            android:drawableTop="@drawable/ic_commint"
+            android:text="43" />
+
+        <TextView
+            style="@style/styleSongListHead"
+            android:drawableTop="@drawable/ic_share"
+            android:text="40" />
+
+        <TextView
+            style="@style/styleSongListHead"
+            android:drawableTop="@drawable/ic_download"
+            android:text="下载" />
+
+        <TextView
+            style="@style/styleSongListHead"
+            android:drawableTop="@drawable/ic_mulit_select"
+            android:text="多选" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

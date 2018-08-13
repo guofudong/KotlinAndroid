@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorTopBG"
-        android:paddingBottom="@dimen/dp_4"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_10"
         android:paddingTop="@dimen/dp_4">
@@ -21,13 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:src="@drawable/ic_menu"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/padding_top"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/padding_top">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -51,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_top_search"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/padding_top"/>
     </RelativeLayout>
 
     <android.support.design.widget.TabLayout

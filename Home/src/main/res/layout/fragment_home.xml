@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/common_white"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
     android:paddingTop="@dimen/dp_4">
 
     <TextView
@@ -20,7 +19,8 @@
         android:maxLines="1"
         android:paddingLeft="@dimen/dp_6"
         android:text="@string/homeSerachHint"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="@dimen/padding_top"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"

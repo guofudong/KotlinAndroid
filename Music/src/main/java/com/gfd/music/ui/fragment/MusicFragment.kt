@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import com.gfd.common.ext.noScroll
 import com.gfd.common.ui.fragment.BaseFragment
+import com.gfd.common.utils.CommonUtils
 import com.gfd.music.R
 import com.gfd.music.adapter.MusicPagerAdapter
 import com.gfd.music.ext.init

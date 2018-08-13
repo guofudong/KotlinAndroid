@@ -1,7 +1,14 @@
 package com.gfd.music.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.support.v7.graphics.Palette
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.gfd.common.ui.adapter.BaseMultiAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
@@ -10,6 +17,7 @@ import com.gfd.music.common.Concant
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_IMG
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_TITLE
 import com.gfd.music.entity.SongData
+
 
 /**
  * @Author : 郭富东
@@ -45,6 +53,17 @@ class RecommendAdapter(val context: Context) : BaseMultiAdapter<SongData>(contex
         val tagText = holder.getView(R.id.tvSongTag) as TextView
         title.text = itemData.recommend_reason
         tagText.text = (itemData.file_duration + "万")
+        val img = holder.getView(R.id.img_music_item) as ImageView
+        Glide.with(context).load(itemData.pic_big).asBitmap().into(object : SimpleTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
+                img.setImageBitmap(resource)
+                Palette.from(resource).generate {
+                    // 获取到柔和的明亮的颜色（可传默认值）
+                    itemData.color = it?.getVibrantColor(Color.BLACK)!!
+                }
+
+            }
+        })
         ImageLoader.loadUrlImage(context, itemData.pic_big, holder.getView(R.id.img_music_item))
     }
 

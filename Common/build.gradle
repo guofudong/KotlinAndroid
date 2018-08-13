@@ -69,5 +69,6 @@ dependencies {
     api rootProject.ext.dependence.libFlexbox
     api rootProject.ext.dependence.libAnkoSqlite
     api rootProject.ext.dependence.libCardview
+    api rootProject.ext.dependence.libPalette
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
 }

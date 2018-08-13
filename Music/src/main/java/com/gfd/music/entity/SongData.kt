@@ -9,7 +9,7 @@ import com.gfd.common.ui.adapter.MultiItemEntity
  * @descriptio：
  */
 data class SongData(var type: Int, var itemTitle: String, var name: String, var recommend_reason: String, var pic_big: String, var pic_premium: String,
-                    var song_id: String, var title: String, var url: String, var file_duration: String) : MultiItemEntity {
+                    var song_id: String, var title: String, var url: String, var file_duration: String, var id:String = "", var color:Int = 0) : MultiItemEntity {
 
     override fun getItemType(): Int {
         return type

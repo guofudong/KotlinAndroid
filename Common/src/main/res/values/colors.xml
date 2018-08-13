@@ -22,4 +22,5 @@
     <color name="transparent">#00000000</color>
 
     <color name="common_colorItemBG">#e6e4e5</color>
+    <color name="colorTopBG">#d93d34</color>
 </resources>

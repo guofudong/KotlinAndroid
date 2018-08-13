@@ -1,6 +1,6 @@
-if(isMusicModule.toBoolean()){
+if (isMusicModule.toBoolean()) {
     apply plugin: 'com.android.application'
-}else{
+} else {
     apply plugin: 'com.android.library'
 }
 
@@ -11,7 +11,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        if(isMusicModule.toBoolean()){
+        if (isMusicModule.toBoolean()) {
             applicationId "com.gfd.music"
         }
         minSdkVersion 15
@@ -30,13 +30,13 @@ android {
         }
     }
 
-    sourceSets{
-        main{
-            if(isMusicModule.toBoolean()){
+    sourceSets {
+        main {
+            if (isMusicModule.toBoolean()) {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            }else{
+            } else {
                 manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                java{
+                java {
                     exclude 'debug/**'
                 }
             }
@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

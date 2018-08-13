@@ -1,5 +1,6 @@
 package com.gfd.music.ui.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.gfd.common.ext.gridInit
@@ -14,6 +15,7 @@ import com.gfd.music.injection.component.DaggerMusicComponent
 import com.gfd.music.injection.module.MusicMoudle
 import com.gfd.music.mvp.contract.RecommendContract
 import com.gfd.music.mvp.preesnter.RecommendPresenter
+import com.gfd.music.ui.activity.SongListActivity
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.fragment_recommend.*
@@ -31,6 +33,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mSongAdapter: RecommendAdapter
     private lateinit var mBanner: Banner
+    private lateinit var mSongData: List<SongData>
     override fun getLayoutId(): Int {
         return R.layout.fragment_recommend
     }
@@ -62,7 +65,18 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     }
 
     override fun setListener() {
+        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
+            val songData = mSongData[position]
+            if (Concant.ITEM_TYPE_IMG == songData.getItemType()) {//点击内容
+                val intent = Intent(activity, SongListActivity::class.java)
+                intent.putExtra("id",songData.id)
+                intent.putExtra("pic_big",songData.pic_big)
+                intent.putExtra("file_duration",songData.file_duration)
+                intent.putExtra("color",songData.color)
+                startActivity(intent)
+            }
 
+        }
     }
 
     override fun showBanner(bannerData: List<BannerData>) {
@@ -74,6 +88,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     }
 
     override fun showSongList(songDatas: List<SongData>) {
+        mSongData = songDatas
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             val type = songDatas[position].getItemType()
             if (type == Concant.ITEM_TYPE_TITLE) {

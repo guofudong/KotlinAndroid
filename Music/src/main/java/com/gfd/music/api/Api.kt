@@ -136,7 +136,7 @@ object Api {
      * @param id Int ： 歌单id
      * @return String
      */
-    fun getIdSongList(id: Int): String {
+    fun getIdSongList(id: String): String {
         return "$URL_BASE$URL_ID_SONG_LIST&listid=$id"
     }
 
@@ -176,7 +176,7 @@ object Api {
      * @return String
      */
     fun getChannelSongList(tag: Int, count: Int): String {
-        return "$URL_BASE$URL_CHANNEL_SONG_LIST&tag_id=￥tag&num=$count"
+        return "$URL_BASE$URL_CHANNEL_SONG_LIST&tag_id=tag&num=$count"
     }
 
     /**
