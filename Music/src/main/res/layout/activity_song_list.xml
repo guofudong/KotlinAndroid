@@ -13,9 +13,9 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingTbl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="60dp"
             app:expandedTitleMarginStart="48dp"
             android:background="@color/transparent"
@@ -29,7 +29,8 @@
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
                 android:layout_marginTop="@dimen/padding_top"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -65,7 +66,7 @@
                             android:ellipsize="end"
                             android:maxLength="15"
                             android:maxLines="1"
-                            android:textColor="@color/common_gray"
+                            android:textColor="#aaffffff"
                             android:textSize="@dimen/sp_10" />
 
                     </LinearLayout>

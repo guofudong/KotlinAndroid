@@ -44,6 +44,7 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
         duration = intent.getStringExtra("file_duration")
         colorBg = intent.getIntExtra("color", Color.BLACK)
         headRoot.setBackgroundColor(colorBg)
+        collapsingTbl.setContentScrimColor(colorBg)
         mRecyclerView.layoutManager = LinearLayoutManager(this@SongListActivity, LinearLayoutManager.VERTICAL, false)
         songListAdapter = SongListAdapter(this@SongListActivity)
         mRecyclerView.adapter = songListAdapter

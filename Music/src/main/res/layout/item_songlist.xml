@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/dp_10"
-    android:paddingRight="@dimen/dp_10"
-    android:paddingTop="@dimen/dp_6"
-    android:paddingBottom="@dimen/dp_6">
+    android:paddingTop="@dimen/dp_6">
 
     <TextView
         android:id="@+id/tv_item_num"
@@ -44,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_meun_sy" />
+        android:src="@drawable/ic_meun_sy"
+        android:layout_marginRight="@dimen/dp_6"/>
 
     <ImageView
         android:id="@+id/ic_item_play"
@@ -54,6 +53,15 @@
         android:layout_marginRight="@dimen/dp_8"
         android:layout_toLeftOf="@+id/ic_menu"
         android:src="@drawable/ic_play" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:background="#aac7c7c7"
+        android:layout_toRightOf="@+id/tv_item_num"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_below="@+id/tv_item_autor"
+        android:layout_marginLeft="@dimen/dp_8"/>
 
 
 </RelativeLayout>
