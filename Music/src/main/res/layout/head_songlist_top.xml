@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_10"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="@dimen/dp_75"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    app:layout_collapseMode="parallax">
+    app:layout_collapseMode="pin">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.gfd.music.ui.activity
 
 import android.graphics.Color
+import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.utils.ImageLoader
@@ -20,8 +21,10 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
     private lateinit var artistId: String
     private lateinit var picUrl: String
     private lateinit var duration: String
+    private lateinit var title: String
     private var colorBg = Color.BLACK
     private lateinit var songListAdapter: SongListAdapter
+
     override fun getLayoutId(): Int {
         return R.layout.activity_song_list
     }
@@ -32,7 +35,7 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
                 .songListMoudle(SongListMoudle(this))
                 .build()
                 .inject(this)
-        //setStatusBar()
+        setStatusBar()
     }
 
     override fun initView() {
@@ -44,10 +47,19 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
         mRecyclerView.layoutManager = LinearLayoutManager(this@SongListActivity, LinearLayoutManager.VERTICAL, false)
         songListAdapter = SongListAdapter(this@SongListActivity)
         mRecyclerView.adapter = songListAdapter
+
     }
 
     override fun initData() {
         mPresenter.getSongList(artistId)
+    }
+
+    override fun setListener() {
+        headRoot.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+
+        })
+
+
     }
 
     override fun showSongList(datas: List<SongItemData>) {
@@ -56,7 +68,8 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
 
     override fun showHead(datas: SongTitleData) {
         ImageLoader.loadUrlImage(this@SongListActivity, picUrl, ivLogo)
-        tvTitle.text = datas.title
+        title = datas.title
+        tvTitle.text = title
         tvTag.text = "编辑推荐：$datas.des"
         tvType.text = datas.type
         tvSongTag.text = duration + "万"
