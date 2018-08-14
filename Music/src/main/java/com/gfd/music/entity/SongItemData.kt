@@ -6,4 +6,4 @@ package com.gfd.music.entity
  * @Email：878749089@qq.com
  * @descriptio：
  */
-data class SongItemData(var name: String, var autor: String, var songId: String)
+data class SongItemData(var name: String, var autor: String, var songId: String, var pic: String)

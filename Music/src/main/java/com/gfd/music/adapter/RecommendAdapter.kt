@@ -11,12 +11,12 @@ import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.gfd.common.ui.adapter.BaseMultiAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
-import com.gfd.common.utils.ImageLoader
 import com.gfd.music.R
 import com.gfd.music.common.Concant
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_IMG
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_TITLE
 import com.gfd.music.entity.SongData
+import com.orhanobut.logger.Logger
 
 
 /**
@@ -54,17 +54,21 @@ class RecommendAdapter(val context: Context) : BaseMultiAdapter<SongData>(contex
         title.text = itemData.recommend_reason
         tagText.text = (itemData.file_duration + "万")
         val img = holder.getView(R.id.img_music_item) as ImageView
-        Glide.with(context).load(itemData.pic_big).asBitmap().into(object : SimpleTarget<Bitmap>() {
+        Glide.with(context).load(itemData.pic_big).asBitmap().error(R.drawable.ic_songlist_error).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
-                img.setImageBitmap(resource)
                 Palette.from(resource).generate {
                     // 获取到柔和的明亮的颜色（可传默认值）
-                    itemData.color = it?.getVibrantColor(Color.BLACK)!!
+                    if (it == null) {
+                        img.setImageResource(R.drawable.ic_songlist_error)
+                    } else {
+                        val vibrantColor = it.getVibrantColor(Color.BLACK)
+                        itemData.color = vibrantColor
+                        img.setImageBitmap(resource)
+                    }
                 }
 
             }
         })
-        ImageLoader.loadUrlImage(context, itemData.pic_big, holder.getView(R.id.img_music_item))
     }
 
     /**

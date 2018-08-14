@@ -41,10 +41,10 @@ class SongListServiceImpl @Inject constructor() : SongListService {
                         } else {
                             jsonData.pic_700
                         }
-                        val titleData = SongTitleData(jsonData.title,jsonData.tag,jsonData.desc)
+                        val titleData = SongTitleData(jsonData.title, jsonData.tag, jsonData.desc)
                         val datas = ArrayList<SongItemData>()
                         jsonData.content.forEach {
-                            datas.add(SongItemData(it.title, it.author, it.song_id))
+                            datas.add(SongItemData(it.title, it.author, it.song_id, it.pic_radio))
                         }
                         callBack.onSongList(datas)
                         callBack.onTitle(titleData)

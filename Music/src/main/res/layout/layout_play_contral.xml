@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playContralRoot"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_52"
+    android:background="@color/common_white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/dp_8"
+    android:paddingRight="@dimen/dp_8"
+    android:visibility="gone">
+
+
+    <ImageView
+        android:id="@+id/album"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dp_8" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp_4">
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textColor="@color/common_black"
+            android:text="@string/app_name"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/songaAtist"
+            style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/playMusic"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_play_music"
+        android:layout_marginRight="@dimen/dp_12"/>
+
+    <ImageView
+        android:id="@+id/play_menu"
+        android:layout_width="@dimen/dp_26"
+        android:layout_height="@dimen/dp_26"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_play_menu" />
+
+</LinearLayout>

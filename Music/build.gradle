@@ -40,6 +40,7 @@ android {
                     exclude 'debug/**'
                 }
             }
+            aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
         }
     }
 

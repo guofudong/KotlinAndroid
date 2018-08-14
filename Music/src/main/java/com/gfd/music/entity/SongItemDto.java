@@ -1,5 +1,6 @@
 package com.gfd.music.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,18 +12,18 @@ import java.util.List;
 public class SongItemDto {
 
     public String listid;
-    public String title;
-    public String pic_300;
-    public String pic_500;
-    public String pic_700;
+    public String title = "";
+    public String pic_300 ="";
+    public String pic_500 ="";
+    public String pic_700 ="";
     public String width;
     public String height;
     public String listenum;
     public String collectnum;
-    public String tag;
-    public String desc;
+    public String tag = "";
+    public String desc = "";
     public String url;
-    public List<SongItem> content;
+    public List<SongItem> content = new ArrayList();
 
     public class SongItem {
 
@@ -31,6 +32,7 @@ public class SongItemDto {
         public String author;
         public String album_title;
         public String pic_big;
+        public String pic_radio = "";
         public String ting_uid;
         public String all_artist_id;
         public String high_rate;

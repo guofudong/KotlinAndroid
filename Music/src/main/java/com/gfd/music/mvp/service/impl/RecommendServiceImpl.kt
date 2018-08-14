@@ -43,7 +43,7 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
     }
 
     override fun getSongList(callBack: RecommendService.GetRecommendCallBack) {
-        OkGo.get<String>(Api.getRecommend(30))
+        OkGo.get<String>(Api.getRecommend(18))
                 .tag(this)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
@@ -52,9 +52,7 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                         val songDatas = Gson().fromJson(json, SongDto::class.java)
                         val datas = ArrayList<SongData>()
                         val song_list = songDatas.content[0].song_list
-                        for (i in 0..11) {
-                            song_list.removeAt(0)
-                        }
+                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
                         song_list.forEachWithIndex { index, value ->
                             if (index == 6) {
                                 datas.add(SongData(Concant.ITEM_TYPE_TITLE, "最新歌曲"))
@@ -65,8 +63,8 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                                     value.pic_huge, value.pic_premium, value.song_id, value.title, value.url,
                                     value.file_duration,value.artist_id))
                         }
-                        datas.reverse()
-                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
+                        datas[4].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
+                        datas[5].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
                         callBack.onSongList(datas)
                     }
                 })
