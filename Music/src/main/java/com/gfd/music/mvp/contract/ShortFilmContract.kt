@@ -2,6 +2,7 @@ package com.gfd.music.mvp.contract
 
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
+import com.gfd.music.entity.MvData
 
 /**
  * @Author : 郭富东
@@ -9,12 +10,14 @@ import com.gfd.common.mvp.view.BaseView
  * @Email：878749089@qq.com
  * @descriptio：
  */
-interface ShortFilmContract{
-    interface View :BaseView{
+interface ShortFilmContract {
+    interface View : BaseView {
+
+        fun showMvList(datas: List<MvData>)
 
     }
 
-    interface Presenter: BasePresenter {
-
+    interface Presenter : BasePresenter {
+        fun getMvList(offset: Int, isLoading: Boolean)
     }
 }

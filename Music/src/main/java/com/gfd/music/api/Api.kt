@@ -12,6 +12,7 @@ import java.net.URLEncoder
  */
 object Api {
     var URL_BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method="
+    var URL_MV_BASE = "https://netease.api.zzsun.cc/"
     /** 推荐歌曲 */
     var URL_RECOMMEND = "baidu.ting.song.getEditorRecommend&num="
     /** 新曲轮播图 */
@@ -215,6 +216,20 @@ object Api {
             e.printStackTrace()
         }
         return str
+    }
+
+    /**
+     * 获取推荐MV
+     * @param offset Int
+     * @param size Int
+     * @return String
+     */
+    fun getRecommendMV(offset: Int, size: Int = 12): String {
+        return URL_MV_BASE + "top/mv/?offset=$offset&limit=$size"
+    }
+
+    fun getMVDetail(mvId: Int): String {
+        return URL_MV_BASE + "mv?mvid=$mvId"
     }
 
 }

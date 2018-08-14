@@ -80,4 +80,8 @@ open abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.
         notifyDataSetChanged()
     }
 
+    fun getDatas():List<T>{
+        return mDatas
+    }
+
 }
