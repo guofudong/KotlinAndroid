@@ -1,9 +1,7 @@
 package com.gfd.video
 
-import android.graphics.Color
 import android.os.Build
 import android.view.View
-import android.view.WindowManager
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.home.ui.fragment.HomeFragment

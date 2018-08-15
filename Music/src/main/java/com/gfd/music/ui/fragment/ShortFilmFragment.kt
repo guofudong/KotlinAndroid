@@ -1,6 +1,7 @@
 package com.gfd.music.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.MvListAdapter
@@ -11,7 +12,6 @@ import com.gfd.music.mvp.contract.ShortFilmContract
 import com.gfd.music.mvp.preesnter.ShortFilmPresenter
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import kotlinx.android.synthetic.main.activity_song_list.*
 import kotlinx.android.synthetic.main.fragment_short_film.*
 
 
@@ -73,6 +73,9 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
                 isLoadMore = true
                 mPresenter.getMvList(mAdapter.getItemSize(), false)
             }
+        }
+        mAdapter.setOnTitleClickListener{
+
         }
     }
 
