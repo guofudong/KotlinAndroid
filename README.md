@@ -13,8 +13,14 @@
 
 ![](/screenshot/mvp演示.png)
 
-## 效果图
+## 首页模块效果图
 ![](/screenshot/home.png)  ![](/screenshot/player.png)
 
 ![](/screenshot/search2.png)  ![](/screenshot/search1.png)
+
+## 音乐模块效果图
+
+![](/screenshot/music1.png)  ![](/screenshot/music2.png)
+
+![](/screenshot/music3.png)  
 
