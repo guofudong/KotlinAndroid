@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/Provider" />
             <option value="$PROJECT_DIR$/User" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/nicevideoplayer" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

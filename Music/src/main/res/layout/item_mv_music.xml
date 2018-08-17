@@ -16,10 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.gfd.music.widgets.MyVideoView
+            <com.xiao.nicevideoplayer.NiceVideoPlayer
                 android:id="@+id/videoView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/tvCountMv"

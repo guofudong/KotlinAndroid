@@ -10,12 +10,13 @@ import com.gfd.music.R
 import com.gfd.music.api.Api
 import com.gfd.music.entity.MvData
 import com.gfd.music.entity.MvDetailDto
-import com.gfd.music.widgets.MyVideoView
-import com.gfd.music.widgets.MyVideoViewHelp
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
+import com.xiao.nicevideoplayer.Clarity
+import com.xiao.nicevideoplayer.NiceVideoPlayer
+import com.xiao.nicevideoplayer.TxVideoPlayerController
 
 /**
  * @Author : 郭富东
@@ -23,6 +24,7 @@ import com.lzy.okgo.model.Response
  * @Email：878749089@qq.com
  * @descriptio：
  */
+
 class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
 
     private var listener: OnTitleClickListener? = null
@@ -33,30 +35,53 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
     override fun onBindView(holder: BaseViewHolder, position: Int) {
         val tvName = holder.getView<TextView>(R.id.tvNameMv)
         val tvCount = holder.getView<TextView>(R.id.tvCountMv)
-        val videoView = holder.getView<MyVideoView>(R.id.videoView)
+        val videoView = holder.getView<NiceVideoPlayer>(R.id.videoView)
+        setVideoView(videoView, holder.itemView)
+        val controller = TxVideoPlayerController(context)
+        videoView.setController(controller)
         val mvData = mDatas[position]
-        tvName.text = if (mvData.des.isEmpty()) {
+        val des: String = if (mvData.des.isEmpty()) {
             mvData.name
         } else {
             mvData.des
         }
+        controller.setTitle("")
+        ImageLoader.loadUrlImage(context, mvData.pic, controller.imageView())
+        tvName.text = des
         if (listener != null) {
             tvName.setOnClickListener {
                 listener?.onClick(it)
             }
         }
         tvCount.text = "播放次数:${mvData.playCount / 1000}万"
-        ImageLoader.loadUrlImage(context, mvData.pic, videoView.coverImageView)
         OkGo.get<String>(Api.getMVDetail(mvData.id))
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
-                        val mvDetail = Gson().fromJson(response.body().toString(), MvDetailDto::class.java)
-                        mvData.videoUrl = mvDetail.data.brs.`_$720`
-                        videoView.setUp(mvData.videoUrl)
+                        val json = response.body().toString()
+                        val mvData = Gson().fromJson(json, MvDetailDto::class.java)
+                        controller.setLenght(mvData.data.duration)
+                        //videoView.setUp(mvData.data.brs.`_$720`, null)
+                        controller.setClarity(getClarites(mvData), 2)
                     }
-
                 })
 
+    }
+
+    private fun getClarites(mvData: MvDetailDto): MutableList<Clarity> {
+        val datas = ArrayList<Clarity>()
+        datas.add(Clarity("标清", "270P", mvData.data.brs.`_$240`))
+        datas.add(Clarity("高清", "480P", mvData.data.brs.`_$480`))
+        datas.add(Clarity("超清", "720P", mvData.data.brs.`_$720`))
+        datas.add(Clarity("蓝光", "1080P", mvData.data.brs.`_$1080`))
+        return datas
+
+    }
+
+    private fun setVideoView(videoView: NiceVideoPlayer, itemView: View) {
+        val params = videoView.layoutParams
+        params.width = itemView.resources.displayMetrics.widthPixels // 宽度为屏幕宽度
+        params.height = (params.width * 9f / 16f).toInt()    // 高度为宽度的9/16
+        videoView.layoutParams = params
     }
 
     fun getItemSize(): Int {

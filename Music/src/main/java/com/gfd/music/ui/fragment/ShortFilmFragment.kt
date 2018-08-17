@@ -1,7 +1,7 @@
 package com.gfd.music.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
+import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.MvListAdapter
@@ -12,6 +12,8 @@ import com.gfd.music.mvp.contract.ShortFilmContract
 import com.gfd.music.mvp.preesnter.ShortFilmPresenter
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.xiao.nicevideoplayer.NiceVideoPlayer
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.fragment_short_film.*
 
 
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_short_film.*
  * @Email：878749089@qq.com
  * @descriptio：短片Fragment
  */
-class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContract.View {
+class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContract.View{
 
     private lateinit var mAdapter: MvListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
@@ -67,16 +69,14 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             mPresenter.getMvList(offset, false)
         }
         mMvRecycler.setOnLoadMoreListener {
-            if(mMvDatas.size > 12){
+            if (mMvDatas.size > 12) {
                 mMvRecycler.setNoMore(true)
-            }else{
+            } else {
                 isLoadMore = true
                 mPresenter.getMvList(mAdapter.getItemSize(), false)
             }
         }
-        mAdapter.setOnTitleClickListener{
 
-        }
     }
 
     override fun showMvList(datas: List<MvData>) {
@@ -93,5 +93,9 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
+    }
 
 }

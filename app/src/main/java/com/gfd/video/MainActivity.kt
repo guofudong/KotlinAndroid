@@ -5,6 +5,7 @@ import android.view.View
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.home.ui.fragment.HomeFragment
+import com.gfd.music.common.PlayUtils
 import com.gfd.music.ui.fragment.MusicFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -86,6 +87,12 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (PlayUtils.onBackPressd()) {
+            return
+        }
+        super.onBackPressed()
+    }
 
 }
 

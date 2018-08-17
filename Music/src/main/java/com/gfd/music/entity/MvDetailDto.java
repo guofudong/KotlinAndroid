@@ -67,7 +67,7 @@ public class MvDetailDto {
         public int shareCount;
         public int likeCount;
         public int commentCount;
-        public int duration;
+        public long duration;
         public int nType;
         public String publishTime;
         public BrsBean brs;
