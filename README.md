@@ -22,5 +22,5 @@
 
 ![](/screenshot/music1.png)  ![](/screenshot/music2.png)
 
-![](/screenshot/music3.png)  
+![](/screenshot/music4.png)  ![](/screenshot/music3.png)  
 
