@@ -8,6 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.SongListActivity"/>
+        <activity android:name=".ui.activity.MvDetailActivity"/>
         <service android:name=".service.MusicPlayService"/>
     </application>
 

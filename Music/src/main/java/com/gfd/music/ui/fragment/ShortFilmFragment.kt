@@ -1,5 +1,6 @@
 package com.gfd.music.ui.fragment
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.ui.fragment.BaseMvpFragment
@@ -10,6 +11,7 @@ import com.gfd.music.injection.component.DaggerShortFilmComponent
 import com.gfd.music.injection.module.ShortFilmMoudle
 import com.gfd.music.mvp.contract.ShortFilmContract
 import com.gfd.music.mvp.preesnter.ShortFilmPresenter
+import com.gfd.music.ui.activity.MvDetailActivity
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.xiao.nicevideoplayer.NiceVideoPlayer
@@ -75,6 +77,11 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
                 isLoadMore = true
                 mPresenter.getMvList(mAdapter.getItemSize(), false)
             }
+        }
+        mAdapter.setOnTitleClickListener { _, data ->
+            val intent = Intent(activity, MvDetailActivity::class.java)
+            intent.putExtra("json",data)
+            startActivity(intent)
         }
 
     }

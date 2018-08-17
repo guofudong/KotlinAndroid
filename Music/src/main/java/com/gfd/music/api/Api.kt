@@ -232,4 +232,22 @@ object Api {
         return URL_MV_BASE + "mv?mvid=$mvId"
     }
 
+    /**
+     * 获取相似MV
+     * @param mvId Int
+     * @return String
+     */
+    fun getSimilarMv(mvId:String):String{
+        return URL_MV_BASE + "simi/mv?mvid=$mvId"
+    }
+
+    /**
+     * 获取MV的评论
+     * @param mvId Int
+     * @return String
+     */
+    fun getMvComment(mvId:String):String{
+        return URL_MV_BASE + "comment/mv?id=$mvId"
+    }
+
 }

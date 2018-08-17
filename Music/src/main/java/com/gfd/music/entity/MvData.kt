@@ -7,6 +7,6 @@ package com.gfd.music.entity
  * @descriptio：
  */
 data class MvData(var name: String, var id: Int, var pic: String, var des: String, var autor: String,
-                  var playCount: Int, var artistId: Int, var score: Int, var videoUrl: String = "") {
+                  var playCount: Int, var artistId: Int, var score: Int, var artistName:String = "",var videoUrl: String = "") {
 
 }

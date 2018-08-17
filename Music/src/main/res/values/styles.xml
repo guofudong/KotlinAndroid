@@ -21,6 +21,11 @@
         <item name="android:layout_marginTop">@dimen/dp_2</item>
         <item name="android:textColor">@color/common_black</item>
         <item name="android:textSize">@dimen/sp_14</item>
+
+    </style> <style name="styleMvDetailTvTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp_12</item>
     </style>
 
     <style name="styleSongListHead">

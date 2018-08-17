@@ -48,11 +48,6 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
         controller.setTitle("")
         ImageLoader.loadUrlImage(context, mvData.pic, controller.imageView())
         tvName.text = des
-        if (listener != null) {
-            tvName.setOnClickListener {
-                listener?.onClick(it)
-            }
-        }
         tvCount.text = "播放次数:${mvData.playCount / 1000}万"
         OkGo.get<String>(Api.getMVDetail(mvData.id))
                 .execute(object : StringCallback() {
@@ -60,8 +55,12 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
                         val json = response.body().toString()
                         val mvData = Gson().fromJson(json, MvDetailDto::class.java)
                         controller.setLenght(mvData.data.duration)
-                        //videoView.setUp(mvData.data.brs.`_$720`, null)
                         controller.setClarity(getClarites(mvData), 2)
+                        if (listener != null) {
+                            tvName.setOnClickListener {
+                                listener?.onClick(it,json)
+                            }
+                        }
                     }
                 })
 
@@ -89,13 +88,13 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
     }
 
     interface OnTitleClickListener {
-        fun onClick(view: View)
+        fun onClick(view: View,data:String)
     }
 
-    fun setOnTitleClickListener(action: (View) -> Unit) {
+    fun setOnTitleClickListener(action: (View,String) -> Unit) {
         this.listener = object : OnTitleClickListener {
-            override fun onClick(view: View) {
-                action(view)
+            override fun onClick(view: View,data:String) {
+                action(view,data)
             }
         }
     }

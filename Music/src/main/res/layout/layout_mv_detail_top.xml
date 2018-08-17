@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:layout_collapseMode="pin">
+
+    <TextView
+        android:id="@+id/tvMvTitile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_black"
+        android:textSize="@dimen/sp_16"
+        android:maxLines="2"
+        android:ellipsize="end"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/dp_4"
+        android:paddingBottom="@dimen/dp_4">
+
+        <TextView
+            android:text="发布："
+            style="@style/styleMvDetailTvTitle" />
+
+
+        <TextView
+            android:id="@+id/tvPublishTime"
+            style="@style/styleMvDetailTvTitle" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_8"
+            android:background="@color/text_dark"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"/>
+
+        <TextView
+            android:text="播放："
+            style="@style/styleMvDetailTvTitle" />
+
+
+        <TextView
+            android:id="@+id/tvPlayCount"
+            style="@style/styleMvDetailTvTitle" />
+
+        <!-- MV标签-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mvTagList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- 评论。分享 ，收藏，点赞-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_6">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mv_good_normal"/>
+
+                <TextView
+                    android:id="@+id/tvMvDetailGood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/common_gray"
+                    android:layout_marginTop="@dimen/dp_2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mv_collent"/>
+
+                <TextView
+                    android:id="@+id/tvMvDetailCollent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/common_gray"
+                    android:layout_marginTop="@dimen/dp_2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mv_comment"/>
+
+                <TextView
+                    android:id="@+id/tvMvDetailComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/common_gray"
+                    android:layout_marginTop="@dimen/dp_2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_mv_share"/>
+
+                <TextView
+                    android:id="@+id/tvMvDetailShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/common_gray"
+                    android:layout_marginTop="@dimen/dp_2"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
