@@ -26,6 +26,7 @@
             android:visibility="gone">
 
             <android.support.v4.widget.NestedScrollView
+                android:id="@+id/mNestedScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/common_white"
@@ -39,12 +40,8 @@
 
                     <include layout="@layout/layout_mv_detail_top" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_1"
-                        android:background="@color/LightGray" />
-
                     <RelativeLayout
+                        android:id="@+id/authorLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_8">
@@ -117,6 +114,49 @@
                 </LinearLayout>
 
             </android.support.v4.widget.NestedScrollView>
+
+            <RelativeLayout
+                android:id="@+id/topLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_8"
+                android:background="@color/common_white"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/mNestedScrollView">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivMVDetailAuthorDetaut"
+                    android:layout_width="@dimen/dp_32"
+                    android:layout_height="@dimen/dp_32"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_my_pic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_toRightOf="@+id/ivMVDetailAuthorDetaut"
+                    android:text="慕涵盛华"
+                    android:textColor="@color/common_black"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/sp_mvdetail_gz_bg"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/dp_2"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_2"
+                    android:text="+ 关注"
+                    android:textColor="@color/common_white"
+                    android:textSize="@dimen/sp_12" />
+
+            </RelativeLayout>
         </android.support.constraint.ConstraintLayout>
 
 

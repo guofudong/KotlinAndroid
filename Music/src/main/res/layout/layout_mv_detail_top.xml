@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mvDetailTop"
     android:layout_width="match_parent"
-    android:padding="@dimen/dp_8"
+    android:paddingRight="@dimen/dp_8"
+    android:paddingLeft="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_8"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -151,5 +154,9 @@
         </LinearLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/LightGray" />
 
 </LinearLayout>

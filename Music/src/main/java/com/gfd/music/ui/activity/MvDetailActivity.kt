@@ -1,5 +1,6 @@
 package com.gfd.music.ui.activity
 
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
@@ -37,12 +38,17 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private lateinit var mMvTagAdapter: MvTagAdapter
     private lateinit var mvId: String
     private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
+
     override fun injectComponent() {
         DaggerMvDetailComponent.builder()
                 .activityComponent(mActivityComponent)
                 .mvDetialMoudle(MvDetialMoudle(this))
                 .build()
                 .inject(this)
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_mv_detail
     }
 
     override fun initView() {
@@ -76,8 +82,14 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         mPresenter.getMvDetail(mvId)
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_mv_detail
+    override fun setListener() {
+        mNestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+            if (topLayout.visibility == View.GONE && scrollY >= mvDetailTop.height) {
+                topLayout.visibility = View.VISIBLE
+            } else if(topLayout.visibility == View.VISIBLE && scrollY < mvDetailTop.height){
+                topLayout.visibility = View.GONE
+            }
+        })
     }
 
     override fun showMvDetail() {
