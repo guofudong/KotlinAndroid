@@ -17,6 +17,7 @@
     <color name="common_yellow">#fe9c2f</color>
     <color name="colorItemDecoration">#ffffff</color>
     <color name="text_dark">#999999</color>
+    <color name="LightGray">#eff2f2</color>
     <color name="text_light_dark">#333333</color>
     <color name="text_normal">#666666</color>
     <color name="transparent">#00000000</color>

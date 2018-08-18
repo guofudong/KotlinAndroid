@@ -25,6 +25,7 @@ interface MvDetailContract{
 
         fun getSimiMv(mvId:String)
         fun getMvComment(mvId:String)
+        fun getMvDetail(mvId:String)
 
     }
 }

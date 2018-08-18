@@ -4,18 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/common_white"
-    android:padding="@dimen/dp_4">
+    android:paddingRight="@dimen/dp_8"
+    android:paddingLeft="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_8">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_item_mvcomment_pic"
         android:layout_width="@dimen/dp_32"
-        android:layout_height="@dimen/dp_32"
-        android:scaleType="center" />
+        android:layout_height="@dimen/dp_32" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginLeft="@dimen/dp_8"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -37,8 +38,18 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/common_gray"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_toLeftOf="@+id/iv_mvdetail_good"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_2"/>
+
+            <ImageView
+                android:id="@+id/iv_mvdetail_good"
+                android:layout_width="@dimen/dp_14"
+                android:layout_height="@dimen/dp_14"
+                android:src="@drawable/ic_mv_good_normal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_2"
+                android:layout_alignParentRight="true"/>
 
         </RelativeLayout>
 
@@ -47,7 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_10"
-            android:textColor="@color/common_gray"/>
+            android:textColor="@color/common_gray"
+            android:layout_marginTop="@dimen/dp_2"/>
 
         <TextView
             android:id="@+id/tv_item_mvcomment_content"
@@ -55,7 +67,13 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
             android:textColor="@color/common_black"
-            android:layout_marginTop="@dimen/dp_2"/>
+            android:layout_marginTop="@dimen/dp_6"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/LightGray"
+            android:layout_marginTop="@dimen/dp_6"/>
 
     </LinearLayout>
 

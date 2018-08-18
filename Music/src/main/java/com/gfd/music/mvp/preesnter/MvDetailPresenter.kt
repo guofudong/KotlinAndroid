@@ -26,10 +26,12 @@ class MvDetailPresenter @Inject constructor():MvDetailContract.Presenter,MvDetai
     }
 
     override fun getMvComment(mvId:String) {
-        mView.showLoading()
         mService.getMvComment(mvId,this)
     }
 
+    override fun getMvDetail(mvId: String) {
+        mView.showMvDetail()
+    }
     override fun onSimiMv(datas: List<MvData>) {
         mView.showSimiMv(datas)
 
@@ -37,7 +39,6 @@ class MvDetailPresenter @Inject constructor():MvDetailContract.Presenter,MvDetai
 
     override fun onMvCommnet(datas: List<CommentData>) {
         mView.showMvComment(datas)
-        mView.hideLoading()
     }
 
 }

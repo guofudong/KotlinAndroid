@@ -2,9 +2,11 @@ package com.gfd.music.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
+import android.view.View
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.music.R
 import com.gfd.music.adapter.MvCommentAdapter
+import com.gfd.music.adapter.MvTagAdapter
 import com.gfd.music.adapter.SimiMvAdapter
 import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
@@ -13,6 +15,10 @@ import com.gfd.music.injection.component.DaggerMvDetailComponent
 import com.gfd.music.injection.module.MvDetialMoudle
 import com.gfd.music.mvp.contract.MvDetailContract
 import com.gfd.music.mvp.preesnter.MvDetailPresenter
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_mv_detail.*
 import kotlinx.android.synthetic.main.layout_mv_detail_top.*
@@ -23,12 +29,14 @@ import kotlinx.android.synthetic.main.layout_mv_detail_top.*
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class MvDetailActivity:BaseMvpActivity<MvDetailPresenter>(),MvDetailContract.View{
+class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.View {
 
-    private lateinit var mMvDetailData:MvDetailDto.DataBean
-    private lateinit var mSimiMvAdapter:SimiMvAdapter
-    private lateinit var mMvCommentAdapter:MvCommentAdapter
-    private lateinit var mvId:String
+    private lateinit var mMvDetailData: MvDetailDto.DataBean
+    private lateinit var mSimiMvAdapter: SimiMvAdapter
+    private lateinit var mMvCommentAdapter: MvCommentAdapter
+    private lateinit var mMvTagAdapter: MvTagAdapter
+    private lateinit var mvId: String
+    private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
     override fun injectComponent() {
         DaggerMvDetailComponent.builder()
                 .activityComponent(mActivityComponent)
@@ -38,22 +46,34 @@ class MvDetailActivity:BaseMvpActivity<MvDetailPresenter>(),MvDetailContract.Vie
     }
 
     override fun initView() {
+        loading.visibility = View.VISIBLE
+        content.visibility = View.GONE
         val json = intent.getStringExtra("json")
         mMvDetailData = Gson().fromJson(json, MvDetailDto::class.java).data
         mvId = mMvDetailData.id.toString()
         //相似MV列表
-        recommendList.layoutManager = LinearLayoutManager(this@MvDetailActivity,LinearLayoutManager.VERTICAL,false)
+        recommendList.layoutManager = LinearLayoutManager(this@MvDetailActivity, LinearLayoutManager.VERTICAL, false)
         mSimiMvAdapter = SimiMvAdapter(this@MvDetailActivity)
         recommendList.adapter = mSimiMvAdapter
         //mv评论列表
-        commentList.layoutManager = LinearLayoutManager(this@MvDetailActivity,LinearLayoutManager.VERTICAL,false)
+        commentList.layoutManager = LinearLayoutManager(this@MvDetailActivity, LinearLayoutManager.VERTICAL, false)
         mMvCommentAdapter = MvCommentAdapter(this)
         commentList.adapter = mMvCommentAdapter
+        //mv标签列表
+        val flexManager = FlexboxLayoutManager(this@MvDetailActivity)
+        flexManager.flexDirection = FlexDirection.ROW
+        flexManager.alignItems = AlignItems.STRETCH
+        flexManager.flexWrap = FlexWrap.WRAP
+        mvTagList.layoutManager = flexManager
+        mMvTagAdapter = MvTagAdapter(this@MvDetailActivity)
+        mMvTagAdapter.updateData(tagDatas.toList())
+        mvTagList.adapter = mMvTagAdapter
     }
 
     override fun initData() {
         mPresenter.getMvComment(mvId)
         mPresenter.getSimiMv(mvId)
+        mPresenter.getMvDetail(mvId)
     }
 
     override fun getLayoutId(): Int {
@@ -62,15 +82,15 @@ class MvDetailActivity:BaseMvpActivity<MvDetailPresenter>(),MvDetailContract.Vie
 
     override fun showMvDetail() {
         //标题
-        tvMvTitile.text = if(TextUtils.isEmpty(mMvDetailData.briefDesc)) {
+        tvMvTitile.text = if (TextUtils.isEmpty(mMvDetailData.briefDesc)) {
             mMvDetailData.name
-        }else{
+        } else {
             mMvDetailData.briefDesc
         }
         //发布时间
         tvPublishTime.text = mMvDetailData.publishTime
         //播放数量
-        tvPlayCount.text =  "${mMvDetailData.playCount / 1000}万"
+        tvPlayCount.text = "${mMvDetailData.playCount / 1000}万"
         //点赞数量
         tvMvDetailGood.text = mMvDetailData.likeCount.toString()
         //评论数量
@@ -84,6 +104,8 @@ class MvDetailActivity:BaseMvpActivity<MvDetailPresenter>(),MvDetailContract.Vie
 
     override fun showSimiMv(datas: List<MvData>) {
         mSimiMvAdapter.updateData(datas)
+        loading.visibility = View.GONE
+        content.visibility = View.VISIBLE
     }
 
     override fun showMvComment(datas: List<CommentData>) {

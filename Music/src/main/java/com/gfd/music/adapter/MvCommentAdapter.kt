@@ -5,9 +5,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
+import com.gfd.common.utils.FormatUtil
 import com.gfd.common.utils.ImageLoader
 import com.gfd.music.R
 import com.gfd.music.entity.CommentData
+import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,11 +31,11 @@ class MvCommentAdapter(val context: Context) : BaseAdapter<CommentData>(context)
         val good = holder.getView<TextView>(R.id.tv_item_mvcomment_good)
         val time = holder.getView<TextView>(R.id.tv_item_mvcomment_time)
         val content = holder.getView<TextView>(R.id.tv_item_mvcomment_content)
-        val img = holder.getView<ImageView>(R.id.iv_item_mvcomment_pic)
+        val img = holder.getView<CircleImageView>(R.id.iv_item_mvcomment_pic)
         author.text = commentData.userName
         good.text = commentData.likedCount.toString()
 
-        time.text =commentData.time.toString()
+        time.text = FormatUtil.formatDate(commentData.time)
         content.text = commentData.content
         ImageLoader.loadUrlImage(context,commentData.userPic,img)
     }

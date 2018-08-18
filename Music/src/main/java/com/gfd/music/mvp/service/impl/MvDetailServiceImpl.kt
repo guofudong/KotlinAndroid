@@ -27,7 +27,7 @@ class MvDetailServiceImpl @Inject constructor():MvDetailService{
                         val mvDatas = ArrayList<MvData>()
                         simiData.mvs.forEach {
                             mvDatas.add(MvData(it.name,it.id,it.cover,"${it.briefDesc}",it.artistName
-                            ,it.playCount,it.artistId,it.id,it.artistName))
+                            ,it.playCount,it.artistId,it.id,it.artistName,it.duration))
                         }
                         callback.onSimiMv(mvDatas)
 

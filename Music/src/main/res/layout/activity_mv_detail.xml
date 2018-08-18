@@ -1,126 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/textureView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_220"
+        android:layout_height="@dimen/dp_200"
+        android:background="@color/common_black"
         app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/common_white">
 
-        <android.support.design.widget.AppBarLayout
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:visibility="gone">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"
-                app:expandedTitleMarginEnd="60dp"
-                app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:background="@color/common_white"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-                <android.support.v7.widget.Toolbar
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_collapseMode="parallax"
-                    android:paddingTop="@dimen/dp_4"
-                    android:paddingBottom="@dimen/dp_4">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/layout_mv_detail_top" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_1"
+                        android:background="@color/LightGray" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_8">
 
-                        <ImageView
+                        <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/ivMVDetailAuthor"
                             android:layout_width="@dimen/dp_32"
-                            android:layout_height="@dimen/dp_32" />
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_my_pic" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/common_black"
-                            android:textSize="@dimen/sp_14"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dp_8"
                             android:layout_toRightOf="@+id/ivMVDetailAuthor"
-                            android:layout_marginLeft="@dimen/dp_4"/>
+                            android:text="慕涵盛华"
+                            android:textColor="@color/common_black"
+                            android:textSize="@dimen/sp_14" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_12"
-                            android:textColor="@color/common_white"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/sp_mvdetail_gz_bg"
                             android:gravity="center"
-                            android:background="@color/common_red"
-                            android:text="+关注"
-                            android:layout_alignParentRight="true"/>
-
+                            android:paddingBottom="@dimen/dp_2"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:paddingRight="@dimen/dp_8"
+                            android:paddingTop="@dimen/dp_2"
+                            android:text="+ 关注"
+                            android:textColor="@color/common_white"
+                            android:textSize="@dimen/sp_12" />
 
                     </RelativeLayout>
-                    
-                </android.support.v7.widget.Toolbar>
-
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@color/common_white">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_30"
+                        android:background="@color/LightGray"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dp_6"
+                        android:text="相关推荐"
+                        android:textColor="@color/common_gray"
+                        android:textSize="@dimen/sp_12" />
 
-                <include
-                    layout="@layout/layout_mv_detail_top"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recommendList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
-                    android:background="@color/text_dark"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dp_6"
-                    android:textColor="@color/common_gray"
-                    android:textSize="@dimen/sp_12"
-                    android:text="相关推荐"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_30"
+                        android:background="@color/LightGray"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dp_6"
+                        android:text="精彩评论"
+                        android:textColor="@color/common_gray"
+                        android:textSize="@dimen/sp_12" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recommendList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/commentList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
-                    android:background="@color/text_dark"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dp_6"
-                    android:textColor="@color/common_gray"
-                    android:textSize="@dimen/sp_12"
-                    android:text="精彩评论"/>
+                </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/commentList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.constraint.ConstraintLayout>
 
-            </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal">
+
+            <ProgressBar
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_22"
+                android:indeterminateDrawable="@drawable/loading"
+                android:layout_marginTop="@dimen/dp_10"/>
+
+            <TextView
+                android:id="@+id/load_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="正在加载中..."
+                android:textColor="@color/common_gray"
+                android:textSize="@dimen/sp_14"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </LinearLayout>

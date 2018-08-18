@@ -70,5 +70,6 @@ dependencies {
     api rootProject.ext.dependence.libAnkoSqlite
     api rootProject.ext.dependence.libCardview
     api rootProject.ext.dependence.libPalette
+    api rootProject.ext.dependence.libCircleImageView
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
 }

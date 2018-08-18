@@ -37,4 +37,10 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="styleMvDetailTopItem">
+        <item name="android:layout_width">@dimen/dp_22</item>
+        <item name="android:layout_height">@dimen/dp_22</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
 </resources>

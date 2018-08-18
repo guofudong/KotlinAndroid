@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/dp_80"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:background="@color/common_white"
-    android:padding="@dimen/dp_4">
+    android:layout_margin="@dimen/dp_6">
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_80"
+        android:layout_height="match_parent"
         app:cardCornerRadius="@dimen/dp_2"
         android:layout_weight="3">
 
@@ -22,33 +22,45 @@
 
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
         android:layout_weight="4"
-        android:layout_marginLeft="@dimen/dp_4">
+        android:layout_marginLeft="@dimen/dp_8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_item_mvdetail_simi_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/common_black"
+                android:textSize="@dimen/sp_14"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tv_item_mvdetail_simi_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/common_gray"
+                android:textSize="@dimen/sp_12"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/dp_4"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_item_mvdetail_simi_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/common_black"
-            android:textSize="@dimen/sp_14"
-            android:maxLines="2"
-            android:ellipsize="end"/>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGray"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_item_mvdetail_simi_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/common_gray"
-            android:textSize="@dimen/sp_12"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginTop="@dimen/dp_4"/>
-
-    </LinearLayout>
 
 </LinearLayout>
