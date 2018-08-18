@@ -11,7 +11,6 @@
         android:layout_height="@dimen/dp_40"
         app:tabMode="fixed"
         app:tabTextColor="@color/common_black"
-        app:tabIndicatorColor="@android:color/transparent"
         app:tabIndicatorHeight="@dimen/dp_0"
         app:tabSelectedTextColor="@color/colorSearchItemBtn"/>
 

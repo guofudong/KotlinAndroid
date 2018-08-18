@@ -42,11 +42,12 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp_2"/>
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/iv_mvdetail_good"
                 android:layout_width="@dimen/dp_14"
                 android:layout_height="@dimen/dp_14"
-                android:src="@drawable/ic_mv_good_normal"
+                android:background="@drawable/select_mvdetail_good"
+                android:button="@null"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_2"
                 android:layout_alignParentRight="true"/>

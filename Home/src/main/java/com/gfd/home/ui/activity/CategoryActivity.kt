@@ -1,6 +1,7 @@
 package com.gfd.home.ui.activity
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -9,7 +10,6 @@ import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.home.R
 import com.gfd.home.adapter.CategoryPagerAdapter
 import com.gfd.home.common.Concant
-import com.gfd.home.ext.init
 import com.gfd.home.ui.fragment.CategoryFragment
 import kotlinx.android.synthetic.main.activity_category.*
 
@@ -47,7 +47,6 @@ class CategoryActivity : BaseActivity() {
             val tab = categoryTabs.getTabAt(i)
             tab?.customView = getTabView(i)
         }
-        categoryTabs.init()
     }
 
 
@@ -57,7 +56,7 @@ class CategoryActivity : BaseActivity() {
      * @return View
      */
     private fun getTabView(position: Int): View {
-        val view = LayoutInflater.from(this).inflate(R.layout.layout_tab, null)
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_tab_home, null)
         val textView = view.findViewById(R.id.tab_item_textview) as TextView
         textView.text = categoryTitles[position]
         textView.textSize = resources.getDimension(R.dimen.dp_5)
@@ -65,6 +64,10 @@ class CategoryActivity : BaseActivity() {
             textView.textSize = resources.getDimension(R.dimen.dp_6)
             textView.setTextColor(resources.getColor(R.color.colorSearchItemBtn))
             textView.paint.isFakeBoldText = true
+        }else{
+            textView.textSize = resources.getDimension(R.dimen.dp_5)
+            textView.paint.isFakeBoldText = false
+            textView.setTextColor(resources.getColor(R.color.common_black))
         }
         return view
     }
@@ -101,4 +104,29 @@ class CategoryActivity : BaseActivity() {
     override fun initData() {
     }
 
+    override fun setListener() {
+        //将当前的tab文字放大
+        categoryTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val textView = tab.customView?.findViewById(R.id.tab_item_textview) as TextView
+                if (null != textView && textView is TextView) {
+                    textView.textSize = resources.getDimension(R.dimen.dp_6)
+                    textView.paint.isFakeBoldText = true
+                    textView.setTextColor(resources.getColor(R.color.colorSearchItemBtn))
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                val textView = tab.customView?.findViewById(R.id.tab_item_textview) as TextView
+                if (null != textView && textView is TextView) {
+                    textView.textSize = resources.getDimension(R.dimen.dp_5)
+                    textView.paint.isFakeBoldText = false
+                    textView.setTextColor(resources.getColor(R.color.common_black))
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+            }
+        })
+    }
 }

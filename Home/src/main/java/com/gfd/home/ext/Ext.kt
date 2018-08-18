@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import android.widget.TextView
 import com.gfd.common.utils.FixedSpeedScroller
 import com.gfd.common.widgets.SpacesItemDecoration
@@ -21,30 +22,6 @@ import java.lang.reflect.Field
  */
 
 
-fun TabLayout.init() {
-    //将当前的tab文字放大
-    this.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab) {
-            var view = tab.customView
-            if (null != view && view is TextView) {
-                view.textSize = resources.getDimension(R.dimen.dp_6)
-                view.paint.isFakeBoldText = true
-                view.setTextColor(resources.getColor(R.color.colorSearchItemBtn))
-            }
-        }
 
-        override fun onTabUnselected(tab: TabLayout.Tab) {
-            var view = tab.customView
-            if (null != view && view is TextView) {
-                view.textSize = resources.getDimension(R.dimen.dp_5)
-                view.paint.isFakeBoldText = false
-                view.setTextColor(resources.getColor(R.color.common_black))
-            }
-        }
-
-        override fun onTabReselected(tab: TabLayout.Tab) {
-        }
-    })
-}
 
 

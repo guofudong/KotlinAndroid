@@ -1,14 +1,13 @@
 package com.gfd.music.ui.fragment
 
+import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.gfd.common.ext.noScroll
 import com.gfd.common.ui.fragment.BaseFragment
-import com.gfd.common.utils.CommonUtils
 import com.gfd.music.R
 import com.gfd.music.adapter.MusicPagerAdapter
-import com.gfd.music.ext.init
 import kotlinx.android.synthetic.main.fragment_music.*
 
 /**
@@ -37,7 +36,6 @@ class MusicFragment:BaseFragment(){
             val tab = mTabLayout.getTabAt(i)
             tab?.customView = getTabView(i)
         }
-        mTabLayout.init()
 
     }
 
@@ -63,5 +61,27 @@ class MusicFragment:BaseFragment(){
         return view
     }
 
+
+    override fun setListener() {
+        //将当前的tab文字放大
+        mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val textView = tab.customView?.findViewById(R.id.tab_item_textview) as TextView
+                val indicator = tab.customView?.findViewById(R.id.view_music_indicator) as View
+                textView.paint.isFakeBoldText = true
+                indicator.visibility = View.VISIBLE
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                val textView = tab.customView?.findViewById(R.id.tab_item_textview) as TextView
+                val indicator = tab.customView?.findViewById(R.id.view_music_indicator) as View
+                textView.paint.isFakeBoldText = false
+                indicator.visibility = View.INVISIBLE
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+            }
+        })
+    }
 
 }
