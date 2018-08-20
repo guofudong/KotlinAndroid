@@ -34,6 +34,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     private var videoParent : ViewGroup? = null
     private var offset = 0
     private var isLoadMore = false
+    private var isSwitchVisible = false
     override fun getLayoutId(): Int {
         return R.layout.fragment_short_film
     }
@@ -81,6 +82,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             }
         }
         mAdapter.setOnTitleClickListener { _, data ->
+            isSwitchVisible = false
             videoParent  = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             val intent = Intent(activity, MvDetailActivity::class.java)
             intent.putExtra("json",data)
@@ -105,6 +107,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     override fun onResume() {
         super.onResume()
+        isSwitchVisible = true
         if(videoParent != null){
             val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
@@ -115,6 +118,14 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     override fun onDestroy() {
         super.onDestroy()
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
+    }
+
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(!isVisibleToUser && isSwitchVisible){
+            NiceVideoPlayerManager.instance().pause()
+        }
     }
 
 }

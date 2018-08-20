@@ -15,7 +15,7 @@ import com.gfd.common.ui.activity.BaseActivity
  */
 class SplashActivity : BaseActivity() {
 
-    private val TIME_COUNTDOEN: Long = 3 * 1000
+    private val TIME_COUNTDOEN: Long = 4 * 1000
     override fun initView() {
 
     }

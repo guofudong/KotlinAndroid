@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:background="@drawable/img_splash">
+    android:background="@drawable/ic_splash">
 
 </RelativeLayout>
