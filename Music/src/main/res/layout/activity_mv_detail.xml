@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/textureView"
+        android:id="@+id/videoContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
         android:background="@color/common_black"

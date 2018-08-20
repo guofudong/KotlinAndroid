@@ -14,4 +14,8 @@ object PlayUtils{
        return NiceVideoPlayerManager.instance().onBackPressd()
     }
 
+    fun release(){
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
+    }
+
 }

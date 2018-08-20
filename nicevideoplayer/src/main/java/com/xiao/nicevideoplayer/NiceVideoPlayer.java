@@ -1,11 +1,14 @@
 package com.xiao.nicevideoplayer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.Surface;
@@ -385,6 +388,12 @@ public class NiceVideoPlayer extends FrameLayout
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER);
         mContainer.addView(mTextureView, 0, params);
+    }
+
+
+    public void setTextureView(SurfaceTexture surfaceTexture){
+        mSurfaceTexture = surfaceTexture;
+        mTextureView.setSurfaceTexture(surfaceTexture);
     }
 
     @Override

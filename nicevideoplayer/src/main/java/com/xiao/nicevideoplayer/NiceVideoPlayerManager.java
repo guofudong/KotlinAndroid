@@ -1,5 +1,7 @@
 package com.xiao.nicevideoplayer;
 
+import android.graphics.SurfaceTexture;
+
 /**
  * Created by XiaoJianjun on 2017/5/5.
  * 视频播放器管理器.
@@ -30,6 +32,11 @@ public class NiceVideoPlayerManager {
             mVideoPlayer = videoPlayer;
         }
     }
+    public void setTextureView(SurfaceTexture surfaceTexture){
+        if (mVideoPlayer != null) {
+            mVideoPlayer.setTextureView(surfaceTexture);
+        }
+    }
 
     public void suspendNiceVideoPlayer() {
         if (mVideoPlayer != null && (mVideoPlayer.isPlaying() || mVideoPlayer.isBufferingPlaying())) {
@@ -47,6 +54,18 @@ public class NiceVideoPlayerManager {
         if (mVideoPlayer != null) {
             mVideoPlayer.release();
             mVideoPlayer = null;
+        }
+    }
+
+    public void pause(){
+        if (mVideoPlayer != null) {
+            mVideoPlayer.pause();
+        }
+    }
+
+    public void continuePlayer(){
+        if (mVideoPlayer != null) {
+            mVideoPlayer.restart();
         }
     }
 

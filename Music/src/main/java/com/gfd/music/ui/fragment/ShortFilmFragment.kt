@@ -2,6 +2,7 @@ package com.gfd.music.ui.fragment
 
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
+import android.view.ViewGroup
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.music.R
@@ -30,6 +31,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     private lateinit var mAdapter: MvListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mMvDatas: List<MvData>
+    private var videoParent : ViewGroup? = null
     private var offset = 0
     private var isLoadMore = false
     override fun getLayoutId(): Int {
@@ -79,6 +81,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             }
         }
         mAdapter.setOnTitleClickListener { _, data ->
+            videoParent  = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             val intent = Intent(activity, MvDetailActivity::class.java)
             intent.putExtra("json",data)
             startActivity(intent)
@@ -100,8 +103,17 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onResume() {
+        super.onResume()
+        if(videoParent != null){
+            val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
+            parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+            videoParent?.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
     }
 

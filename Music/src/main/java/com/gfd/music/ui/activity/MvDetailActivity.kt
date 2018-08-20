@@ -1,9 +1,14 @@
 package com.gfd.music.ui.activity
 
+import android.graphics.SurfaceTexture
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
+import android.view.Gravity
+import android.view.TextureView
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.music.R
 import com.gfd.music.adapter.MvCommentAdapter
@@ -21,6 +26,8 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.gson.Gson
+import com.xiao.nicevideoplayer.NiceTextureView
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.activity_mv_detail.*
 import kotlinx.android.synthetic.main.layout_mv_detail_top.*
 
@@ -36,6 +43,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private lateinit var mSimiMvAdapter: SimiMvAdapter
     private lateinit var mMvCommentAdapter: MvCommentAdapter
     private lateinit var mMvTagAdapter: MvTagAdapter
+    private lateinit var niceTextureView :NiceTextureView
     private lateinit var mvId: String
     private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
 
@@ -74,6 +82,9 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         mMvTagAdapter = MvTagAdapter(this@MvDetailActivity)
         mMvTagAdapter.updateData(tagDatas.toList())
         mvTagList.adapter = mMvTagAdapter
+        val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
+        parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        videoContainer.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
     }
 
     override fun initData() {
@@ -86,7 +97,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         mNestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
             if (topLayout.visibility == View.GONE && scrollY >= mvDetailTop.height) {
                 topLayout.visibility = View.VISIBLE
-            } else if(topLayout.visibility == View.VISIBLE && scrollY < mvDetailTop.height){
+            } else if (topLayout.visibility == View.VISIBLE && scrollY < mvDetailTop.height) {
                 topLayout.visibility = View.GONE
             }
         })
@@ -122,6 +133,11 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
 
     override fun showMvComment(datas: List<CommentData>) {
         mMvCommentAdapter.updateData(datas)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
     }
 
 }
