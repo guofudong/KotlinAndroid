@@ -22,5 +22,9 @@
 
 ![](/screenshot/music1.png)  ![](/screenshot/music2.png)
 
-![](/screenshot/music4.png)  ![](/screenshot/music3.png)  
+![](/screenshot/music4.png)  ![](/screenshot/music5.png)  
 
+ ![](/screenshot/music3.png)  
+ 
+ ## 电视直播模块
+ 实现中。。。。。。
