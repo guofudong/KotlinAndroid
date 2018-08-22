@@ -49,6 +49,7 @@ android {
                     exclude 'debug/**'
                 }
             }
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
 
@@ -63,6 +64,7 @@ dependencies {
     implementation rootProject.ext.dependence.libQSVideoPlayer
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation project(':nicevideoplayer')
 }
 repositories {
     mavenCentral()

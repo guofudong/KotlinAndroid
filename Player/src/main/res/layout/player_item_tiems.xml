@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/dp_4"
+    android:paddingBottom="@dimen/dp_4"
+    android:paddingLeft="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/player_tv_item_times_tiem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_gray"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/player_tv_item_times_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_gray"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginLeft="@dimen/sp_12"/>
+
+</LinearLayout>

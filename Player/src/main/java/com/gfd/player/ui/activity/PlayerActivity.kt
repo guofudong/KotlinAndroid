@@ -1,4 +1,4 @@
-package com.gfd.player
+package com.gfd.player.ui.activity
 
 import android.app.Activity
 import android.content.ClipData
@@ -14,10 +14,11 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
+import com.gfd.player.R
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
 import com.gfd.player.injection.moudle.PlayMoudle
-import com.gfd.player.mvp.PlayContract
+import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
 import kotlinx.android.synthetic.main.activity_player.*

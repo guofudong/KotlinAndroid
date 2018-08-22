@@ -2,9 +2,11 @@ package com.gfd.player.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
+import com.gfd.player.injection.moudle.LiveMoudle
 import com.gfd.player.ui.activity.PlayWebActivity
 import com.gfd.player.ui.activity.PlayerActivity
 import com.gfd.player.injection.moudle.PlayMoudle
+import com.gfd.player.ui.fragment.LiveFragment
 import dagger.Component
 
 /**
@@ -14,10 +16,9 @@ import dagger.Component
  * @descriptio：
  */
 @PerComponentScope
-@Component(modules = arrayOf(PlayMoudle::class),dependencies = arrayOf(ActivityComponent::class))
-interface PlayComponent {
+@Component(modules = [(LiveMoudle::class)],dependencies = [(ActivityComponent::class)])
+interface LiveComponent {
 
-    fun inject(activity: PlayerActivity)
-    fun inject(activity: PlayWebActivity)
+    fun inject(fragment: LiveFragment)
 
 }

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.gfd.common.ui.activity.BaseMvpActivity
+import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
 import com.gfd.music.adapter.MvCommentAdapter
 import com.gfd.music.adapter.MvTagAdapter
@@ -42,6 +43,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private lateinit var mMvDetailData: MvDetailDto.DataBean
     private lateinit var mSimiMvAdapter: SimiMvAdapter
     private lateinit var mMvCommentAdapter: MvCommentAdapter
+    private lateinit var mSimiMvDatas: List<MvData>
     private lateinit var mMvTagAdapter: MvTagAdapter
     private lateinit var niceTextureView :NiceTextureView
     private lateinit var mvId: String
@@ -101,6 +103,13 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 topLayout.visibility = View.GONE
             }
         })
+        mSimiMvAdapter.seOnClickListener(object:BaseAdapter.OnClickListener{
+            override fun onClick(view: View, position: Int) {
+
+
+            }
+
+        })
     }
 
     override fun showMvDetail() {
@@ -126,6 +135,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     }
 
     override fun showSimiMv(datas: List<MvData>) {
+        mSimiMvDatas = datas
         mSimiMvAdapter.updateData(datas)
         loading.visibility = View.GONE
         content.visibility = View.VISIBLE

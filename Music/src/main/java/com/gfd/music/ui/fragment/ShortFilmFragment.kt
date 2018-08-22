@@ -62,6 +62,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
         mMvRecycler.setPullRefreshEnabled(false)
         mMvRecycler.setLoadMoreEnabled(true)
         mMvRecycler.addItemDecoration(divider)
+
     }
 
     override fun initData() {

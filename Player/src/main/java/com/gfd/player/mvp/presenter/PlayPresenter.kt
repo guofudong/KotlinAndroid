@@ -1,7 +1,7 @@
 package com.gfd.player.mvp.presenter
 
 import com.gfd.player.entity.VideoItemData
-import com.gfd.player.mvp.PlayContract
+import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.service.PlayService
 import javax.inject.Inject
 

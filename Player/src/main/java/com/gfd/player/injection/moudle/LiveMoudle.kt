@@ -1,7 +1,10 @@
 package com.gfd.player.injection.moudle
 
+import com.gfd.player.mvp.contract.LiveContract
 import com.gfd.player.mvp.contract.PlayContract
+import com.gfd.player.service.LiveApiService
 import com.gfd.player.service.PlayService
+import com.gfd.player.service.impl.LiveApiServiceImpl
 import com.gfd.player.service.impl.PlayServiceImpl
 import dagger.Module
 import dagger.Provides
@@ -13,15 +16,15 @@ import dagger.Provides
  * @descriptio：
  */
 @Module
-class PlayMoudle(private val view: PlayContract.View) {
+class LiveMoudle(private val view: LiveContract.View) {
 
     @Provides
-    fun provideView(): PlayContract.View {
+    fun provideView(): LiveContract.View {
         return this.view
     }
 
     @Provides
-    fun providePlayService(service: PlayServiceImpl): PlayService {
-        return service
+    fun providePlayService(): LiveApiService {
+        return LiveApiServiceImpl()
     }
 }

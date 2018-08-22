@@ -1,14 +1,13 @@
-package com.gfd.player.service
+package com.gfd.player.service.impl
 
 import com.gfd.common.common.BaseConstant
-import com.gfd.player.R.id.mWebView
 import com.gfd.player.entity.VideoItemData
+import com.gfd.player.service.PlayService
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.activity_play_webview.*
 import org.jsoup.Jsoup
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.gfd.player.mvp
+package com.gfd.player.mvp.contract
 
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView

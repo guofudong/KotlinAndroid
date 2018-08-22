@@ -7,6 +7,7 @@ import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.home.ui.fragment.HomeFragment
 import com.gfd.music.common.PlayUtils
 import com.gfd.music.ui.fragment.MusicFragment
+import com.gfd.player.ui.fragment.LiveFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity() {
 
     private val mHomeFragment: HomeFragment by lazy { HomeFragment() }
     private val mMusicFragment: MusicFragment by lazy { MusicFragment() }
+    private val mLiveFragment: LiveFragment by lazy { LiveFragment() }
 
     private val mStack = Stack<BaseFragment>()
 
@@ -37,8 +39,10 @@ class MainActivity : BaseActivity() {
         val bt = supportFragmentManager.beginTransaction()
         bt.add(R.id.rootLay, mHomeFragment)
         bt.add(R.id.rootLay, mMusicFragment)
+        bt.add(R.id.rootLay, mLiveFragment)
         mStack.add(mHomeFragment)
         mStack.add(mMusicFragment)
+        mStack.add(mLiveFragment)
         bt.commit()
     }
 
@@ -78,7 +82,10 @@ class MainActivity : BaseActivity() {
                     changeFragment(1)
                 }
                 R.id.tab_play -> {//直播
-
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
+                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    }
+                    changeFragment(2)
                 }
                 R.id.tab_mine -> {//我的
 
@@ -88,9 +95,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        if (mLiveFragment.onBackPressed()) {
+            return
+        }
         if (PlayUtils.onBackPressd()) {
             return
         }
+
         super.onBackPressed()
     }
 

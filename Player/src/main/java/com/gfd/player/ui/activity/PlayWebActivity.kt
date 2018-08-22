@@ -1,4 +1,4 @@
-package com.gfd.player
+package com.gfd.player.ui.activity
 
 import android.graphics.PixelFormat
 import android.support.v7.widget.GridLayoutManager
@@ -11,11 +11,12 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.widgets.SpacesItemDecoration
+import com.gfd.player.R
 import com.gfd.player.adapter.EpisodeAdapter
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
 import com.gfd.player.injection.moudle.PlayMoudle
-import com.gfd.player.mvp.PlayContract
+import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
