@@ -1,4 +1,4 @@
-# VIPVideo
+# KotlinAndroid
 基于组件化 + MVP + Retrofit + RxKotlin + Dagger2实现的一款用Kotlin语言编写的影视类应用。
 
 ## 模块化结构图
