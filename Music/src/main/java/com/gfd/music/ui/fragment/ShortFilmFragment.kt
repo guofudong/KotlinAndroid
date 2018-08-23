@@ -121,12 +121,4 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
     }
 
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if(!isVisibleToUser && isSwitchVisible){
-            NiceVideoPlayerManager.instance().pause()
-        }
-    }
-
 }

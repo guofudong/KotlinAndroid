@@ -2,17 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingTop="@dimen/dp_4"
-    android:paddingBottom="@dimen/dp_4"
-    android:paddingRight="@dimen/dp_8"
-    android:paddingLeft="@dimen/dp_8">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/player_iv_item_program"
-        android:layout_width="@dimen/dp_32"
-        android:layout_height="@dimen/dp_32"/>
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_8">
 
     <TextView
         android:id="@+id/player_tv_item_program"
@@ -21,6 +13,13 @@
         android:textSize="@dimen/sp_14"
         android:textColor="@color/common_gray"
         android:gravity="center"
-        android:layout_marginLeft="@dimen/dp_4"/>
+        android:paddingLeft="@dimen/dp_8"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/LightGray"
+        android:layout_marginTop="@dimen/dp_8"/>
+
 
 </LinearLayout>

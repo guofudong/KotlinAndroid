@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <org.song.videoplayer.DemoQSVideoView
+    <com.gfd.player.widgets.VideoPlayer
         android:id="@+id/homeVideoPlayer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_300"

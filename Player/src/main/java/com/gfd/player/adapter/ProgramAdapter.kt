@@ -33,9 +33,7 @@ class ProgramAdapter(val context: Context) : BaseAdapter<LiveDataDto.LiveData>(c
         }
         val liveData = mDatas[position]
         val tvName = holder.getView<TextView>(R.id.player_tv_item_program)
-        val ivPic = holder.getView<CircleImageView>(R.id.player_iv_item_program)
         tvName.text = liveData.name
-        ImageLoader.loadUrlImage(context, liveData.icon, ivPic)
     }
 
     fun refreshItem(position: Int) {

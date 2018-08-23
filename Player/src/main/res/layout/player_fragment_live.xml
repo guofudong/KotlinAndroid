@@ -5,10 +5,10 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/padding_top">
 
-    <org.song.videoplayer.DemoQSVideoView
+    <com.gfd.player.widgets.VideoPlayer
         android:id="@+id/mPlayerVideoPlayer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_260"/>
+        android:layout_height="@dimen/dp_260" />
 
     <LinearLayout
         android:layout_width="match_parent"

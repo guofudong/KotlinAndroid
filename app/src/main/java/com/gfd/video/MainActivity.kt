@@ -2,6 +2,7 @@ package com.gfd.video
 
 import android.os.Build
 import android.view.View
+import android.view.WindowManager
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.home.ui.fragment.HomeFragment
@@ -10,7 +11,6 @@ import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.player.ui.fragment.LiveFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-
 
 /**
  * @Author : 郭富东
@@ -68,6 +68,8 @@ class MainActivity : BaseActivity() {
 
     override fun setListener() {
         bottomBar.setOnTabSelectListener {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
+            PlayUtils.release()
             when (it) {
                 R.id.tab_home -> {//首页
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
@@ -88,7 +90,6 @@ class MainActivity : BaseActivity() {
                     changeFragment(2)
                 }
                 R.id.tab_mine -> {//我的
-
                 }
             }
         }

@@ -20,6 +20,7 @@ import com.gfd.player.injection.component.DaggerPlayComponent
 import com.gfd.player.injection.moudle.PlayMoudle
 import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
+import com.gfd.player.widgets.VideoPlayer
 import com.gfd.provider.router.RouterPath
 import kotlinx.android.synthetic.main.activity_player.*
 import org.song.videoplayer.DemoQSVideoView
@@ -98,7 +99,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
 
-    private fun setVideoPlayer(demoVideoView: DemoQSVideoView) {
+    private fun setVideoPlayer(demoVideoView: VideoPlayer) {
         demoVideoView.layoutParams = LinearLayout.LayoutParams(-1, resources.displayMetrics.widthPixels * 9 / 16)
         //进入全屏的模式 0横屏 1竖屏 2传感器自动横竖屏 3根据视频比例自动确定横竖屏      -1什么都不做
         demoVideoView.enterFullMode = 3
@@ -128,7 +129,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
 
-    private fun play(demoVideoView: DemoQSVideoView, url: String) {
+    private fun play(demoVideoView: VideoPlayer, url: String) {
         demoVideoView.release()
         demoVideoView.setDecodeMedia(AndroidMedia::class.java)
         demoVideoView.setUp(url, videoName)
@@ -140,7 +141,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     override fun onBackPressed() {
         //全屏和系统浮窗不finish
         if (homeVideoPlayer.onBackPressed()) {
-            if (homeVideoPlayer.isSystemFloatMode())
+            if (homeVideoPlayer.isSystemFloatMode)
             //系统浮窗返回上一界面
                 moveTaskToBack(true)
             return

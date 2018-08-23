@@ -9,6 +9,7 @@ import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.player.R
@@ -18,6 +19,7 @@ import com.gfd.player.entity.LiveDataDto
 import com.gfd.player.entity.TimeTableData
 import com.gfd.player.ext.init
 import com.gfd.player.ext.play
+import com.gfd.player.ext.setUrl
 import com.gfd.player.injection.component.DaggerLiveComponent
 import com.gfd.player.injection.moudle.LiveMoudle
 import com.gfd.player.mvp.contract.LiveContract
@@ -43,6 +45,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     private lateinit var videoUrl: String
 
     override fun getLayoutId(): Int {
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         return R.layout.player_fragment_live
     }
 
@@ -77,13 +80,24 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
                 mLeftAdapter.refreshItem(position)
                 videoUrl = mLeftDatas[position].live
                 mPlayerVideoPlayer.play(videoUrl)
+                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
             }
         })
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(hidden){
+            flag = mPlayerVideoPlayer.isPlaying
+            mPlayerVideoPlayer.release()
+            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
+        }
     }
 
     override fun showLiveInfo(datas: List<LiveDataDto.LiveData>) {
         mLeftDatas = datas
         mLeftAdapter.updateData(datas)
+        videoUrl = mLeftDatas[0].live
+        mPlayerVideoPlayer.setUrl(videoUrl)
     }
 
     override fun showTimeTable(datas: List<TimeTableData>) {
@@ -109,6 +123,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
             mPlayerVideoPlayer.seekTo(position)
             position = 0
         }
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
     }
 
     internal var flag: Boolean = false//记录退出时播放状态 回来的时候继续播放
@@ -116,9 +131,10 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
     override fun onPause() {
         super.onPause()
-        if (mPlayerVideoPlayer.isSystemFloatMode())
+        if (mPlayerVideoPlayer.isSystemFloatMode)
             return
         //暂停
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
         flag = mPlayerVideoPlayer.isPlaying()
         mPlayerVideoPlayer.pause()
     }
@@ -126,7 +142,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
     override fun onStop() {
         super.onStop()
-        if (mPlayerVideoPlayer.isSystemFloatMode())
+        if (mPlayerVideoPlayer.isSystemFloatMode)
             return
         //不马上销毁 延时15秒
         handler.postDelayed(runnable, (1000 * 15).toLong())
@@ -135,24 +151,28 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     override fun onDestroy() {
         super.onDestroy()//销毁
         if(mPlayerVideoPlayer != null){
-            if (mPlayerVideoPlayer.isSystemFloatMode)
+            if (mPlayerVideoPlayer.isSystemFloatMode){
                 mPlayerVideoPlayer.quitWindowFloat()
+            }
             mPlayerVideoPlayer.release()
         }
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
     }
 
 
     internal var handler = Handler()
     internal var runnable: Runnable = Runnable {
-        if (mPlayerVideoPlayer != null && mPlayerVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE)
+        if (mPlayerVideoPlayer != null && mPlayerVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE){
             position = mPlayerVideoPlayer.position
-        mPlayerVideoPlayer.release()
+            mPlayerVideoPlayer.release()
+        }
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
         if ((requestCode == 1) and (resultCode == Activity.RESULT_OK)) {
             this.videoUrl = data!!.data!!.toString()
             mPlayerVideoPlayer.play(videoUrl, "")

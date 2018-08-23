@@ -2,11 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gfd.music">
 
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+    <application>
         <activity android:name=".ui.activity.SongListActivity"/>
         <activity android:name=".ui.activity.MvDetailActivity"/>
         <service android:name=".service.MusicPlayService"/>

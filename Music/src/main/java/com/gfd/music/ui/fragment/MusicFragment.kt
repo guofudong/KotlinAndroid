@@ -3,6 +3,7 @@ package com.gfd.music.ui.fragment
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import com.gfd.common.ext.noScroll
 import com.gfd.common.ui.fragment.BaseFragment
