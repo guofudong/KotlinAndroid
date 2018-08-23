@@ -14,4 +14,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/LightGray</item>
+        <item name="colorControlActivated">@color/common_white</item>
+    </style>
 </resources>

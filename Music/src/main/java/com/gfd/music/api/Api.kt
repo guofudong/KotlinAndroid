@@ -185,7 +185,7 @@ object Api {
      * @param count Int ：获取的数量
      * @return String
      */
-    fun getHotTag(count: Int): String {
+    fun getHotTag(count: Int = 10): String {
         return URL_BASE + URL_HOT_TAG + count
     }
 

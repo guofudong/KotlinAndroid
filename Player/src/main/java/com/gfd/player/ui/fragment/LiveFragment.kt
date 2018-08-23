@@ -135,7 +135,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
             return
         //暂停
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
-        flag = mPlayerVideoPlayer.isPlaying()
+        flag = mPlayerVideoPlayer.isPlaying
         mPlayerVideoPlayer.pause()
     }
 
@@ -180,6 +180,5 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
             clipboard.primaryClip = ClipData.newPlainText("text", videoUrl)
         }
     }
-
 
 }

@@ -1,14 +1,16 @@
-package com.gfd.home.injection.component
+package com.gfd.music.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
-import com.gfd.home.injection.module.SearchMoudle
-import com.gfd.home.ui.activity.SearchActivity
+import com.gfd.music.injection.module.MusicMoudle
+import com.gfd.music.injection.module.SearchMoudle
+import com.gfd.music.ui.activity.SearchActivity
+import com.gfd.music.ui.fragment.RecommendFragment
 import dagger.Component
 
 /**
  * @Author : 郭富东
- * @Date ：2018/8/7 - 16:34
+ * @Date ：2018/8/10 - 14:38
  * @Email：878749089@qq.com
  * @descriptio：
  */

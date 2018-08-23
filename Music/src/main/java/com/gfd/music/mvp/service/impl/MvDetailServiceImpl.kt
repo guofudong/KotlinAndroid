@@ -30,7 +30,6 @@ class MvDetailServiceImpl @Inject constructor():MvDetailService{
                             ,it.playCount,it.artistId,it.id,it.artistName,it.duration))
                         }
                         callback.onSimiMv(mvDatas)
-
                     }
 
                 })
