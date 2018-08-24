@@ -1,12 +1,15 @@
 package com.gfd.music.ui.activity
 
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.gfd.common.ui.activity.BaseMvpActivity
+import com.gfd.common.utils.ToastUtils
 import com.gfd.music.R
 import com.gfd.music.adapter.HistoryAdapter
 import com.gfd.music.adapter.HotSearchAdapter
-import com.gfd.music.entity.SearchData
-import com.gfd.music.entity.SongItemData
 import com.gfd.music.injection.component.DaggerSearchComponent
 import com.gfd.music.injection.module.SearchMoudle
 import com.gfd.music.mvp.contract.SearchContract
@@ -23,15 +26,16 @@ import kotlinx.android.synthetic.main.music_activity_search.*
  * @Email：878749089@qq.com
  * @descriptio：搜索歌曲页面
  */
-class SearchActivity:BaseMvpActivity<SearchPresenter>(),SearchContract.View{
+class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     private lateinit var mHotSearchAdapter: HotSearchAdapter
     private lateinit var mHistoryAdapter: HistoryAdapter
-    private lateinit var mHotDatas :List<String>
-    private lateinit var mHistoryDatas :List<String>
+    private lateinit var mHotDatas: List<String>
+    private lateinit var mHistoryDatas: List<String>
     override fun getLayoutId(): Int {
-        return  R.layout.music_activity_search
+        return R.layout.music_activity_search
     }
+
     override fun injectComponent() {
         DaggerSearchComponent.builder()
                 .activityComponent(mActivityComponent)
@@ -53,6 +57,32 @@ class SearchActivity:BaseMvpActivity<SearchPresenter>(),SearchContract.View{
         mPresenter.getSearchHistory(this@SearchActivity)
     }
 
+    override fun setListener() {
+        //监听回车键
+        edKeyword.setOnEditorActionListener { _, actionId, keyEvent ->
+            if (actionId == EditorInfo.IME_ACTION_SEND || (keyEvent != null && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) {
+                search()
+                true
+            }
+            false
+        }
+    }
+
+    private fun search() {
+        if (TextUtils.isEmpty(edKeyword.text.toString())) {
+            ToastUtils.instance.showToast("搜索内容不能为空")
+            return
+        } else {
+            serach(edKeyword.text.toString())
+        }
+    }
+
+    private fun serach(keyword: String) {
+        hotRootLayout.visibility = View.VISIBLE
+        mSearchResultList.visibility = View.GONE
+        mPresenter.search(this@SearchActivity, keyword)
+    }
+
     /** 初始化热门搜索列表 */
     private fun initHotSearchList() {
         val flexManager = FlexboxLayoutManager(this@SearchActivity)
@@ -66,16 +96,13 @@ class SearchActivity:BaseMvpActivity<SearchPresenter>(),SearchContract.View{
 
     /** 初始化搜索历史列表 */
     private fun initSearchHistoryList() {
-        searchHistoryList.layoutManager = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.VERTICAL,false)
+        searchHistoryList.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
         mHistoryAdapter = HistoryAdapter(this@SearchActivity)
         searchHistoryList.adapter = mHistoryAdapter
-
     }
 
-    /** 初始化搜索结果列表*/
     private fun initSearchResultList() {
-        searchResultList.layoutManager = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.VERTICAL,false)
-        searchResultList.adapter = mHistoryAdapter
+        mSearchResultList.layoutManager = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.VERTICAL,false)
     }
 
     override fun showSearchHistory(datas: List<String>) {
@@ -89,7 +116,9 @@ class SearchActivity:BaseMvpActivity<SearchPresenter>(),SearchContract.View{
         mHotSearchAdapter.updateData(mHotDatas)
     }
 
-    override fun showSearchResult(datas: List<SongItemData>) {
+    override fun showSearchResult(html: String) {
+        mSearchResultList.visibility = View.VISIBLE
+        hotRootLayout.visibility = View.GONE
     }
 
 

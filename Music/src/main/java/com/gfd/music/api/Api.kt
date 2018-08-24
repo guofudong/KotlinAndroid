@@ -148,7 +148,7 @@ object Api {
      * @param pageSize Int ： 每页大小
      * @return String
      */
-    fun getSearch(word: String, page: Int, pageSize: Int): String {
+    fun getSearch(word: String, page: Int = 1, pageSize: Int = 12): String {
         return "$URL_BASE$URL_SEARCH&query=$word&page_no=$page&page_size=$pageSize&type=-1&data_source=0"
     }
 
@@ -248,6 +248,15 @@ object Api {
      */
     fun getMvComment(mvId:String):String{
         return URL_MV_BASE + "comment/mv?id=$mvId"
+    }
+
+    /**
+     * 获取搜索音乐url，支持全网搜索
+     * @param name String
+     * @return String
+     */
+    fun getSearchSongApi(name:String):String{
+        return "https://tool.liumingye.cn/qqws/?name=$name"
     }
 
 }

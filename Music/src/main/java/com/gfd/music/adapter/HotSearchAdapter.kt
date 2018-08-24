@@ -16,7 +16,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 class HotSearchAdapter(context: Context) : BaseAdapter<String>(context) {
 
     override fun getItemLayoutId(): Int {
-        return R.layout.music_item_search_history
+        return R.layout.music_item_search_hot
     }
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {

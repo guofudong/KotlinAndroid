@@ -15,6 +15,9 @@ import javax.inject.Inject
  */
 class SearchPresenter @Inject constructor():SearchContract.Presenter,SearchService.IGetSearchCallBack{
 
+    override fun onDeleteHistory() {
+    }
+
     @Inject
     lateinit var mView:SearchContract.View
 
@@ -31,12 +34,15 @@ class SearchPresenter @Inject constructor():SearchContract.Presenter,SearchServi
     }
 
     override fun search(context: Context,keyword: String) {
+        mService.search(context,keyword,this)
     }
 
     override fun onSearchHistory(datas: List<String>) {
+        mView.showSearchHistory(datas)
     }
 
-    override fun onSearchResult(datas: List<SongItemData>) {
+    override fun onSearchResult(html: String) {
+        mView.showSearchResult(html)
     }
 
     override fun onHotSearch(datas: List<String>) {

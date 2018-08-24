@@ -16,6 +16,7 @@ import org.jetbrains.anko.db.StringParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
+import org.jsoup.Jsoup
 import org.jsoup.select.Selector.select
 import java.util.*
 import javax.inject.Inject
@@ -40,6 +41,9 @@ class SearchServiceImpl @Inject constructor():SearchService{
                         hotSearchDto.result.forEach {
                             datas.add(it.word)
                         }
+                        datas.removeAt(datas.size - 1)
+                        datas.removeAt(datas.size - 1)
+                        datas.removeAt(datas.size - 1)
                         callback.onHotSearch(datas)
                     }
                 })
@@ -58,8 +62,17 @@ class SearchServiceImpl @Inject constructor():SearchService{
         //将搜索关键字保存到数据库
         context.database.use {
             insert(SearHistoryTable.TABLE_NAME, SearHistoryTable.NAME to keyword)
-
         }
+        val searchUrl = Api.getSearch(keyword)
+        Logger.e("搜索URL:$searchUrl")
+        OkGo.get<String>(searchUrl)
+                .tag(this)
+                .execute(object:StringCallback(){
+                    override fun onSuccess(response: Response<String>) {
+                        val json = response.body().toString()
+                        Logger.e("搜索音乐返回的数据：$json")
+                    }
+                })
     }
 
     override fun deleteHistory(context: Context, callback: SearchService.IGetSearchCallBack) {
