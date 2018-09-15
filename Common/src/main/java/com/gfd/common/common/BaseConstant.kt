@@ -9,6 +9,10 @@ package com.gfd.common.common
 open class BaseConstant {
     companion object {
         const val BASE_URL = "http://www.vip-free.com"
+        /** 相声视频解析来源*/
+        const val CROSSTRALK_BASE_URL = "https://www.toutiao.com"
+        /** 相声视频解析地址 */
+        const val CROSSTRALK_URL_ANALYSIS = "http://service0.iiilab.com/video/web/toutiao"
         const val URL_SEARCH = "http://www.vip-free.com/seacher.php"
         const val URL_ANALYZE = "http://api.zuilingxian.com/jiexi.php?url="
         /**频道-电影*/

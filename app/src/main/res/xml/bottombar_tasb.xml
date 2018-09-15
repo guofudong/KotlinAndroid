@@ -16,5 +16,5 @@
     <tab
         icon="@drawable/select_main_mine"
         id="@+id/tab_mine"
-        title="我的" />
+        title="相声" />
 </tabs>

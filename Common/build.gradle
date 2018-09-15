@@ -72,4 +72,5 @@ dependencies {
     api rootProject.ext.dependence.libPalette
     api rootProject.ext.dependence.libCircleImageView
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
+    api 'io.apisense:rhino-android:1.0'
 }
