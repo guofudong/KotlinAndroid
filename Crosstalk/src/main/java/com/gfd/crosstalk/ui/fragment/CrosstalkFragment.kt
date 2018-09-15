@@ -1,17 +1,21 @@
-package com.gfd.crosstalk
+package com.gfd.crosstalk.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
+import com.gfd.crosstalk.R
 import com.gfd.crosstalk.adapter.VideoAdapter
 import com.gfd.crosstalk.entity.Video
 import com.gfd.crosstalk.injection.component.DaggerCrosstalkComponent
 import com.gfd.crosstalk.injection.moudle.CrosstalkMoudle
 import com.gfd.crosstalk.mvp.contract.CrosstalkContract
 import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
+import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
 
 /**
@@ -75,6 +79,18 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
             page++
             mPresenter.getVideoList(page)
         }
+        mAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener{
+            override fun onClick(view: View, position: Int) {
+                val videoUrl = mAdapter.getDatas()[position].source_url
+                val videoImage = mAdapter.getDatas()[position].large_image_url
+                val videoName = mAdapter.getDatas()[position].name
+                ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER)
+                        .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
+                        .withString(RouterPath.Player.KEY_IMAGE, videoImage)
+                        .withString(RouterPath.Player.KEY_NAME, videoName)
+                        .navigation()
+            }
+        })
     }
 
     override fun showVideoList(datas: List<Video>) {

@@ -2,7 +2,7 @@ package com.gfd.crosstalk.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
-import com.gfd.crosstalk.CrosstalkFragment
+import com.gfd.crosstalk.ui.fragment.CrosstalkFragment
 import com.gfd.crosstalk.injection.moudle.CrosstalkMoudle
 import dagger.Component
 

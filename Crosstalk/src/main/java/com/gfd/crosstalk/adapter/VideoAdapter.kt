@@ -7,6 +7,7 @@ import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
+import com.gfd.common.utils.JSUtils
 import com.gfd.crosstalk.R
 import com.gfd.crosstalk.entity.Video
 import com.gfd.crosstalk.entity.VideoPlayerData
@@ -93,39 +94,18 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
 
     @Throws(Exception::class)
     private fun excuteJs(link: String): Map<String, String> {
-        val engine = ScriptEngineManager().getEngineByName("rhino")
-        engine.eval("function test(a) {\n" +
-                "            var c = function () {\n" +
-                "                for (var d = 0, f = new Array(256), g = 0; 256 != g; ++g) {\n" +
-                "                    d = g, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, f[g] = d\n" +
-                "                }\n" +
-                "                return \"undefined\" != typeof Int32Array ? new Int32Array(f) : f\n" +
-                "            }(),\n" +
-                "             b = function (g) {\n" +
-                "                for (var j, k, h = -1, f = 0, d = g.length; f < d;) {\n" +
-                "                    j = g.charCodeAt(f++), j < 128 ? h = h >>> 8 ^ c[255 & (h ^ j)] : j < 2048 ? (h = h >>> 8 ^ c[255 & (h ^ (192 | j >> 6 & 31))], h = h >>> 8 ^ c[255 & (h ^ (128 | 63 & j))]) : j >= 55296 && j < 57344 ? (j = (1023 & j) + 64, k = 1023 & g.charCodeAt(f++), h = h >>> 8 ^ c[255 & (h ^ (240 | j >> 8 & 7))], h = h >>> 8 ^ c[255 & (h ^ (128 | j >> 2 & 63))], h = h >>> 8 ^ c[255 & (h ^ (128 | k >> 6 & 15 | (3 & j) << 4))], h = h >>> 8 ^ c[255 & (h ^ (128 | 63 & k))]) : (h = h >>> 8 ^ c[255 & (h ^ (224 | j >> 12 & 15))], h = h >>> 8 ^ c[255 & (h ^ (128 | j >> 6 & 63))], h = h >>> 8 ^ c[255 & (h ^ (128 | 63 & j))])\n" +
-                "                }\n" +
-                "                return h ^ -1\n" +
-                "            };\n" +
-                "            \n" +
-                "             var f = b(a) >>> 0;\n" +
-                "            return f.toString(10);\n" +
-                "        }\n" +
-                "\n" +
-                "\n" +
-                "      function test2(){\n" +
-                "          return Math.random().toString(10).substring(2);\n" +
-                "      }\n")
-        val inv = engine as Invocable
-        val test2 = inv.invokeFunction("test2")
-        val param = link + "@" + test2.toString()
-        val a = inv.invokeFunction("test", param)
-        val hashMap = HashMap<String, String>()
-        hashMap["r"] = test2.toString()
-        hashMap["s"] = a.toString()
-        return hashMap
+        val stream= context.assets.open("test.js")
+        stream.buffered().reader().use {
+            val jsStr = it.readText()
+            val inv = JSUtils.getJsInvocable(jsStr)
+            val r = inv.invokeFunction("getR")
+            val param = link + "@" + r.toString()
+            val s = inv.invokeFunction("getS", param)
+            val hashMap = HashMap<String, String>()
+            hashMap["r"] = r.toString()
+            hashMap["s"] = s.toString()
+            return hashMap
+        }
     }
-
-
 
 }

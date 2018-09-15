@@ -1,4 +1,4 @@
-function test(a) {
+function getS(a) {
             var c = function () {
                 for (var d = 0, f = new Array(256), g = 0; 256 != g; ++g) {
                     d = g, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, d = 1 & d ? -306674912 ^ d >>> 1 : d >>> 1, f[g] = d
@@ -15,6 +15,6 @@ function test(a) {
         }
 
 
-      function test2(){
+      function getR(){
           return Math.random().toString(10).substring(2);
       }
