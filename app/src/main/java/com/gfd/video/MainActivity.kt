@@ -110,7 +110,6 @@ class MainActivity : BaseActivity() {
         if (PlayUtils.onBackPressd()) {
             return
         }
-
         super.onBackPressed()
     }
 

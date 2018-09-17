@@ -57,7 +57,7 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
         val map = excuteJs(link)
         OkGo.post<String>(BaseConstant.CROSSTRALK_URL_ANALYSIS)
                 .headers("Origin", "http://toutiao.iiilab.com")
-                .headers("Cookie", "_ga=GA1.2.1595067136.1536918184; _gid=GA1.2.1986337126.1536918184; iii_Session=9md298fdbbead8ugotksgrb2h2; PHPSESSIID=577069153695; _gat=1")
+                .headers("Cookie", data.cookie)
                 .headers("Referer", "http://toutiao.iiilab.com/")
                 .params("link",link )
                 .params("r", map["r"])
@@ -86,6 +86,7 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
 
 
     private fun setVideoView(videoView: NiceVideoPlayer, itemView: View) {
+        videoView.setPlayerType(NiceVideoPlayer.TYPE_NATIVE)
         val params = videoView.layoutParams
         params.width = itemView.resources.displayMetrics.widthPixels // 宽度为屏幕宽度
         params.height = (params.width * 9f / 16f).toInt()    // 高度为宽度的9/16

@@ -3,7 +3,6 @@ package com.gfd.crosstalk.ui.fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.crosstalk.R
@@ -16,6 +15,7 @@ import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
 
 /**
@@ -30,7 +30,6 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
     private lateinit var mAdapter: VideoAdapter
     private var isLoadMore = false
     private var videoParent : ViewGroup? = null
-    private var isSwitchVisible = false
     private var page = 1
 
     override fun injectComponent() {
@@ -105,4 +104,17 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(videoParent != null){
+            val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
+            parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+            videoParent?.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
+    }
 }

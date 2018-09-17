@@ -38,6 +38,7 @@ dependencies {
     api rootProject.ext.dependence.libSupportV7
     api rootProject.ext.dependence.libSupportV4
 
+
     api rootProject.ext.dependence.libKotlinJre7
     api rootProject.ext.dependence.libDesign
     api rootProject.ext.dependence.libRecyclerview

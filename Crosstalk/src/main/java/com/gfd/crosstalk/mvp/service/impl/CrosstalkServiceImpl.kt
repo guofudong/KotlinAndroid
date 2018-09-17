@@ -9,7 +9,6 @@ import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import com.orhanobut.logger.Logger
-import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 /**
@@ -34,24 +33,37 @@ class CrosstalkServiceImpl @Inject constructor(): CrosstalkService {
                         val json = CodeUtils.unicodeToString(response.body().toString())
                         Logger.e("相声视频数据：$json")
                         val videoData = Gson().fromJson(json,CrosstalkVideoData::class.java)
-                        val datas = ArrayList<Video>()
-                        videoData.data.forEach {
-                            val video = Video(
-                                    it.title,
-                                    it.create_time,
-                                    it.datetime,
-                                    it.video_duration,
-                                    it.comment_count,
-                                    it.middle_image_url,
-                                    it.large_image_url,
-                                    it.source_url,
-                                    it.video_duration_str)
-                            datas.add(video)
-                        }
-                        callback.onVideoList(datas)
+                        //获取Cookie
+                        OkGo.get<String>("http://toutiao.iiilab.com")
+                                .execute(object :StringCallback(){
+                                    override fun onSuccess(response: Response<String>) {
+                                        val  headers = response.headers()
+                                        var cookie = headers.get("Set-Cookie").toString().split(";")[0].split("=")[1]
+                                        Logger.e("cookie = $cookie")
+                                        cookie = "iii_Session=f2gstd4ovdl4ait39i4aqco6f6;PHPSESSIID=$cookie"
+                                        val datas = ArrayList<Video>()
+                                        videoData.data.forEach {
+                                            val video = Video(
+                                                    it.title,
+                                                    it.create_time,
+                                                    it.datetime,
+                                                    it.video_duration,
+                                                    it.comment_count,
+                                                    it.middle_image_url,
+                                                    it.large_image_url,
+                                                    it.source_url,
+                                                    it.video_duration_str,
+                                                    cookie)
+                                            datas.add(video)
+                                        }
+                                        callback.onVideoList(datas)
+                                    }
+                                })
+
                     }
                 })
 
     }
+
 
 }

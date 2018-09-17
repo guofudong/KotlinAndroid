@@ -34,4 +34,5 @@ dependencies {
     implementation project(':Provider')
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation project(':nicevideoplayer')
+    implementation rootProject.ext.dependence.libQSVideoPlayer
 }

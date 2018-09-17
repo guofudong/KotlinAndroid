@@ -4,9 +4,12 @@ import android.app.Application
 import android.content.Context
 import com.gfd.common.injection.component.DaggerAppComponent
 import com.gfd.common.injection.module.AppMoudle
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.cookie.CookieJarImpl
+import com.lzy.okgo.cookie.store.SPCookieStore
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-
+import okhttp3.OkHttpClient
 
 
 /**
@@ -15,7 +18,7 @@ import com.orhanobut.logger.Logger
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open class BaseApplication : Application(){
+open class BaseApplication : Application() {
     lateinit var appComponent: DaggerAppComponent
 
     override fun onCreate() {
@@ -26,12 +29,12 @@ open class BaseApplication : Application(){
     }
 
     private fun initInjection() {
-         appComponent = DaggerAppComponent.builder()
-                 .appMoudle(AppMoudle(this))
-                 .build() as DaggerAppComponent
+        appComponent = DaggerAppComponent.builder()
+                .appMoudle(AppMoudle(this))
+                .build() as DaggerAppComponent
     }
 
     companion object {
-        lateinit var context :Context
+        lateinit var context: Context
     }
 }
