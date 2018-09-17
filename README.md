@@ -1,6 +1,9 @@
 # KotlinAndroid
 基于组件化 + MVP + Retrofit + RxKotlin + Dagger2实现的一款用Kotlin语言编写的影视类应用。
 
+## APK下载
+[点击下载](/screenshot/app-release.apk)
+
 ## 模块化结构图
 
 ![](/screenshot/模块化.png)
@@ -20,5 +23,6 @@
 
  ![](/screenshot/music3.png)  
  
- ## 电视直播模块
- 实现中。。。。。。
+ ## 电视直播，相声模块
+ 
+![](/screenshot/live01.png)  ![](/screenshot/crosstalk01.png)  
