@@ -2,7 +2,7 @@
 基于组件化 + MVP + Retrofit + RxKotlin + Dagger2实现的一款用Kotlin语言编写的影视类应用。
 
 ## APK下载
-![apk](/screenshot/app-release.apk)
+[点击下载](/screenshot/app-release.apk)
 
 ## 模块化结构图
 
