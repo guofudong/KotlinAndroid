@@ -38,7 +38,6 @@ dependencies {
     api rootProject.ext.dependence.libSupportV7
     api rootProject.ext.dependence.libSupportV4
 
-
     api rootProject.ext.dependence.libKotlinJre7
     api rootProject.ext.dependence.libDesign
     api rootProject.ext.dependence.libRecyclerview
@@ -72,6 +71,7 @@ dependencies {
     api rootProject.ext.dependence.libCardview
     api rootProject.ext.dependence.libPalette
     api rootProject.ext.dependence.libCircleImageView
+    api rootProject.ext.dependence.libBugly
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
     api 'io.apisense:rhino-android:1.0'
 }

@@ -9,6 +9,7 @@ package com.gfd.common.common
 open class BaseConstant {
     companion object {
         const val BASE_URL = "http://www.vip-free.com"
+        const val BUGLY_APPID = "4e8d7c7498"
         /** 相声视频解析来源*/
         const val CROSSTRALK_BASE_URL = "https://www.toutiao.com"
         /** 相声视频解析地址 */

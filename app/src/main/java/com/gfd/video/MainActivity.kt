@@ -10,6 +10,7 @@ import com.gfd.home.ui.fragment.HomeFragment
 import com.gfd.music.common.PlayUtils
 import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.player.ui.fragment.LiveFragment
+import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
