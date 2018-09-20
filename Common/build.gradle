@@ -1,4 +1,5 @@
-apply from:rootProject.file('library.gradle')
+apply plugin: 'com.android.library'
+apply from:rootProject.file('libbase.gradle')
 
 dependencies {
 
