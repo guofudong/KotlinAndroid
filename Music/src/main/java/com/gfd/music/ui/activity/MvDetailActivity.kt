@@ -1,14 +1,12 @@
 package com.gfd.music.ui.activity
 
-import android.graphics.SurfaceTexture
+import android.graphics.Color
+import android.graphics.Paint
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
-import android.view.Gravity
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
@@ -45,7 +43,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private lateinit var mMvCommentAdapter: MvCommentAdapter
     private lateinit var mSimiMvDatas: List<MvData>
     private lateinit var mMvTagAdapter: MvTagAdapter
-    private lateinit var niceTextureView :NiceTextureView
+    private lateinit var niceTextureView: NiceTextureView
     private lateinit var mvId: String
     private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
 
@@ -103,7 +101,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 topLayout.visibility = View.GONE
             }
         })
-        mSimiMvAdapter.seOnClickListener(object:BaseAdapter.OnClickListener{
+        mSimiMvAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
 
 
@@ -143,11 +141,16 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
 
     override fun showMvComment(datas: List<CommentData>) {
         mMvCommentAdapter.updateData(datas)
+        val a = 1
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
+
+
     }
+
 
 }

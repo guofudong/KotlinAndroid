@@ -1,10 +1,38 @@
 //第三方依赖库和版本号管理
+def versions = [:]
+
+versions.support = "28.0.0-beta01"
+
+versions.rxjava = "2.4.0"
+versions.rx_android = "2.0.1"
+versions.retrofit = "2.4.0"
+versions.okhttp3 = "3.11.0"
+versions.gson = "2.4.0"
+
+versions.rxkotlin = "2.0.0-RC1"
+versions.kotlin_stdlib_jdk7 = "1.2.30"
+versions.rxlifecycle_kotlin = "2.2.2"
+versions.anko_sqlite = "0.10.5"
+
+versions.dagger = "2.17"
+
+versions.glide = "3.7.0"
+versions.bottom_bar = "2.3.1"
+versions.LRecyclerView = "1.5.0"
+versions.okgo = "3.0.4"
+versions.jsoup = "1.11.3"
+versions.banner = "1.4.10"
+versions.permissionsdispatcher = "4.0.0-alpha1"
+versions.arouter_api = "1.3.1"
+versions.arouter_compiler_version = "1.1.4"
+versions.QSVideoPlayer = "2.2.3"
+versions.flexbox = "1.0.0"
+versions.circleimageview = "2.2.0"
+versions.logger = "2.2.0"
+versions.bugly = "latest.release"
+versions.rhino_android = "1.0"
 
 ext {
-    permission_version = '4.0.0-alpha1'
-    arouter_api_version = '1.3.1'
-    arouter_compiler_version = '1.1.4'
-    supper_version = '28.0.0-beta01'
     android = [compileSdkVersion: 28,
                applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
@@ -21,36 +49,36 @@ ext {
     java = ['javaVersion': JavaVersion.VERSION_1_7]
 
 
-    dependence = ['libSupportV7'                : "com.android.support:appcompat-v7:$supper_version",
-                  'libSupportV4'                : "com.android.support:support-v4:$supper_version",
-                  'libOkhttp'                   : 'com.squareup.okhttp3:okhttp:3.11.0',
-                  'libKotlinJre7'               : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30',
-                  'libRetrofit'                 : 'com.squareup.retrofit2:retrofit:2.4.0',
-                  'libRetrofitConvert'          : 'com.squareup.retrofit2:converter-gson:2.4.0',
-                  'libRetrofitAdapter'          : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
-                  'libokhttp3LoggingInterceptor': 'com.squareup.okhttp3:logging-interceptor:3.11.0',
-                  'libRxkotlin'                 : 'io.reactivex:rxkotlin:2.0.0-RC1',
-                  'libDagger'                   : "com.google.dagger:dagger:${dagger_version}",
-                  'libDaggerCompiler'           : 'com.google.dagger:dagger-compiler:2.16',
-                  'libRxlifecycle2'             : 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.2',
-                  'libGlide'                    : "com.github.bumptech.glide:glide:3.7.0",
-                  'libRecyclerview'             : "com.android.support:recyclerview-v7:$supper_version",
-                  'libDesign'                   : "com.android.support:design:$supper_version",
-                  'libBottomBar'                : 'com.roughike:bottom-bar:2.3.1',
-                  'libLRecyclerView'            : 'com.github.jdsjlzx:LRecyclerView:1.5.0',
-                  'libOkgo'                     : 'com.lzy.net:okgo:3.0.4',
-                  'libLJsoup'                   : 'org.jsoup:jsoup:1.11.3',
-                  'libBanner'                   : 'com.youth.banner:banner:1.4.10',
-                  'libPermission'               : "com.github.hotchemi:permissionsdispatcher:${permission_version}",
-                  'libArouter'                  : "com.alibaba:arouter-api:$arouter_api_version",
-                  'libQSVideoPlayer'            : 'com.github.tohodog:QSVideoPlayer:2.2.3',
-                  'libFlexbox'                  : 'com.google.android:flexbox:1.0.0',
-                  'libAnkoSqlite'               : 'org.jetbrains.anko:anko-sqlite:0.10.5',
-                  'libCardview'                 : "com.android.support:cardview-v7:$supper_version",
-                  'libPalette'                  : "com.android.support:palette-v7:$supper_version",
-                  'libCircleImageView'          : 'de.hdodenhof:circleimageview:2.2.0',
-                  'libLogger'                   : 'com.orhanobut:logger:2.2.0',
-                  'libBugly'                    : 'com.tencent.bugly:crashreport:latest.release'
+    dependence = ['libSupportV7'                : "com.android.support:appcompat-v7:$versions.support",
+                  'libSupportV4'                : "com.android.support:support-v4:$versions.support",
+                  'libOkhttp'                   : "com.squareup.okhttp3:okhttp:$versions.okhttp3",
+                  'libKotlinJre7'               : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_stdlib_jdk7",
+                  'libRetrofit'                 : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+                  'libRetrofitConvert'          : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+                  'libRetrofitAdapter'          : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
+                  'libokhttp3LoggingInterceptor': "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3",
+                  'libRxkotlin'                 : "io.reactivex:rxkotlin:$versions.rxkotlin",
+                  'libDagger'                   : "com.google.dagger:dagger:${versions.dagger}",
+                  'libDaggerCompiler'           : "com.google.dagger:${versions.dagger}",
+                  'libRxlifecycle2'             : "com.trello.rxlifecycle2:rxlifecycle-kotlin:$versions.rxlifecycle_kotlin",
+                  'libGlide'                    : "com.github.bumptech.glide:glide:$versions.glide",
+                  'libRecyclerview'             : "com.android.support:recyclerview-v7:$versions.support",
+                  'libDesign'                   : "com.android.support:design:$versions.support",
+                  'libBottomBar'                : "com.roughike:bottom-bar:$versions.bottom_bar",
+                  'libLRecyclerView'            : "com.github.jdsjlzx:LRecyclerView:$versions.LRecyclerView",
+                  'libOkgo'                     : "com.lzy.net:okgo:$versions.okgo",
+                  'libLJsoup'                   : "org.jsoup:jsoup:$versions.jsoup",
+                  'libBanner'                   : "com.youth.banner:banner:$versions.banner",
+                  'libPermission'               : "com.github.hotchemi:permissionsdispatcher:${versions.permissionsdispatcher}",
+                  'libArouter'                  : "com.alibaba:arouter-api:$versions.arouter_api",
+                  'libQSVideoPlayer'            : "com.github.tohodog:QSVideoPlayer:$versions.QSVideoPlayer",
+                  'libFlexbox'                  : "com.google.android:flexbox:$versions.flexbox",
+                  'libAnkoSqlite'               : "org.jetbrains.anko:anko-sqlite:$versions.anko_sqlite",
+                  'libCardview'                 : "com.android.support:cardview-v7:$versions.support",
+                  'libPalette'                  : "com.android.support:palette-v7:$versions.support",
+                  'libCircleImageView'          : "de.hdodenhof:circleimageview:$versions.circleimageview",
+                  'libLogger'                   : "com.orhanobut:logger:$versions.logger",
+                  'libBugly'                    : "com.tencent.bugly:crashreport:$versions.bugly"
     ]
 
 }
