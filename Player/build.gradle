@@ -3,37 +3,15 @@ if (isPlayerModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
-}
+apply from:rootProject.file('libbase.gradle')
+
+
 android {
-    compileSdkVersion 28
-
-
 
     defaultConfig {
         if (isPlayerModule.toBoolean()) {
             applicationId "com.gfd.player"
-        }
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -56,16 +34,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api project(':Provider')
     implementation rootProject.ext.dependence.libQSVideoPlayer
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation project(':nicevideoplayer')
-}
-repositories {
-    mavenCentral()
 }
