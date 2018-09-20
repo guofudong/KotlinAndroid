@@ -2,44 +2,42 @@ apply from:rootProject.file('library.gradle')
 
 dependencies {
 
-    api rootProject.ext.dependence.libSupportV7
-    api rootProject.ext.dependence.libSupportV4
+    api dependence.libSupportV7
+    api dependence.libSupportV4
 
+    api dependence.libKotlinJre7
+    api dependence.libDesign
+    api dependence.libRecyclerview
 
-    api rootProject.ext.dependence.libKotlinJre7
-    api rootProject.ext.dependence.libDesign
-    api rootProject.ext.dependence.libRecyclerview
-    //glide
-    api rootProject.ext.dependence.libGlide
-    //retrofit
-    api rootProject.ext.dependence.libRetrofit
-    api rootProject.ext.dependence.libRetrofitConvert
-    api rootProject.ext.dependence.libRetrofitAdapter
-    //okhttp
-    api rootProject.ext.dependence.libOkhttp
-    api rootProject.ext.dependence.libokhttp3LoggingInterceptor
-    //rxkotlin
-    api rootProject.ext.dependence.libRxkotlin
-    //rxkotlin生命周期管理
-    api rootProject.ext.dependence.libRxlifecycle2
-    //dagger
+    api dependence.libGlide
+
+    api dependence.libRetrofit
+    api dependence.libRetrofitConvert
+    api dependence.libRetrofitAdapter
+
+    api dependence.libOkhttp
+    api dependence.libokhttp3LoggingInterceptor
+
+    api dependence.libRxkotlin
+
+    api dependence.libRxlifecycle2
+
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    api rootProject.ext.dependence.libDagger
-    //logger日志工具类
-    api rootProject.ext.dependence.libLogger
-    //底部导航栏
-    api rootProject.ext.dependence.libBottomBar
-    api rootProject.ext.dependence.libLRecyclerView
-    api rootProject.ext.dependence.libLJsoup
-    api rootProject.ext.dependence.libOkgo
-    api rootProject.ext.dependence.libBanner
-    api rootProject.ext.dependence.libArouter
-    api rootProject.ext.dependence.libFlexbox
-    api rootProject.ext.dependence.libAnkoSqlite
-    api rootProject.ext.dependence.libCardview
-    api rootProject.ext.dependence.libPalette
-    api rootProject.ext.dependence.libCircleImageView
-    api rootProject.ext.dependence.libBugly
+    api dependence.libDagger
+    api dependence.libLogger
+
+    api dependence.libBottomBar
+    api dependence.libLRecyclerView
+    api dependence.libLJsoup
+    api dependence.libOkgo
+    api dependence.libBanner
+    api dependence.libArouter
+    api dependence.libFlexbox
+    api dependence.libAnkoSqlite
+    api dependence.libCardview
+    api dependence.libPalette
+    api dependence.libCircleImageView
+    api dependence.libBugly
+    api dependence.libRhinoAndroid
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
-    api 'io.apisense:rhino-android:1.0'
 }

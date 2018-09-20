@@ -33,6 +33,9 @@ versions.bugly = "latest.release"
 versions.rhino_android = "1.0"
 
 ext {
+    dagger_version = versions.dagger
+    arouter_compiler_version = versions.arouter_compiler_version
+
     android = [compileSdkVersion: 28,
                applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
@@ -78,6 +81,7 @@ ext {
                   'libPalette'                  : "com.android.support:palette-v7:$versions.support",
                   'libCircleImageView'          : "de.hdodenhof:circleimageview:$versions.circleimageview",
                   'libLogger'                   : "com.orhanobut:logger:$versions.logger",
+                  'libRhinoAndroid'             : "io.apisense:rhino-android:$versions.rhino_android",
                   'libBugly'                    : "com.tencent.bugly:crashreport:$versions.bugly"
     ]
 
