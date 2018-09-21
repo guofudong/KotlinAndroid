@@ -16,7 +16,7 @@ android {
 
     sourceSets {
         main {
-            if (isMusicModule.toBoolean()) {
+            if (isCrosstalkModule.toBoolean()) {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/release/AndroidManifest.xml'

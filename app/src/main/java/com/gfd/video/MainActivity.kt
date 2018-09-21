@@ -5,12 +5,10 @@ import android.view.View
 import android.view.WindowManager
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.common.ui.fragment.BaseFragment
-import com.gfd.crosstalk.ui.fragment.CrosstalkFragment
 import com.gfd.home.ui.fragment.HomeFragment
 import com.gfd.music.common.PlayUtils
 import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.player.ui.fragment.LiveFragment
-import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -25,7 +23,7 @@ class MainActivity : BaseActivity() {
     private val mHomeFragment: HomeFragment by lazy { HomeFragment() }
     private val mMusicFragment: MusicFragment by lazy { MusicFragment() }
     private val mLiveFragment: LiveFragment by lazy { LiveFragment() }
-    private val mCrosstalkFragment: CrosstalkFragment by lazy { CrosstalkFragment() }
+  //  private val mCrosstalkFragment: CrosstalkFragment by lazy { CrosstalkFragment() }
 
     private val mStack = Stack<BaseFragment>()
 
@@ -43,11 +41,11 @@ class MainActivity : BaseActivity() {
         bt.add(R.id.rootLay, mHomeFragment)
         bt.add(R.id.rootLay, mMusicFragment)
         bt.add(R.id.rootLay, mLiveFragment)
-        bt.add(R.id.rootLay, mCrosstalkFragment)
+     //   bt.add(R.id.rootLay, mCrosstalkFragment)
         mStack.add(mHomeFragment)
         mStack.add(mMusicFragment)
         mStack.add(mLiveFragment)
-        mStack.add(mCrosstalkFragment)
+     //   mStack.add(mCrosstalkFragment)
         bt.commit()
     }
 
