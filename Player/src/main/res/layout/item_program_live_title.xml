@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_6"
+    android:paddingTop="@dimen/dp_6"
+    android:paddingLeft="@dimen/dp_6"
+    android:paddingRight="@dimen/dp_6">
+
+    <TextView
+        android:id="@+id/tv_live_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="标题"
+        android:textColor="@color/common_black"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center_vertical"
+        android:background="@drawable/sp_title_left"
+        android:paddingLeft="@dimen/dp_10"/>
+
+</RelativeLayout>

@@ -1,7 +1,34 @@
-apply plugin: 'com.android.library'
+if(isCrosstalkModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
 
 apply from:rootProject.file('libbase.gradle')
 
+android {
+
+    defaultConfig {
+        if (isCrosstalkModule.toBoolean()) {
+            applicationId "com.gfd.crosstalk"
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isMusicModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+            }
+            aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
+        }
+    }
+
+}
 
 dependencies {
     implementation project(':Provider')

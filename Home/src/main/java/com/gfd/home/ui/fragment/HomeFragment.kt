@@ -8,6 +8,7 @@ import com.gfd.common.ext.gridInit
 import com.gfd.common.ext.player
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.home.R
+import com.gfd.home.R.id.*
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData

@@ -3,6 +3,7 @@ package com.gfd.common.ext
 import android.content.Context
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.gfd.common.R
 import com.gfd.common.utils.FixedSpeedScroller
 import com.gfd.common.widgets.SpacesItemDecoration
@@ -31,6 +32,14 @@ fun LRecyclerView.gridInit(context: Context, span: Int = 3, adapter: LRecyclerVi
     this.adapter = adapter
     this.setLoadMoreEnabled(false)
     this.setPullRefreshEnabled(false)
+    val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
+    this.addItemDecoration(SpacesItemDecoration.newInstance(
+            spacing, spacing, span, resources.getColor(R.color.colorItemDecoration)))
+}
+
+fun RecyclerView.gridInit(context: Context, span: Int = 3) {
+    val layoutManager = GridLayoutManager(context, span)
+    this.layoutManager = layoutManager
     val spacing = resources.getDimensionPixelSize(R.dimen.dp_4)
     this.addItemDecoration(SpacesItemDecoration.newInstance(
             spacing, spacing, span, resources.getColor(R.color.colorItemDecoration)))

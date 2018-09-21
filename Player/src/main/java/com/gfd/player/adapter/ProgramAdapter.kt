@@ -2,12 +2,11 @@ package com.gfd.player.adapter
 
 import android.content.Context
 import android.widget.TextView
-import com.gfd.common.ui.adapter.BaseAdapter
+import com.gfd.common.ui.adapter.BaseMultiAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
-import com.gfd.common.utils.ImageLoader
 import com.gfd.player.R
+import com.gfd.player.common.Concant
 import com.gfd.player.entity.LiveDataDto
-import de.hdodenhof.circleimageview.CircleImageView
 
 /**
  * @Author : 郭富东
@@ -15,36 +14,36 @@ import de.hdodenhof.circleimageview.CircleImageView
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class ProgramAdapter(val context: Context) : BaseAdapter<LiveDataDto.LiveData>(context) {
+class ProgramAdapter(val context: Context) : BaseMultiAdapter<LiveDataDto.LiveData>(context) {
 
-    private var oldSelectPosition = -1
-    private var currentSelectPosition = 0
+    private  var currentSelect : Int = 1
 
-    override fun getItemLayoutId(): Int {
-        return R.layout.item_program_live
-
+    init {
+        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.item_program_live_title)
+        addItemType(Concant.ITEM_TYPE_CONTEXT,R.layout.item_program_live)
     }
 
-    override fun onBindView(holder: BaseViewHolder, position: Int) {
-        if(currentSelectPosition == position){
-            holder.itemView.setBackgroundResource(R.drawable.sp_item_select)
-        }else{
-            holder.itemView.setBackgroundResource(R.drawable.sp_item_normal)
+    override fun onBindItemholder(holder: BaseViewHolder, position: Int) {
+        val itemData = mDatas[position]
+        if(itemData.getItemType() == Concant.ITEM_TYPE_TITLE){
+            bindTitleItem(holder,itemData)
+        }else if(itemData.getItemType() == Concant.ITEM_TYPE_CONTEXT){
+            bindContentItem(holder,itemData,position)
         }
-        val liveData = mDatas[position]
-        val tvName = holder.getView<TextView>(R.id.player_tv_item_program)
+    }
+
+    private fun bindContentItem(holder: BaseViewHolder, liveData: LiveDataDto.LiveData, position: Int) {
+        val tvName = holder.getView<TextView>(R.id.tv_live_item_content)
+        tvName.isSelected =(currentSelect == position)
         tvName.text = liveData.name
     }
 
-    fun refreshItem(position: Int) {
-        if (currentSelectPosition != -1) {
-            oldSelectPosition = currentSelectPosition
-        }
-        currentSelectPosition = position
-        if (oldSelectPosition != -1) {
-            notifyItemChanged(oldSelectPosition)
-        }
-        notifyItemChanged(currentSelectPosition)
+    private fun bindTitleItem(holder: BaseViewHolder, liveData: LiveDataDto.LiveData) {
+        val tvName = holder.getView<TextView>(R.id.tv_live_item_title)
+        tvName.text = liveData.name
     }
 
+    fun setSelect(position: Int){
+        currentSelect = position
+    }
 }

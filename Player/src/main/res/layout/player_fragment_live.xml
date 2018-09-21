@@ -10,33 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_260" />
 
-    <LinearLayout
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/mLeftList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mLeftList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="@drawable/sp_list_scollbar"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/mRightList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:scrollbars="vertical"
+        android:background="@color/common_white"
+        android:scrollbarThumbVertical="@drawable/sp_list_scollbar"/>
 
 </LinearLayout>

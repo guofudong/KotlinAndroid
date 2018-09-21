@@ -6,15 +6,12 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
-import android.view.KeyEvent
-import android.view.View
 import android.view.WindowManager
-import com.gfd.common.ui.adapter.BaseAdapter
+import com.gfd.common.ext.gridInit
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.player.R
 import com.gfd.player.adapter.ProgramAdapter
-import com.gfd.player.adapter.TimeTableAdapter
+import com.gfd.player.common.Concant
 import com.gfd.player.entity.LiveDataDto
 import com.gfd.player.entity.TimeTableData
 import com.gfd.player.ext.init
@@ -24,8 +21,7 @@ import com.gfd.player.injection.component.DaggerLiveComponent
 import com.gfd.player.injection.moudle.LiveMoudle
 import com.gfd.player.mvp.contract.LiveContract
 import com.gfd.player.mvp.presenter.LivePresenter
-import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.activity_player.*
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import kotlinx.android.synthetic.main.player_fragment_live.*
 import org.song.videoplayer.IVideoPlayer
 
@@ -38,11 +34,13 @@ import org.song.videoplayer.IVideoPlayer
  */
 class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
+    /** GridView 列表的列数 */
+    private val GRID_COLUMNS = 3
     private lateinit var mLeftAdapter: ProgramAdapter
-    private lateinit var mRightAdapter: TimeTableAdapter
     private lateinit var mLeftDatas: List<LiveDataDto.LiveData>
-    private lateinit var mRightDatas: List<TimeTableData>
+    private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var videoUrl: String
+
 
     override fun getLayoutId(): Int {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
@@ -61,12 +59,9 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
 
     override fun initView() {
-        mLeftList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mRightList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mLeftAdapter = ProgramAdapter(activity!!)
-        mLeftList.adapter = mLeftAdapter
-        mRightAdapter = TimeTableAdapter(activity!!)
-        mRightList.adapter = mRightAdapter
+        mLRecyclerViewAdapter = LRecyclerViewAdapter(mLeftAdapter)
+        mLeftList.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         mPlayerVideoPlayer.init(activity!!)
     }
 
@@ -75,14 +70,16 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     }
 
     override fun setListener() {
-        mLeftAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
-            override fun onClick(view: View, position: Int) {
-                mLeftAdapter.refreshItem(position)
-                videoUrl = mLeftDatas[position].live
+        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
+            val liveData = mLeftDatas[position]
+            if (!liveData.isTitle) {
+                mLeftAdapter.setSelect(position)
+                mLRecyclerViewAdapter.notifyDataSetChanged()
+                videoUrl = liveData.live
                 mPlayerVideoPlayer.play(videoUrl)
                 activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
             }
-        })
+        }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -94,15 +91,27 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     }
 
     override fun showLiveInfo(datas: List<LiveDataDto.LiveData>) {
+        mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
+            var index = 0
+            if(position == datas.size){
+                index = datas.size - 1
+            }else{
+                index = position
+            }
+            val type = datas[index].getItemType()
+            if (type == Concant.ITEM_TYPE_TITLE) {
+                GRID_COLUMNS
+            } else {
+                1
+            }
+        }
         mLeftDatas = datas
         mLeftAdapter.updateData(datas)
-        videoUrl = mLeftDatas[0].live
+        videoUrl = mLeftDatas[1].live
         mPlayerVideoPlayer.setUrl(videoUrl)
     }
 
     override fun showTimeTable(datas: List<TimeTableData>) {
-        mRightDatas = datas
-        mRightAdapter.updateData(datas)
     }
 
     override fun showVideo(url: String) {

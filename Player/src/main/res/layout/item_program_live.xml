@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/dp_8">
+    android:background="@drawable/sp_item_player_bg">
 
     <TextView
-        android:id="@+id/player_tv_item_program"
+        android:id="@+id/tv_live_item_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/common_gray"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:paddingLeft="@dimen/dp_8"/>
+        android:padding="@dimen/dp_10"
+        android:maxLength="10"
+        android:textColor="@drawable/select_item_episode_text"
+        android:textSize="@dimen/sp_14" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="@color/LightGray"
-        android:layout_marginTop="@dimen/dp_8"/>
-
-
-</LinearLayout>
+</RelativeLayout>
