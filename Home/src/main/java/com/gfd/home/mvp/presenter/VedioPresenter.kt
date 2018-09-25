@@ -1,10 +1,9 @@
 package com.gfd.home.mvp.presenter
 
+import com.gfd.common.utils.NetUtils
 import com.gfd.home.entity.VideoListData
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.service.VideoService
-import com.google.gson.Gson
-import com.orhanobut.logger.Logger
 import javax.inject.Inject
 
 /**
@@ -13,24 +12,29 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class VedioPresenter @Inject constructor() : VideoListContract.Presenter,VideoService.GetVideoCallBack {
+class VedioPresenter @Inject constructor() : VideoListContract.Presenter, VideoService.GetVideoCallBack {
 
     @Inject
     lateinit var videoService: VideoService
     private var isLoading = false
 
     @Inject
-    lateinit var mView : VideoListContract.View
+    lateinit var mView: VideoListContract.View
 
-    override fun getVideoList(isLoading:Boolean) {
-        this.isLoading = isLoading
-        if(isLoading) mView.showLoading()
-        videoService.getVideoList(this)
+    override fun getVideoList(isLoading: Boolean) {
+        if (NetUtils.NETWORK_ENABLE) {
+            this.isLoading = isLoading
+            if (isLoading) mView.showLoading()
+            videoService.getVideoList(this)
+        }else{//网络不可用
+            mView.error()
+        }
     }
+
 
     override fun onVideoDataSuccess(data: VideoListData) {
         mView.showVideoList(data)
-        if(isLoading){
+        if (isLoading) {
             mView.hideLoading()
         }
     }

@@ -49,4 +49,12 @@ open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseVie
         LoadingHelper.hideLoading(activity!!)
     }
 
+    override fun error() {
+        mStatusLayoutManager.showErrorLayout()
+    }
+
+    override fun empty() {
+        mStatusLayoutManager.showEmptyLayout()
+    }
+
 }

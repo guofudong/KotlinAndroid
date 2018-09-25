@@ -1,10 +1,13 @@
 package com.gfd.common.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.gfd.common.R
+import com.gfd.common.net.status.StatusLayoutManager
 
 
 /**
@@ -21,11 +24,24 @@ open abstract class BaseFragment : Fragment() {
     //第一次onResume中的调用onUserVisible避免操作与onFirstUserVisible操作重复
     private var isFirstResume: Boolean = true
     private lateinit var rootView: View
+    protected lateinit var mStatusLayoutManager: StatusLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(getLayoutId(), null)
+        initStatusLayout()
+        rootView = mStatusLayoutManager.getRootLayout()
         initOperate()
         return rootView
+    }
+
+    private fun initStatusLayout() {
+        mStatusLayoutManager = StatusLayoutManager.Builder(activity as Context)
+                .setContentLayout(getLayoutId())
+                .setEmptyLayout(R.layout.layout_status_layout_manager_empty)
+                .setErrorLayout(R.layout.layout_status_layout_manager_error)
+                .setLoadingLayout(R.layout.layout_status_layout_manager_loading)
+                .setEmptyLayoutClickId(R.id.empty_click)
+                .newBuilder()
+        mStatusLayoutManager.showContent()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

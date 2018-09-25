@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/empty_click"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/status_layout_background_color"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_status_error_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_net_error"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="网络已断开"
+        android:textColor="@color/common_black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_status_error_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/status_layout_manager_error"
+        android:textColor="@color/status_layout_tip_text_color"
+        android:textSize="16sp" />
+
+</LinearLayout>

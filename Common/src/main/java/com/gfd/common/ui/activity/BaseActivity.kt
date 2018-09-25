@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.gfd.common.common.AppManager
@@ -16,9 +17,11 @@ import com.gfd.common.common.AppManager
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        val rootView = LayoutInflater.from(this).inflate(getLayoutId(), null)
+        setContentView(rootView)
         AppManager.instance.addActivity(this)
         initOperate()
         initView()

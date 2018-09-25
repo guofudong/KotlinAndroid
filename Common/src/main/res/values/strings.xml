@@ -8,4 +8,9 @@
     <string name="parse_error">解析异常</string>
     <string name="unknown_error">未知错误</string>
     <string name="response_return_error">响应返回状态不为1，并且错误信息为空</string>
+
+    <string name="status_layout_manager_loading">加载中...</string>
+    <string name="status_layout_manager_empty">还没有内容</string>
+    <string name="status_layout_manager_error">连接后请点击刷新</string>
+    <string name="status_layout_manager_retry">重新加载</string>
 </resources>

@@ -3,9 +3,11 @@ package com.gfd.home.ui.fragment
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
+import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ext.gridInit
 import com.gfd.common.ext.player
+import com.gfd.common.net.status.OnStatusLayoutClickListener
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.home.R
 import com.gfd.home.R.id.*
@@ -110,6 +112,15 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         tvSearch.setOnClickListener {
             startActivity(Intent(activity, SearchActivity::class.java))
         }
+
+        mStatusLayoutManager.setOnStatusLayoutClickListener(object :OnStatusLayoutClickListener{
+            override fun onEmptyViewClick(view: View) {
+
+            }
+            override fun onErrorViewClick(view: View) {
+                mPresenter.getVideoList(true)
+            }
+        })
     }
 
     override fun showVideoList(data: VideoListData) {
