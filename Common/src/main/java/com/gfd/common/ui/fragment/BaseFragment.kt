@@ -39,7 +39,7 @@ open abstract class BaseFragment : Fragment() {
                 .setEmptyLayout(R.layout.layout_status_layout_manager_empty)
                 .setErrorLayout(R.layout.layout_status_layout_manager_error)
                 .setLoadingLayout(R.layout.layout_status_layout_manager_loading)
-                .setEmptyLayoutClickId(R.id.empty_click)
+                .setErrorLayoutClickId(R.id.error_click)
                 .newBuilder()
         mStatusLayoutManager.showContent()
     }

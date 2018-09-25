@@ -97,14 +97,6 @@ class StatusLayoutHelper(context: Context) : FrameLayout(context) {
         if (layoutSparseArray[LAYOUT_EMPTYDATA_ID] == null) {
             if (mStatusLayoutManager.emptyLayout != null) {
                 val emptyView = mStatusLayoutManager.emptyLayout?.inflate()
-                if(mStatusLayoutManager.emptyLayoutClickId != -1){
-                    val view = emptyView?.findViewById<View>(mStatusLayoutManager.emptyLayoutClickId)
-                    if(view != null){
-                        view.setOnClickListener {
-                            mStatusLayoutManager.onStatusLayoutClickListener?.onErrorViewClick(view)
-                        }
-                    }
-                }
                 layoutSparseArray.put(LAYOUT_EMPTYDATA_ID, emptyView)
             }
         }
@@ -114,8 +106,16 @@ class StatusLayoutHelper(context: Context) : FrameLayout(context) {
     fun showErrorLayout() {
         if (layoutSparseArray[LAYOUT_ERROR_ID] == null) {
             if (mStatusLayoutManager.errorLayout != null) {
-                val emptyView = mStatusLayoutManager.errorLayout?.inflate()
-                layoutSparseArray.put(LAYOUT_ERROR_ID, emptyView)
+                val errorView = mStatusLayoutManager.errorLayout?.inflate()
+                layoutSparseArray.put(LAYOUT_ERROR_ID, errorView)
+                if(mStatusLayoutManager.errorLayoutClickId != -1){
+                    val view = errorView?.findViewById<View>(mStatusLayoutManager.errorLayoutClickId)
+                    if(view != null){
+                        view.setOnClickListener {
+                            mStatusLayoutManager.onStatusLayoutClickListener?.onErrorViewClick(view)
+                        }
+                    }
+                }
             }
         }
         showLayoutById(LAYOUT_ERROR_ID)

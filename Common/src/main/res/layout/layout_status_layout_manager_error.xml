@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/empty_click"
+    android:id="@+id/error_click"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/status_layout_background_color"

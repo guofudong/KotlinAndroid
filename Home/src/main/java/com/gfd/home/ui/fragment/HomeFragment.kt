@@ -118,6 +118,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
 
             }
             override fun onErrorViewClick(view: View) {
+                Logger.e("点击错误布局")
                 mPresenter.getVideoList(true)
             }
         })
@@ -142,6 +143,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mVideoDatas = data.videoList
         mVideoAdapter.updateData(mVideoDatas)
         mLRecyclerViewAdapter.notifyDataSetChanged()
+        mStatusLayoutManager.showContent()
 
     }
 
