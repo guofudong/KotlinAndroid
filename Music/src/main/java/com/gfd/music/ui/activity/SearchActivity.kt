@@ -86,10 +86,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         //监听回车键
         edKeyword.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEND || (keyEvent != null && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) {
-                search()
-                //隐藏键盘
-                val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                manager.hideSoftInputFromWindow(edKeyword.windowToken, 0)
+                searchSong(edKeyword.text.toString().trim())
                 true
             }
             false
@@ -104,14 +101,24 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             }
 
         })
+        mHistoryAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
+            override fun onClick(view: View, position: Int) {
+                val keyword = mHistoryDatas[position]
+                searchSong(keyword)
+            }
+
+        })
     }
 
-    private fun search() {
-        if (TextUtils.isEmpty(edKeyword.text.toString())) {
+    private fun searchSong(keyword:String) {
+        if (TextUtils.isEmpty(keyword)) {
             ToastUtils.instance.showToast("搜索内容不能为空")
             return
         } else {
-            serach(edKeyword.text.toString())
+            //隐藏键盘
+            val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(edKeyword.windowToken, 0)
+            serach(keyword)
         }
     }
 
@@ -158,12 +165,16 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun showSearchResult(datas: List<SearchData>) {
-        mSearchResultList.visibility = View.VISIBLE
-        hotRootLayout.visibility = View.GONE
-        playContralRoot.visibility = View.VISIBLE
         if (!datas.isEmpty()) {
+            mSearchResultList.visibility = View.VISIBLE
+            hotRootLayout.visibility = View.GONE
+            playContralRoot.visibility = View.VISIBLE
             mSearchAdapter.updateData(datas)
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPlayService?.stop()
+    }
 }
