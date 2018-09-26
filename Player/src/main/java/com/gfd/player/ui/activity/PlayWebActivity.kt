@@ -10,8 +10,11 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
+import com.gfd.common.utils.ToastUtils
 import com.gfd.common.widgets.SpacesItemDecoration
 import com.gfd.player.R
+import com.gfd.player.R.id.episodeList
+import com.gfd.player.R.id.mWebView
 import com.gfd.player.adapter.EpisodeAdapter
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
@@ -133,9 +136,14 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun playWebVideo(datas: List<VideoItemData>) {
-        mDatas = datas
-        mWebView.loadUrl(datas[0].videoUrl)
-        episodeAdapter.addAll(mDatas)
+        if(datas.isEmpty()){
+            ToastUtils.instance.showToast("视频还没上映,请等待")
+            finish()
+        }else{
+            mDatas = datas
+            mWebView.loadUrl(datas[0].videoUrl)
+            episodeAdapter.addAll(mDatas)
+        }
     }
 
     override fun showVideoPlot(plotText: String) {

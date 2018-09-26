@@ -51,9 +51,14 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         val document = Jsoup.parse(json)
-                        val plotText = document.selectFirst("div[class=plot]").text()
-                        val lis = document.select("div#playlist1 > ul > li")
+                        val selectFirst = document.selectFirst("div[class=plot]")
                         val videoDatas = ArrayList<VideoItemData>()
+                        if(selectFirst == null){
+                            callBack.videoWebData(videoDatas,"")
+                            return
+                        }
+                        val plotText = selectFirst.text()
+                        val lis = document.select("div#playlist1 > ul > li")
                         lis.forEach{
                             val a = it.selectFirst("a")
                             val count = a.text()//集数
