@@ -1,23 +1,35 @@
 package com.gfd.music.ui.activity
 
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.IBinder
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import com.gfd.common.ui.activity.BaseMvpActivity
+import com.gfd.common.utils.ImageLoader
 import com.gfd.common.utils.ToastUtils
 import com.gfd.music.R
 import com.gfd.music.adapter.HistoryAdapter
 import com.gfd.music.adapter.HotSearchAdapter
+import com.gfd.music.adapter.SearchAdapter
+import com.gfd.music.entity.SearchData
 import com.gfd.music.injection.component.DaggerSearchComponent
 import com.gfd.music.injection.module.SearchMoudle
 import com.gfd.music.mvp.contract.SearchContract
 import com.gfd.music.mvp.preesnter.SearchPresenter
+import com.gfd.music.service.MusicPlayService
+import com.gfd.music.service.MusicServiceStub
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import kotlinx.android.synthetic.main.layout_play_contral.*
 import kotlinx.android.synthetic.main.music_activity_search.*
 
 /**
@@ -30,8 +42,10 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     private lateinit var mHotSearchAdapter: HotSearchAdapter
     private lateinit var mHistoryAdapter: HistoryAdapter
+    private lateinit var mSearchAdapter: SearchAdapter
     private lateinit var mHotDatas: List<String>
     private lateinit var mHistoryDatas: List<String>
+    private var mPlayService: MusicPlayService? = null
     override fun getLayoutId(): Int {
         return R.layout.music_activity_search
     }
@@ -43,6 +57,17 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
                 .build()
                 .inject(this)
         setStatusBar()
+        bindService(Intent(this@SearchActivity, MusicPlayService::class.java),
+                object : ServiceConnection {
+                    override fun onServiceDisconnected(name: ComponentName) {
+
+                    }
+
+                    override fun onServiceConnected(name: ComponentName, service: IBinder) {
+                        mPlayService = (service as MusicServiceStub).getService()
+                    }
+
+                }, Context.BIND_AUTO_CREATE)
 
     }
 
@@ -62,10 +87,23 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         edKeyword.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEND || (keyEvent != null && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) {
                 search()
+                //隐藏键盘
+                val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                manager.hideSoftInputFromWindow(edKeyword.windowToken, 0)
                 true
             }
             false
         }
+        mSearchAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
+            override fun onClick(view: View, position: Int) {
+                val song = mSearchAdapter.getDatas()[position]
+                ImageLoader.loadUrlImage(this@SearchActivity, song.pic, album)
+                songName.text = song.name
+                songaAtist.text = song.artist
+                mPlayService?.playMusic(song.url_music)
+            }
+
+        })
     }
 
     private fun search() {
@@ -80,6 +118,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     private fun serach(keyword: String) {
         hotRootLayout.visibility = View.VISIBLE
         mSearchResultList.visibility = View.GONE
+        playContralRoot.visibility = View.GONE
         mPresenter.search(this@SearchActivity, keyword)
     }
 
@@ -102,7 +141,9 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     private fun initSearchResultList() {
-        mSearchResultList.layoutManager = LinearLayoutManager(this@SearchActivity,LinearLayoutManager.VERTICAL,false)
+        mSearchResultList.layoutManager = LinearLayoutManager(this@SearchActivity, LinearLayoutManager.VERTICAL, false)
+        mSearchAdapter = SearchAdapter(this@SearchActivity)
+        mSearchResultList.adapter = mSearchAdapter
     }
 
     override fun showSearchHistory(datas: List<String>) {
@@ -116,10 +157,13 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         mHotSearchAdapter.updateData(mHotDatas)
     }
 
-    override fun showSearchResult(html: String) {
+    override fun showSearchResult(datas: List<SearchData>) {
         mSearchResultList.visibility = View.VISIBLE
         hotRootLayout.visibility = View.GONE
+        playContralRoot.visibility = View.VISIBLE
+        if (!datas.isEmpty()) {
+            mSearchAdapter.updateData(datas)
+        }
     }
-
 
 }

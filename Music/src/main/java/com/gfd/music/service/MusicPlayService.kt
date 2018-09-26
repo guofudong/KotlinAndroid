@@ -30,7 +30,7 @@ class MusicPlayService : Service() {
     }
 
     fun playMusic(path: String) {
-
+        mPlayer.setDataSource(path)
     }
 
     fun playMusicById(id: String) {

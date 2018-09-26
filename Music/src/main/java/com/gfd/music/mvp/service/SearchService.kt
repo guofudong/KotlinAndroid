@@ -20,7 +20,7 @@ interface SearchService {
     interface IGetSearchCallBack {
         fun onHotSearch(datas: List<String>)
         fun onSearchHistory(datas: List<String>)
-        fun onSearchResult(html: String)
+        fun onSearchResult(datas: List<SearchData>)
         fun onDeleteHistory()
     }
 

@@ -2,6 +2,7 @@ package com.gfd.music.mvp.preesnter
 
 import android.content.Context
 import com.gfd.common.common.BaseApplication.Companion.context
+import com.gfd.music.entity.SearchData
 import com.gfd.music.entity.SongItemData
 import com.gfd.music.mvp.contract.SearchContract
 import com.gfd.music.mvp.service.SearchService
@@ -41,8 +42,8 @@ class SearchPresenter @Inject constructor():SearchContract.Presenter,SearchServi
         mView.showSearchHistory(datas)
     }
 
-    override fun onSearchResult(html: String) {
-        mView.showSearchResult(html)
+    override fun onSearchResult(datas: List<SearchData>) {
+        mView.showSearchResult(datas)
     }
 
     override fun onHotSearch(datas: List<String>) {

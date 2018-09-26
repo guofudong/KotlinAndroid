@@ -28,17 +28,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_weight="1"
+            android:background="@drawable/music_sp_search_ed_bg"
             android:hint="猜你喜欢"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            android:textCursorDrawable="@drawable/music_sp_cursor"
+            android:paddingBottom="@dimen/dp_6"
             android:textColor="@color/common_white"
             android:textColorHint="@color/textGray"
-            android:theme="@style/MyEditText"
-            android:background="@drawable/music_sp_search_ed_bg"
-            android:paddingBottom="@dimen/dp_6"
-            android:textSize="@dimen/sp_16" />
+            android:textCursorDrawable="@drawable/music_sp_cursor"
+            android:textSize="@dimen/sp_16"
+            android:theme="@style/MyEditText" />
 
     </LinearLayout>
 
@@ -57,9 +57,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/dp_8"
-                android:gravity="center_vertical"
                 android:paddingTop="@dimen/dp_8">
 
                 <ImageView
@@ -70,59 +70,63 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_6"
                     android:text="歌手分类"
                     android:textColor="@color/common_gray"
-                    android:layout_marginLeft="@dimen/dp_6"
                     android:textSize="@dimen/sp_14" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp_6"
-                    android:src="@drawable/ic_search_go"
-                    android:layout_gravity="center_vertical"/>
+                    android:src="@drawable/ic_search_go" />
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
-                android:background="@color/LightGray"/>
+                android:background="@color/LightGray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/common_gray"
-                android:textSize="@dimen/sp_12"
-                android:text="热门搜索"
+                android:paddingBottom="@dimen/dp_6"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_8"
-                android:paddingBottom="@dimen/dp_6"
-                android:paddingTop="@dimen/dp_6"/>
+                android:paddingTop="@dimen/dp_6"
+                android:text="热门搜索"
+                android:textColor="@color/common_gray"
+                android:textSize="@dimen/sp_12" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hotSearchList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dp_8"
-                android:paddingRight="@dimen/dp_8"/>
+                android:paddingRight="@dimen/dp_8" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/searchHistoryList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
                 android:paddingLeft="@dimen/dp_8"
-                android:paddingRight="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_16"/>
+                android:paddingRight="@dimen/dp_8" />
 
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/mSearchResultList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
+        <include
+            layout="@layout/layout_play_contral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
-
 
 </LinearLayout>

@@ -259,4 +259,17 @@ object Api {
         return "https://tool.liumingye.cn/qqws/?name=$name"
     }
 
+    class AnalysisMusic{
+        companion object {
+            val url = "http://tool.liumingye.cn/music/ajax.php"
+            val cookie = "PHPSESSID=k0lglound3be0hgf6l44n66c56;"
+            val host = "tool.liumingye.cn"
+            val origin = "http://tool.liumingye.cn"
+            val request_with = "XMLHttpRequest"
+            val referer = "http://tool.liumingye.cn/music/?name="
+            val token = "klotuyM568"
+            val key = "&vkey=E3E2AEB8F82039EEDE2D7628423639DEF08ADD1CDF7BC9B290E4C263664F87F4E9CA124C300F8FA671F3112D38A4C47FE4059329F93139F8"
+        }
+    }
+
 }

@@ -17,7 +17,7 @@ interface SearchContract{
     interface View :BaseView{
         fun showSearchHistory(datas:List<String>)
         fun showHotSearch(datas:List<String>)
-        fun showSearchResult(html: String)
+        fun showSearchResult(datas: List<SearchData>)
 
     }
 
