@@ -21,8 +21,10 @@
 
 ![](/screenshot/music4.png)  ![](/screenshot/music5.png)  
 
+![](/screenshot/music_search2.png)  ![](/screenshot/music_search1.png)  
+
  ![](/screenshot/music3.png)  
  
  ## 电视直播，相声模块
  
-![](/screenshot/live01.png)  ![](/screenshot/crosstalk01.png)  
+![](/screenshot/play01.png)  ![](/screenshot/crosstalk01.png)  
