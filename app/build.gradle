@@ -2,14 +2,28 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: rootProject.file('and_res_guard.gradle')
+apply from: rootProject.file('releaseinfo.gradle')
 android {
+
     compileSdkVersion 28
+    buildToolsVersion '27.0.3'
+
+    signingConfigs {
+        release {//release版的签名配置信息
+            storeFile file(rootProject.ext.signConfigs.storeFile)
+            storePassword rootProject.ext.signConfigs.storePassword
+            keyAlias rootProject.ext.signConfigs.keyAlias
+            keyPassword rootProject.ext.signConfigs.keyPassword
+        }
+    }
+
 
     splits {
         abi {
             enable true
             reset()
-            include 'x86', 'armeabi-v7a','x86_64'
+            include 'x86', 'armeabi-v7a', 'x86_64'
             universalApk true
         }
     }
@@ -32,11 +46,32 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true //混淆编译
+            shrinkResources true //移除无用资源
+            zipAlignEnabled true //zipalign优化
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            buildConfigField("boolean", "LOG_DEBUG", "false")//正式版不打印日志
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {//为了方便调试微信支付、登陆、分享等把deug签名配置成了Release版的签名
+            signingConfig signingConfigs.release
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+        }
     }
-    buildToolsVersion '27.0.3'
+
+    //自定义输出apk名字
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all { output ->
+                if (buildType.name == 'release') {
+                    outputFileName = new File("app_v" + defaultConfig.versionName + "_" +
+                            new Date().format("yyyy-MM-dd") + "_" +
+                            buildType.name + ".apk")
+                }
+            }
+    }
+
 }
 
 dependencies {

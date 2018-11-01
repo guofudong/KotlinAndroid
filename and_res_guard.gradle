@@ -1,0 +1,51 @@
+apply plugin: 'AndResGuard'
+//资源"混淆"配置文件
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    useSign = true
+    keepRoot = false // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    whiteList = [ //白名单
+                  "R.drawable.icon",
+                  "R.string.com.crashlytics.*",
+                  // google-services.json
+                  "R.string.google_app_id",
+                  "R.string.gcm_defaultSenderId",
+                  "R.string.default_web_client_id",
+                  "R.string.ga_trackingId",
+                  "R.string.firebase_database_url",
+                  "R.string.google_api_key",
+                  "R.string.google_crash_reporting_api_key",
+                  //友盟
+                  "R.string.tb_*",
+                  "R.layout.tb_*",
+                  "R.drawable.tb_*",
+                  "R.drawable.u1*",
+                  "R.drawable.u2*",
+                  "R.color.tb_*",
+                  "R.drawable.sina*",
+                  "R.string.umeng*",
+                  "R.string.UM*",
+                  "R.layout.umeng*",
+                  "R.drawable.umeng*",
+                  "R.id.umeng*",
+                  "R.anim.umeng*",
+                  "R.color.umeng*",
+                  "R.style.*UM*",
+                  "R.style.umeng*",
+                  //极光推送
+                  "R.drawable.jpush_notification_icon"
+    ]
+
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.2.15'
+    }
+    digestalg = "SHA-256"
+}

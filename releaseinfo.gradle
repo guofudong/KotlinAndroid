@@ -1,0 +1,87 @@
+import groovy.xml.MarkupBuilder
+
+/**
+ * 描述：版本发布文档自动维护脚本
+ * 流程描述：
+ *           1、将版本相关信息解析出来
+ *           2、将解析出的数据生成xml格式数据
+ *           3、写入到已有的文档数据中
+ **/
+ext {
+    versionName = rootProject.ext.android.versionName
+    versionCode = rootProject.ext.android.versionCode
+    versionInfo = 'App的第1个版本，上线了一些最基础核心的功能,主要是要通过审核'
+    destFile = file('releasesInfo.xml')//指定输出文件
+    if (destFile != null && !destFile.exists()) {
+        destFile.createNewFile()
+    }
+}
+//挂在到应用构建的过程中
+this.project.afterEvaluate { project ->
+    def buildTask = project.tasks.getByName('assembleRelease')
+    if (buildTask != null) {
+        buildTask.doLast {//assembleRelease 之后执行
+            releaseInfoTask.execute()
+        }
+    }
+}
+//创建一个Task，并指定输入输出
+task releaseInfoTask {
+    inputs.property('versionCode', this.versionCode)
+    inputs.property('versionName', this.versionName)
+    inputs.property('versionInfo', this.versionInfo)
+    outputs.file this.destFile
+    doLast {
+        //将输入的内容写入到输出文件中去
+        def data = inputs.getProperties()
+        File file = outputs.getFiles().getSingleFile()
+        def versionMsg = new VersionMsg(data)
+        //将实体对象写入到xml文件中
+        def sw = new StringWriter()
+        def xmlBuilder = new MarkupBuilder(sw)
+        if (file.text != null && file.text.size() <= 0) {
+            //没有内容
+            xmlBuilder.releases {
+                release {
+                    versionCode(versionMsg.versionCode)
+                    versionName(versionMsg.versionName)
+                    versionInfo(versionMsg.versionInfo)
+                }
+            }
+            //直接写入
+            file.withWriter { writer ->
+                writer.append("<?xml version=\"1.0\" encoding=\"GBK\"?>" + '\r\n')
+                writer.append(sw.toString())
+            }
+        } else {//有内容判断版本是否改变
+            def releases = new XmlParser().parse(file)
+            def codeName = releases.release[-1].versionName.text()
+            if (codeName != versionMsg.versionName) {//新的版本信息
+                xmlBuilder.release {
+                    versionCode(versionMsg.versionCode)
+                    versionName(versionMsg.versionName)
+                    versionInfo(versionMsg.versionInfo)
+                }
+                //插入到最后一行前面
+                def lines = file.readLines()
+                def lengths = lines.size() - 1
+                file.withWriter { writer ->
+                    lines.eachWithIndex { line, index ->
+                        if (index != lengths) {
+                            writer.append(line + '\r\n')
+                        } else if (index == lengths) {
+                            writer.append('\r\n' + sw.toString() + '\r\n')
+                            writer.append(lines.get(lengths))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//信息实体类
+class VersionMsg {
+    String versionCode
+    String versionName
+    String versionInfo
+}
