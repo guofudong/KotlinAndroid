@@ -37,6 +37,8 @@ ext {
     arouter_compiler_version = versions.arouter_compiler_version
 
     android = [compileSdkVersion: 28,
+               buildToolsVersion: '27.0.3',
+               applicationId    : 'com.gfd.video',
                applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
                targetSdkVersion : 28,
@@ -46,7 +48,7 @@ ext {
 
     signConfigs = ['storeFile'    : 'sign.jks',
                    'storePassword': '123456',
-                   'keyAlias'     : 'alias',
+                   'keyAlias'     : 'sign',
                    'keyPassword'  : '123456']
 
     java = ['javaVersion': JavaVersion.VERSION_1_7]

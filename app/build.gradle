@@ -4,10 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: rootProject.file('and_res_guard.gradle')
 apply from: rootProject.file('releaseinfo.gradle')
-android {
+apply from:rootProject.file('libbase.gradle')
 
-    compileSdkVersion 28
-    buildToolsVersion '27.0.3'
+android {
 
     signingConfigs {
         release {//release版的签名配置信息
@@ -18,30 +17,10 @@ android {
         }
     }
 
-
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a', 'x86_64'
-            universalApk true
-        }
-    }
-
     defaultConfig {
-        applicationId "com.gfd.video"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        ndk {
-            // Specifies the ABI configurations of your native
-            // libraries Gradle should build and package with your APK.
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
-        }
+        applicationId rootProject.ext.android.applicationId
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
 
     buildTypes {
@@ -75,11 +54,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.support:multidex:1.0.3'
     api project(':Common')
     if (!isMusicModule.toBoolean()) {
         api project(':Music')
