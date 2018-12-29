@@ -42,7 +42,7 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
         val tvVideoTitle = holder.getView<TextView>(R.id.tvVideoTitle)
         val tvTime = holder.getView<TextView>(R.id.tvTime)
         val videoView = holder.getView<NiceVideoPlayer>(R.id.videoView)
-        setVideoView(videoView,holder.itemView)
+        setVideoView(videoView, holder.itemView)
         val data = mDatas[position]
         tvCommentCount.text = "${data.comment_count}评论"
         tvVideoTitle.text = data.name
@@ -59,15 +59,15 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
                 .headers("Origin", "http://toutiao.iiilab.com")
                 .headers("Cookie", data.cookie)
                 .headers("Referer", "http://toutiao.iiilab.com/")
-                .params("link",link )
+                .params("link", link)
                 .params("r", map["r"])
                 .params("s", map["s"])
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("视频播放地址数据：$json")
-                        val playerData = Gson().fromJson(json,VideoPlayerData::class.java)
-                        controller.setClarity(getClarites(playerData),0)
+                        val playerData = Gson().fromJson(json, VideoPlayerData::class.java)
+                        controller.setClarity(getClarites(playerData), 0)
                     }
                 })
 
@@ -76,10 +76,13 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
     override fun getItemLayoutId(): Int {
         return R.layout.crosstalk_item_video
     }
+
     private fun getClarites(playerData: VideoPlayerData): MutableList<Clarity> {
         val datas = ArrayList<Clarity>()
-        playerData.data.video.link.forEachIndexed { index, linkBean ->
-            datas.add(Clarity("高清$index", "480P", linkBean.url))
+        if (playerData.data != null) {
+            playerData.data.video.link.forEachIndexed { index, linkBean ->
+                datas.add(Clarity("高清$index", "480P", linkBean.url))
+            }
         }
         return datas
     }
@@ -95,7 +98,7 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
 
     @Throws(Exception::class)
     private fun excuteJs(link: String): Map<String, String> {
-        val stream= context.assets.open("test.js")
+        val stream = context.assets.open("test.js")
         stream.buffered().reader().use {
             val jsStr = it.readText()
             val inv = JSUtils.getJsInvocable(jsStr)

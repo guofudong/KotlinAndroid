@@ -17,7 +17,6 @@ class SplashActivity : BaseActivity() {
 
     private val TIME_COUNTDOEN: Long = 4 * 1000
     override fun initView() {
-
     }
 
     override fun initData() {
