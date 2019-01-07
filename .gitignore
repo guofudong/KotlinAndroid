@@ -1,10 +1,12 @@
+# Generated files
+bin/
+gen/
+out/
+# Gradle files
+.gradle/
+build/
+# Local configuration file (sdk path, etc)
+local.properties
 *.iml
-.gradle
-/local.properties
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
+.idea/
+

@@ -70,7 +70,6 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
                         controller.setClarity(getClarites(playerData), 0)
                     }
                 })
-
     }
 
     override fun getItemLayoutId(): Int {
@@ -86,7 +85,6 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
         }
         return datas
     }
-
 
     private fun setVideoView(videoView: NiceVideoPlayer, itemView: View) {
         videoView.setPlayerType(NiceVideoPlayer.TYPE_NATIVE)
