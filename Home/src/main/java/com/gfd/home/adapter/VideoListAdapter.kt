@@ -23,8 +23,8 @@ class VideoListAdapter(private var context: Context?) : BaseMultiAdapter<VideoIt
 
 
     init {
-        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.item_home_video_list_title)
-        addItemType(Concant.ITEM_TYPE_IMG,R.layout.item_home_video_list_img)
+        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.home_item_home_video_list_title)
+        addItemType(Concant.ITEM_TYPE_IMG,R.layout.home_item_home_video_list_img)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {

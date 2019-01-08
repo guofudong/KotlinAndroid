@@ -15,8 +15,8 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
-        app:bb_activeTabColor="@color/tab_select"
-        app:bb_inActiveTabColor="@color/tab_normal"
-        app:bb_tabXmlResource="@xml/bottombar_tasb" />
+        app:bb_activeTabColor="@color/app_tab_select"
+        app:bb_inActiveTabColor="@color/app_tab_normal"
+        app:bb_tabXmlResource="@xml/app_bottombar_tasb" />
 
 </LinearLayout>

@@ -1,7 +1,5 @@
 package com.gfd.music.ui.activity
 
-import android.graphics.Color
-import android.graphics.Paint
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -27,8 +25,8 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.gson.Gson
 import com.xiao.nicevideoplayer.NiceTextureView
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
-import kotlinx.android.synthetic.main.activity_mv_detail.*
-import kotlinx.android.synthetic.main.layout_mv_detail_top.*
+import kotlinx.android.synthetic.main.music_activity_mv_detail.*
+import kotlinx.android.synthetic.main.music_layout_mv_detail_top.*
 
 /**
  * @Author : 郭富东
@@ -56,7 +54,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_mv_detail
+        return R.layout.music_activity_mv_detail
     }
 
     override fun initView() {

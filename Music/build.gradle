@@ -27,7 +27,8 @@ android {
             aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
         }
     }
-
+    //规定资源命名前缀为music_
+    resourcePrefix "music_"
 }
 
 dependencies {

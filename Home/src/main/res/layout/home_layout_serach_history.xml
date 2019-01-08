@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_delete" />
+            android:src="@drawable/home_ic_delete" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -12,13 +12,13 @@
         android:layout_height="@dimen/dp_32"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginRight="@dimen/dp_8"
-        android:background="@drawable/sp_edit_search_bg"
-        android:drawableLeft="@drawable/ic_search"
+        android:background="@drawable/home_sp_edit_search_bg"
+        android:drawableLeft="@drawable/home_ic_search"
         android:drawablePadding="@dimen/dp_6"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:paddingLeft="@dimen/dp_6"
-        android:text="@string/homeSerachHint"
+        android:text="@string/home_SerachHint"
         android:textSize="@dimen/sp_14"
         android:layout_marginTop="@dimen/padding_top"/>
 

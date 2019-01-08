@@ -8,8 +8,6 @@ import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
 import com.gfd.home.R
 import com.gfd.home.common.Concant
-import com.gfd.home.common.Concant.Companion.ITEM_TYPE_IMG
-import com.gfd.home.common.Concant.Companion.ITEM_TYPE_TITLE
 import com.gfd.home.entity.VideoItemData
 
 /**
@@ -23,7 +21,7 @@ class CategoryVideoAdapter(private var context: Context?) : BaseMultiAdapter<Vid
 
 
     init {
-        addItemType(Concant.ITEM_TYPE_IMG,R.layout.item_home_video_list_img)
+        addItemType(Concant.ITEM_TYPE_IMG,R.layout.home_item_home_video_list_img)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {

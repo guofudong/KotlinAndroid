@@ -3,7 +3,6 @@ package com.gfd.music.ui.fragment
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
-import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.MvListAdapter
@@ -15,9 +14,8 @@ import com.gfd.music.mvp.preesnter.ShortFilmPresenter
 import com.gfd.music.ui.activity.MvDetailActivity
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import com.xiao.nicevideoplayer.NiceVideoPlayer
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
-import kotlinx.android.synthetic.main.fragment_short_film.*
+import kotlinx.android.synthetic.main.music_fragment_short_film.*
 
 
 /**
@@ -36,7 +34,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     private var isLoadMore = false
     private var isSwitchVisible = false
     override fun getLayoutId(): Int {
-        return R.layout.fragment_short_film
+        return R.layout.music_fragment_short_film
     }
 
     override fun injectComponent() {

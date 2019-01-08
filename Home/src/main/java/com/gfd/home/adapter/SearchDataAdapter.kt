@@ -18,7 +18,7 @@ import com.gfd.home.entity.SearchItemData
  */
 class SearchDataAdapter(var context: Context) : BaseAdapter<SearchItemData>(context) {
     override fun getItemLayoutId(): Int {
-        return R.layout.item_search
+        return R.layout.home_item_search
 
     }
 

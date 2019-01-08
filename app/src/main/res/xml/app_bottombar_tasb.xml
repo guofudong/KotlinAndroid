@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        icon="@drawable/select_main_home"
+        icon="@drawable/app_select_main_home"
         id="@+id/tab_home"
         title="首页" />
     <tab
-        icon="@drawable/select_main_music"
+        icon="@drawable/app_select_main_music"
         id="@+id/tab_music"
         title="音乐" />
     <tab
-        icon="@drawable/select_main_play"
+        icon="@drawable/app_select_main_play"
         id="@+id/tab_play"
         title="直播" />
 
     <tab
-        icon="@drawable/select_main_mine"
+        icon="@drawable/app_select_main_mine"
         id="@+id/tab_mine"
         title="相声" />
 </tabs>

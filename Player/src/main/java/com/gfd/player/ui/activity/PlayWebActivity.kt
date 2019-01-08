@@ -13,8 +13,6 @@ import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.utils.ToastUtils
 import com.gfd.common.widgets.SpacesItemDecoration
 import com.gfd.player.R
-import com.gfd.player.R.id.episodeList
-import com.gfd.player.R.id.mWebView
 import com.gfd.player.adapter.EpisodeAdapter
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
@@ -26,7 +24,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import kotlinx.android.synthetic.main.activity_play_webview.*
+import kotlinx.android.synthetic.main.player_activity_play_webview.*
 
 
 /**
@@ -55,7 +53,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_play_webview
+        return R.layout.player_activity_play_webview
     }
 
     override fun injectComponent() {
@@ -81,7 +79,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         episodeList.adapter = mLRecyclerViewAdapter
         episodeList.setLoadMoreEnabled(false)
         episodeList.setPullRefreshEnabled(false)
-        var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.head_playweb, null, false)
+        var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.player_head_playweb, null, false)
         mTvPlot = headView.findViewById<TextView>(R.id.tvPlot)
         mLRecyclerViewAdapter.addHeaderView(headView)
     }

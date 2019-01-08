@@ -12,7 +12,7 @@
         app:tabMode="fixed"
         app:tabTextColor="@color/common_black"
         app:tabIndicatorHeight="@dimen/dp_0"
-        app:tabSelectedTextColor="@color/colorSearchItemBtn"/>
+        app:tabSelectedTextColor="@color/home_colorSearchItemBtn"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/videoPager"

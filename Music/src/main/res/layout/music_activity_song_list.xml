@@ -28,7 +28,7 @@
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <include layout="@layout/head_songlist_top" />
+                <include layout="@layout/music_head_songlist_top" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -120,6 +120,6 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <include layout="@layout/layout_play_contral" />
+    <include layout="@layout/music_layout_play_contral" />
 
 </LinearLayout>

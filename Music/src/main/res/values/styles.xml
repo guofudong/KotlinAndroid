@@ -1,34 +1,34 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" tools:ignore="ResourceName">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/music_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/music_colorPrimaryDark</item>
+        <item name="colorAccent">@color/music_colorAccent</item>
     </style>
 
-    <style name="styleMusicHead">
+    <style name="styleMusicHead" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/dp_6</item>
         <item name="android:background">@drawable/ic_recommend_head_itembg</item>
     </style>
 
-    <style name="styleMusicHeadText">
+    <style name="styleMusicHeadText" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/dp_2</item>
         <item name="android:textColor">@color/common_black</item>
         <item name="android:textSize">@dimen/sp_14</item>
 
-    </style> <style name="styleMvDetailTvTitle">
+    </style> <style name="styleMvDetailTvTitle" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/sp_12</item>
     </style>
 
-    <style name="styleSongListHead">
+    <style name="styleSongListHead" tools:ignore="ResourceName">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -37,7 +37,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="styleMvDetailTopItem">
+    <style name="styleMvDetailTopItem" tools:ignore="ResourceName">
         <item name="android:layout_width">@dimen/dp_22</item>
         <item name="android:layout_height">@dimen/dp_22</item>
         <item name="android:scaleType">fitXY</item>

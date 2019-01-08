@@ -11,7 +11,7 @@ import com.gfd.home.R
 import com.gfd.home.adapter.CategoryPagerAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.ui.fragment.CategoryFragment
-import kotlinx.android.synthetic.main.activity_category.*
+import kotlinx.android.synthetic.main.home_activity_category.*
 
 
 /**
@@ -26,7 +26,7 @@ class CategoryActivity : BaseActivity() {
     private val mFragments = ArrayList<CategoryFragment>()
     private var currentPosition = 0
     override fun getLayoutId(): Int {
-        return R.layout.activity_category
+        return R.layout.home_activity_category
     }
 
     override fun initView() {
@@ -56,13 +56,13 @@ class CategoryActivity : BaseActivity() {
      * @return View
      */
     private fun getTabView(position: Int): View {
-        val view = LayoutInflater.from(this).inflate(R.layout.layout_tab_home, null)
+        val view = LayoutInflater.from(this).inflate(R.layout.home_layout_tab_home, null)
         val textView = view.findViewById(R.id.tab_item_textview) as TextView
         textView.text = categoryTitles[position]
         textView.textSize = resources.getDimension(R.dimen.dp_5)
         if (position == currentPosition) {
             textView.textSize = resources.getDimension(R.dimen.dp_6)
-            textView.setTextColor(resources.getColor(R.color.colorSearchItemBtn))
+            textView.setTextColor(resources.getColor(R.color.home_colorSearchItemBtn))
             textView.paint.isFakeBoldText = true
         }else{
             textView.textSize = resources.getDimension(R.dimen.dp_5)
@@ -112,7 +112,7 @@ class CategoryActivity : BaseActivity() {
                 if (null != textView && textView is TextView) {
                     textView.textSize = resources.getDimension(R.dimen.dp_6)
                     textView.paint.isFakeBoldText = true
-                    textView.setTextColor(resources.getColor(R.color.colorSearchItemBtn))
+                    textView.setTextColor(resources.getColor(R.color.home_colorSearchItemBtn))
                 }
             }
 

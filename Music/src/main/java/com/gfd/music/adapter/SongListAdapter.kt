@@ -16,7 +16,7 @@ import com.gfd.music.entity.SongItemData
 class SongListAdapter(context: Context) : BaseAdapter<SongItemData>(context) {
 
     override fun getItemLayoutId(): Int {
-        return R.layout.item_songlist
+        return R.layout.music_item_songlist
 
     }
 

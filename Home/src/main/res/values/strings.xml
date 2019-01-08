@@ -1,4 +1,4 @@
-<resources>
-    <string name="app_name">Home</string>
-    <string name="homeSerachHint">全网VIP影视搜索</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="ResourceName">Home</string>
+    <string name="home_SerachHint">全网VIP影视搜索</string>
 </resources>

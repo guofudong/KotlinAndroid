@@ -4,14 +4,13 @@ import android.content.Intent
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import android.widget.TextView
 import com.gfd.common.ext.noScroll
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.MusicPagerAdapter
 import com.gfd.music.ui.activity.SearchActivity
-import kotlinx.android.synthetic.main.fragment_music.*
+import kotlinx.android.synthetic.main.music_fragment_music.*
 
 /**
  * @Author : 郭富东
@@ -25,7 +24,7 @@ class MusicFragment:BaseFragment(){
     private val mFragments = ArrayList<BaseFragment>()
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_music
+        return R.layout.music_fragment_music
     }
 
     override fun initView() {
@@ -78,7 +77,7 @@ class MusicFragment:BaseFragment(){
      * @return View
      */
     private fun getTabView(position: Int): View {
-        val view = LayoutInflater.from(activity).inflate(R.layout.layout_tab, null)
+        val view = LayoutInflater.from(activity).inflate(R.layout.music_layout_tab, null)
         val textView = view.findViewById(R.id.tab_item_textview) as TextView
         val indicator = view.findViewById(R.id.view_music_indicator) as View
         textView.text = mTabTitles[position]

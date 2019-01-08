@@ -18,7 +18,7 @@ import com.gfd.home.mvp.presenter.CategoryPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.fragment_category.*
+import kotlinx.android.synthetic.main.home_fragment_category.*
 
 /**
  * @Author : 郭富东
@@ -56,13 +56,13 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_category
+        return R.layout.home_fragment_category
     }
 
 
     override fun initView() {
         //设置刷新
-        categoryRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
+        categoryRefresh.setColorSchemeColors(resources.getColor(R.color.home_colorRefresh))
         categoryRefresh.setSize(SwipeRefreshLayout.DEFAULT)
         mVideoAdapter = CategoryVideoAdapter(activity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)

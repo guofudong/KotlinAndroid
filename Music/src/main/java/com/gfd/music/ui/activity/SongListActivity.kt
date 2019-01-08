@@ -22,10 +22,9 @@ import com.gfd.music.mvp.contract.SongListContract
 import com.gfd.music.mvp.preesnter.SongListPresenter
 import com.gfd.music.service.MusicPlayService
 import com.gfd.music.service.MusicServiceStub
-import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.activity_song_list.*
-import kotlinx.android.synthetic.main.head_songlist_top.*
-import kotlinx.android.synthetic.main.layout_play_contral.*
+import kotlinx.android.synthetic.main.music_activity_song_list.*
+import kotlinx.android.synthetic.main.music_head_songlist_top.*
+import kotlinx.android.synthetic.main.music_layout_play_contral.*
 
 class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.View {
 
@@ -40,7 +39,7 @@ class SongListActivity : BaseMvpActivity<SongListPresenter>(), SongListContract.
     private var mPlayService: MusicPlayService? = null
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_song_list
+        return R.layout.music_activity_song_list
     }
 
     override fun injectComponent() {

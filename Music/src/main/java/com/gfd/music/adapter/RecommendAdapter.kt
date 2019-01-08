@@ -16,7 +16,6 @@ import com.gfd.music.common.Concant
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_IMG
 import com.gfd.music.common.Concant.Companion.ITEM_TYPE_TITLE
 import com.gfd.music.entity.SongData
-import com.orhanobut.logger.Logger
 
 
 /**
@@ -29,8 +28,8 @@ class RecommendAdapter(val context: Context) : BaseMultiAdapter<SongData>(contex
 
 
     init {
-        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.item_music_song_title)
-        addItemType(Concant.ITEM_TYPE_IMG, R.layout.item_music_song_img)
+        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.music_item_music_song_title)
+        addItemType(Concant.ITEM_TYPE_IMG, R.layout.music_item_music_song_img)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {

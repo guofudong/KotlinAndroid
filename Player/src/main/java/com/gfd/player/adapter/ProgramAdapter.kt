@@ -19,8 +19,8 @@ class ProgramAdapter(val context: Context) : BaseMultiAdapter<LiveDataDto.LiveDa
     private  var currentSelect : Int = 1
 
     init {
-        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.item_program_live_title)
-        addItemType(Concant.ITEM_TYPE_CONTEXT,R.layout.item_program_live)
+        addItemType(Concant.ITEM_TYPE_TITLE, R.layout.player_item_program_live_title)
+        addItemType(Concant.ITEM_TYPE_CONTEXT,R.layout.player_item_program_live)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {

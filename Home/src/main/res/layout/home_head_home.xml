@@ -10,6 +10,6 @@
         android:layout_height="@dimen/dp_220"
         app:indicator_width ="@dimen/dp_6"
         app:indicator_height="@dimen/dp_6"
-        app:indicator_drawable_selected="@drawable/sp_indicator_select"/>
+        app:indicator_drawable_selected="@drawable/home_sp_indicator_select"/>
 
 </RelativeLayout>

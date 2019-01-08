@@ -17,6 +17,6 @@
         android:layout_marginBottom="@dimen/dp_4"
         android:scrollbars="vertical"
         android:background="@color/common_white"
-        android:scrollbarThumbVertical="@drawable/sp_list_scollbar"/>
+        android:scrollbarThumbVertical="@drawable/player_sp_list_scollbar"/>
 
 </LinearLayout>

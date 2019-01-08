@@ -13,7 +13,7 @@ import com.gfd.music.mvp.preesnter.RadioPresenter
 class RadioFragment:BaseMvpFragment<RadioPresenter>(){
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_radio
+        return R.layout.music_fragment_radio
     }
 
     override fun injectComponent() {

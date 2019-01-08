@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -70,7 +69,7 @@ public class VideoPlayer extends QSVideoViewHelp {
     }
 
     protected int getLayoutId() {
-        return R.layout.layout_player_control;
+        return R.layout.player_layout_player_control;
     }
 
     protected void initView() {

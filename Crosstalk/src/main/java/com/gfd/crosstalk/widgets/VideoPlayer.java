@@ -70,7 +70,7 @@ public class VideoPlayer extends QSVideoViewHelp {
     }
 
     protected int getLayoutId() {
-        return R.layout.layout_player_control;
+        return R.layout.crosstalk_layout_player_control;
     }
 
     protected void initView() {

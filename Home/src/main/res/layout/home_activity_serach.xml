@@ -20,11 +20,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/sp_edit_search_bg"
-            android:drawableLeft="@drawable/ic_search"
+            android:background="@drawable/home_sp_edit_search_bg"
+            android:drawableLeft="@drawable/home_ic_search"
             android:drawablePadding="@dimen/dp_6"
             android:gravity="center_vertical"
-            android:hint="@string/homeSerachHint"
+            android:hint="@string/home_SerachHint"
             android:maxLines="1"
             android:paddingLeft="@dimen/dp_6"
             android:textSize="@dimen/sp_14" />
@@ -53,9 +53,9 @@
             android:layout_marginTop="@dimen/dp_4"
             android:visibility="gone" />
 
-        <include layout="@layout/layout_serach_history" />
+        <include layout="@layout/home_layout_serach_history" />
 
-        <include layout="@layout/layout_search_empty" />
+        <include layout="@layout/home_layout_search_empty" />
     </RelativeLayout>
 
 </LinearLayout>

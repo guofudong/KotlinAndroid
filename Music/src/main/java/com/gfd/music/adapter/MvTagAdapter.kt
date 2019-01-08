@@ -15,7 +15,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
  */
 class MvTagAdapter(val context: Context):BaseAdapter<String>(context){
     override fun getItemLayoutId(): Int {
-        return R.layout.item_mvdetail_tag
+        return R.layout.music_item_mvdetail_tag
 
     }
 

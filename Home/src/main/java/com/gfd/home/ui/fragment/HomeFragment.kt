@@ -10,7 +10,6 @@ import com.gfd.common.ext.player
 import com.gfd.common.net.status.OnStatusLayoutClickListener
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.home.R
-import com.gfd.home.R.id.*
 import com.gfd.home.adapter.VideoListAdapter
 import com.gfd.home.common.Concant
 import com.gfd.home.entity.BinnerData
@@ -27,7 +26,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.kotlin.base.utils.AppPrefsUtils
 import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.home_fragment_home.*
 
 
 /**
@@ -57,18 +56,18 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_home
+        return R.layout.home_fragment_home
     }
 
     override fun initView() {
         //设置刷新
-        swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorRefresh))
+        swipeRefresh.setColorSchemeColors(resources.getColor(R.color.home_colorRefresh))
         swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT)
         mVideoAdapter = VideoListAdapter(activity)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         mRecyclerView.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         //添加Head View
-        val headView = LayoutInflater.from(context).inflate(R.layout.head_home, null, false)
+        val headView = LayoutInflater.from(context).inflate(R.layout.home_head_home, null, false)
         mBanner = headView.findViewById(R.id.mBanner)
         mLRecyclerViewAdapter.addHeaderView(headView)
 

@@ -28,6 +28,9 @@ android {
         }
     }
 
+    //规定资源命名前缀为home_
+    resourcePrefix "home_"
+
 }
 
 dependencies {

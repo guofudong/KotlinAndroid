@@ -391,11 +391,13 @@ public class NiceVideoPlayer extends FrameLayout
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void setTextureView(SurfaceTexture surfaceTexture){
         mSurfaceTexture = surfaceTexture;
         mTextureView.setSurfaceTexture(surfaceTexture);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
         if (mSurfaceTexture == null) {
@@ -427,7 +429,7 @@ public class NiceVideoPlayer extends FrameLayout
             mCurrentState = STATE_PREPARING;
             mController.onPlayStateChanged(mCurrentState);
             LogUtil.d("STATE_PREPARING");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             LogUtil.e("打开播放器发生错误", e);
         }

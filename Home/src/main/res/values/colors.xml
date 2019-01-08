@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="home_colorPrimary">#3F51B5</color>
+    <color name="home_colorPrimaryDark">#303F9F</color>
+    <color name="home_colorAccent">#FF4081</color>
 
-    <color name="colorSearchShape">#eae9ea</color>
+    <color name="home_colorSearchShape">#eae9ea</color>
 
 
-    <color name="colorItemTitle">#646162</color>
+    <color name="home_colorItemTitle">#646162</color>
 
     <!--下拉刷新控件颜色 -->
-    <color name="colorRefresh">#ea3471</color>
+    <color name="home_colorRefresh">#ea3471</color>
 
-    <color name="colorSearchItemBtn">#e29a0a</color>
+    <color name="home_colorSearchItemBtn">#e29a0a</color>
 
-    <color name="colorHistoryItemBG">#eff2f2</color>
+    <color name="home_colorHistoryItemBG">#eff2f2</color>
 
 
 </resources>

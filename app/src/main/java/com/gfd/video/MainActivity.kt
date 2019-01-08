@@ -10,8 +10,7 @@ import com.gfd.home.ui.fragment.HomeFragment
 import com.gfd.music.common.PlayUtils
 import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.player.ui.fragment.LiveFragment
-import com.gfd.video.R.id.bottomBar
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_activity_main.*
 import java.util.*
 
 /**
@@ -30,7 +29,7 @@ class MainActivity : BaseActivity() {
     private val mStack = Stack<BaseFragment>()
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_main
+        return R.layout.app_activity_main
     }
 
     override fun initView() {

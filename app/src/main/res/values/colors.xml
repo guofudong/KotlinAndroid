@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="app_colorPrimary">#3F51B5</color>
+    <color name="app_colorPrimaryDark">#303F9F</color>
+    <color name="app_colorAccent">#FF4081</color>
 
     <!--主页底部tab文件颜色-->
-    <color name="tab_select">#ff4081</color>
-    <color name="tab_normal">#4b4a4a</color>
+    <color name="app_tab_select">#ff4081</color>
+    <color name="app_tab_normal">#4b4a4a</color>
 </resources>

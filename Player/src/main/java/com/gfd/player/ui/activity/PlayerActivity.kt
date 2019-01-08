@@ -22,7 +22,7 @@ import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.player.widgets.VideoPlayer
 import com.gfd.provider.router.RouterPath
-import kotlinx.android.synthetic.main.activity_player.*
+import kotlinx.android.synthetic.main.player_activity_player.*
 import org.song.videoplayer.DemoQSVideoView
 import org.song.videoplayer.IVideoPlayer
 import org.song.videoplayer.PlayListener
@@ -56,7 +56,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     private lateinit var url: String
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_player
+        return R.layout.player_activity_player
     }
 
 

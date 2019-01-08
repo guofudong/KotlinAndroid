@@ -25,6 +25,8 @@ android {
         }
     }
 
+    //规定资源命名前缀为user_
+    resourcePrefix "user_"
 }
 
 dependencies {

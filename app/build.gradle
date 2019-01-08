@@ -39,6 +39,9 @@ android {
         }
     }
 
+    //规定资源命名前缀为app_
+    resourcePrefix "app_"
+
     //自定义输出apk名字
     applicationVariants.all {
         variant ->

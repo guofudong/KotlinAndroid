@@ -1,7 +1,6 @@
 package com.gfd.home.adapter
 
 import android.content.Context
-import android.view.ViewGroup
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
@@ -17,7 +16,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 class HistoryAdapter(context: Context) : BaseAdapter<String>(context) {
 
     override fun getItemLayoutId(): Int {
-        return R.layout.item_search_history
+        return R.layout.home_item_search_history
     }
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {

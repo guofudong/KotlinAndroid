@@ -25,9 +25,9 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import kotlinx.android.synthetic.main.activity_serach.*
-import kotlinx.android.synthetic.main.layout_search_empty.*
-import kotlinx.android.synthetic.main.layout_serach_history.*
+import kotlinx.android.synthetic.main.home_activity_serach.*
+import kotlinx.android.synthetic.main.home_layout_search_empty.*
+import kotlinx.android.synthetic.main.home_layout_serach_history.*
 
 
 /**
@@ -57,7 +57,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_serach
+        return R.layout.home_activity_serach
     }
 
     override fun initView() {
@@ -150,8 +150,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         mVideoList.adapter = mLRecyclerViewAdapter
         //添加分割线
         val divider = DividerDecoration.Builder(this)
-                .setHeight(R.dimen.default_divider_height)
-                .setPadding(R.dimen.default_divider_padding)
+                .setHeight(R.dimen.home_default_divider_height)
+                .setPadding(R.dimen.home_default_divider_padding)
                 .setColorResource(R.color.colorItemDecoration)
                 .build()
         mVideoList.setLoadMoreEnabled(false)

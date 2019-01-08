@@ -18,7 +18,7 @@ import com.gfd.music.mvp.preesnter.RecommendPresenter
 import com.gfd.music.ui.activity.SongListActivity
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.youth.banner.Banner
-import kotlinx.android.synthetic.main.fragment_recommend.*
+import kotlinx.android.synthetic.main.music_fragment_recommend.*
 import java.util.*
 
 /**
@@ -35,7 +35,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     private lateinit var mBanner: Banner
     private lateinit var mSongData: List<SongData>
     override fun getLayoutId(): Int {
-        return R.layout.fragment_recommend
+        return R.layout.music_fragment_recommend
     }
 
     override fun injectComponent() {
@@ -52,7 +52,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mSongAdapter)
         mRecyclerView.gridInit(context = activity!!, adapter = mLRecyclerViewAdapter)
         //添加head
-        val headView = LayoutInflater.from(context).inflate(R.layout.layout_recommend_head, null, false)
+        val headView = LayoutInflater.from(context).inflate(R.layout.music_layout_recommend_head, null, false)
         mBanner = headView.findViewById(R.id.mBannerRecommend)
         val tvDay = headView.findViewById<TextView>(R.id.tv_head_day)
         tvDay.text = String.format("%td", Date(System.currentTimeMillis()))

@@ -29,7 +29,7 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
 
     private var listener: OnTitleClickListener? = null
     override fun getItemLayoutId(): Int {
-        return R.layout.item_mv_music
+        return R.layout.music_item_mv_music
     }
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {

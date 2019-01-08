@@ -1,7 +1,6 @@
 package com.gfd.music.adapter
 
 import android.content.Context
-import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
@@ -10,8 +9,6 @@ import com.gfd.common.utils.ImageLoader
 import com.gfd.music.R
 import com.gfd.music.entity.CommentData
 import de.hdodenhof.circleimageview.CircleImageView
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * @Author : 郭富东
@@ -21,7 +18,7 @@ import java.util.*
  */
 class MvCommentAdapter(val context: Context) : BaseAdapter<CommentData>(context) {
     override fun getItemLayoutId(): Int {
-        return R.layout.item_mv_comment
+        return R.layout.music_item_mv_comment
 
     }
 

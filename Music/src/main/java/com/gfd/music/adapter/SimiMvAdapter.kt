@@ -2,7 +2,6 @@ package com.gfd.music.adapter
 
 import android.content.Context
 import android.text.TextUtils
-import android.view.TextureView
 import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
@@ -20,7 +19,7 @@ import com.gfd.music.entity.MvData
  */
 class SimiMvAdapter(val context: Context) : BaseAdapter<MvData>(context) {
     override fun getItemLayoutId(): Int {
-        return R.layout.item_mvdetail_simi
+        return R.layout.music_item_mvdetail_simi
 
     }
 

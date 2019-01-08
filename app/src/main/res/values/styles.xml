@@ -1,14 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="ResourceName">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/common_black</item>
         <item name="colorPrimaryDark">@color/common_black</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/app_colorAccent</item>
     </style>
 
-    <style name="AppActivityTheme" parent="@style/MyAppTheme">
+    <style name="AppActivityTheme" parent="@style/MyAppTheme" tools:ignore="ResourceName">
         <item name="android:windowIsTranslucent">false</item>
     </style>
 

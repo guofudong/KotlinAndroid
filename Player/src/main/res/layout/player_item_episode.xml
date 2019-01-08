@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/sp_item_player_bg">
+    android:background="@drawable/player_sp_item_player_bg">
 
     <TextView
         android:id="@+id/tv_item_episode"
@@ -12,7 +12,7 @@
         android:gravity="center"
         android:padding="@dimen/dp_10"
         android:maxLength="10"
-        android:textColor="@drawable/select_item_episode_text"
+        android:textColor="@drawable/player_select_item_episode_text"
         android:textSize="@dimen/sp_14" />
 
 </RelativeLayout>
