@@ -126,7 +126,9 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
             categoryRecycler.refreshComplete(datas.size)
         } else if (state == Concant.STATE_REFRESH) {//下拉刷新
             mVideoAdapter.updateData(datas)
-            categoryRefresh.isRefreshing = false
+            if(categoryRefresh != null){
+                categoryRefresh.isRefreshing = false
+            }
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }
