@@ -16,18 +16,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.xiao.nicevideoplayer.NiceVideoPlayer
-                android:id="@+id/videoView"
+            <ImageView
+                android:id="@+id/videoPic"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/imgPlayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_player_center_start"
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:id="@+id/tvCountMv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/dp_4"
                 android:paddingTop="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
                 android:textColor="@color/common_white"
                 android:textSize="@dimen/sp_12" />
 

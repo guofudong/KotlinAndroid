@@ -6,6 +6,6 @@ package com.gfd.music.entity
  * @Email：878749089@qq.com
  * @descriptio：
  */
-data class MvData(var name: String = "慕涵盛华", var id: Int, var pic: String, var des: String, var autor: String,
-                  var playCount: Int, var artistId: Int, var score: Int, var artistName:String = "",
+data class MvData(var name: String = "慕涵盛华", var id: String, var pic: String, var des: String, var autor: String,
+                  var playCount: Int, var artistId: Int = 0, var score: Int = 0, var artistName:String = "",
                   var duration:Int = 0,var videoUrl: String = "")

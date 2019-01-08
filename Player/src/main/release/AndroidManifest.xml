@@ -14,5 +14,9 @@
             android:name=".ui.activity.PlayWebActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.PlayMvActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
     </application>
 </manifest>

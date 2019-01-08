@@ -224,8 +224,8 @@ object Api {
      * @param size Int
      * @return String
      */
-    fun getRecommendMV(offset: Int, size: Int = 12): String {
-        return URL_MV_BASE + "top/mv/?offset=$offset&limit=$size"
+    fun getRecommendMV(offset: Int = 0, size: Int = 12): String {
+        return "https://api.bzqll.com/music/netease/topMvList?key=579621905&limit=$size&offset=$offset"
     }
 
     fun getMVDetail(mvId: Int): String {
@@ -237,7 +237,7 @@ object Api {
      * @param mvId Int
      * @return String
      */
-    fun getSimilarMv(mvId:String):String{
+    fun getSimilarMv(mvId: String): String {
         return URL_MV_BASE + "simi/mv?mvid=$mvId"
     }
 
@@ -246,7 +246,7 @@ object Api {
      * @param mvId Int
      * @return String
      */
-    fun getMvComment(mvId:String):String{
+    fun getMvComment(mvId: String): String {
         return URL_MV_BASE + "comment/mv?id=$mvId"
     }
 
@@ -255,11 +255,11 @@ object Api {
      * @param name String
      * @return String
      */
-    fun getSearchSongApi(name:String):String{
+    fun getSearchSongApi(name: String): String {
         return "https://tool.liumingye.cn/qqws/?name=$name"
     }
 
-    class AnalysisMusic{
+    class AnalysisMusic {
         companion object {
             val url = "http://tool.liumingye.cn/music/ajax.php"
             val cookie = "PHPSESSID=k0lglound3be0hgf6l44n66c56;"

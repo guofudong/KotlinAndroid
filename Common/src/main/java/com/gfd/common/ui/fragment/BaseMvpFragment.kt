@@ -42,11 +42,11 @@ open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseVie
     }
 
     override fun showLoading() {
-        LoadingHelper.showLoading(activity!!)
+        LoadingHelper.showLoading(activity)
     }
 
     override fun hideLoading() {
-        LoadingHelper.hideLoading(activity!!)
+        LoadingHelper.hideLoading(activity)
     }
 
     override fun error() {

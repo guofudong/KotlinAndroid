@@ -15,6 +15,7 @@ object RouterPath {
             /** 视频播放页面 */
             const val PATH_PLAYER = "/player/play"
             const val PATH_PLAYER_WEB = "/playerWeb/playweb"
+            const val PATH_PLAYER_MV= "/playerWeb/MV"
             const val KEY_PLAYER = "videoPlayer"
             const val KEY_IMAGE = "videoImage"
             const val KEY_NAME = "videoName"

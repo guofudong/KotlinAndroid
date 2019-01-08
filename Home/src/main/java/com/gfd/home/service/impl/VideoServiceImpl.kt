@@ -35,16 +35,17 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                         override fun onSuccess(response: Response<String>) {
                             val json = response.body().toString()
                             val document = Jsoup.parse(json)
-
                             //轮播图
                             val e1 = document.select("div.hy-video-slide")
                             var binners: MutableList<BinnerData> = ArrayList()
                             for (element in e1) {
                                 val subE = element.selectFirst("a[href]")
                                 val title = subE.attr("title")
-                                val link = subE.attr("href")
+                                var link = subE.attr("href")
                                 val style = subE.attr("style")
                                 val img = style.substring(style.indexOf("url") + 4, style.indexOf(")"))
+                                link = if (link[0] == '/') link else "/$link"
+                                Logger.e("轮播图数据：link = $link")
                                 binners.add(BinnerData(title, img, link))
                             }
                             //取出最后两个
@@ -77,7 +78,7 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                 videoList.add(VideoItemData(tag, Concant.ITEM_TYPE_IMG, name, img, link, types[0]))
                             }
 
-                            val titleTypes = arrayOf(Concant.CATEGORY_MOVIE, Concant.CATEGORY_DINASHI, Concant.CATEGORY_ZONGYI,0)
+                            val titleTypes = arrayOf(Concant.CATEGORY_MOVIE, Concant.CATEGORY_DINASHI, Concant.CATEGORY_ZONGYI, 0)
                             //其他分类
                             var index = 1
                             for (element in document.select("div[class=hy-layout clearfix]")) {

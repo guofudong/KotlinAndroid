@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MvDetailServiceImpl @Inject constructor():MvDetailService{
 
     override fun getSimlMv(mvId:String,callback: MvDetailService.GetMvDetailCallBack) {
-        OkGo.get<String>(Api.getSimilarMv(mvId))
+      /*  OkGo.get<String>(Api.getSimilarMv(mvId))
                 .tag(this)
                 .execute(object:StringCallback(){
                     override fun onSuccess(response: Response<String>) {
@@ -32,7 +32,7 @@ class MvDetailServiceImpl @Inject constructor():MvDetailService{
                         callback.onSimiMv(mvDatas)
                     }
 
-                })
+                })*/
     }
 
     override fun getMvComment(mvId:String,callback: MvDetailService.GetMvDetailCallBack) {

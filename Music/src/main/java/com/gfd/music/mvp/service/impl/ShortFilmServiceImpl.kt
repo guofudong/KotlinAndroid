@@ -29,9 +29,9 @@ class ShortFilmServiceImpl @Inject constructor() : ShortFilmService {
                         val mvDto = Gson().fromJson(json, MvDto::class.java)
                         val mvDatas = ArrayList<MvData>()
                         mvDto.data.forEach {
-                            mvDatas.add(MvData(it.name, it.id, it.cover, it.briefDesc
-                                    ?: "", it.artistName,
-                                    it.playCount, it.artistId, it.score))
+                            mvDatas.add(MvData(it.name, it.id, it.pic, it.desc
+                                    ?: "", it.singer,
+                                    it.playCount, videoUrl = it.url))
                         }
                         callBack.onMvData(mvDatas)
                     }
