@@ -14,7 +14,7 @@
 [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
 
 ### API说明
->项目中用到的数据都是通过解析网站解析而来，所以没有固定的接口格式。因此没有封装统一的网络工具类，而使用三方库[okhttp-OkGo](https://github.com/jeasonlzy/okhttp-OkGo)来请求，便于解析数据。
+>项目中用到的数据都是通过解析网站数据而来，所以没有固定的接口格式。因此没有封装统一的网络工具类，而使用三方库[okhttp-OkGo](https://github.com/jeasonlzy/okhttp-OkGo)来请求，便于解析数据。
 
 ### 屏幕适配
 采用smallestWidth适配
