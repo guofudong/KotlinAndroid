@@ -23,6 +23,8 @@
 
 [自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)
 
+[AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
+
 ## 模块化结构图
 
 ![](/screenshot/模块化.png)
