@@ -9,7 +9,7 @@
 
 [and_res_guard.gradle](/and_res_guard.gradle):微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
 
-[libbase.gradle](/libbase.gradle):多Modle build文件公共部分抽取。
+[libbase.gradle](/libbase.gradle):多Module build文件公共部分抽取。
 
 [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
 
@@ -33,7 +33,7 @@
 
 ![](/screenshot/模块化.png)
 
->Common为公共库，主要包含一些基类和常用的工具类，Provider依赖于Common，是业务模块真正依赖的库。业务模块包括：Home，Music，User，Player。每个业务模块对应一个Modle。
+>Common为公共库，主要包含一些基类和常用的工具类，Provider依赖于Common，是业务模块真正依赖的库。业务模块包括：Home，Music，User，Player。每个业务模块对应一个Module。
 
 ## 首页模块效果图
 ![](/screenshot/home.png)  ![](/screenshot/player.png)
