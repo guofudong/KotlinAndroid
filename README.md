@@ -4,6 +4,9 @@
 ## APK下载
 [点击下载](/screenshot/app-release.apk)
 
+## 说明
+[common.gradle](/common.gradle):三方依赖库和版本管理，统一放在该文件中。
+
 ## 模块化结构图
 
 ![](/screenshot/模块化.png)
