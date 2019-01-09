@@ -6,8 +6,11 @@
 
 ## 说明
 [common.gradle](/common.gradle):三方依赖库和版本管理，统一放在该文件中。
+
 [and_res_guard.gradle](/and_res_guard.gradle):微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
+
 [libbase.gradle](/libbase.gradle):多Modle build文件公共部分抽取。
+
 [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
 
 ## 模块化结构图
