@@ -2,6 +2,7 @@ package com.gfd.music.mvp.preesnter
 
 import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
+import com.gfd.music.entity.MvDetailData
 import com.gfd.music.mvp.contract.MvDetailContract
 import com.gfd.music.mvp.contract.RadioContract
 import com.gfd.music.mvp.service.MvDetailService
@@ -14,24 +15,25 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class MvDetailPresenter @Inject constructor():MvDetailContract.Presenter,MvDetailService.GetMvDetailCallBack{
+class MvDetailPresenter @Inject constructor() : MvDetailContract.Presenter, MvDetailService.GetMvDetailCallBack {
 
     @Inject
-    lateinit var mView:MvDetailContract.View
+    lateinit var mView: MvDetailContract.View
     @Inject
     lateinit var mService: MvDetailService
 
-    override fun getSimiMv(mvId:String) {
-        mService.getSimlMv(mvId,this)
+    override fun getSimiMv(mvId: String) {
+        mService.getSimlMv(mvId, this)
     }
 
-    override fun getMvComment(mvId:String) {
-        mService.getMvComment(mvId,this)
+    override fun getMvComment(mvId: String) {
+        mService.getMvComment(mvId, this)
     }
 
     override fun getMvDetail(mvId: String) {
-        mView.showMvDetail()
+        mService.getMvDetail(mvId, this)
     }
+
     override fun onSimiMv(datas: List<MvData>) {
         mView.showSimiMv(datas)
 
@@ -39,6 +41,10 @@ class MvDetailPresenter @Inject constructor():MvDetailContract.Presenter,MvDetai
 
     override fun onMvCommnet(datas: List<CommentData>) {
         mView.showMvComment(datas)
+    }
+
+    override fun onMvDetail(data: MvDetailData) {
+        mView.showMvDetail(data)
     }
 
 }

@@ -15,41 +15,72 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class MvDetailServiceImpl @Inject constructor():MvDetailService{
+class MvDetailServiceImpl @Inject constructor() : MvDetailService {
 
-    override fun getSimlMv(mvId:String,callback: MvDetailService.GetMvDetailCallBack) {
-      /*  OkGo.get<String>(Api.getSimilarMv(mvId))
+
+    override fun getMvDetail(mvId: String, callback: MvDetailService.GetMvDetailCallBack) {
+        OkGo.get<String>(Api.getMvDetail(mvId))
                 .tag(this)
-                .execute(object:StringCallback(){
+                .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
-                        val simiData = Gson().fromJson(json, SimiMvDto::class.java)
-                        val mvDatas = ArrayList<MvData>()
-                        simiData.mvs.forEach {
-                            mvDatas.add(MvData(it.name,it.id,it.cover,"${it.briefDesc}",it.artistName
-                            ,it.playCount,it.artistId,it.id,it.artistName,it.duration))
-                        }
-                        callback.onSimiMv(mvDatas)
+                        val mvDetail = Gson().fromJson(json, MvDetail::class.java).data
+                        val mvDetailData = MvDetailData(
+                                mvDetail.id,
+                                mvDetail.name,
+                                mvDetail.singer,
+                                mvDetail.playCount,
+                                mvDetail.publishTime,
+                                mvDetail.url,
+                                mvDetail.pic
+                        )
+                        callback.onMvDetail(mvDetailData)
                     }
+                })
 
-                })*/
     }
 
-    override fun getMvComment(mvId:String,callback: MvDetailService.GetMvDetailCallBack) {
-        OkGo.get<String>(Api.getMvComment(mvId))
+    override fun getSimlMv(mvId: String, callback: MvDetailService.GetMvDetailCallBack) {
+        OkGo.get<String>(Api.getSimilarMv(mvId))
                 .tag(this)
-                .execute(object:StringCallback(){
+                .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
-                        val commentData = Gson().fromJson(json, MvCommentDto::class.java)
+                        val simiData = Gson().fromJson(json, SimiMv::class.java).data
+                        val mvDatas = ArrayList<MvData>()
+                        if (simiData.videos != null) {
+                            simiData.videos.forEach {
+                                mvDatas.add(MvData(it.title, it.vid, it.coverUrl, it.title, it.creator[0].userName, 0
+                                        , duration = it.durationms))
+                            }
+                            callback.onSimiMv(mvDatas)
+                        }
+                    }
+                })
+    }
+
+    override fun getMvComment(mvId: String, callback: MvDetailService.GetMvDetailCallBack) {
+        //api已不能使用，这里用假数据电梯
+        /*OkGo.get<String>(Api.getMvComment(mvId))
+                .tag(this)
+                .execute(object : StringCallback() {
+                    override fun onSuccess(response: Response<String>) {
+                        val json = response.body().toString()
+                        val commentData = Gson().fromJson(json, MvComment::class.java)
                         val mvCommentDatas = ArrayList<CommentData>()
                         commentData.hotComments.forEach {
-                            mvCommentDatas.add(CommentData(it.user.nickname,it.user.avatarUrl,it.content,
-                                    it.likedCount,it.time,it.liked))
+                            mvCommentDatas.add(CommentData(it.user.nickname, it.user.avatarUrl, it.content,
+                                    it.likedCount, it.time, it.liked))
                         }
                         callback.onMvCommnet(mvCommentDatas)
                     }
-                })
+                })*/
+        val mvCommentDatas = ArrayList<CommentData>()
+        for (i in 0..6) {
+            mvCommentDatas.add(CommentData("Android行动派", "", "关注微信公众号Android行动派获取更多资源", 12,
+                    System.currentTimeMillis() - 1000 * 12, false))
+        }
+        callback.onMvCommnet(mvCommentDatas)
     }
 
 }

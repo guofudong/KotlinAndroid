@@ -234,20 +234,30 @@ object Api {
 
     /**
      * 获取相似MV
-     * @param mvId Int
+     * @param mvId String
      * @return String
      */
     fun getSimilarMv(mvId: String): String {
-        return URL_MV_BASE + "simi/mv?mvid=$mvId"
+        //return URL_MV_BASE + "simi/mv?mvid=$mvId"改API已不能使用
+        return "https://api.bzqll.com/music/netease/search?key=579621905&type=video&limit=8&offset=0&s=$mvId"
     }
 
     /**
      * 获取MV的评论
-     * @param mvId Int
+     * @param mvId String
      * @return String
      */
     fun getMvComment(mvId: String): String {
         return URL_MV_BASE + "comment/mv?id=$mvId"
+    }
+
+    /**
+     * 获取MV的信息
+     * @param mvId String
+     * @return String
+     */
+    fun getMvDetail(mvId: String): String {
+        return "https://api.bzqll.com/music/netease/mv?key=579621905&id=$mvId"
     }
 
     /**

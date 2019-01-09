@@ -10,7 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
         android:background="@color/common_black"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/mWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,10 +75,10 @@
                             android:layout_centerVertical="true"
                             android:background="@drawable/music_sp_mvdetail_gz_bg"
                             android:gravity="center"
-                            android:paddingBottom="@dimen/dp_2"
                             android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
                             android:paddingTop="@dimen/dp_2"
+                            android:paddingRight="@dimen/dp_10"
+                            android:paddingBottom="@dimen/dp_2"
                             android:text="+ 关注"
                             android:textColor="@color/common_white"
                             android:textSize="@dimen/sp_12" />
@@ -118,8 +124,8 @@
                 android:id="@+id/topLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_8"
                 android:background="@color/common_white"
+                android:padding="@dimen/dp_8"
                 android:visibility="gone"
                 app:layout_constraintTop_toTopOf="@+id/mNestedScrollView">
 
@@ -147,10 +153,10 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/music_sp_mvdetail_gz_bg"
                     android:gravity="center"
-                    android:paddingBottom="@dimen/dp_2"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_2"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_2"
                     android:text="+ 关注"
                     android:textColor="@color/common_white"
                     android:textSize="@dimen/sp_12" />
@@ -163,15 +169,15 @@
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerInParent="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ProgressBar
                 android:layout_width="@dimen/dp_32"
                 android:layout_height="@dimen/dp_22"
-                android:indeterminateDrawable="@drawable/loading"
-                android:layout_marginTop="@dimen/dp_10"/>
+                android:layout_marginTop="@dimen/dp_10"
+                android:indeterminateDrawable="@drawable/loading" />
 
             <TextView
                 android:id="@+id/load_text"
@@ -180,7 +186,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="正在加载中..."
                 android:textColor="@color/common_gray"
-                android:textSize="@dimen/sp_14"/>
+                android:textSize="@dimen/sp_14" />
 
         </LinearLayout>
 

@@ -3,9 +3,9 @@ package com.gfd.music.mvp.service.impl
 import com.gfd.music.api.Api
 import com.gfd.music.common.Concant
 import com.gfd.music.entity.BannerData
-import com.gfd.music.entity.BannerDto
+import com.gfd.music.entity.Banner
 import com.gfd.music.entity.SongData
-import com.gfd.music.entity.SongDto
+import com.gfd.music.entity.Song
 import com.gfd.music.mvp.service.RecommendService
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
@@ -32,7 +32,7 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("推荐轮播图：$json")
-                        val banner = Gson().fromJson(json, BannerDto::class.java)
+                        val banner = Gson().fromJson(json, Banner::class.java)
                         val datas = ArrayList<BannerData>()
                         banner.pic.forEach {
                             datas.add(BannerData(it.type, it.mo_type, it.code, it.randpic))
@@ -49,7 +49,7 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("推荐歌曲：$json")
-                        val songDatas = Gson().fromJson(json, SongDto::class.java)
+                        val songDatas = Gson().fromJson(json, Song::class.java)
                         val datas = ArrayList<SongData>()
                         val song_list = songDatas.content[0].song_list
                         datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))

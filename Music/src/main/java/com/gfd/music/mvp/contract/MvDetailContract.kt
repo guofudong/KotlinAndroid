@@ -4,6 +4,7 @@ import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
 import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
+import com.gfd.music.entity.MvDetailData
 
 /**
  * @Author : 郭富东
@@ -15,7 +16,7 @@ interface MvDetailContract{
 
     interface View :BaseView{
 
-        fun showMvDetail()
+        fun showMvDetail(data: MvDetailData)
         fun showSimiMv(datas:List<MvData>)
         fun showMvComment(datas: List<CommentData>)
 

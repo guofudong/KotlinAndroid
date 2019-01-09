@@ -34,7 +34,7 @@ class MvCommentAdapter(val context: Context) : BaseAdapter<CommentData>(context)
 
         time.text = FormatUtil.formatDate(commentData.time)
         content.text = commentData.content
-        ImageLoader.loadUrlImage(context,commentData.userPic,img)
+        //ImageLoader.loadUrlImage(context,commentData.userPic,img)
     }
 
 }

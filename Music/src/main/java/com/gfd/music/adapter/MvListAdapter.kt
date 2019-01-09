@@ -1,6 +1,7 @@
 package com.gfd.music.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,8 +11,10 @@ import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
 import com.gfd.music.R
 import com.gfd.music.entity.MvData
+import com.gfd.music.ui.activity.MvDetailActivity
 import com.gfd.provider.router.RouterPath
 import com.orhanobut.logger.Logger
+import org.jetbrains.anko.startActivity
 
 /**
  * @Author : 郭富东
@@ -50,11 +53,11 @@ class MvListAdapter(val context: Context) : BaseAdapter<MvData>(context) {
             //播放视频按钮
             val videoUrl = mvData.videoUrl
             Logger.e("视频播放地址:$videoUrl")
-            ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_MV)
-                    .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
-                    .withString(RouterPath.Player.KEY_IMAGE, mvData.pic)
-                    .withString(RouterPath.Player.KEY_NAME, mvData.des)
-                    .navigation()
+            val intent = Intent(context, MvDetailActivity::class.java)
+            intent.putExtra("mvUrl",videoUrl)
+            intent.putExtra("mvId",mvData.id)
+            intent.putExtra("mvName",mvData.name)
+            context.startActivity(intent)
         }
     }
 

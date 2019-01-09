@@ -104,6 +104,14 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
                 super.onReceivedTitle(view, videoName)
             }
         }
+        //去掉qq浏览器的推广
+        window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val outView = ArrayList<View>()
+            window.decorView.findViewsWithText(outView, "QQ浏览器", View.FIND_VIEWS_WITH_TEXT)
+            if (outView.size > 0) {
+                outView[0].visibility = View.GONE
+            }
+        }
     }
 
     override fun initData() {
@@ -118,15 +126,6 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
                 mWebView.loadUrl(mDatas[positon].videoUrl)
             }
         })
-        //去掉qq浏览器的推广
-        window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            val outView = ArrayList<View>()
-            window.decorView.findViewsWithText(outView, "QQ浏览器", View.FIND_VIEWS_WITH_TEXT)
-            if (outView.size > 0) {
-                outView[0].visibility = View.GONE
-            }
-        }
-
     }
 
 

@@ -1,10 +1,9 @@
 package com.gfd.music.ui.activity
 
+import android.graphics.PixelFormat
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
-import android.text.TextUtils
 import android.view.View
-import android.view.ViewGroup
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
@@ -13,7 +12,7 @@ import com.gfd.music.adapter.MvTagAdapter
 import com.gfd.music.adapter.SimiMvAdapter
 import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
-import com.gfd.music.entity.MvDetailDto
+import com.gfd.music.entity.MvDetailData
 import com.gfd.music.injection.component.DaggerMvDetailComponent
 import com.gfd.music.injection.module.MvDetialMoudle
 import com.gfd.music.mvp.contract.MvDetailContract
@@ -22,7 +21,9 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.gson.Gson
+import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebView
+import com.tencent.smtt.sdk.WebViewClient
 import com.xiao.nicevideoplayer.NiceTextureView
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.music_activity_mv_detail.*
@@ -36,13 +37,13 @@ import kotlinx.android.synthetic.main.music_layout_mv_detail_top.*
  */
 class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.View {
 
-    private lateinit var mMvDetailData: MvDetailDto.DataBean
     private lateinit var mSimiMvAdapter: SimiMvAdapter
     private lateinit var mMvCommentAdapter: MvCommentAdapter
     private lateinit var mSimiMvDatas: List<MvData>
     private lateinit var mMvTagAdapter: MvTagAdapter
     private lateinit var niceTextureView: NiceTextureView
     private lateinit var mvId: String
+    private lateinit var mvName: String
     private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
 
     override fun injectComponent() {
@@ -58,11 +59,9 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     }
 
     override fun initView() {
+        setWebView()
         loading.visibility = View.VISIBLE
         content.visibility = View.GONE
-        val json = intent.getStringExtra("json")
-        mMvDetailData = Gson().fromJson(json, MvDetailDto::class.java).data
-        mvId = mMvDetailData.id.toString()
         //相似MV列表
         recommendList.layoutManager = LinearLayoutManager(this@MvDetailActivity, LinearLayoutManager.VERTICAL, false)
         mSimiMvAdapter = SimiMvAdapter(this@MvDetailActivity)
@@ -80,14 +79,23 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         mMvTagAdapter = MvTagAdapter(this@MvDetailActivity)
         mMvTagAdapter.updateData(tagDatas.toList())
         mvTagList.adapter = mMvTagAdapter
-        val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
-        parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
-        videoContainer.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        //原来mvAPI已不能使用，这里改用webview播放mv
+        //val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
+        //parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        //videoContainer.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
+        if (intent != null) {
+            val mvUrl = intent.getStringExtra("mvUrl")
+            mvId = intent.getStringExtra("mvId")
+            mvName = intent.getStringExtra("mvName")
+            mWebView.loadUrl(mvUrl)
+        }
     }
 
     override fun initData() {
+        //原来的API已不能使用，这个用假数据代替
         mPresenter.getMvComment(mvId)
-        mPresenter.getSimiMv(mvId)
+        //原来的API已不能使用，这个使用搜索相同的名字来代替相似的MV
+        mPresenter.getSimiMv(mvName)
         mPresenter.getMvDetail(mvId)
     }
 
@@ -108,26 +116,22 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         })
     }
 
-    override fun showMvDetail() {
-        //标题
-        tvMvTitile.text = if (TextUtils.isEmpty(mMvDetailData.briefDesc)) {
-            mMvDetailData.name
-        } else {
-            mMvDetailData.briefDesc
-        }
+    override fun showMvDetail(data: MvDetailData) {
         //发布时间
-        tvPublishTime.text = mMvDetailData.publishTime
+        tvPublishTime.text = data.publishTime
         //播放数量
-        tvPlayCount.text = "${mMvDetailData.playCount / 1000}万"
+        tvPlayCount.text = "${data.playCount.toInt() / 1000}万"
+        //标题
+        tvMvTitile.text = data.name
+        //原来的API已经不能使用，以下几个数据使用的是假数据
         //点赞数量
-        tvMvDetailGood.text = mMvDetailData.likeCount.toString()
+        tvMvDetailGood.text = "5569"
         //评论数量
-        tvMvDetailComment.text = mMvDetailData.commentCount.toString()
+        tvMvDetailComment.text = "4123"
         //分享数量
-        tvMvDetailShare.text = mMvDetailData.shareCount.toString()
+        tvMvDetailShare.text = "1135"
         //收藏数量
-        tvMvDetailCollent.text = mMvDetailData.subCount.toString()
-
+        tvMvDetailCollent.text = "2568"
     }
 
     override fun showSimiMv(datas: List<MvData>) {
@@ -146,9 +150,38 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     override fun onDestroy() {
         super.onDestroy()
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
-
-
     }
 
+    private fun setWebView() {
+        window.setFormat(PixelFormat.TRANSLUCENT)
+        val webSettings = mWebView.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.useWideViewPort = true // 关键点
+        //自动播放H5中的video
+        webSettings.mediaPlaybackRequiresUserGesture = false
+        mWebView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                mWebView.loadUrl(url)
+                return true
+            }
+
+            override fun onPageFinished(p0: WebView?, p1: String?) {
+                super.onPageFinished(p0, p1)
+            }
+        }
+        mWebView.webChromeClient = object : WebChromeClient() {
+            override fun onReceivedTitle(view: WebView, title: String) {
+                super.onReceivedTitle(view, "")
+            }
+        }
+        //去掉qq浏览器的推广
+        window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val outView = ArrayList<View>()
+            window.decorView.findViewsWithText(outView, "QQ浏览器", View.FIND_VIEWS_WITH_TEXT)
+            if (outView.size > 0) {
+                outView[0].visibility = View.GONE
+            }
+        }
+    }
 
 }

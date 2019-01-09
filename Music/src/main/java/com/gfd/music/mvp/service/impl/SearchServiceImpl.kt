@@ -4,8 +4,8 @@ import android.content.Context
 import com.gfd.music.api.Api
 import com.gfd.music.db.SearHistoryTable
 import com.gfd.music.db.ext.database
-import com.gfd.music.entity.AnalyMusicDto
-import com.gfd.music.entity.HotSearchDto
+import com.gfd.music.entity.AnalyMusic
+import com.gfd.music.entity.HotSearch
 import com.gfd.music.entity.SearchData
 import com.gfd.music.mvp.service.SearchService
 import com.google.gson.Gson
@@ -37,7 +37,7 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("热门标签：$json")
-                        val hotSearchDto = Gson().fromJson(json, HotSearchDto::class.java)
+                        val hotSearchDto = Gson().fromJson(json, HotSearch::class.java)
                         val datas = ArrayList<String>()
                         hotSearchDto.result.forEach {
                             datas.add(it.word)
@@ -90,9 +90,9 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("搜索音乐结果数据：$json")
-                        val music: AnalyMusicDto?
+                        val music: AnalyMusic?
                         try {
-                            music = Gson().fromJson(json, AnalyMusicDto::class.java)
+                            music = Gson().fromJson(json, AnalyMusic::class.java)
                             val musicList = ArrayList<SearchData>()
                             music.data.list.forEach {
                                 var url_music = it.url_320

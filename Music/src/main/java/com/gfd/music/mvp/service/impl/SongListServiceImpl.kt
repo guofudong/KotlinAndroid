@@ -2,7 +2,7 @@ package com.gfd.music.mvp.service.impl
 
 import com.gfd.music.api.Api
 import com.gfd.music.entity.SongItemData
-import com.gfd.music.entity.SongItemDto
+import com.gfd.music.entity.SongItemBean
 import com.gfd.music.entity.SongTitleData
 import com.gfd.music.mvp.service.SongListService
 import com.google.gson.Gson
@@ -27,7 +27,7 @@ class SongListServiceImpl @Inject constructor() : SongListService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("歌单-歌曲列表：$json")
-                        val jsonData = Gson().fromJson(json, SongItemDto::class.java)
+                        val jsonData = Gson().fromJson(json, SongItemBean::class.java)
                         val imgUrl = if (jsonData.pic_700 == null) {
                             if (jsonData.pic_500 == null) {
                                 if (jsonData.pic_300 == null) {

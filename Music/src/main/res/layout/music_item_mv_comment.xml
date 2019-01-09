@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="@color/common_white"
-    android:paddingRight="@dimen/dp_8"
+    android:orientation="horizontal"
     android:paddingLeft="@dimen/dp_8"
-    android:paddingTop="@dimen/dp_8">
+    android:paddingTop="@dimen/dp_8"
+    android:paddingRight="@dimen/dp_8">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_item_mvcomment_pic"
         android:layout_width="@dimen/dp_32"
-        android:layout_height="@dimen/dp_32" />
+        android:layout_height="@dimen/dp_32"
+        android:src="@drawable/ic_my_pic" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -28,29 +29,29 @@
                 android:id="@+id/tv_item_mvcomment_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
+                android:layout_centerVertical="true"
                 android:textColor="@color/common_gray"
-                android:layout_centerVertical="true"/>
+                android:textSize="@dimen/sp_12" />
 
             <TextView
                 android:id="@+id/tv_item_mvcomment_good"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/common_gray"
-                android:layout_toLeftOf="@+id/iv_mvdetail_good"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_2"/>
+                android:layout_marginRight="@dimen/dp_2"
+                android:layout_toLeftOf="@+id/iv_mvdetail_good"
+                android:textColor="@color/common_gray"
+                android:textSize="@dimen/sp_12" />
 
             <CheckBox
                 android:id="@+id/iv_mvdetail_good"
                 android:layout_width="@dimen/dp_14"
                 android:layout_height="@dimen/dp_14"
-                android:background="@drawable/music_select_mvdetail_good"
-                android:button="@null"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_2"
-                android:layout_alignParentRight="true"/>
+                android:background="@drawable/music_select_mvdetail_good"
+                android:button="@null" />
 
         </RelativeLayout>
 
@@ -58,23 +59,23 @@
             android:id="@+id/tv_item_mvcomment_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_10"
+            android:layout_marginTop="@dimen/dp_2"
             android:textColor="@color/common_gray"
-            android:layout_marginTop="@dimen/dp_2"/>
+            android:textSize="@dimen/sp_10" />
 
         <TextView
             android:id="@+id/tv_item_mvcomment_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_14"
+            android:layout_marginTop="@dimen/dp_6"
             android:textColor="@color/common_black"
-            android:layout_marginTop="@dimen/dp_6"/>
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/LightGray"
-            android:layout_marginTop="@dimen/dp_6"/>
+            android:layout_marginTop="@dimen/dp_6"
+            android:background="@color/LightGray" />
 
     </LinearLayout>
 

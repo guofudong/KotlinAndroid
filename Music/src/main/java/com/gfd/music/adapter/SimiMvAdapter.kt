@@ -2,6 +2,7 @@ package com.gfd.music.adapter
 
 import android.content.Context
 import android.text.TextUtils
+import android.view.TextureView
 import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
@@ -34,9 +35,10 @@ class SimiMvAdapter(val context: Context) : BaseAdapter<MvData>(context) {
         } else {
             mvData.des
         }
-        if(title.text == "null"){
+        if (title.text == "null") {
             title.text = "慕涵盛华"
         }
+        mvData.artistName = if (TextUtils.isEmpty(mvData.artistName)) "慕涵盛华" else mvData.artistName
         author.text = "${FormatUtil.formatTime(mvData.duration.toLong())} by ${mvData.artistName}"
     }
 
