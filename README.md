@@ -20,7 +20,7 @@
 ### PluginSwitch：插件项目
 实现了两个功能：
 * 1.自动切换library和Application。
->如果gradle.properties中配置了isRunAlone=true，也就是能够独立运行，那么点击运行按钮可以选择该模块自动运行,无需在build.gradle文件中配置
+>如果gradle.properties中配置了isRunAlone=true，也就是能够独立运行，那么点击运行按钮可以选择该模块自动运行,无需在build.gradle文件中配置。如果运行的是主module，不管其依赖的module是否可以独立运行，插件自动设置为library。实现真正的自动切换。
 ```
 if(isHomeModule.toBoolean()){
     apply plugin: 'com.android.library'
@@ -28,6 +28,18 @@ if(isHomeModule.toBoolean()){
     apply plugin: 'com.android.application'
 }
 //省略资源目录的配置
+```
+##### 效果图：
+
+![](/screenshot/module_run.gif)  ![](/screenshot/alone.png)
+
+* 2.主Module在开发时不依赖业务模块，只要在运行打包时才依赖，彻底避免业务模块之间的耦合。
+>通过在build.gradle配置，通过字节码插桩来实现的。
+```
+combuild {
+    applicationName = 'com.gfd.home.app.HomeApplication'
+    isRegisterAuto = false
+}
 ```
 
 ### API说明
