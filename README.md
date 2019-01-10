@@ -5,15 +5,15 @@
 [点击下载](/screenshot/app-release.apk)
 
 ## 说明
-#### [common.gradle](/common.gradle):三方依赖库和版本管理，统一放在该文件中。
+#### [common.gradle](/common.gradle)：三方依赖库和版本管理，统一放在该文件中。
 
-#### [and_res_guard.gradle](/and_res_guard.gradle):微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
+#### [and_res_guard.gradle](/and_res_guard.gradle)：微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
 
 >[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
 
-#### [libbase.gradle](/libbase.gradle):多Module build文件公共部分抽取。
+#### [libbase.gradle](/libbase.gradle)：多Module build文件公共部分抽取。
 
-#### [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
+#### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
 
 >[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
@@ -84,7 +84,7 @@ interface IApplicationLoad {
 
 ![](/screenshot/模块化.png)
 
->Common为公共库，主要包含一些基类和常用的工具类，Provider依赖于Common，是业务模块真正依赖的库。业务模块包括：Home，Music，User，Player。每个业务模块对应一个Module。
+>Common为公共库，主要包含一些基类和常用的工具类，Provider依赖于Common，是模块真正依赖的库。其中业务模块包括：Home，Music，User，Player。每个业务模块对应一个Module。主模块APP和业务模块都依赖Provider，主模块APP在开发阶段不再依赖具体的业务模块，彻底隔离业务模块之间的耦合。业务模块统一实现Provider中定义的接口，暴露需要提供的服务。
 
 ## 首页模块效果图
 ![](/screenshot/home.png)  ![](/screenshot/player.png)
