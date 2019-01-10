@@ -9,13 +9,13 @@
 
 [and_res_guard.gradle](/and_res_guard.gradle):微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
 
-[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
+>[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
 
 [libbase.gradle](/libbase.gradle):多Module build文件公共部分抽取。
 
 [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
 
-[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
+>[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
 ### API说明
 >项目中用到的数据都是通过解析网站数据而来，所以没有固定的接口格式。因此没有封装统一的网络工具类，而使用三方库[okhttp-OkGo](https://github.com/jeasonlzy/okhttp-OkGo)来请求，便于解析数据。
