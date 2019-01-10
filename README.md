@@ -64,6 +64,13 @@ interface IApplicationLoad {
     /** 组件卸载*/
     fun unregistered()
 }
+
+定义Music模块提供的服务
+interface MusicService {
+
+    fun getMusicFragment(): BaseFragment
+
+}
 ```
 
 ### API说明
