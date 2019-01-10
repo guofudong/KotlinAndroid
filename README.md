@@ -9,6 +9,8 @@
 
 [and_res_guard.gradle](/and_res_guard.gradle):微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
 
+[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
+
 [libbase.gradle](/libbase.gradle):多Module build文件公共部分抽取。
 
 [releaseinfo.gradle](/releaseinfo.gradle):版本发布文档自动维护脚本
