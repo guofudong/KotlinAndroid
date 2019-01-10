@@ -49,10 +49,11 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                 binners.add(BinnerData(title, img, link))
                             }
                             //取出最后两个
-                            binners.removeAt(binners.size - 1)
-                            binners.removeAt(binners.size - 1)
-                            binners.removeAt(binners.size - 1)
-
+                            if(binners.size >= 3){
+                                binners.removeAt(binners.size - 1)
+                                binners.removeAt(binners.size - 1)
+                                binners.removeAt(binners.size - 1)
+                            }
                             //影视列表中的分类 新片，电视剧，综艺等
                             var types: MutableList<String> = ArrayList()
                             for (typeElement in document.select("h3[class=margin-0]")) {

@@ -1,32 +1,14 @@
-if (isMusicModule.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.gfd.comswitch'
+apply from: rootProject.file('libbase.gradle')
 
-apply from:rootProject.file('libbase.gradle')
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 
 android {
 
-    defaultConfig {
-        if (isMusicModule.toBoolean()) {
-            applicationId "com.gfd.music"
-        }
-    }
-
-    sourceSets {
-        main {
-            if (isMusicModule.toBoolean()) {
-                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                java {
-                    exclude 'debug/**'
-                }
-            }
-            aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
-        }
-    }
     //规定资源命名前缀为music_
     resourcePrefix "music_"
 }
@@ -38,3 +20,7 @@ dependencies {
     implementation project(':nicevideoplayer')
 }
 
+combuild {
+    applicationName = 'com.gfd.music.app.MusicApplication'
+    isRegisterAuto = false
+}

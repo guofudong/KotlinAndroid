@@ -169,6 +169,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
+        Logger.e("跳转路径：path = $path")
         ARouter.getInstance().build(path)
                 .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
                 .withString(RouterPath.Player.KEY_IMAGE, videoImage)

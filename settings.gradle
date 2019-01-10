@@ -1,1 +1,1 @@
-include ':app', ':Common', ':Home', ':Player', ':User', ':Music', ':Provider', ':app', ':Crosstalk','nicevideoplayer'
+include ':app', ':Common', ':Home', ':Player', ':Music', ':Provider', ':app', ':Crosstalk', ':PluginSwitch', 'nicevideoplayer'

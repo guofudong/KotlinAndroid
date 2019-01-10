@@ -43,20 +43,22 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
                                         Logger.e("cookie = $cookie")
                                         cookie = "iii_Session=f2gstd4ovdl4ait39i4aqco6f6;PHPSESSIID=$cookie"
                                         val datas = ArrayList<Video>()
-                                        videoData.data.forEach {
-                                            if (!TextUtils.isEmpty(it.title)) {
-                                                val video = Video(
-                                                        it.title,
-                                                        it.create_time,
-                                                        it.datetime,
-                                                        it.video_duration,
-                                                        it.comment_count,
-                                                        it.middle_image_url,
-                                                        it.large_image_url,
-                                                        it.source_url,
-                                                        it.video_duration_str,
-                                                        cookie)
-                                                datas.add(video)
+                                        if (videoData.data != null) {
+                                            videoData.data.forEach {
+                                                if (!TextUtils.isEmpty(it.title)) {
+                                                    val video = Video(
+                                                            it.title,
+                                                            it.create_time,
+                                                            it.datetime,
+                                                            it.video_duration,
+                                                            it.comment_count,
+                                                            it.middle_image_url,
+                                                            it.large_image_url,
+                                                            it.source_url,
+                                                            it.video_duration_str,
+                                                            cookie)
+                                                    datas.add(video)
+                                                }
                                             }
                                         }
                                         callback.onVideoList(datas)

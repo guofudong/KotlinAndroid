@@ -31,14 +31,14 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                         val src = document.selectFirst("iframe#video").attr("src")
                         Logger.e("解析出来的地址：$src")
                         val split = src.split("url=")
-                        val videoUrl : String
-                        if(split.size < 3){
+                        val videoUrl: String
+                        if (split.size < 3) {
                             videoUrl = src
-                        }else{
-                            videoUrl =split[2]
+                        } else {
+                            videoUrl = split[2]
                         }
                         Logger.e("播放地址：$videoUrl")
-                        callBack.videoUrl(videoUrl,plotText)
+                        callBack.videoUrl(videoUrl, plotText)
                     }
                 })
     }
@@ -53,21 +53,23 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                         val document = Jsoup.parse(json)
                         val selectFirst = document.selectFirst("div[class=plot]")
                         val videoDatas = ArrayList<VideoItemData>()
-                        if(selectFirst == null){
-                            callBack.videoWebData(videoDatas,"")
+                        if (selectFirst == null) {
+                            callBack.videoWebData(videoDatas, "")
                             return
                         }
                         val plotText = selectFirst.text()
                         val lis = document.select("div#playlist1 > ul > li")
-                        lis.forEach{
-                            val a = it.selectFirst("a")
-                            val count = a.text()//集数
-                            var link = BaseConstant.URL_ANALYZE  + a.attr("href")
-                            videoDatas.add(VideoItemData(count,link))
+                        if (lis != null) {
+                            lis.forEach {
+                                val a = it.selectFirst("a")
+                                val count = a.text()//集数
+                                var link = BaseConstant.URL_ANALYZE + a.attr("href")
+                                videoDatas.add(VideoItemData(count, link))
+                            }
+                            val jsonData = Gson().toJson(videoDatas)
+                            Logger.e("解析出来的剧集地址：$jsonData")
                         }
-                        val jsonData = Gson().toJson(videoDatas)
-                        Logger.e("解析出来的剧集地址：$jsonData")
-                        callBack.videoWebData(videoDatas,plotText)
+                        callBack.videoWebData(videoDatas, plotText)
                     }
                 })
     }

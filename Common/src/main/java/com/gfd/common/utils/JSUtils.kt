@@ -31,9 +31,12 @@ object JSUtils {
      * @param js String ：js代码
      * @return Invocable ：js执行引擎
      */
-    fun getJsInvocable(js:String):Invocable{
+    fun getJsInvocable(js: String): Invocable? {
         val engine = ScriptEngineManager().getEngineByName("rhino")
-        engine.eval(js)
-        return engine as Invocable
+        if (engine != null) {
+            engine.eval(js)
+            return engine as Invocable
+        }
+        return null
     }
 }

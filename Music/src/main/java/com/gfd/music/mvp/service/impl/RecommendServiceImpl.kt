@@ -34,8 +34,10 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                         Logger.e("推荐轮播图：$json")
                         val banner = Gson().fromJson(json, Banner::class.java)
                         val datas = ArrayList<BannerData>()
-                        banner.pic.forEach {
-                            datas.add(BannerData(it.type, it.mo_type, it.code, it.randpic))
+                        if (banner.pic != null) {
+                            banner.pic.forEach {
+                                datas.add(BannerData(it.type, it.mo_type, it.code, it.randpic))
+                            }
                         }
                         callBack.onBanner(datas)
                     }
@@ -51,20 +53,24 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                         Logger.e("推荐歌曲：$json")
                         val songDatas = Gson().fromJson(json, Song::class.java)
                         val datas = ArrayList<SongData>()
-                        val song_list = songDatas.content[0].song_list
-                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
-                        song_list.forEachWithIndex { index, value ->
-                            if (index == 6) {
-                                datas.add(SongData(Concant.ITEM_TYPE_TITLE, "最新歌曲"))
-                            } else if (index == 12) {
-                                datas.add(SongData(Concant.ITEM_TYPE_TITLE, "主播电台"))
+                        if (songDatas.content != null && songDatas.content.size > 0) {
+                            val song_list = songDatas.content[0].song_list
+                            datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
+                            if (song_list != null) {
+                                song_list.forEachWithIndex { index, value ->
+                                    if (index == 6) {
+                                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "最新歌曲"))
+                                    } else if (index == 12) {
+                                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "主播电台"))
+                                    }
+                                    datas.add(SongData(Concant.ITEM_TYPE_IMG, "", "", value.recommend_reason,
+                                            value.pic_huge, value.pic_premium, value.song_id, value.title, value.url,
+                                            value.file_duration, value.artist_id))
+                                }
+                                datas[4].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
+                                datas[5].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
                             }
-                            datas.add(SongData(Concant.ITEM_TYPE_IMG, "", "", value.recommend_reason,
-                                    value.pic_huge, value.pic_premium, value.song_id, value.title, value.url,
-                                    value.file_duration,value.artist_id))
                         }
-                        datas[4].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
-                        datas[5].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
                         callBack.onSongList(datas)
                     }
                 })

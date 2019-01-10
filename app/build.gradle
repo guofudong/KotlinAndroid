@@ -2,9 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.gfd.comswitch'
 apply from: rootProject.file('and_res_guard.gradle')
 apply from: rootProject.file('releaseinfo.gradle')
-apply from:rootProject.file('libbase.gradle')
+apply from: rootProject.file('libbase.gradle')
+
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 
 android {
 
@@ -33,7 +40,7 @@ android {
             buildConfigField("boolean", "LOG_DEBUG", "false")//正式版不打印日志
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {//为了方便调试微信支付、登陆、分享等把deug签名配置成了Release版的签名
+        debug {
             signingConfig signingConfigs.release
             buildConfigField("boolean", "LOG_DEBUG", "true")
         }
@@ -57,20 +64,13 @@ android {
 }
 
 dependencies {
-    api project(':Common')
-    if (!isMusicModule.toBoolean()) {
-        api project(':Music')
-    }
-    if (!isUserModule.toBoolean()) {
-        api project(':User')
-    }
-    if (!isPlayerModule.toBoolean()) {
-        api project(':Player')
-    }
-    if (!isHomeModule.toBoolean()) {
-        api project(':Home')
-    }
-    if (!isCrosstalkModule.toBoolean()) {
-        api project(':Crosstalk')
-    }
+    api project(':Provider')
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}
+
+
+combuild {
+    applicationName = 'com.gfd.video.MainApplication'
+    isRegisterAuto = true
 }

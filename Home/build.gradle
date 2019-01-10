@@ -1,32 +1,13 @@
-if(isHomeModule.toBoolean()){//module
-    apply plugin: 'com.android.application'
-}else{//lib
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.gfd.comswitch'
 apply from:rootProject.file('libbase.gradle')
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 android {
-
-    defaultConfig {
-        if(isHomeModule.toBoolean()){
-            applicationId "com.gfd.home"
-        }
-    }
-
-    sourceSets{
-        main{
-            //根据是module还是lib来选择加载的清单文件，lib的清单文件是不需要启动Activity
-            if(isHomeModule.toBoolean()){//module
-                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            }else{
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                //release模式下排除debug下的所有的java文件
-                java{
-                    exclude 'debug/**'
-                }
-            }
-        }
-    }
 
     //规定资源命名前缀为home_
     resourcePrefix "home_"
@@ -37,4 +18,9 @@ dependencies {
     api project(':Provider')
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+}
+
+combuild {
+    applicationName = 'com.gfd.home.app.HomeApplication'
+    isRegisterAuto = false
 }

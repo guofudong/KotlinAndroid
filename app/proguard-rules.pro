@@ -137,9 +137,16 @@ public *;
 }
 
 #-----------处理实体类---------------
--keep class com.xiyang51.platform.entity.**{ *; }
+-keep class com.gfd.home.entity.**{ *; }
+-keep class com.gfd.crosstalk.entity.**{ *; }
+-keep class com.gfd.music.entity.**{ *; }
+-keep class com.gfd.player.entity.**{ *; }
 
 #-----------处理第三方依赖库---------
+#ARouter
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep public class com.alibaba.android.arouter.facade.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
 # gson
 -keep class com.google.**{*;}
 -keep class sun.misc.Unsafe { *; }
@@ -158,6 +165,9 @@ public *;
 # Bugly
 -dontwarn com.tencent.bugly.**
 -keep class com.tencent.bugly.** {*;}
+#ScriptEngine
+-dontwarn javax.script.**
+-keep class javax.script.** {*;}
 # ButterKnife
 -keep public class * implements butterknife.Unbinder {
     public <init>(**, android.view.View);
@@ -197,6 +207,11 @@ public static java.lang.String TABLENAME;
 -dontwarn okhttp3.**
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
+-keep class okhttp3.**{*;}
+-keep class okio.**{*;}
+#jsoup
+-dontwarn org.jsoup.**
+-keep class org.jsoup.**{*;}
 # OrmLite
 -keepattributes *DatabaseField*
 -keepattributes *DatabaseTable*

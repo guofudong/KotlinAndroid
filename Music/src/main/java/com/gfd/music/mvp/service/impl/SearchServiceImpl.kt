@@ -39,12 +39,14 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                         Logger.e("热门标签：$json")
                         val hotSearchDto = Gson().fromJson(json, HotSearch::class.java)
                         val datas = ArrayList<String>()
-                        hotSearchDto.result.forEach {
-                            datas.add(it.word)
+                        if (hotSearchDto.result != null) {
+                            hotSearchDto.result.forEach {
+                                datas.add(it.word)
+                            }
+                            datas.removeAt(datas.size - 1)
+                            datas.removeAt(datas.size - 1)
+                            datas.removeAt(datas.size - 1)
                         }
-                        datas.removeAt(datas.size - 1)
-                        datas.removeAt(datas.size - 1)
-                        datas.removeAt(datas.size - 1)
                         callback.onHotSearch(datas)
                     }
                 })
@@ -94,18 +96,20 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                         try {
                             music = Gson().fromJson(json, AnalyMusic::class.java)
                             val musicList = ArrayList<SearchData>()
-                            music.data.list.forEach {
-                                var url_music = it.url_320
-                                if (url_music == null) {
-                                    url_music = it.url_128
+                            if (music.data.list != null) {
+                                music.data.list.forEach {
+                                    var url_music = it.url_320
+                                    if (url_music == null) {
+                                        url_music = it.url_128
+                                    }
+                                    val musicData = SearchData(
+                                            it.name,
+                                            it.artist,
+                                            it.cover,
+                                            url_music + Api.AnalysisMusic.key,
+                                            it.url_flac + "")
+                                    musicList.add(musicData)
                                 }
-                                val musicData = SearchData(
-                                        it.name,
-                                        it.artist,
-                                        it.cover,
-                                        url_music + Api.AnalysisMusic.key,
-                                        it.url_flac + "")
-                                musicList.add(musicData)
                             }
                             callback.onSearchResult(musicList)
                         } catch (e: Exception) {

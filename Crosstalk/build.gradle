@@ -1,32 +1,13 @@
-if(isCrosstalkModule.toBoolean()){
-    apply plugin: 'com.android.application'
-}else{
-    apply plugin: 'com.android.library'
-}
-
+apply plugin: 'com.gfd.comswitch'
 apply from:rootProject.file('libbase.gradle')
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 android {
-
-    defaultConfig {
-        if (isCrosstalkModule.toBoolean()) {
-            applicationId "com.gfd.crosstalk"
-        }
-    }
-
-    sourceSets {
-        main {
-            if (isCrosstalkModule.toBoolean()) {
-                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                java {
-                    exclude 'debug/**'
-                }
-            }
-            aidl.srcDirs = ['src/main/aidl', 'src/main/aidl/']
-        }
-    }
 
     //规定资源命名前缀为crosstalk_
     resourcePrefix "crosstalk_"
@@ -38,4 +19,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation project(':nicevideoplayer')
     implementation rootProject.ext.dependence.libQSVideoPlayer
+}
+
+combuild {
+    isRegisterAuto = false
 }

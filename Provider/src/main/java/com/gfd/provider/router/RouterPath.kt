@@ -13,9 +13,9 @@ object RouterPath {
     class Player {
         companion object {
             /** 视频播放页面 */
-            const val PATH_PLAYER = "/player/play"
-            const val PATH_PLAYER_WEB = "/playerWeb/playweb"
-            const val PATH_PLAYER_MV= "/playerWeb/MV"
+            const val PATH_PLAYER = "/player/playActivity"
+            const val PATH_PLAYER_WEB = "/playerWeb/playwebActivity"
+            const val PATH_PLAYER_MV = "/playerWeb/MV"
             const val KEY_PLAYER = "videoPlayer"
             const val KEY_IMAGE = "videoImage"
             const val KEY_NAME = "videoName"
@@ -26,7 +26,7 @@ object RouterPath {
     class Home {
         companion object {
             /** 视频搜索页面 */
-            const val PATH_SERACH = "/home/search"
+            const val PATH_SERACH = "/home/searchActivity"
         }
     }
 }

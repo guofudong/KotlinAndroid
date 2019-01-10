@@ -1,35 +1,13 @@
-if (isPlayerModule.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
-
+apply plugin: 'com.gfd.comswitch'
 apply from:rootProject.file('libbase.gradle')
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
 
 android {
-
-    defaultConfig {
-        if (isPlayerModule.toBoolean()) {
-            applicationId "com.gfd.player"
-        }
-    }
-
-    sourceSets {
-        main {
-            //根据是module还是lib来选择加载的清单文件，lib的清单文件是不需要启动Activity
-            if (isPlayerModule.toBoolean()) {//module
-                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/release/AndroidManifest.xml'
-                //release模式下排除debug下的所有的java文件
-                java {
-                    exclude 'debug/**'
-                }
-            }
-            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
-        }
-    }
 
     //规定资源命名前缀为player_
     resourcePrefix "player_"
@@ -42,4 +20,8 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation project(':nicevideoplayer')
+}
+
+combuild {
+    isRegisterAuto = false
 }

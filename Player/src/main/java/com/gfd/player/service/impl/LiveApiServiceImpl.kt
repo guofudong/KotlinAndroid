@@ -21,7 +21,7 @@ import javax.inject.Inject
 class LiveApiServiceImpl @Inject constructor() : LiveApiService {
 
     private var wb: WebView? = null
-    private lateinit var mCallBack:LiveApiService.IGetLiveCallback
+    private lateinit var mCallBack: LiveApiService.IGetLiveCallback
 
     /**
      * 获取电视直播所有的电视台
@@ -36,8 +36,10 @@ class LiveApiServiceImpl @Inject constructor() : LiveApiService {
         inputStream.read(byteArray)
         inputStream.close()
         val json = String(byteArray)
-        val dataDto = Gson().fromJson(json, LiveDataDto::class.java)
-        callback.onLive(dataDto.lives)
+        val data = Gson().fromJson(json, LiveDataDto::class.java)
+        if (data.lives != null) {
+            callback.onLive(data.lives)
+        }
     }
 
     /**
@@ -56,11 +58,12 @@ class LiveApiServiceImpl @Inject constructor() : LiveApiService {
             }
         }).start()
     }
+
     /**
      * 设置WebView
      * @param context Context
      */
-    private fun initWebView(context: Context,url:String) {
+    private fun initWebView(context: Context, url: String) {
         (context as Activity).runOnUiThread {
             wb = WebView(context)
             val settings = wb?.settings

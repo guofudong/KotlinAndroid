@@ -14,6 +14,12 @@ class MainApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        if(BuildConfig.DEBUG){
+            // 打印日志
+            ARouter.openLog()
+            //开启调试模式
+            ARouter.openDebug()
+        }
         ARouter.init(this)
         QbSdk.initX5Environment(this,null)
     }

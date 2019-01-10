@@ -100,12 +100,14 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
         stream.buffered().reader().use {
             val jsStr = it.readText()
             val inv = JSUtils.getJsInvocable(jsStr)
-            val r = inv.invokeFunction("getR")
-            val param = link + "@" + r.toString()
-            val s = inv.invokeFunction("getS", param)
             val hashMap = HashMap<String, String>()
-            hashMap["r"] = r.toString()
-            hashMap["s"] = s.toString()
+            if (inv != null) {
+                val r = inv.invokeFunction("getR")
+                val param = link + "@" + r.toString()
+                val s = inv.invokeFunction("getS", param)
+                hashMap["r"] = r.toString()
+                hashMap["s"] = s.toString()
+            }
             return hashMap
         }
     }
