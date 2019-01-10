@@ -18,6 +18,8 @@
 >[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
 ### PluginSwitch：插件项目
+>[如何使用Android Studio开发Gradle插件](https://blog.csdn.net/sbsujjbcy/article/details/50782830)
+
 实现了两个功能：
 * 1.自动切换library和Application。
 >如果gradle.properties中配置了isRunAlone=true，也就是能够独立运行，那么点击运行按钮可以选择该模块自动运行,无需在build.gradle文件中配置。如果运行的是主module，不管其依赖的module是否可以独立运行，插件自动设置为library。实现真正的自动切换。
@@ -42,11 +44,11 @@ combuild {
     isRegisterAuto = false
 }
 
-//主module依赖其他模块配置在该目录下的gradle.properties中配置：
-debugComponent=Home,Crosstalk,Music,Player //debug依赖的
-compileComponent=Home,Crosstalk,Music,Player //release依赖的
+主module依赖其他模块配置在该目录下的gradle.properties中配置：
+debugComponent=Home,Crosstalk,Music,Player //debug时依赖的
+compileComponent=Home,Crosstalk,Music,Player //release时依赖的
 
-//不需要在build.gradle中依赖了
+不需要在build.gradle中依赖了
 api project(':Home')
 api project(':Music')
 ......
