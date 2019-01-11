@@ -5,17 +5,6 @@
 [点击下载](/screenshot/app-release.apk)
 
 ## 说明
-#### [common.gradle](/common.gradle)：三方依赖库和版本管理，统一放在该文件中。
-
-#### [and_res_guard.gradle](/and_res_guard.gradle)：微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
-
->[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
-
-#### [libbase.gradle](/libbase.gradle)：多Module build文件公共部分抽取。
-
-#### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
-
->[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
 ### PluginSwitch：插件项目
 >[如何使用Android Studio开发Gradle插件](https://blog.csdn.net/sbsujjbcy/article/details/50782830)
@@ -90,6 +79,18 @@ interface MusicService {
 [自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)
 
 [AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
+
+#### [common.gradle](/common.gradle)：三方依赖库和版本管理，统一放在该文件中。
+
+#### [and_res_guard.gradle](/and_res_guard.gradle)：微信开源工具[AndResGuard](https://github.com/shwenzhang/AndResGuard)资源文件"混淆"配置文件。
+
+>[Android打包那些事](https://www.jianshu.com/p/5255cf853fad)
+
+#### [libbase.gradle](/libbase.gradle)：多Module build文件公共部分抽取。
+
+#### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
+
+>[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
 ## 模块化结构图
 
