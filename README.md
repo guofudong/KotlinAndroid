@@ -73,6 +73,10 @@ interface MusicService {
 }
 ```
 
+### componentrelease：文件夹
+>该文件夹存放的是业务模块的.aar包，在执行业务Module的`assembleRelease`命令后会生成对应的.aar包，也可以上传到maven仓库。这样的话主Module只需要依赖.arr包。哪个业务Module改变只需要编译哪个生成对应的.aar包即可，实现真正的组件化。
+
+
 ### API说明
 >项目中用到的数据都是通过解析网站数据而来，所以没有固定的接口格式。因此没有封装统一的网络工具类，而使用三方库[okhttp-OkGo](https://github.com/jeasonlzy/okhttp-OkGo)来请求，便于解析数据。
 
