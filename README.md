@@ -76,9 +76,7 @@ interface MusicService {
 
 >smallestWidth限定符适配和宽高限定符适配最大的区别在于，前者有很好的容错机制，如果没有对应dp文件夹，系统会向下寻找，比如离360dp最近的只有value-sw350dp，那么Android就会选择value-sw350dp文件夹下面的资源文件。这个特性就完美的解决了上文提到的宽高限定符的容错问题。
 
-[自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)
-
-[AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
+>[自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)   [AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
 
 #### [common.gradle](/common.gradle)：三方依赖库和版本管理，统一放在该文件中。
 
