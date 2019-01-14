@@ -65,7 +65,7 @@ interface MusicService {
 ### componentrelease：文件夹
 >该文件夹存放的是业务模块的.aar包，在执行业务Module的`assembleRelease`命令后会生成对应的.aar包，也可以上传到maven仓库。这样的话主Module只需要依赖.arr包。哪个业务Module改变只需要编译哪个生成对应的.aar包即可，实现真正的组件化。
 
->如果项目中的module很多，gradle在编译的时候会去检测module的依赖链，gradle会帮助我们层层梳理module之间的关系，避免因为module之间相互引用而来带的问题。这些梳理工作和module的合并工作都会带来build的时间，会造成build十分缓慢，所以将稳定的底层module打包为aar，上传到公司的maven仓库，借此来加快build速度。
+>如果项目中的module很多，gradle在编译的时候会去检测module的依赖链，gradle会帮助我们层层梳理module之间的关系，避免因为module之间相互引用而来带的问题。这些梳理工作和module的合并工作都会带来build的时间，会造成build十分缓慢，所以将稳定的module打包为aar，上传到公司的maven仓库，借此来加快build速度。
 
 
 ### API说明
