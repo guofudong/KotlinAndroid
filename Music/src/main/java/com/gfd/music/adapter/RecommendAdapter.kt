@@ -1,8 +1,7 @@
 package com.gfd.music.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Color
+import android.graphics.*
 import android.support.v7.graphics.Palette
 import android.widget.ImageView
 import android.widget.TextView
@@ -51,24 +50,29 @@ class RecommendAdapter(val context: Context) : BaseMultiAdapter<SongData>(contex
         val title = holder.getView(R.id.tv_music_img_title) as TextView
         val tagText = holder.getView(R.id.tvSongTag) as TextView
         title.text = itemData.recommend_reason
-        tagText.text = (itemData.file_duration + "万")
+        tagText.text = (itemData.file_duration)
         val img = holder.getView(R.id.img_music_item) as ImageView
         Glide.with(context).load(itemData.pic_big).asBitmap().error(R.drawable.ic_songlist_error).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
-                Palette.from(resource).generate {
-                    // 获取到柔和的明亮的颜色（可传默认值）
-                    if (it == null) {
-                        img.setImageResource(R.drawable.ic_songlist_error)
-                    } else {
-                        val vibrantColor = it.getVibrantColor(Color.BLACK)
-                        itemData.color = vibrantColor
-                        img.setImageBitmap(resource)
+
+                Palette.from(resource).generate { palette ->
+                    if (palette == null) return@generate
+                    //palette取色不一定取得到某些特定的颜色，这里通过取多种颜色来避免取不到颜色的情况
+                    var vibrantColor = palette.getVibrantColor(Color.TRANSPARENT)
+                    if (vibrantColor == Color.TRANSPARENT) {
+                        vibrantColor = palette.getMutedColor(Color.TRANSPARENT)
                     }
+                    if (vibrantColor == Color.TRANSPARENT) {
+                        vibrantColor = palette.getMutedColor(Color.TRANSPARENT)
+                    }
+                    itemData.color = vibrantColor
+                    img.setImageBitmap(resource)
                 }
 
             }
         })
     }
+
 
     /**
      * 设置title布局数据

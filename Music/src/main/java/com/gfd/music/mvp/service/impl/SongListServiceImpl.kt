@@ -20,36 +20,25 @@ import javax.inject.Inject
  */
 class SongListServiceImpl @Inject constructor() : SongListService {
 
-    override fun getSongList(id: String, callBack: SongListService.GetSongListCallBack) {
-        OkGo.get<String>(Api.getIdSongList(id))
+    override fun getSongList(id: String, offset: Int, callBack: SongListService.GetSongListCallBack) {
+        OkGo.get<String>(Api.getIdSongList(id, offset))
                 .tag(this)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
-                        Logger.e("歌单-歌曲列表：$json")
-                        val jsonData = Gson().fromJson(json, SongItemBean::class.java)
-                        val imgUrl = if (jsonData.pic_700 == null) {
-                            if (jsonData.pic_500 == null) {
-                                if (jsonData.pic_300 == null) {
-                                    ""
-                                } else {
-                                    jsonData.pic_300
-                                }
-                            } else {
-                                jsonData.pic_500
-                            }
-                        } else {
-                            jsonData.pic_700
-                        }
-                        val titleData = SongTitleData(jsonData.title, jsonData.tag, jsonData.desc)
+                        Logger.e("歌单-歌曲列表：id = $id - $json")
                         val datas = ArrayList<SongItemData>()
-                        if (jsonData.content != null) {
-                            jsonData.content.forEach {
-                                datas.add(SongItemData(it.title, it.author, it.song_id, it.pic_radio))
+                        val jsonData = Gson().fromJson(json, SongItemBean::class.java).data
+                        if (jsonData != null) {
+                            val titleData = SongTitleData(jsonData.songListName, "", jsonData.songListDescription)
+                            callBack.onTitle(titleData)
+                            if (jsonData.songs != null && jsonData.songs.size > 0) {
+                                jsonData.songs.forEach {
+                                    datas.add(SongItemData(it.name, it.time, it.id, it.pic, it.url, it.singer))
+                                }
                             }
                         }
                         callBack.onSongList(datas)
-                        callBack.onTitle(titleData)
                     }
                 })
     }

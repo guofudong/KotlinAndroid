@@ -5,12 +5,15 @@
     android:layout_height="wrap_content"
     android:background="@color/common_white"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_120"
-        app:cardCornerRadius="@dimen/dp_2">
+        app:cardCornerRadius="@dimen/dp_4"
+        app:cardElevation="@dimen/dp_0"
+        app:cardMaxElevation="@dimen/dp_0">
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -20,6 +20,6 @@ interface SongListContract {
     }
 
     interface Presenter : BasePresenter {
-        fun getSongList(id: String)
+        fun getSongList(id: String, offset: Int)
     }
 }

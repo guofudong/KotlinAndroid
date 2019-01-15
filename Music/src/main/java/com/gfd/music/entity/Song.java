@@ -10,94 +10,113 @@ import java.util.List;
  */
 public class Song {
 
-
     /**
-     * error_code : 22000
-     * content : [{"title":"歌曲推荐","song_list":[{"artist_id":"130","pic_big":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_150","pic_small":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_90","pic_premium":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_500","pic_huge":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg","pic_singer":"","all_artist_ting_uid":"1100","file_duration":"273","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"600902000005286912","copy_type":"0","has_mv_mobile":1,"song_id":"7313983","title":"喜欢你","ting_uid":"1100","author":"Beyond","album_id":"7311104","album_title":"传奇再续","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":1,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"1100000000","desc":"","url":"http://music.baidu.com/song/7313983","recommend_reason":"以往片刻欢笑仍挂在脸上"},{"artist_id":"90","pic_big":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_500,h_500","pic_huge":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg","pic_singer":"","all_artist_ting_uid":"1079","file_duration":"210","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"600902000005510324","copy_type":"1","has_mv_mobile":1,"song_id":"305963","title":"停电","ting_uid":"1079","author":"金莎","album_id":"61643","album_title":"空气","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":1,"learn":1,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"2","mv_provider":"0100000000","desc":"","url":"http://music.baidu.com/song/305963","recommend_reason":"我害怕一个人累 一个人睡"},{"artist_id":"1413","pic_big":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_500,h_500","pic_huge":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg","pic_singer":"","all_artist_ting_uid":"1541","file_duration":"271","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"0","copy_type":"1","has_mv_mobile":0,"song_id":"242427416","title":"从前的我","ting_uid":"1541","author":"陈洁仪","album_id":"242427415","album_title":"从前的我","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":0,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"0000000000","desc":"","url":"http://music.baidu.com/song/242427416","recommend_reason":"你说你要离开 明天还会回来"},{"artist_id":"2237987","pic_big":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_500,h_500","pic_huge":"","pic_singer":"","all_artist_ting_uid":"218966","file_duration":"234","del_status":"0","resource_type":"0","all_rate":"96,128,224,320","toneid":"0","copy_type":"0","has_mv_mobile":0,"song_id":"261813046","title":"Ship To Wreck","ting_uid":"218966","author":"Florence + The Machine","album_id":"261812620","album_title":"2016 GRAMMY Nominees","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":0,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"0000000000","desc":"","url":"http://music.baidu.com/song/261813046","recommend_reason":"How Big, How Blue, How Beautiful"}]}]
+     * result : SUCCESS
+     * code : 200
+     * data : [{"id":2614841256,"title":"给那些回不去又遥远的乡愁","creator":"AirRadio空气赫兹","description":"很多年前看过一部关于乡愁的记录式电影，分别拍摄了几个不同的人各自的生活轨迹。其中一个人在异乡生活一辈子都没有再回到家乡，他在一个新的城市里落地生根，他的故乡是内陆城市，离开故乡的原因很简单，他喜欢大海所以去了有海的城市，就一直在哪里呆着，从年少一晃到了老年，摄制组跟拍了他的生活，他像个向导一样，带着他们去他年轻时工作的地方转转，他经常走的那条海边小路，边走边回忆，\u201c看，那是我第一次约会的地方\u201d。他指着一间破旧的咖啡馆说，\u201c我太太其实几年前就去世了，但是我每次路过这里，都会觉得她在里面等着我。\u201d 他的故事最后，摄制组邀请他回到他的家乡，也就是年少时执意离开的地方，这么多年没有回去，其实那个城市早就变了样子，这一段画面的语言很少，一行人走进这个城市，仿佛是陌生人一样，后来他们来到他年少时的社区，有些许变化但基本还是以前的样子，他在一条小路前停了好长时间，这个长镜头是影片的结尾，之前他们有说话，可是这一刻，整段影片静默到几乎令人窒息，尽头从远景慢慢的移动到近景，定格在他的那有些感情波动的表情上，我看见一行眼泪\u2026电影结束。 这么多年过去了，每每我们说起\u201c乡愁\u201d两个字的时候，我总会想起那部电影结束时候，那张脸庞的表情，它太真实了，在没有语言的情节下，却胜过千言万语，尽管我已经忘了那部电影的名字。 乡愁在每个人的生活轨迹里，是不同的印记，也许是故乡的味道，就像我离开故乡这么多年，依旧念念不忘家乡小吃的味道，每次看到我生活的城市里出现新的家乡口味的小吃店都想去试试（每次都失望而归），心里明白虽然味道不差，可能是乡愁作祟；身边的小伙伴早已全部离家在各自的城市里生活，聚会的次数少的可怜，你知道的，人只要不在一起习惯了，似乎也就没有什么可以讲的了\u2026 故乡在现实里越来越远，我却想在记忆慢慢靠近它，人和事是基本不可能了，除了饮食的味道，还有音乐，那些青春期一起听过的歌，到现在听起来想到从前的歌，也许就是那么几句歌词 少年十八离家，匆匆数年，往后故事的发生和故乡的名字也许再没有关联，你重新和一个陌生的城市相处，把理想和热血往那儿一丢，冷暖自知，成功与失败一直交错，受过挫折打败过他人，爱过错或对的人，多年以后，也许满载荣誉，也许依旧孑然一身，不知道为什么，每次想到这些，我总会有些淡淡的乡愁。 封面图片来自：阮义忠","coverImgUrl":"http://p1.music.126.net/A6I-QOF_h2AkBA6eN7hbGw==/109951163781590817.jpg?param=400y400","songNum":26,"playCount":133415},{"id":2575922902,"title":"新锐之声|| 来日已可期的欧美零零后","creator":"冰糖炖雪梨Er","description":"随着2018年12月31日的过去 意味着00年份最小的一批也已踏入成年人的行列 封面｜Kristian Kostov (2000.03.15) 17年欧歌赛亚军 来自保加利亚 & 俄罗斯双国籍 \u203b新锐之星\u203b 来日方长 未来已可期\u203b ta们有些已完成变声or正处在变声期or还保持着少年的稚嫩嗓音 但不可否认一点：零零后乐坛新声代宣布ta们已经悄然杀入欧美圈 (流行、R&B、电子、说唱、乡村、另类/独立系都有十分令人期待的新声代) 相信未来的欧美圈一定会拿下属于ta们的一片天空 按歌手出生年份列表分享（很多歌手页资料待补充） 2000年份推荐歌手 Bülow Bars & Melody Carlie Hanson Craaon Lunders Charlotte Lawrence Connie Talbot Daniel Skye Isac Elliot Jada Facer Jasmine Thompson Kriatian Kostov Maisie Peters New District Willion Smith 2001年份推荐歌手 Billie Eilish Isabela Moner Luna Blaise Noah Cyrus Selina Mour Toby Randall Zhavia Ward 2002年份推荐歌手 Henry Gallahger Jacob Satoruis Lil Mosey Marcus & Martinus 2003年份推荐歌手 Johnny Orlando Matty B 2004年份推荐歌手 Grace Vanderwaal Mackenzie Ziegler 2005年份推荐歌手 Cruz Beckham 2006年份推荐歌手 Mason Ramsey","coverImgUrl":"http://p1.music.126.net/ywfmojI47lp82_Ydoe3xUA==/109951163771871623.jpg?param=400y400","songNum":34,"playCount":84712}]
      */
 
-    public int error_code;
-    public List<ContentBean> content;
+    private String result;
+    private int code;
+    private List<DataBean> data;
 
-    public static class ContentBean {
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public List<DataBean> getData() {
+        return data;
+    }
+
+    public void setData(List<DataBean> data) {
+        this.data = data;
+    }
+
+    public static class DataBean {
         /**
-         * title : 歌曲推荐
-         * song_list : [{"artist_id":"130","pic_big":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_150","pic_small":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_90","pic_premium":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_500","pic_huge":"http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg","pic_singer":"","all_artist_ting_uid":"1100","file_duration":"273","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"600902000005286912","copy_type":"0","has_mv_mobile":1,"song_id":"7313983","title":"喜欢你","ting_uid":"1100","author":"Beyond","album_id":"7311104","album_title":"传奇再续","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":1,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"1100000000","desc":"","url":"http://music.baidu.com/song/7313983","recommend_reason":"以往片刻欢笑仍挂在脸上"},{"artist_id":"90","pic_big":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg@s_1,w_500,h_500","pic_huge":"http://qukufile2.qianqian.com/data2/pic/0748b2fb73c0be76039beb88869fa936/61643/61643.jpg","pic_singer":"","all_artist_ting_uid":"1079","file_duration":"210","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"600902000005510324","copy_type":"1","has_mv_mobile":1,"song_id":"305963","title":"停电","ting_uid":"1079","author":"金莎","album_id":"61643","album_title":"空气","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":1,"learn":1,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"2","mv_provider":"0100000000","desc":"","url":"http://music.baidu.com/song/305963","recommend_reason":"我害怕一个人累 一个人睡"},{"artist_id":"1413","pic_big":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg@s_1,w_500,h_500","pic_huge":"http://qukufile2.qianqian.com/data2/music/028AB2B6109AC56CFC4AFE3A9FF2FB2B/255084406/255084406.jpg","pic_singer":"","all_artist_ting_uid":"1541","file_duration":"271","del_status":"0","resource_type":"0","all_rate":"96,128,224,320,flac","toneid":"0","copy_type":"1","has_mv_mobile":0,"song_id":"242427416","title":"从前的我","ting_uid":"1541","author":"陈洁仪","album_id":"242427415","album_title":"从前的我","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":0,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"0000000000","desc":"","url":"http://music.baidu.com/song/242427416","recommend_reason":"你说你要离开 明天还会回来"},{"artist_id":"2237987","pic_big":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_150,h_150","pic_small":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_90,h_90","pic_premium":"http://qukufile2.qianqian.com/data2/pic/e18b5d0931908d181b1c66bcdd794d6d/261812620/261812620.jpg@s_1,w_500,h_500","pic_huge":"","pic_singer":"","all_artist_ting_uid":"218966","file_duration":"234","del_status":"0","resource_type":"0","all_rate":"96,128,224,320","toneid":"0","copy_type":"0","has_mv_mobile":0,"song_id":"261813046","title":"Ship To Wreck","ting_uid":"218966","author":"Florence + The Machine","album_id":"261812620","album_title":"2016 GRAMMY Nominees","is_first_publish":0,"havehigh":2,"charge":0,"has_mv":0,"learn":0,"song_source":"web","piao_id":"0","korean_bb_song":"0","resource_type_ext":"0","mv_provider":"0000000000","desc":"","url":"http://music.baidu.com/song/261813046","recommend_reason":"How Big, How Blue, How Beautiful"}]
+         * id : 2614841256
+         * title : 给那些回不去又遥远的乡愁
+         * creator : AirRadio空气赫兹
+         * description : 很多年前看过一部关于乡愁的记录式电影，分别拍摄了几个不同的人各自的生活轨迹。其中一个人在异乡生活一辈子都没有再回到家乡，他在一个新的城市里落地生根，他的故乡是内陆城市，离开故乡的原因很简单，他喜欢大海所以去了有海的城市，就一直在哪里呆着，从年少一晃到了老年，摄制组跟拍了他的生活，他像个向导一样，带着他们去他年轻时工作的地方转转，他经常走的那条海边小路，边走边回忆，“看，那是我第一次约会的地方”。他指着一间破旧的咖啡馆说，“我太太其实几年前就去世了，但是我每次路过这里，都会觉得她在里面等着我。” 他的故事最后，摄制组邀请他回到他的家乡，也就是年少时执意离开的地方，这么多年没有回去，其实那个城市早就变了样子，这一段画面的语言很少，一行人走进这个城市，仿佛是陌生人一样，后来他们来到他年少时的社区，有些许变化但基本还是以前的样子，他在一条小路前停了好长时间，这个长镜头是影片的结尾，之前他们有说话，可是这一刻，整段影片静默到几乎令人窒息，尽头从远景慢慢的移动到近景，定格在他的那有些感情波动的表情上，我看见一行眼泪…电影结束。 这么多年过去了，每每我们说起“乡愁”两个字的时候，我总会想起那部电影结束时候，那张脸庞的表情，它太真实了，在没有语言的情节下，却胜过千言万语，尽管我已经忘了那部电影的名字。 乡愁在每个人的生活轨迹里，是不同的印记，也许是故乡的味道，就像我离开故乡这么多年，依旧念念不忘家乡小吃的味道，每次看到我生活的城市里出现新的家乡口味的小吃店都想去试试（每次都失望而归），心里明白虽然味道不差，可能是乡愁作祟；身边的小伙伴早已全部离家在各自的城市里生活，聚会的次数少的可怜，你知道的，人只要不在一起习惯了，似乎也就没有什么可以讲的了… 故乡在现实里越来越远，我却想在记忆慢慢靠近它，人和事是基本不可能了，除了饮食的味道，还有音乐，那些青春期一起听过的歌，到现在听起来想到从前的歌，也许就是那么几句歌词 少年十八离家，匆匆数年，往后故事的发生和故乡的名字也许再没有关联，你重新和一个陌生的城市相处，把理想和热血往那儿一丢，冷暖自知，成功与失败一直交错，受过挫折打败过他人，爱过错或对的人，多年以后，也许满载荣誉，也许依旧孑然一身，不知道为什么，每次想到这些，我总会有些淡淡的乡愁。 封面图片来自：阮义忠
+         * coverImgUrl : http://p1.music.126.net/A6I-QOF_h2AkBA6eN7hbGw==/109951163781590817.jpg?param=400y400
+         * songNum : 26
+         * playCount : 133415
          */
 
-        public String title;
-        public List<SongListBean> song_list;
+        private long id;
+        private String title;
+        private String creator;
+        private String description;
+        private String coverImgUrl;
+        private int songNum;
+        private int playCount;
 
-        public static class SongListBean {
-            /**
-             * artist_id : 130
-             * pic_big : http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_150
-             * pic_small : http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_90
-             * pic_premium : http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg@s_0,w_500
-             * pic_huge : http://qukufile2.qianqian.com/data2/music/1805DC21398BAF2A5723BCC7956D8D15/252492173/252492173.jpg
-             * pic_singer :
-             * all_artist_ting_uid : 1100
-             * file_duration : 273
-             * del_status : 0
-             * resource_type : 0
-             * all_rate : 96,128,224,320,flac
-             * toneid : 600902000005286912
-             * copy_type : 0
-             * has_mv_mobile : 1
-             * song_id : 7313983
-             * title : 喜欢你
-             * ting_uid : 1100
-             * author : Beyond
-             * album_id : 7311104
-             * album_title : 传奇再续
-             * is_first_publish : 0
-             * havehigh : 2
-             * charge : 0
-             * has_mv : 1
-             * learn : 0
-             * song_source : web
-             * piao_id : 0
-             * korean_bb_song : 0
-             * resource_type_ext : 0
-             * mv_provider : 1100000000
-             * desc :
-             * url : http://music.baidu.com/song/7313983
-             * recommend_reason : 以往片刻欢笑仍挂在脸上
-             */
+        public long getId() {
+            return id;
+        }
 
-            public String artist_id;
-            public String pic_big;
-            public String pic_small;
-            public String pic_premium;
-            public String pic_huge;
-            public String pic_singer;
-            public String all_artist_ting_uid;
-            public String file_duration;
-            public String del_status;
-            public String resource_type;
-            public String all_rate;
-            public String toneid;
-            public String copy_type;
-            public int has_mv_mobile;
-            public String song_id;
-            public String title;
-            public String ting_uid;
-            public String author;
-            public String album_id;
-            public String album_title;
-            public int is_first_publish;
-            public int havehigh;
-            public int charge;
-            public int has_mv;
-            public int learn;
-            public String song_source;
-            public String piao_id;
-            public String korean_bb_song;
-            public String resource_type_ext;
-            public String mv_provider;
-            public String desc;
-            public String url;
-            public String recommend_reason;
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getCreator() {
+            return creator;
+        }
+
+        public void setCreator(String creator) {
+            this.creator = creator;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getCoverImgUrl() {
+            return coverImgUrl;
+        }
+
+        public void setCoverImgUrl(String coverImgUrl) {
+            this.coverImgUrl = coverImgUrl;
+        }
+
+        public int getSongNum() {
+            return songNum;
+        }
+
+        public void setSongNum(int songNum) {
+            this.songNum = songNum;
+        }
+
+        public int getPlayCount() {
+            return playCount;
+        }
+
+        public void setPlayCount(int playCount) {
+            this.playCount = playCount;
         }
     }
 }

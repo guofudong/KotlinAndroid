@@ -1,6 +1,7 @@
 package com.gfd.music.ui.fragment
 
 import android.content.Intent
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.gfd.common.ext.gridInit
@@ -15,7 +16,7 @@ import com.gfd.music.injection.component.DaggerMusicComponent
 import com.gfd.music.injection.module.MusicMoudle
 import com.gfd.music.mvp.contract.RecommendContract
 import com.gfd.music.mvp.preesnter.RecommendPresenter
-import com.gfd.music.ui.activity.SongListActivity
+import com.gfd.music.ui.activity.SongListDetailActivity
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.music_fragment_recommend.*
@@ -48,6 +49,8 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     }
 
     override fun initView() {
+        swipeRefresh.setColorSchemeColors(resources.getColor(R.color.colorTopBG))
+        swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT)
         mSongAdapter = RecommendAdapter(activity!!)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mSongAdapter)
         mRecyclerView.gridInit(context = activity!!, adapter = mLRecyclerViewAdapter)
@@ -68,14 +71,16 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
             val songData = mSongData[position]
             if (Concant.ITEM_TYPE_IMG == songData.getItemType()) {//点击内容
-                val intent = Intent(activity, SongListActivity::class.java)
-                intent.putExtra("id",songData.id)
-                intent.putExtra("pic_big",songData.pic_big)
-                intent.putExtra("file_duration",songData.file_duration)
-                intent.putExtra("color",songData.color)
+                val intent = Intent(activity, SongListDetailActivity::class.java)
+                intent.putExtra("id", songData.song_id)
+                intent.putExtra("pic_big", songData.pic_big)
+                intent.putExtra("file_duration", songData.file_duration)
+                intent.putExtra("color", songData.color)
                 startActivity(intent)
             }
-
+        }
+        swipeRefresh.setOnRefreshListener {
+            mPresenter.getSongList(false)
         }
     }
 
@@ -88,6 +93,9 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     }
 
     override fun showSongList(songDatas: List<SongData>) {
+        if (swipeRefresh.isRefreshing) {
+            swipeRefresh.isRefreshing = false
+        }
         mSongData = songDatas
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             val type = songDatas[position].getItemType()

@@ -33,18 +33,8 @@ class MusicPlayService : Service() {
         mPlayer.setDataSource(path)
     }
 
-    fun playMusicById(id: String) {
-        OkGo.get<String>(Api.getSongInfo(id))
-                .tag(this)
-                .execute(object : StringCallback() {
-                    override fun onSuccess(response: Response<String>) {
-                        val json = response.body().toString()
-                        Logger.e("歌曲信息：$json")
-                        val songLink = JSONObject(json).getJSONObject("songurl").getJSONArray("url")
-                                .getJSONObject(0).getString("show_link")
-                        mPlayer.setDataSource(songLink)
-                    }
-                })
+    fun playMusicById(url: String) {
+        mPlayer.setDataSource(url)
     }
 
     fun pause() {

@@ -49,13 +49,23 @@ object Api {
     var URL_SONG_BASE_INFO = "baidu.ting.song.baseInfos"
     var ENCODE = "song_id,title,author,album_title,pic_big,pic_small,havehigh,all_rate,charge,has_mv_mobile,learn,song_source,korean_bb_song"
 
+    //以下为新的Api
+    var URL_SONGLIST = "https://api.bzqll.com/music/netease/hotSongList"
+
+    var recommendListOffset = 0
     /**
      * 获取推荐歌曲API
      * @param count Int : 要获取歌曲的数量
      * @return String
      */
     fun getRecommend(count: Int): String {
-        return URL_BASE + URL_RECOMMEND + count
+        //return URL_BASE + URL_RECOMMEND + count :原来的API，可以使用但是里面的列表歌曲无，只有封面
+        val url = "https://api.bzqll.com/music/netease/hotSongList?key=579621905&limit=$count&offset=$recommendListOffset"
+        recommendListOffset += count
+        if (recommendListOffset > count * 4) {
+            recommendListOffset = 0
+        }
+        return url
     }
 
     /**
@@ -137,8 +147,9 @@ object Api {
      * @param id Int ： 歌单id
      * @return String
      */
-    fun getIdSongList(id: String): String {
-        return "$URL_BASE$URL_ID_SONG_LIST&listid=$id"
+    fun getIdSongList(id: String, offset: Int = 0): String {
+        //return "$URL_BASE$URL_ID_SONG_LIST&listid=$id" :原来的API
+        return "https://api.bzqll.com/music/netease/songList?key=579621905&id=$id&limit=12&offset=$offset"
     }
 
     /**
@@ -158,6 +169,16 @@ object Api {
      */
     fun getHotWord(): String {
         return URL_BASE + URL_HOT_WORD
+    }
+
+    /**
+     * 获取歌单
+     * @param offset Int
+     * @param cat String：类别
+     * @return String
+     */
+    fun getSongList(offset: Int, cat: String): String {
+        return "$URL_SONGLIST?key=579621905&cat=$cat&limit=13&offset=$offset"
     }
 
     /**

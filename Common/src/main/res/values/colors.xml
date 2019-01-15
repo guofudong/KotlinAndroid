@@ -24,7 +24,7 @@
     <color name="transparent">#00000000</color>
 
     <color name="common_colorItemBG">#e6e4e5</color>
-    <color name="colorTopBG">#d93d34</color>
+    <color name="colorTopBG">#d63d34</color>
 
     <color name="status_layout_background_color">#EBEBEB</color>
     <color name="status_layout_tip_text_color">#8a8a8a</color>

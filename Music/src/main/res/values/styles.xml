@@ -11,18 +11,21 @@
     <style name="styleMusicHead" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/dp_6</item>
-        <item name="android:background">@drawable/ic_recommend_head_itembg</item>
+        <item name="android:padding">@dimen/dp_0</item>
+        <item name="android:background">@drawable/music_sp_item_bg</item>
+        <item name="android:translationZ" tools:ignore="NewApi">@dimen/dp_2</item>
     </style>
 
     <style name="styleMusicHeadText" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/dp_2</item>
-        <item name="android:textColor">@color/common_black</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:layout_marginTop">@dimen/dp_4</item>
+        <item name="android:textColor">@color/text_normal</item>
+        <item name="android:textSize">@dimen/sp_12</item>
 
-    </style> <style name="styleMvDetailTvTitle" tools:ignore="ResourceName">
+    </style>
+
+    <style name="styleMvDetailTvTitle" tools:ignore="ResourceName">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/sp_12</item>

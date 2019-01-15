@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".ui.activity.MvDetailActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.SongListActivity" />
+        <activity android:name=".ui.activity.SongListDetailActivity" />
     </application>
 
 </manifest>

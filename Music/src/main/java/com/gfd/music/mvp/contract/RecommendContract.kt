@@ -19,6 +19,6 @@ interface RecommendContract{
 
     interface Presenter:BasePresenter{
         fun getBanner()
-        fun getSongList()
+        fun getSongList(isLoading : Boolean = true)
     }
 }

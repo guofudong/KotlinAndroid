@@ -2,8 +2,8 @@ package com.gfd.music.injection.component
 
 import com.gfd.common.injection.component.ActivityComponent
 import com.gfd.common.injection.scope.PerComponentScope
-import com.gfd.music.injection.module.SongListMoudle
-import com.gfd.music.ui.activity.SongListActivity
+import com.gfd.music.injection.module.SongListDetailMoudle
+import com.gfd.music.ui.activity.SongListDetailActivity
 import dagger.Component
 
 /**
@@ -13,7 +13,7 @@ import dagger.Component
  * @descriptio：
  */
 @PerComponentScope
-@Component(dependencies = [(ActivityComponent::class)], modules = [(SongListMoudle::class)])
-interface SongListComponent {
-    fun inject(activity: SongListActivity)
+@Component(dependencies = [(ActivityComponent::class)], modules = [(SongListDetailMoudle::class)])
+interface SongListDetailComponent {
+    fun inject(activity: SongListDetailActivity)
 }

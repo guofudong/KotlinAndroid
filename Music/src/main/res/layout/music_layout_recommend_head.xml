@@ -41,9 +41,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
-        android:translationZ="@dimen/dp_6">
+        android:paddingBottom="@dimen/dp_10"
+        android:translationZ="@dimen/dp_0">
 
         <!--私人FM-->
         <LinearLayout
@@ -75,11 +75,13 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:translationZ="@dimen/dp_2">
 
                 <ImageView
                     style="@style/styleMusicHead"
-                    android:src="@drawable/ic_re_bill" />
+                    android:src="@drawable/ic_re_bill"
+                    android:translationZ="@dimen/dp_0"/>
 
                 <TextView
                     android:id="@+id/tv_head_day"

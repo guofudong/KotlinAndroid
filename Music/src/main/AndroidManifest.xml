@@ -3,7 +3,7 @@
     package="com.gfd.music">
 
     <application>
-        <activity android:name=".ui.activity.SongListActivity"/>
+        <activity android:name=".ui.activity.SongListDetailActivity"/>
         <activity android:name=".ui.activity.MvDetailActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
         <service android:name=".service.MusicPlayService"/>

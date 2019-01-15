@@ -13,7 +13,7 @@ import dagger.Provides
  * @descriptio：
  */
 @Module
-class SongListMoudle(val view: SongListContract.View) {
+class SongListDetailMoudle(val view: SongListContract.View) {
 
     @Provides
     fun provideView(): SongListContract.View {

@@ -10,17 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textColor="@color/common_gray"
-        android:textSize="@dimen/sp_16"
         android:gravity="center"
-        android:padding="@dimen/dp_6"/>
+        android:padding="@dimen/dp_6"
+        android:textColor="@color/common_gray"
+        android:textSize="@dimen/sp_16" />
 
     <TextView
         android:id="@+id/tv_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_6"
+        android:layout_toLeftOf="@+id/ic_item_play"
         android:layout_toRightOf="@+id/tv_item_num"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/common_black"
         android:textSize="@dimen/sp_14" />
 
@@ -32,7 +36,10 @@
         android:layout_below="@+id/tv_item_name"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_2"
+        android:layout_toLeftOf="@+id/ic_item_play"
         android:layout_toRightOf="@+id/tv_item_num"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/common_gray"
         android:textSize="@dimen/sp_12" />
 
@@ -42,26 +49,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_meun_sy"
-        android:layout_marginRight="@dimen/dp_6"/>
+        android:layout_marginRight="@dimen/dp_6"
+        android:src="@drawable/ic_meun_sy" />
 
     <ImageView
         android:id="@+id/ic_item_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/dp_8"
         android:layout_toLeftOf="@+id/ic_menu"
-        android:src="@drawable/ic_play" />
+        android:src="@drawable/ic_play"
+        android:tint="#acabab" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
-        android:background="#aac7c7c7"
-        android:layout_toRightOf="@+id/tv_item_num"
-        android:layout_marginTop="@dimen/dp_6"
         android:layout_below="@+id/tv_item_autor"
-        android:layout_marginLeft="@dimen/dp_8"/>
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_toRightOf="@+id/tv_item_num"
+        android:background="#aac7c7c7" />
 
 
 </RelativeLayout>

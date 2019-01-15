@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class SongListPresenter @Inject constructor() : SongListContract.Presenter, SongListService.GetSongListCallBack {
+class SongListDetailPresenter @Inject constructor() : SongListContract.Presenter, SongListService.GetSongListCallBack {
 
     @Inject
     lateinit var mView: SongListContract.View
@@ -20,9 +20,9 @@ class SongListPresenter @Inject constructor() : SongListContract.Presenter, Song
     @Inject
     lateinit var mService: SongListService
 
-    override fun getSongList(id: String) {
+    override fun getSongList(id: String, offset: Int) {
         mView.showLoading()
-        mService.getSongList(id, this)
+        mService.getSongList(id, offset, this)
     }
 
     override fun onSongList(datas: List<SongItemData>) {

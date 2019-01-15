@@ -1,6 +1,7 @@
 package com.gfd.music.ui.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,9 @@ import kotlinx.android.synthetic.main.music_fragment_music.*
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class MusicFragment:BaseFragment(){
+class MusicFragment : BaseFragment() {
 
-    private val mTabTitles = arrayOf("推荐","电台","短片")
+    private val mTabTitles = arrayOf("推荐", "电台", "短片")
     private val mFragments = ArrayList<BaseFragment>()
 
     override fun getLayoutId(): Int {
@@ -32,13 +33,13 @@ class MusicFragment:BaseFragment(){
         mFragments.add(RadioFragment())
         mFragments.add(ShortFilmFragment())
         mViewPager.noScroll()
-        mViewPager.adapter = MusicPagerAdapter(fragmentManager!!,mTabTitles,mFragments)
+        mViewPager.offscreenPageLimit = 2
+        mViewPager.adapter = MusicPagerAdapter(fragmentManager!!, mTabTitles, mFragments)
         mTabLayout.setupWithViewPager(mViewPager)
         for (i in 0..mTabLayout.tabCount) {
             val tab = mTabLayout.getTabAt(i)
             tab?.customView = getTabView(i)
         }
-
     }
 
     override fun initData() {
@@ -66,7 +67,7 @@ class MusicFragment:BaseFragment(){
         })
         //搜索按钮
         ivSearch.setOnClickListener {
-            startActivity(Intent(activity,SearchActivity::class.java))
+            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 
@@ -84,7 +85,7 @@ class MusicFragment:BaseFragment(){
         if (position == 0) {
             textView.paint.isFakeBoldText = true
             indicator.visibility = View.VISIBLE
-        }else{
+        } else {
             indicator.visibility = View.INVISIBLE
         }
         return view

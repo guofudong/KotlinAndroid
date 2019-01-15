@@ -80,6 +80,7 @@ class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
         val datas = ArrayList<Clarity>()
         if (playerData.data != null) {
             playerData.data.video.link.forEachIndexed { index, linkBean ->
+                //linkBean.url 原来的解析网站已不能使用，这个使用默认的地址
                 datas.add(Clarity("高清$index", "480P", linkBean.url))
             }
         }

@@ -25,8 +25,10 @@ class RecommendPresenter @Inject constructor() : RecommendContract.Presenter, Re
 
     }
 
-    override fun getSongList() {
-        mView.showLoading()
+    override fun getSongList(isLoading: Boolean) {
+        if (isLoading) {
+            mView.showLoading()
+        }
         mService.getSongList(this)
     }
 

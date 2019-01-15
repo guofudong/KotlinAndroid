@@ -11,10 +11,10 @@ import com.gfd.music.entity.SongTitleData
  */
 interface SongListService {
 
-    fun getSongList(id: String, callBack: GetSongListCallBack)
+    fun getSongList(id: String, offset: Int, callBack: GetSongListCallBack)
 
     interface GetSongListCallBack {
         fun onSongList(datas: List<SongItemData>)
-        fun onTitle(titles:SongTitleData)
+        fun onTitle(titles: SongTitleData)
     }
 }

@@ -53,22 +53,22 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                         Logger.e("推荐歌曲：$json")
                         val songDatas = Gson().fromJson(json, Song::class.java)
                         val datas = ArrayList<SongData>()
-                        if (songDatas.content != null && songDatas.content.size > 0) {
-                            val song_list = songDatas.content[0].song_list
+                        if (songDatas.data != null && songDatas.data.size > 0) {
                             datas.add(SongData(Concant.ITEM_TYPE_TITLE, "推荐歌单"))
-                            if (song_list != null) {
-                                song_list.forEachWithIndex { index, value ->
-                                    if (index == 6) {
-                                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "最新歌曲"))
-                                    } else if (index == 12) {
-                                        datas.add(SongData(Concant.ITEM_TYPE_TITLE, "主播电台"))
-                                    }
-                                    datas.add(SongData(Concant.ITEM_TYPE_IMG, "", "", value.recommend_reason,
-                                            value.pic_huge, value.pic_premium, value.song_id, value.title, value.url,
-                                            value.file_duration, value.artist_id))
+                            songDatas.data.forEachWithIndex { index, value ->
+                                if (index == 6) {
+                                    datas.add(SongData(Concant.ITEM_TYPE_TITLE, "最新歌曲"))
+                                } else if (index == 12) {
+                                    datas.add(SongData(Concant.ITEM_TYPE_TITLE, "主播电台"))
                                 }
-                                datas[4].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
-                                datas[5].pic_big = "http://qukufile2.qianqian.com/data2/music/F54D281EF676D71064E8FFD144D6DF4F/252188434/252188434.jpg"
+                                val playCount = if (value.playCount > 99999) {
+                                    "${value.playCount / 10000}万"
+                                } else {
+                                    value.playCount.toString()
+                                }
+                                datas.add(SongData(Concant.ITEM_TYPE_IMG, "", "", value.title,
+                                        value.coverImgUrl, value.coverImgUrl, value.id.toString(), value.title, "",
+                                        playCount, ""))
                             }
                         }
                         callBack.onSongList(datas)
