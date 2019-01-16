@@ -1,6 +1,7 @@
 package com.gfd.music.mvp.preesnter
 
 import com.gfd.music.entity.BannerData
+import com.gfd.music.entity.RadioData
 import com.gfd.music.entity.SongData
 import com.gfd.music.mvp.contract.RecommendContract
 import com.gfd.music.mvp.service.RecommendService
@@ -32,12 +33,23 @@ class RecommendPresenter @Inject constructor() : RecommendContract.Presenter, Re
         mService.getSongList(this)
     }
 
+
+    override fun getRadioData() {
+        mView.showLoading()
+        mService.getRadioData(this)
+    }
+
     override fun onBanner(datas: List<BannerData>) {
         mView.showBanner(datas)
     }
 
     override fun onSongList(datas: List<SongData>) {
         mView.showSongList(datas)
+        mView.hideLoading()
+    }
+
+    override fun onRadioData(datas: List<RadioData>) {
+        mView.showRadioData(datas)
         mView.hideLoading()
     }
 

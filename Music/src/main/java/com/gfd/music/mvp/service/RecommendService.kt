@@ -1,6 +1,7 @@
 package com.gfd.music.mvp.service
 
 import com.gfd.music.entity.BannerData
+import com.gfd.music.entity.RadioData
 import com.gfd.music.entity.SongData
 
 /**
@@ -14,9 +15,11 @@ interface RecommendService {
     fun getBanner(callBack: GetRecommendCallBack)
 
     fun getSongList(callBack: GetRecommendCallBack)
+    fun getRadioData(callBack: GetRecommendCallBack)
 
     interface GetRecommendCallBack {
         fun onBanner(datas: List<BannerData>)
         fun onSongList(datas: List<SongData>)
+        fun onRadioData(datas: List<RadioData>)
     }
 }

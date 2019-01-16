@@ -3,6 +3,7 @@ package com.gfd.music.mvp.contract
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
 import com.gfd.music.entity.BannerData
+import com.gfd.music.entity.RadioData
 import com.gfd.music.entity.SongData
 
 /**
@@ -11,14 +12,17 @@ import com.gfd.music.entity.SongData
  * @Email：878749089@qq.com
  * @descriptio：
  */
-interface RecommendContract{
-    interface View :BaseView{
-        fun showBanner(bannerData : List<BannerData>)
-        fun showSongList(songDatas: List<SongData>)
+interface RecommendContract {
+    interface View : BaseView {
+        fun showBanner(bannerData: List<BannerData>)
+        fun showSongList(songDatas: List<SongData>) {}
+        fun showRadioData(radioDatas: List<RadioData>) {}
     }
 
-    interface Presenter:BasePresenter{
+    interface Presenter : BasePresenter {
         fun getBanner()
-        fun getSongList(isLoading : Boolean = true)
+        fun getSongList(isLoading: Boolean = true)
+        fun getRadioData()
     }
+
 }

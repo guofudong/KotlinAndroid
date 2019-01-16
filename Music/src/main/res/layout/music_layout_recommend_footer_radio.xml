@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_white"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/music_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:text="热门分类"
+        android:textColor="@color/common_black"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/music_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_textview" />
+
+    <TextView
+        android:id="@+id/music_textview2"
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_01"
+        android:text="有声书    "
+        app:layout_constraintBottom_toBottomOf="@+id/music_view2"
+        app:layout_constraintEnd_toStartOf="@+id/music_view2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/music_view2" />
+
+    <View
+        android:id="@+id/music_view2"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="8dp"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view" />
+
+    <TextView
+        android:id="@+id/music_textview3"
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_02"
+        android:text="知识技能"
+        app:layout_constraintBottom_toTopOf="@+id/music_view5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/music_view2"
+        app:layout_constraintTop_toTopOf="@+id/music_view" />
+
+    <View
+        android:id="@+id/music_view5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view2" />
+
+    <TextView
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_03"
+        android:text="商业财经"
+        app:layout_constraintBottom_toBottomOf="@+id/music_view7"
+        app:layout_constraintEnd_toStartOf="@+id/music_view7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/music_view7" />
+
+    <View
+        android:id="@+id/music_view7"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view5" />
+
+    <TextView
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_06"
+        android:text="人文历史"
+        app:layout_constraintBottom_toBottomOf="@+id/music_view7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/music_view7"
+        app:layout_constraintTop_toTopOf="@+id/music_view7" />
+
+    <View
+        android:id="@+id/music_view6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view7" />
+
+    <TextView
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_04"
+        android:text="外语世界"
+        app:layout_constraintBottom_toBottomOf="@+id/music_view8"
+        app:layout_constraintEnd_toStartOf="@+id/music_view8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/music_view8" />
+
+    <View
+        android:id="@+id/music_view8"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/dp_30"
+        android:layout_marginTop="8dp"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view6" />
+
+    <TextView
+        style="@style/music_styleRadioCategoryTV"
+        android:drawableLeft="@drawable/ic_category_05"
+        android:text="亲子宝贝"
+        app:layout_constraintBottom_toTopOf="@+id/music_view9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/music_view8"
+        app:layout_constraintTop_toBottomOf="@+id/music_view6" />
+
+    <View
+        android:id="@+id/music_view9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/LightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_view8" />
+
+
+</android.support.constraint.ConstraintLayout>

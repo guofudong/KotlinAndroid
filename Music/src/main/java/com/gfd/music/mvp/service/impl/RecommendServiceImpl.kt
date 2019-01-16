@@ -2,10 +2,7 @@ package com.gfd.music.mvp.service.impl
 
 import com.gfd.music.api.Api
 import com.gfd.music.common.Concant
-import com.gfd.music.entity.BannerData
-import com.gfd.music.entity.Banner
-import com.gfd.music.entity.SongData
-import com.gfd.music.entity.Song
+import com.gfd.music.entity.*
 import com.gfd.music.mvp.service.RecommendService
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
@@ -72,6 +69,62 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                             }
                         }
                         callBack.onSongList(datas)
+                    }
+                })
+    }
+
+    override fun getRadioData(callBack: RecommendService.GetRecommendCallBack) {
+        OkGo.get<String>(Api.getRadioData())
+                .tag(this)
+                .execute(object : StringCallback() {
+                    override fun onSuccess(response: Response<String>) {
+                        val json = response.body().toString()
+                        Logger.e("热门电台：$json")
+                        val radioData = Gson().fromJson(json, Radio::class.java).data.djRadios
+                        val datas = ArrayList<RadioData>()
+                        if (radioData.isNotEmpty()) {
+                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "今日优选", "", ""))
+                            radioData.forEachWithIndex { index, value ->
+                                if (index <= 3) {
+                                    datas.add(RadioData(Concant.ITEM_TYPE_LIST, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(),
+                                            value.dj.avatarUrl))
+                                } else {
+                                    if (index == 4) {
+                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "电台推荐", "", ""))
+                                    }
+                                    if (index == 7) {
+                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "情感调频", "", ""))
+                                    }
+                                    datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString()))
+                                }
+                            }
+                        }
+                        OkGo.get<String>(Api.getRadioData2())
+                                .tag(this)
+                                .execute(object : StringCallback() {
+                                    override fun onSuccess(response: Response<String>) {
+                                        val json = response.body().toString()
+                                        Logger.e("热门电台：$json")
+                                        val radioData2 = Gson().fromJson(json, Radio::class.java).data.djRadios
+                                        if (radioData2.isNotEmpty()) {
+                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "音乐故事", "", ""))
+                                            radioData2.forEachWithIndex { index, value ->
+                                                if (index < 9) {
+                                                    if (index == 3) {
+                                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "二次元", "", ""))
+                                                    }
+                                                    if (index == 6) {
+                                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "3D|电子", "", ""))
+                                                    }
+                                                    datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString()))
+                                                }
+                                            }
+                                        }
+                                        callBack.onRadioData(datas)
+                                    }
+
+                                })
+                        callBack.onRadioData(datas)
                     }
                 })
     }

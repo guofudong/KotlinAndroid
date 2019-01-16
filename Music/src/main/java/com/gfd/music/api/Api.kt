@@ -78,12 +78,23 @@ object Api {
     }
 
     /**
-     * 获取推荐电台API
+     * 获取热门电台
      * @return String
      */
-    fun getRadio(): String {
-        return URL_BASE + URL_RADIO
+    fun getRadioData(): String {
+        //推荐电台
+        return "https://api.bzqll.com/music/netease/search?key=579621905&type=radio&offset=0&s=%E6%8E%A8%E8%8D%90"
     }
+
+    /**
+     * 获取电台数据：一次只能返回10条数据，所以访问两次来获取足够的数据
+     * @return String
+     */
+    fun getRadioData2(): String {
+        //情感电台
+        return "https://api.bzqll.com/music/netease/search?key=579621905&type=radio&limit=100&offset=0&s=%E6%83%85%E6%84%9F"
+    }
+
 
     /**
      * 获取歌曲的信息和下载地址

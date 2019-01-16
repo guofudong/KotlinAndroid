@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/dp_4"
     android:paddingLeft="@dimen/dp_4"
-    android:paddingTop="@dimen/dp_4"
+    android:paddingTop="@dimen/dp_10"
     android:background="@color/common_white">
 
     <TextView
