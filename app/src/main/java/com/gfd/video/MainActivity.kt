@@ -142,14 +142,23 @@ class MainActivity : BaseActivity() {
         startActivity(home)
     }
 
-    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+  /*  override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         if (event.keyCode == KeyEvent.KEYCODE_BACK) {//点击的是返回键
             if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) {//按键的按下事件
+                if (mMusicFragment.onKeyBackPressed()) {
+                    return true
+                }
                 backHome()
             }
             return true
         }
         return super.dispatchKeyEvent(event)
+    }*/
+
+    override fun onBackPressed() {
+        if (!mMusicFragment.onKeyBackPressed()) {
+            backHome()
+        }
     }
 
 }

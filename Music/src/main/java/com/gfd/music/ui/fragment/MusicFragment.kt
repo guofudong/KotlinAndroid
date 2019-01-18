@@ -3,6 +3,8 @@ package com.gfd.music.ui.fragment
 import android.content.Intent
 import android.graphics.Color
 import android.support.design.widget.TabLayout
+import android.support.v7.app.ActionBarDrawerToggle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -11,6 +13,7 @@ import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.MusicPagerAdapter
 import com.gfd.music.ui.activity.SearchActivity
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.music_fragment_music.*
 
 /**
@@ -23,12 +26,17 @@ class MusicFragment : BaseFragment() {
 
     private val mTabTitles = arrayOf("推荐", "电台", "短片")
     private val mFragments = ArrayList<BaseFragment>()
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun getLayoutId(): Int {
         return R.layout.music_fragment_music
     }
 
     override fun initView() {
+        toggle = ActionBarDrawerToggle(activity, drawerLayout,
+                R.string.music_navigation_drawer_open, R.string.music_navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
         mFragments.add(RecommendFragment())
         mFragments.add(RadioFragment())
         mFragments.add(ShortFilmFragment())
@@ -69,6 +77,10 @@ class MusicFragment : BaseFragment() {
         ivSearch.setOnClickListener {
             startActivity(Intent(activity, SearchActivity::class.java))
         }
+        //显示侧滑按钮
+        ivMenu.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.LEFT, true)
+        }
     }
 
 
@@ -91,5 +103,12 @@ class MusicFragment : BaseFragment() {
         return view
     }
 
+    override fun onKeyBackPressed(): Boolean {
+        if (drawerLayout.isDrawerOpen(navigationView)) {
+            drawerLayout.closeDrawers()
+            return true
+        }
+        return false
+    }
 
 }

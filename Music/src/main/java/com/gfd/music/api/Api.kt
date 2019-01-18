@@ -193,6 +193,14 @@ object Api {
     }
 
     /**
+     * 获取搜索API
+     * @return String
+     */
+    fun getSongSearch(keyword: String): String {
+        return "https://api.bzqll.com/music/netease/search?key=579621905&s=$keyword&type=song&limit=12&offset=0"
+    }
+
+    /**
      * 获取频道
      * @param page Int：页码
      * @param pageSize Int： 每页大小

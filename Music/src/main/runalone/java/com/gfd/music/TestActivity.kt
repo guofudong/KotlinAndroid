@@ -9,9 +9,18 @@ import com.gfd.music.ui.fragment.MusicFragment
  */
 class TestActivity : AppCompatActivity() {
 
+    val musicFragment = MusicFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.music_activity_test)
-        supportFragmentManager.beginTransaction().replace(R.id.flay_root, MusicFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flay_root, musicFragment).commit()
     }
+
+    override fun onBackPressed() {
+        if (!musicFragment.onKeyBackPressed()) {
+            super.onBackPressed()
+        }
+    }
+
 }

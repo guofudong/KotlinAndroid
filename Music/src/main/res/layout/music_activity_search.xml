@@ -11,15 +11,15 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_8"
-        android:paddingRight="@dimen/dp_8"
-        android:paddingTop="@dimen/padding_top">
+        android:paddingTop="@dimen/padding_top"
+        android:paddingRight="@dimen/dp_8">
 
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
             android:src="@drawable/ic_back" />
 
         <EditText
@@ -35,7 +35,7 @@
             android:maxLines="1"
             android:paddingBottom="@dimen/dp_6"
             android:textColor="@color/common_white"
-            android:textColorHint="@color/textGray"
+            android:textColorHint="#66ffffff"
             android:textCursorDrawable="@drawable/music_sp_cursor"
             android:textSize="@dimen/sp_16"
             android:theme="@style/MyEditText" />
@@ -59,8 +59,8 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/dp_8"
-                android:paddingTop="@dimen/dp_8">
+                android:paddingTop="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -72,8 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_6"
                     android:text="歌手分类"
-                    android:textColor="@color/common_gray"
-                    android:textSize="@dimen/sp_14" />
+                    android:textColor="@color/common_black"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -92,13 +93,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/dp_6"
                 android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_8"
                 android:paddingTop="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_6"
                 android:text="热门搜索"
-                android:textColor="@color/common_gray"
-                android:textSize="@dimen/sp_12" />
+                android:textColor="@color/common_black"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hotSearchList"
@@ -117,16 +119,23 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mSearchResultList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <include
-            layout="@layout/music_layout_play_contral"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mSearchResultList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <include
+                layout="@layout/music_layout_play_contral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

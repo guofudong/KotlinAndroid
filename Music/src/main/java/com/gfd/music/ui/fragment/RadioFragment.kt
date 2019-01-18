@@ -1,5 +1,6 @@
 package com.gfd.music.ui.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import com.gfd.common.ext.gridInit
 import com.gfd.common.ext.player
@@ -14,6 +15,7 @@ import com.gfd.music.injection.component.DaggerRadioComponent
 import com.gfd.music.injection.module.MusicMoudle
 import com.gfd.music.mvp.contract.RecommendContract
 import com.gfd.music.mvp.preesnter.RecommendPresenter
+import com.gfd.music.ui.activity.SongListDetailActivity
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.music_fragment_recommend.*
@@ -63,17 +65,18 @@ class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.V
     }
 
     override fun setListener() {
-        /*  mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
-              val songData = mSongData[position]
-              if (Concant.ITEM_TYPE_IMG == songData.getItemType()) {//点击内容
-                  val intent = Intent(activity, SongListDetailActivity::class.java)
-                  intent.putExtra("id", songData.song_id)
-                  intent.putExtra("pic_big", songData.pic_big)
-                  intent.putExtra("file_duration", songData.file_duration)
-                  intent.putExtra("color", songData.color)
-                  startActivity(intent)
-              }
-          }*/
+        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
+          /*  val radioData = mRadioData[position]
+            val type = radioData.getItemType()
+            if (Concant.ITEM_TYPE_IMG == type || type == Concant.ITEM_TYPE_LIST) {//点击内容
+                val intent = Intent(activity, SongListDetailActivity::class.java)
+                intent.putExtra("id", radioData.id.toString())
+                intent.putExtra("pic_big", radioData.logo)
+                intent.putExtra("file_duration", radioData.count)
+                intent.putExtra("color", radioData.color)
+                startActivity(intent)
+            }*/
+        }
     }
 
     override fun showBanner(bannerData: List<BannerData>) {

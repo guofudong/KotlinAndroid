@@ -6,4 +6,4 @@ package com.gfd.music.entity
  * @Email：878749089@qq.com
  * @descriptio：
  */
-data class SearchData(var name: String, var artist: String, var pic: String, var url_music: String, var url_download: String)
+data class SearchData(var name: String, var pic: String, var id: String, var singer: String,var playerUrl:String)

@@ -4,9 +4,9 @@ import android.content.Context
 import com.gfd.music.api.Api
 import com.gfd.music.db.SearHistoryTable
 import com.gfd.music.db.ext.database
-import com.gfd.music.entity.AnalyMusic
 import com.gfd.music.entity.HotSearch
 import com.gfd.music.entity.SearchData
+import com.gfd.music.entity.SongSearch
 import com.gfd.music.mvp.service.SearchService
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
@@ -78,42 +78,20 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                  })*/
         val encode = URLEncoder.encode(keyword, "UTF-8")
         Logger.e("关键字：$encode")
-        OkGo.post<String>(Api.AnalysisMusic.url)
+        OkGo.post<String>(Api.getSongSearch(encode))
                 .tag(this)
-                .headers("Cookie", Api.AnalysisMusic.cookie)
-                .headers("Host", Api.AnalysisMusic.host)
-                .headers("Origin", Api.AnalysisMusic.origin)
-                .headers("X-Requested-With", Api.AnalysisMusic.request_with)
-                .headers("Referer", Api.AnalysisMusic.referer + encode)
-                .params("token", Api.AnalysisMusic.token)
-                .params("page", "1")
-                .params("text", encode)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("搜索音乐结果数据：$json")
-                        val music: AnalyMusic?
-                        try {
-                            music = Gson().fromJson(json, AnalyMusic::class.java)
-                            val musicList = ArrayList<SearchData>()
-                            if (music.data.list != null) {
-                                music.data.list.forEach {
-                                    var url_music = it.url_320
-                                    if (url_music == null) {
-                                        url_music = it.url_128
-                                    }
-                                    val musicData = SearchData(
-                                            it.name,
-                                            it.artist,
-                                            it.cover,
-                                            url_music + Api.AnalysisMusic.key,
-                                            it.url_flac + "")
-                                    musicList.add(musicData)
-                                }
+                        val searchData = Gson().fromJson(json, SongSearch::class.java).data
+                        val musicList = ArrayList<SearchData>()
+                        if (searchData != null && searchData.size > 0) {
+                            searchData.forEach {
+                                musicList.add(SearchData(it.name, it.pic,it.id, it.singer,it.url))
                             }
-                            callback.onSearchResult(musicList)
-                        } catch (e: Exception) {
                         }
+                        callback.onSearchResult(musicList)
                     }
 
                 })

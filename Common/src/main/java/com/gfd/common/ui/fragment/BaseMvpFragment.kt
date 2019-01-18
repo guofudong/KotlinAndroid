@@ -18,8 +18,7 @@ import javax.inject.Inject
  * @Email：878749089@qq.com
  * @descriptio：MVP架构 Fragment的基类
  */
-open abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
-
+abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T

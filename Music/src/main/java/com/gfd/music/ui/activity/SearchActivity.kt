@@ -29,6 +29,10 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.lzy.okgo.OkGo
+import com.lzy.okgo.callback.StringCallback
+import com.lzy.okgo.model.Response
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.music_layout_play_contral.*
 import kotlinx.android.synthetic.main.music_activity_search.*
 
@@ -96,8 +100,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
                 val song = mSearchAdapter.getDatas()[position]
                 ImageLoader.loadUrlImage(this@SearchActivity, song.pic, album)
                 songName.text = song.name
-                songaAtist.text = song.artist
-                mPlayService?.playMusic(song.url_music)
+                songaAtist.text = song.singer
+                mPlayService?.playMusic(song.playerUrl)
             }
 
         })
@@ -108,9 +112,12 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             }
 
         })
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 
-    private fun searchSong(keyword:String) {
+    private fun searchSong(keyword: String) {
         if (TextUtils.isEmpty(keyword)) {
             ToastUtils.instance.showToast("搜索内容不能为空")
             return

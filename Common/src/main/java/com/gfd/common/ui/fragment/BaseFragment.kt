@@ -17,7 +17,7 @@ import com.gfd.common.net.status.StatusLayoutManager
  * @descriptio：Fragment的基类
  */
 
-open abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     private var isFirstVisible: Boolean = true
     private var isFirstInvisible: Boolean = true
@@ -50,6 +50,7 @@ open abstract class BaseFragment : Fragment() {
         initData()
         setListener()
     }
+
     abstract fun initView()
 
     abstract fun initData()
@@ -139,6 +140,10 @@ open abstract class BaseFragment : Fragment() {
      */
     open fun onUserVisible() {
 
+    }
+
+    open fun onKeyBackPressed(): Boolean {
+        return false
     }
 
 }

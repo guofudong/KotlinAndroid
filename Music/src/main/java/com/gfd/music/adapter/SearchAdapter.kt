@@ -26,7 +26,7 @@ class SearchAdapter(val context: Context):BaseAdapter<SearchData>(context){
         val tvSongArtist = holder.getView<TextView>(R.id.tvSongArtist)
         val ivSongPic = holder.getView<ImageView>(R.id.ivItemSearch)
         ImageLoader.loadUrlImage(context,searchData.pic,ivSongPic)
-        tvSongArtist.text = searchData.artist
+        tvSongArtist.text = searchData.singer
         tvSongName.text = searchData.name
     }
 

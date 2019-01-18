@@ -20,7 +20,6 @@ class MusicPlayerEngine(service: MusicPlayService) : MediaPlayer.OnPreparedListe
     /** 是否准备完成*/
     private var mIsPrepared = false
 
-
     init {
         //一直保持，确保后台播放时不被关闭
         mPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK)

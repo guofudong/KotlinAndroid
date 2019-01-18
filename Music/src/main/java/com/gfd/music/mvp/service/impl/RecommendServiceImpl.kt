@@ -80,22 +80,25 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("热门电台：$json")
-                        val radioData = Gson().fromJson(json, Radio::class.java).data.djRadios
+                        val radio1 = Gson().fromJson(json, Radio::class.java)
                         val datas = ArrayList<RadioData>()
-                        if (radioData.isNotEmpty()) {
-                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "今日优选", "", ""))
-                            radioData.forEachWithIndex { index, value ->
-                                if (index <= 3) {
-                                    datas.add(RadioData(Concant.ITEM_TYPE_LIST, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(),
-                                            value.dj.avatarUrl))
-                                } else {
-                                    if (index == 4) {
-                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "电台推荐", "", ""))
+                        if (radio1.data != null) {
+                            val radioData = radio1.data.djRadios
+                            if (radioData.isNotEmpty()) {
+                                datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "今日优选", "", ""))
+                                radioData.forEachWithIndex { index, value ->
+                                    if (index <= 3) {
+                                        datas.add(RadioData(Concant.ITEM_TYPE_LIST, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(),
+                                                value.dj.avatarUrl, id = value.id))
+                                    } else {
+                                        if (index == 4) {
+                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "电台推荐", "", ""))
+                                        }
+                                        if (index == 7) {
+                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "情感调频", "", ""))
+                                        }
+                                        datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(), id = value.id))
                                     }
-                                    if (index == 7) {
-                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "情感调频", "", ""))
-                                    }
-                                    datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString()))
                                 }
                             }
                         }
@@ -105,18 +108,21 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                                     override fun onSuccess(response: Response<String>) {
                                         val json = response.body().toString()
                                         Logger.e("热门电台：$json")
-                                        val radioData2 = Gson().fromJson(json, Radio::class.java).data.djRadios
-                                        if (radioData2.isNotEmpty()) {
-                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "音乐故事", "", ""))
-                                            radioData2.forEachWithIndex { index, value ->
-                                                if (index < 9) {
-                                                    if (index == 3) {
-                                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "二次元", "", ""))
+                                        val radio2 = Gson().fromJson(json, Radio::class.java)
+                                        if (radio2.data != null) {
+                                            val radioData2 = radio2.data.djRadios
+                                            if (radioData2.isNotEmpty()) {
+                                                datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "音乐故事", "", ""))
+                                                radioData2.forEachWithIndex { index, value ->
+                                                    if (index < 9) {
+                                                        if (index == 3) {
+                                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "二次元", "", ""))
+                                                        }
+                                                        if (index == 6) {
+                                                            datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "3D|电子", "", ""))
+                                                        }
+                                                        datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(), id = value.id))
                                                     }
-                                                    if (index == 6) {
-                                                        datas.add(RadioData(Concant.ITEM_TYPE_TITLE, "", "3D|电子", "", ""))
-                                                    }
-                                                    datas.add(RadioData(Concant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString()))
                                                 }
                                             }
                                         }

@@ -71,7 +71,7 @@ class RadioAdapter(val context: Context) : BaseMultiAdapter<RadioData>(context) 
                     if (vibrantColor == Color.TRANSPARENT) {
                         vibrantColor = palette.getMutedColor(Color.TRANSPARENT)
                     }
-                   // itemData.color = vibrantColor
+                    itemData.color = vibrantColor
                     img.setImageBitmap(resource)
                 }
 

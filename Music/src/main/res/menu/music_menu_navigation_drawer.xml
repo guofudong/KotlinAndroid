@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:title="简书">
+
+            <menu>
+                <item
+                    android:id="@+id/item_one"
+                    android:title="慕涵盛华" />
+                <item
+                    android:id="@+id/item_two"
+                    android:title="网站推荐" />
+            </menu>
+        </item>
+
+    </group>
+
+    <item android:title="公众号">
+        <menu>
+            <item
+                android:id="@+id/subitem_one"
+                android:title="工具" />
+            <item
+                android:id="@+id/subitem_two"
+                android:title="PPT" />
+            <item
+                android:id="@+id/subitem_three"
+                android:title="设计" />
+        </menu>
+    </item>
+
+</menu>
