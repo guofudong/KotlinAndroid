@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gfd.music">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application>
-        <activity android:name=".ui.activity.SongListDetailActivity"/>
-        <activity android:name=".ui.activity.MvDetailActivity"/>
-        <activity android:name=".ui.activity.SearchActivity"/>
-        <service android:name=".service.MusicPlayService"/>
+        <activity android:name=".ui.activity.SongListDetailActivity" />
+        <activity android:name=".ui.activity.MvDetailActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
+
+        <service android:name=".service.MusicPlayService" />
     </application>
 
 </manifest>

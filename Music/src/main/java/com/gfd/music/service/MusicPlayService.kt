@@ -26,7 +26,7 @@ class MusicPlayService : Service() {
     }
 
     override fun onBind(intent: Intent): IBinder {
-        return MusicServiceStub(this)
+        return MusicServiceStub(this).asBinder()
     }
 
     fun playMusic(path: String) {

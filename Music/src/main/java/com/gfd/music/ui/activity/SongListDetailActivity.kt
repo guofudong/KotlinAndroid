@@ -22,6 +22,7 @@ import com.gfd.music.mvp.contract.SongListContract
 import com.gfd.music.mvp.preesnter.SongListDetailPresenter
 import com.gfd.music.service.MusicPlayService
 import com.gfd.music.service.MusicServiceStub
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.music_activity_song_list.*
 import kotlinx.android.synthetic.main.music_head_songlist_top.*
 import kotlinx.android.synthetic.main.music_layout_play_contral.*
@@ -49,7 +50,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
                 .build()
                 .inject(this)
         setStatusBar()
-        bindService(Intent(this@SongListDetailActivity, MusicPlayService::class.java),
+        bindService(Intent(applicationContext, MusicPlayService::class.java),
                 object : ServiceConnection {
                     override fun onServiceDisconnected(name: ComponentName) {
 
@@ -90,10 +91,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
                 ImageLoader.loadUrlImage(this@SongListDetailActivity, song.pic, album)
                 songName.text = song.name
                 songaAtist.text = song.autor
-                if (mPlayService != null) {
-                    mPlayService?.playMusicById(song.url)
-                }
-
+                mPlayService?.playMusicById(song.url)
             }
         })
         playMusic.setOnClickListener {
@@ -116,6 +114,11 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         tvTag.text = "编辑推荐：$datas.des"
         tvType.text = datas.type
         tvSongTag.text = duration + "万"
+    }
+
+    override fun onBackPressed() {
+        mPlayService?.stop()
+        super.onBackPressed()
     }
 
 }
