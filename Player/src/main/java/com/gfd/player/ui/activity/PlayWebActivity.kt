@@ -94,15 +94,13 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
                 mWebView.loadUrl(url)
                 return true
             }
-
-            override fun onPageFinished(p0: WebView?, p1: String?) {
-                super.onPageFinished(p0, p1)
-            }
         }
         mWebView.webChromeClient = object : WebChromeClient() {
+
             override fun onReceivedTitle(view: WebView, title: String) {
                 super.onReceivedTitle(view, videoName)
             }
+
         }
         //去掉qq浏览器的推广
         window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -133,10 +131,10 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun playWebVideo(datas: List<VideoItemData>) {
-        if(datas.isEmpty()){
+        if (datas.isEmpty()) {
             ToastUtils.instance.showToast("视频还没上映,请等待")
             finish()
-        }else{
+        } else {
             mDatas = datas
             mWebView.loadUrl(datas[0].videoUrl)
             episodeAdapter.addAll(mDatas)

@@ -29,12 +29,8 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.lzy.okgo.OkGo
-import com.lzy.okgo.callback.StringCallback
-import com.lzy.okgo.model.Response
-import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.music_layout_play_contral.*
 import kotlinx.android.synthetic.main.music_activity_search.*
+import kotlinx.android.synthetic.main.music_layout_play_contral.*
 
 /**
  * @Author : 郭富东

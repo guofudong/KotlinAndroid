@@ -74,7 +74,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     override fun initData() {
-        mPresenter.getVideoList(true)
+        mPresenter.getVideoList(false)
     }
 
     override fun setListener() {

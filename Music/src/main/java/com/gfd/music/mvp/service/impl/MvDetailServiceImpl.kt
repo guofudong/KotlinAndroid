@@ -25,16 +25,18 @@ class MvDetailServiceImpl @Inject constructor() : MvDetailService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         val mvDetail = Gson().fromJson(json, MvDetail::class.java).data
-                        val mvDetailData = MvDetailData(
-                                mvDetail.id,
-                                mvDetail.name,
-                                mvDetail.singer,
-                                mvDetail.playCount,
-                                mvDetail.publishTime,
-                                mvDetail.url,
-                                mvDetail.pic
-                        )
-                        callback.onMvDetail(mvDetailData)
+                        if (mvDetail != null) {
+                            val mvDetailData = MvDetailData(
+                                    mvDetail.id,
+                                    mvDetail.name,
+                                    mvDetail.singer,
+                                    mvDetail.playCount,
+                                    mvDetail.publishTime,
+                                    mvDetail.url,
+                                    mvDetail.pic
+                            )
+                            callback.onMvDetail(mvDetailData)
+                        }
                     }
                 })
 
@@ -48,13 +50,13 @@ class MvDetailServiceImpl @Inject constructor() : MvDetailService {
                         val json = response.body().toString()
                         val simiData = Gson().fromJson(json, SimiMv::class.java).data
                         val mvDatas = ArrayList<MvData>()
-                        if (simiData.videos != null) {
+                        if (simiData != null && simiData.videos != null) {
                             simiData.videos.forEach {
                                 mvDatas.add(MvData(it.title, it.vid, it.coverUrl, it.title, it.creator[0].userName, 0
                                         , duration = it.durationms))
                             }
-                            callback.onSimiMv(mvDatas)
                         }
+                        callback.onSimiMv(mvDatas)
                     }
                 })
     }
