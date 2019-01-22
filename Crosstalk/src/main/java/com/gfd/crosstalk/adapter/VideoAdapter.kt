@@ -35,7 +35,7 @@ import javax.script.ScriptException
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class VideoAdapter(val context: Context) : BaseAdapter<Video>(context) {
+class VideoAdapter(private val context: Context) : BaseAdapter<Video>(context) {
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
         val tvCommentCount = holder.getView<TextView>(R.id.tvCommentCount)

@@ -9,9 +9,9 @@ package com.gfd.music.common
 class Concant {
 
     companion object {
-        val ITEM_TYPE_TITLE = 0
-        val ITEM_TYPE_IMG = 1
-        val ITEM_TYPE_LIST = 2
+        const val ITEM_TYPE_TITLE = 0
+        const val ITEM_TYPE_IMG = 1
+        const val ITEM_TYPE_LIST = 2
 
     }
 }

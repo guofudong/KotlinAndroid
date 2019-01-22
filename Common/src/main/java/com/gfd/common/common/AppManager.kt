@@ -57,7 +57,7 @@ class AppManager private constructor(){
     fun exitApp(context:Context){
         finishAllActivity()
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        activityManager.killBackgroundProcesses(context.getPackageName())
+        activityManager.killBackgroundProcesses(context.packageName)
         System.exit(0)
     }
 

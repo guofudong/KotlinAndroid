@@ -12,7 +12,7 @@ import javax.inject.Singleton
  * @descriptio：
  */
 @Singleton
-@Component(modules = arrayOf(AppMoudle::class))
+@Component(modules = [AppMoudle::class])
 interface AppComponent{
 
     fun context():Context

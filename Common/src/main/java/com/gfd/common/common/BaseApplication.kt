@@ -2,6 +2,7 @@ package com.gfd.common.common
 
 import android.app.Application
 import android.content.Context
+import com.gfd.common.BuildConfig
 import com.gfd.common.injection.component.DaggerAppComponent
 import com.gfd.common.injection.module.AppMoudle
 import com.lzy.okgo.OkGo
@@ -25,7 +26,11 @@ open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initInjection()
-        Logger.addLogAdapter(AndroidLogAdapter())
+        Logger.addLogAdapter(object : AndroidLogAdapter() {
+            override fun isLoggable(priority: Int, tag: String?): Boolean {
+                return BuildConfig.DEBUG
+            }
+        })
         context = this
         //初始化腾讯Bugly
         CrashReport.initCrashReport(this, BaseConstant.BUGLY_APPID, true)

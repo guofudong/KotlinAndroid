@@ -13,8 +13,8 @@ import dagger.Component
  * @descriptio：
  */
 @ActivityScope
-@Component(dependencies = arrayOf(AppComponent::class),
-        modules = arrayOf(ActivityMoudle::class))
+@Component(dependencies = [AppComponent::class],
+        modules = [ActivityMoudle::class])
 interface ActivityComponent {
 
     fun context(): Context

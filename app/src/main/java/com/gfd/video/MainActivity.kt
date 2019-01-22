@@ -19,7 +19,7 @@ import java.util.*
  * @Author : 郭富东
  * @Date ：2018/8/2 - 15:22
  * @Email：878749089@qq.com
- * @descriptio：
+ * @descriptio：应用主页面：主要加载4个业务模块对应的Fragment
  */
 class MainActivity : BaseActivity() {
 
@@ -27,8 +27,13 @@ class MainActivity : BaseActivity() {
     private lateinit var mMusicFragment: BaseFragment
     private lateinit var mLiveFragment: BaseFragment
     private lateinit var mCrosstalkFragment: BaseFragment
+    private val STATUSBAR_POSITION = 1
 
     private val mStack = Stack<BaseFragment>()
+
+    override fun initOperate() {
+        setStatusBar()
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.app_activity_main
@@ -38,6 +43,29 @@ class MainActivity : BaseActivity() {
         initFragment()
     }
 
+    override fun initData() {
+    }
+
+    override fun setListener() {
+        bottomBar.setOnTabSelectListener {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
+            when (it) {
+                R.id.tab_home -> {//首页
+                    changeFragment(0)
+                }
+                R.id.tab_music -> {//音乐
+                    changeFragment(1)
+                }
+                R.id.tab_play -> {//直播
+                    changeFragment(2)
+                }
+                R.id.tab_mine -> {//相声
+                    changeFragment(3)
+                }
+            }
+        }
+    }
+
     /** 初始化fragment*/
     private fun initFragment() {
         val router = Router.instance
@@ -45,32 +73,27 @@ class MainActivity : BaseActivity() {
         val liveService = router.getService(LiveService::class.simpleName)
         val crosstalkService = router.getService(CrosstalkService::class.simpleName)
         val homeService = router.getService(HomeService::class.simpleName)
+        val bt = supportFragmentManager.beginTransaction()
         if (homeService != null) {
             mHomeFragment = (homeService as HomeService).getHomeFragment()
+            bt.add(R.id.rootLay, mHomeFragment)
+            mStack.add(mHomeFragment)
         }
         if (homeService != null) {
             mMusicFragment = (musicService as MusicService).getMusicFragment()
+            bt.add(R.id.rootLay, mMusicFragment)
         }
         if (homeService != null) {
             mLiveFragment = (liveService as LiveService).getLiveFragment()
+            bt.add(R.id.rootLay, mLiveFragment)
+            mStack.add(mLiveFragment)
         }
         if (homeService != null) {
             mCrosstalkFragment = (crosstalkService as CrosstalkService).getCrosstalkFragment()
+            bt.add(R.id.rootLay, mCrosstalkFragment)
+            mStack.add(mCrosstalkFragment)
         }
-        val bt = supportFragmentManager.beginTransaction()
-        bt.add(R.id.rootLay, mHomeFragment)
-        bt.add(R.id.rootLay, mMusicFragment)
-        bt.add(R.id.rootLay, mLiveFragment)
-        bt.add(R.id.rootLay, mCrosstalkFragment)
-        mStack.add(mHomeFragment)
-        mStack.add(mMusicFragment)
-        mStack.add(mLiveFragment)
-        mStack.add(mCrosstalkFragment)
         bt.commit()
-    }
-
-    override fun initOperate() {
-        setStatusBar()
     }
 
     /**
@@ -78,59 +101,24 @@ class MainActivity : BaseActivity() {
      * @param position Int
      */
     private fun changeFragment(position: Int) {
-        val bt = supportFragmentManager.beginTransaction()
-        mStack.forEach {
-            bt.hide(it)
-        }
-        bt.show(mStack[position])
-        bt.commit()
-    }
-
-    override fun initData() {
-    }
-
-    override fun setListener() {
-        bottomBar.setOnTabSelectListener {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
-            // PlayUtils.release()
-            when (it) {
-                R.id.tab_home -> {//首页
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    }
-                    changeFragment(0)
-                }
-                R.id.tab_music -> {//音乐
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    }
-                    changeFragment(1)
-                }
-                R.id.tab_play -> {//直播
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    }
-                    changeFragment(2)
-                }
-                R.id.tab_mine -> {//相声
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    }
-                    changeFragment(3)
-                }
+        if (position < mStack.size) {
+            val bt = supportFragmentManager.beginTransaction()
+            mStack.forEach {
+                bt.hide(it)
+            }
+            bt.show(mStack[position])
+            bt.commit()
+            //android6.0以后可以对状态栏文字颜色和图标进行修改
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.decorView.systemUiVisibility =
+                        if (position == STATUSBAR_POSITION) {
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        } else {
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        }
             }
         }
     }
-
-    /* override fun onBackPressed() {
-           if (mLiveFragment.onBackPressed()) {
-               return
-           }
-           if (PlayUtils.onBackPressd()) {
-               return
-           }
-           super.onBackPressed()
-     }*/
 
     /**
      * 返回到桌面
@@ -142,19 +130,6 @@ class MainActivity : BaseActivity() {
         startActivity(home)
     }
 
-  /*  override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (event.keyCode == KeyEvent.KEYCODE_BACK) {//点击的是返回键
-            if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) {//按键的按下事件
-                if (mMusicFragment.onKeyBackPressed()) {
-                    return true
-                }
-                backHome()
-            }
-            return true
-        }
-        return super.dispatchKeyEvent(event)
-    }*/
-
     override fun onBackPressed() {
         if (!mMusicFragment.onKeyBackPressed()) {
             backHome()
@@ -162,4 +137,3 @@ class MainActivity : BaseActivity() {
     }
 
 }
-
