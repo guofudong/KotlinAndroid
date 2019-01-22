@@ -74,7 +74,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     override fun initData() {
-        mPresenter.getVideoList(false)
+        mPresenter.getVideoList(true)
     }
 
     override fun setListener() {
@@ -112,10 +112,11 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
             startActivity(Intent(activity, SearchActivity::class.java))
         }
 
-        mStatusLayoutManager.setOnStatusLayoutClickListener(object :OnStatusLayoutClickListener{
+        mStatusLayoutManager.setOnStatusLayoutClickListener(object : OnStatusLayoutClickListener {
             override fun onEmptyViewClick(view: View) {
 
             }
+
             override fun onErrorViewClick(view: View) {
                 Logger.e("点击错误布局")
                 mPresenter.getVideoList(true)

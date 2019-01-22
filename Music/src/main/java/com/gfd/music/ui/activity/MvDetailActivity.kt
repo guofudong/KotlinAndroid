@@ -4,6 +4,7 @@ import android.graphics.PixelFormat
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.gfd.common.ext.config
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
@@ -22,6 +23,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import com.xiao.nicevideoplayer.NiceTextureView
@@ -59,6 +61,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     }
 
     override fun initView() {
+        window.setFormat(PixelFormat.TRANSLUCENT)
         setWebView()
         loading.visibility = View.VISIBLE
         content.visibility = View.GONE
@@ -155,19 +158,13 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private fun setWebView() {
         window.setFormat(PixelFormat.TRANSLUCENT)
         val webSettings = mWebView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.useWideViewPort = true // 关键点
-        //自动播放H5中的video
-        webSettings.mediaPlaybackRequiresUserGesture = false
+        webSettings.config()
         mWebView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 mWebView.loadUrl(url)
                 return true
             }
 
-            override fun onPageFinished(p0: WebView?, p1: String?) {
-                super.onPageFinished(p0, p1)
-            }
         }
         mWebView.webChromeClient = object : WebChromeClient() {
             override fun onReceivedTitle(view: WebView, title: String) {

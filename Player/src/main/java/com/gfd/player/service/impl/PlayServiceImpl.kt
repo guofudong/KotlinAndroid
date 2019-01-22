@@ -27,7 +27,8 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         val document = Jsoup.parse(json)
-                        val plotText = document.selectFirst("div[class=plot]").text()
+                        val e = document.selectFirst("div[class=plot]")
+                        val plotText = e?.text() ?: ""
                         val src = document.selectFirst("iframe#video").attr("src")
                         Logger.e("解析出来的地址：$src")
                         val split = src.split("url=")

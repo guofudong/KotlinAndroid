@@ -9,6 +9,8 @@ import com.gfd.common.utils.FixedSpeedScroller
 import com.gfd.common.widgets.SpacesItemDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerView
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.tencent.smtt.sdk.WebSettings
+import com.tencent.smtt.sdk.WebView
 import com.youth.banner.Banner
 import java.lang.reflect.Field
 
@@ -49,10 +51,10 @@ var BANNER_TIME = 3 * 1000
 
 fun Banner.player(titles: List<String>?, bannerImages: List<String>) {
 
-    if(null != titles){
+    if (null != titles) {
         this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR_TITLE)
         this.setBannerTitles(titles)
-    }else{
+    } else {
         this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR)
     }
     this.setImageLoader(com.gfd.common.utils.GlideImageLoader())
@@ -62,4 +64,16 @@ fun Banner.player(titles: List<String>?, bannerImages: List<String>) {
     this.setIndicatorGravity(com.youth.banner.BannerConfig.CENTER)
     this.setBannerAnimation(com.youth.banner.Transformer.Default)
     this.start()
+}
+
+fun WebSettings.config() {
+    this.javaScriptEnabled = true
+    this.useWideViewPort = true // 关键点
+    this.allowFileAccess = true
+    this.setSupportZoom(true)
+    this.loadWithOverviewMode = true
+    this.cacheMode = WebSettings.LOAD_NO_CACHE; // 不加载缓存内容
+    this.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+    //自动播放视频
+    this.mediaPlaybackRequiresUserGesture = false
 }

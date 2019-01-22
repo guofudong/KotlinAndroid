@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gfd.common.ext.config
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.utils.ToastUtils
@@ -22,6 +23,7 @@ import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.player_activity_play_webview.*
@@ -66,6 +68,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun initView() {
+        window.setFormat(PixelFormat.TRANSLUCENT)
         setWebView()
         ARouter.getInstance().inject(this)
         //设置剧集列表属性
@@ -80,15 +83,14 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         episodeList.setLoadMoreEnabled(false)
         episodeList.setPullRefreshEnabled(false)
         var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.player_head_playweb, null, false)
-        mTvPlot = headView.findViewById<TextView>(R.id.tvPlot)
+        mTvPlot = headView.findViewById(R.id.tvPlot)
         mLRecyclerViewAdapter.addHeaderView(headView)
     }
 
     private fun setWebView() {
         window.setFormat(PixelFormat.TRANSLUCENT)
         val webSettings = mWebView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.useWideViewPort = true // 关键点
+        webSettings.config()
         mWebView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 mWebView.loadUrl(url)

@@ -12,6 +12,7 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.activity.PlayWebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.activity.PlayMvActivity"

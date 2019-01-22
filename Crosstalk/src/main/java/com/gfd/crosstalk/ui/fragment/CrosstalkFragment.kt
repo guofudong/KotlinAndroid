@@ -1,9 +1,11 @@
 package com.gfd.crosstalk.ui.fragment
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.crosstalk.R
 import com.gfd.crosstalk.adapter.VideoAdapter
@@ -12,6 +14,7 @@ import com.gfd.crosstalk.injection.component.DaggerCrosstalkComponent
 import com.gfd.crosstalk.injection.moudle.CrosstalkMoudle
 import com.gfd.crosstalk.mvp.contract.CrosstalkContract
 import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
+import com.gfd.crosstalk.ui.activity.WebViewActivity
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
@@ -80,14 +83,18 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
         }
         mAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener{
             override fun onClick(view: View, position: Int) {
-                val videoUrl = mAdapter.getDatas()[position].source_url
+                val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getDatas()[position].source_url
                 val videoImage = mAdapter.getDatas()[position].large_image_url
                 val videoName = mAdapter.getDatas()[position].name
-                ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER)
+              /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
                         .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
-                        .withString(RouterPath.Player.KEY_IMAGE, videoImage)
+                      //  .withString(RouterPath.Player.KEY_IMAGE, videoImage)
                         .withString(RouterPath.Player.KEY_NAME, videoName)
-                        .navigation()
+                        .navigation()*/
+                val intent = Intent(activity,WebViewActivity::class.java)
+                intent.putExtra("videoUrl",videoUrl)
+                intent.putExtra("videoName",videoName)
+                startActivity(intent)
             }
         })
     }
