@@ -136,6 +136,7 @@ public *;
 -keep class com.gfd.crosstalk.entity.**{ *; }
 -keep class com.gfd.music.entity.**{ *; }
 -keep class com.gfd.player.entity.**{ *; }
+-keep class com.gfd.video.entity.**{ *; }
 
 #-----------处理第三方依赖库---------
 #ARouter

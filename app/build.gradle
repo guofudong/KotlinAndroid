@@ -71,6 +71,6 @@ dependencies {
 
 
 combuild {
-    applicationName = 'com.gfd.video.MainApplication'
+    applicationName = 'com.gfd.video.app.MainApplication'
     isRegisterAuto = true
 }

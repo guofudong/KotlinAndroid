@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ext.config
+import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.utils.ToastUtils
@@ -145,5 +146,13 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
     override fun showVideoPlot(plotText: String) {
         mTvPlot.text = plotText
+    }
+
+    override fun onDestroy() {
+        if (mWebView != null) {
+            //销毁，防止内存泄漏，自定义的扩展方法
+            mWebView.onDestroy()
+        }
+        super.onDestroy()
     }
 }

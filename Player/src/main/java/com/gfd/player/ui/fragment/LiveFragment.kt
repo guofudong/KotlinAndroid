@@ -71,19 +71,21 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
     override fun setListener() {
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
-            val liveData = mLeftDatas[position]
-            if (!liveData.isTitle) {
-                mLeftAdapter.setSelect(position)
-                mLRecyclerViewAdapter.notifyDataSetChanged()
-                videoUrl = liveData.live
-                mPlayerVideoPlayer.play(videoUrl)
-                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
+            if (mLeftAdapter.getCurrentSelect() != position) {
+                val liveData = mLeftDatas[position]
+                if (!liveData.isTitle) {
+                    mLeftAdapter.setSelect(position)
+                    mLRecyclerViewAdapter.notifyDataSetChanged()
+                    videoUrl = liveData.live
+                    mPlayerVideoPlayer.play(videoUrl)
+                    activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
+                }
             }
         }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
-        if(hidden){
+        if (hidden) {
             flag = mPlayerVideoPlayer.isPlaying
             mPlayerVideoPlayer.release()
             activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
@@ -93,9 +95,9 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     override fun showLiveInfo(datas: List<LiveDataDto.LiveData>) {
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             var index = 0
-            if(position == datas.size){
+            if (position == datas.size) {
                 index = datas.size - 1
-            }else{
+            } else {
                 index = position
             }
             val type = datas[index].getItemType()
@@ -117,12 +119,12 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     override fun showVideo(url: String) {
     }
 
-    //返回键
-    fun onBackPressed() :Boolean{
-       return mPlayerVideoPlayer.onBackPressed()
-    }
-    //=======================以下生命周期控制=======================
 
+    override fun onKeyBackPressed(): Boolean {
+        return mPlayerVideoPlayer.onBackPressed()
+    }
+
+    //=======================以下生命周期控制=======================
     override fun onResume() {
         super.onResume()
         if (flag)
@@ -159,8 +161,8 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
     override fun onDestroy() {
         super.onDestroy()//销毁
-        if(mPlayerVideoPlayer != null){
-            if (mPlayerVideoPlayer.isSystemFloatMode){
+        if (mPlayerVideoPlayer != null) {
+            if (mPlayerVideoPlayer.isSystemFloatMode) {
                 mPlayerVideoPlayer.quitWindowFloat()
             }
             mPlayerVideoPlayer.release()
@@ -171,7 +173,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
     internal var handler = Handler()
     internal var runnable: Runnable = Runnable {
-        if (mPlayerVideoPlayer != null && mPlayerVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE){
+        if (mPlayerVideoPlayer != null && mPlayerVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE) {
             position = mPlayerVideoPlayer.position
             mPlayerVideoPlayer.release()
         }

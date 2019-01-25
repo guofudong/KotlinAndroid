@@ -40,5 +40,7 @@ dependencies {
     api dependence.libCircleImageView
     api dependence.libBugly
     api dependence.libRhinoAndroid
+    implementation dependence.libLeakCanaryActivity
+    implementation dependence.libLeakCanaryFragment
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
 }

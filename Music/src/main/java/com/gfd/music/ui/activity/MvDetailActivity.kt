@@ -5,6 +5,7 @@ import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.gfd.common.ext.config
+import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
@@ -88,8 +89,8 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         //videoContainer.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
         if (intent != null) {
             val mvUrl = intent.getStringExtra("mvUrl")
-            mvId = intent.getStringExtra("mvId")
-            mvName = intent.getStringExtra("mvName")
+            mvId = intent.getStringExtra("mvId") ?: "1"
+            mvName = intent.getStringExtra("mvName") ?: ""
             mWebView.loadUrl(mvUrl)
         }
     }
@@ -150,11 +151,6 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer()
-    }
-
     private fun setWebView() {
         window.setFormat(PixelFormat.TRANSLUCENT)
         val webSettings = mWebView.settings
@@ -179,6 +175,14 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 outView[0].visibility = View.GONE
             }
         }
+    }
+
+    override fun onDestroy() {
+        if (mWebView != null) {
+            //销毁，防止内存泄漏，自定义的扩展方法
+            mWebView.onDestroy()
+        }
+        super.onDestroy()
     }
 
 }

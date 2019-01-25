@@ -10,6 +10,7 @@ import com.lzy.okgo.cookie.CookieJarImpl
 import com.lzy.okgo.cookie.store.SPCookieStore
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.squareup.leakcanary.LeakCanary
 import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
 
@@ -34,6 +35,10 @@ open class BaseApplication : Application() {
         context = this
         //初始化腾讯Bugly
         CrashReport.initCrashReport(this, BaseConstant.BUGLY_APPID, true)
+        if (BuildConfig.DEBUG) {
+            //初始化LeakCanary
+            LeakCanary.install(this)
+        }
     }
 
     private fun initInjection() {

@@ -5,4 +5,10 @@
     <versionName>1.0.0</versionName>
     <versionInfo>App的第1个版本，上线了一些最基础核心的功能,主要是要通过审核</versionInfo>
   </release>
+
+<release>
+  <versionCode>110</versionCode>
+  <versionName>1.1.0</versionName>
+  <versionInfo>App的第1个版本，上线了一些最基础核心的功能,主要是要通过审核</versionInfo>
+</release>
 </releases>

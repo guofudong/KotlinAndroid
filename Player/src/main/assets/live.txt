@@ -12,7 +12,7 @@
         {
             "name": "CCTV3综艺",
             "icon": "",
-            "live": "http://223.110.243.150/PLTV/3/224/3221225588/index.m3u8"
+            "live": "http://183.207.249.5/PLTV/3/224/3221225588/index.m3u8"
         },
         {
             "name": "CCTV4中文国际",
@@ -42,7 +42,7 @@
         {
             "name": "CCTV9记录",
             "icon": "",
-            "live": "http://223.110.243.158/PLTV/3/224/3221225532/index.m3u8"
+            "live": "http://183.251.61.207/PLTV/88888888/224/3221225820/index.m3u8"
         },
         {
             "name": "CCTV10科教",
@@ -62,7 +62,7 @@
         {
             "name": "CCTV13新闻",
             "icon": "",
-            "live": "http://223.110.243.142/ott.js.chinamobile.com/PLTV/3/224/3221225560/index.m3u8"
+            "live": "http://111.44.138.251:16414/contents41/live/CHANNEL5927f2e6ae894019aa3a5c62aaa88897/HD_6950400846260074992/live.m3u8"
         },
         {
             "name": "CCTV14少儿",

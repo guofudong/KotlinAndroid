@@ -13,7 +13,7 @@ import com.gfd.common.R
  * @Email：878749089@qq.com
  * @descriptio：加载对话框
  */
-class ProgressLoading private constructor(context: Context, them: Int) : Dialog(context, them) {
+class ProgressLoading  private constructor(context: Context, them: Int) : Dialog(context, them) {
 
     companion object {
         private lateinit var mDialog: ProgressLoading

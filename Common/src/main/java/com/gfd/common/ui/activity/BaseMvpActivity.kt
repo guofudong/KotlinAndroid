@@ -19,9 +19,9 @@ abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
     @Inject
     lateinit var mPresenter: T
 
-    lateinit var mActivityComponent: DaggerActivityComponent
+    protected lateinit var mActivityComponent: DaggerActivityComponent
 
-    lateinit var mProgressLoading: ProgressLoading
+    private var mProgressLoading: ProgressLoading? = null
 
     override fun initOperate() {
         initActivityInjection()
@@ -38,16 +38,22 @@ abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
     }
 
     override fun showLoading() {
-        mProgressLoading.showLoading()
+        mProgressLoading?.showLoading()
     }
 
     override fun hideLoading() {
-        mProgressLoading.hideLoading()
+        mProgressLoading?.hideLoading()
     }
 
     /**
      * 注册依赖对象
      */
     abstract fun injectComponent()
+
+    override fun onDestroy() {
+        mProgressLoading?.cancel()
+        mProgressLoading = null
+        super.onDestroy()
+    }
 
 }

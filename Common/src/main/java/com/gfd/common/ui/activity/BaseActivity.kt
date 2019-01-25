@@ -1,5 +1,8 @@
 package com.gfd.common.ui.activity
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LifecycleRegistry
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -15,13 +18,15 @@ import com.gfd.common.common.AppManager
  * @Email：878749089@qq.com
  * @descriptio：所有Activity的基类
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
 
+    private lateinit var mLifecycleRegistry: LifecycleRegistry
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val rootView = LayoutInflater.from(this).inflate(getLayoutId(), null)
         setContentView(rootView)
+        mLifecycleRegistry = LifecycleRegistry(this)
         AppManager.instance.addActivity(this)
         initOperate()
         initView()
@@ -29,6 +34,9 @@ abstract class BaseActivity : AppCompatActivity() {
         setListener()
     }
 
+    override fun getLifecycle(): Lifecycle {
+        return mLifecycleRegistry
+    }
 
     abstract fun initView()
 

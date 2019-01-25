@@ -82,7 +82,6 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
         }
         mAdapter.setOnTitleClickListener { _, data ->
             isSwitchVisible = false
-            videoParent  = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             val intent = Intent(activity, MvDetailActivity::class.java)
             intent.putExtra("json",data)
             startActivity(intent)

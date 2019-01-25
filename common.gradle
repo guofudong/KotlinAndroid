@@ -15,6 +15,7 @@ versions.rxlifecycle_kotlin = "2.2.2"
 versions.anko_sqlite = "0.10.5"
 
 versions.dagger = "2.17"
+versions.leakcanary = "1.6.3"
 
 versions.glide = "3.7.0"
 versions.bottom_bar = "2.3.1"
@@ -39,11 +40,10 @@ ext {
     android = [compileSdkVersion: 28,
                buildToolsVersion: '27.0.3',
                applicationId    : 'com.gfd.video',
-               applicationId    : 'com.gradle.demo',
                minSdkVersion    : 15,
                targetSdkVersion : 28,
-               versionCode      : 1,
-               versionName      : '1.0.0',
+               versionCode      : 110,
+               versionName      : '1.1.0',
                multiDexEnabled  : true]
 
     signConfigs = ['storeFile'    : 'sign.jks',
@@ -84,7 +84,9 @@ ext {
                   'libCircleImageView'          : "de.hdodenhof:circleimageview:$versions.circleimageview",
                   'libLogger'                   : "com.orhanobut:logger:$versions.logger",
                   'libRhinoAndroid'             : "io.apisense:rhino-android:$versions.rhino_android",
-                  'libBugly'                    : "com.tencent.bugly:crashreport:$versions.bugly"
+                  'libBugly'                    : "com.tencent.bugly:crashreport:$versions.bugly",
+                  'libLeakCanaryActivity'       : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
+                  'libLeakCanaryFragment'       : "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary"
     ]
 
 }

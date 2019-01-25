@@ -22,8 +22,8 @@ abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
-    lateinit var mProgressLoading: ProgressLoading
-    lateinit var mActivityComponent: DaggerActivityComponent
+    private  var mProgressLoading: ProgressLoading? = null
+    protected lateinit var mActivityComponent: DaggerActivityComponent
 
     override fun initOperate() {
         initActivityInjection()

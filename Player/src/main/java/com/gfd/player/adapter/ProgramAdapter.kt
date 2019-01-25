@@ -16,25 +16,25 @@ import com.gfd.player.entity.LiveDataDto
  */
 class ProgramAdapter(val context: Context) : BaseMultiAdapter<LiveDataDto.LiveData>(context) {
 
-    private  var currentSelect : Int = 1
+    private var currentSelect: Int = 1
 
     init {
         addItemType(Concant.ITEM_TYPE_TITLE, R.layout.player_item_program_live_title)
-        addItemType(Concant.ITEM_TYPE_CONTEXT,R.layout.player_item_program_live)
+        addItemType(Concant.ITEM_TYPE_CONTEXT, R.layout.player_item_program_live)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {
         val itemData = mDatas[position]
-        if(itemData.getItemType() == Concant.ITEM_TYPE_TITLE){
-            bindTitleItem(holder,itemData)
-        }else if(itemData.getItemType() == Concant.ITEM_TYPE_CONTEXT){
-            bindContentItem(holder,itemData,position)
+        if (itemData.getItemType() == Concant.ITEM_TYPE_TITLE) {
+            bindTitleItem(holder, itemData)
+        } else if (itemData.getItemType() == Concant.ITEM_TYPE_CONTEXT) {
+            bindContentItem(holder, itemData, position)
         }
     }
 
     private fun bindContentItem(holder: BaseViewHolder, liveData: LiveDataDto.LiveData, position: Int) {
         val tvName = holder.getView<TextView>(R.id.tv_live_item_content)
-        tvName.isSelected =(currentSelect == position)
+        tvName.isSelected = (currentSelect == position)
         tvName.text = liveData.name
     }
 
@@ -43,7 +43,11 @@ class ProgramAdapter(val context: Context) : BaseMultiAdapter<LiveDataDto.LiveDa
         tvName.text = liveData.name
     }
 
-    fun setSelect(position: Int){
+    fun setSelect(position: Int) {
         currentSelect = position
+    }
+
+    fun getCurrentSelect(): Int {
+        return currentSelect
     }
 }

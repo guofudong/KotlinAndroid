@@ -3,7 +3,9 @@ package com.gfd.crosstalk.ui.activity
 import android.graphics.Bitmap
 import android.graphics.PixelFormat
 import android.view.View
+import android.view.ViewGroup
 import com.gfd.common.ext.config
+import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.crosstalk.R
 import com.orhanobut.logger.Logger
@@ -80,5 +82,13 @@ class WebViewActivity : BaseActivity() {
             }
         }
         mWebView.loadUrl(videoUrl)
+    }
+
+    override fun onDestroy() {
+        if (mWebView != null) {
+            //销毁，防止内存泄漏，自定义的扩展方法
+            mWebView.onDestroy()
+        }
+        super.onDestroy()
     }
 }

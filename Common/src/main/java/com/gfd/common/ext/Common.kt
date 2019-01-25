@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 import com.gfd.common.R
 import com.gfd.common.utils.FixedSpeedScroller
 import com.gfd.common.widgets.SpacesItemDecoration
@@ -49,21 +50,23 @@ fun RecyclerView.gridInit(context: Context, span: Int = 3) {
 
 var BANNER_TIME = 3 * 1000
 
-fun Banner.player(titles: List<String>?, bannerImages: List<String>) {
-
-    if (null != titles) {
-        this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR_TITLE)
-        this.setBannerTitles(titles)
-    } else {
-        this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR)
+fun Banner.player(titles: List<String>?, bannerImages: List<String>?) {
+    val isNotEmptyImages = bannerImages?.isNotEmpty() ?: false
+    if (isNotEmptyImages) {
+        if (null != titles) {
+            this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR_TITLE)
+            this.setBannerTitles(titles)
+        } else {
+            this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR)
+        }
+        this.setImageLoader(com.gfd.common.utils.GlideImageLoader())
+        this.setImages(bannerImages)
+        this.setDelayTime(BANNER_TIME)
+        this.isAutoPlay(true)
+        this.setIndicatorGravity(com.youth.banner.BannerConfig.CENTER)
+        this.setBannerAnimation(com.youth.banner.Transformer.Default)
+        this.start()
     }
-    this.setImageLoader(com.gfd.common.utils.GlideImageLoader())
-    this.setImages(bannerImages)
-    this.setDelayTime(BANNER_TIME)
-    this.isAutoPlay(true)
-    this.setIndicatorGravity(com.youth.banner.BannerConfig.CENTER)
-    this.setBannerAnimation(com.youth.banner.Transformer.Default)
-    this.start()
 }
 
 fun WebSettings.config() {
@@ -76,4 +79,18 @@ fun WebSettings.config() {
     this.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
     //自动播放视频
     this.mediaPlaybackRequiresUserGesture = false
+}
+
+fun WebView.onDestroy() {
+    val parent = this.parent
+    if (parent != null) {
+        (parent as ViewGroup).removeView(this)
+    }
+    this.stopLoading()
+    this.onPause()
+    this.settings.javaScriptEnabled = false
+    this.clearHistory()
+    this.clearView()
+    this.removeAllViews()
+    this.destroy()
 }
