@@ -27,18 +27,12 @@ abstract class BaseFragment : Fragment() {
     private var isFirstResume: Boolean = true
     private lateinit var rootView: View
     protected lateinit var mStatusLayoutManager: StatusLayoutManager
-    private lateinit var mLifecycleRegistry: LifecycleRegistry
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initStatusLayout()
         rootView = mStatusLayoutManager.getRootLayout()
         initOperate()
-        mLifecycleRegistry = LifecycleRegistry(this)
         return rootView
-    }
-
-    override fun getLifecycle(): Lifecycle {
-        return mLifecycleRegistry
     }
 
     private fun initStatusLayout() {

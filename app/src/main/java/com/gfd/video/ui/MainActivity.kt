@@ -1,6 +1,5 @@
 package com.gfd.video.ui
 
-import android.content.Intent
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
@@ -35,6 +34,7 @@ class MainActivity : BaseActivity() {
 
     override fun initOperate() {
         setStatusBar()
+        setTheme(R.style.AppActivityTheme)
     }
 
     override fun getLayoutId(): Int {

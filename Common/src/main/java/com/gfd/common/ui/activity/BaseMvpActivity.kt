@@ -26,8 +26,6 @@ abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
     override fun initOperate() {
         initActivityInjection()
         injectComponent()
-        mProgressLoading = ProgressLoading.create(this)
-
     }
 
     private fun initActivityInjection() {
@@ -38,6 +36,9 @@ abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
     }
 
     override fun showLoading() {
+        if(mProgressLoading == null){
+            mProgressLoading = ProgressLoading(this)
+        }
         mProgressLoading?.showLoading()
     }
 

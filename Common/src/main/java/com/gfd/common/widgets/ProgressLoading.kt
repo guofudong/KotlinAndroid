@@ -2,7 +2,9 @@ package com.gfd.common.widgets
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.widget.ImageView
 import com.gfd.common.R
@@ -13,38 +15,26 @@ import com.gfd.common.R
  * @Email：878749089@qq.com
  * @descriptio：加载对话框
  */
-class ProgressLoading  private constructor(context: Context, them: Int) : Dialog(context, them) {
+class ProgressLoading constructor(context: Context) : Dialog(context,R.style.LightProgressDialog) {
 
-    companion object {
-        private lateinit var mDialog: ProgressLoading
-        private var animDrawable: AnimationDrawable? = null
+    private var animDrawable: AnimationDrawable? = null
 
-        /**
-         * 创建对话框
-         */
-        fun create(context: Context): ProgressLoading {
-            mDialog = ProgressLoading(context, R.style.LightProgressDialog)
-            mDialog.setContentView(R.layout.progress_dialog)
-            mDialog.setCancelable(true)
-            mDialog.setCanceledOnTouchOutside(false)
-            mDialog.window.attributes.gravity = Gravity.CENTER
-            val lp = mDialog.window.attributes
-            //设置Dialog背景层的透明度
-            lp.dimAmount = 0.2f
-            mDialog.window.attributes = lp
-            //获取动画
-            val loadingView = mDialog.findViewById<ImageView>(R.id.iv_loading)
-            animDrawable = loadingView.background as AnimationDrawable
-            return mDialog
-        }
+    init {
+        setContentView(R.layout.progress_dialog)
+        setCancelable(true)
+        setCanceledOnTouchOutside(false)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //获取动画
+        val loadingView = findViewById<ImageView>(R.id.iv_loading)
+        animDrawable = loadingView.background as AnimationDrawable
     }
 
     /**
      * 显示对话框
      */
     fun showLoading() {
-        if (!mDialog.isShowing) {
-            mDialog.show()
+        if (!this.isShowing) {
+            this.show()
         }
         animDrawable?.start()
     }
@@ -53,10 +43,9 @@ class ProgressLoading  private constructor(context: Context, them: Int) : Dialog
      * 隐藏对话框
      */
     fun hideLoading() {
-        if (mDialog.isShowing) {
-            mDialog.dismiss()
+        if (this.isShowing) {
+            this.dismiss()
         }
         animDrawable?.stop()
     }
-
 }

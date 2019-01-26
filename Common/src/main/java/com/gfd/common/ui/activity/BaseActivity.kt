@@ -18,24 +18,17 @@ import com.gfd.common.common.AppManager
  * @Email：878749089@qq.com
  * @descriptio：所有Activity的基类
  */
-abstract class BaseActivity : AppCompatActivity(), LifecycleOwner {
-
-    private lateinit var mLifecycleRegistry: LifecycleRegistry
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val rootView = LayoutInflater.from(this).inflate(getLayoutId(), null)
         setContentView(rootView)
-        mLifecycleRegistry = LifecycleRegistry(this)
         AppManager.instance.addActivity(this)
         initOperate()
         initView()
         initData()
         setListener()
-    }
-
-    override fun getLifecycle(): Lifecycle {
-        return mLifecycleRegistry
     }
 
     abstract fun initView()

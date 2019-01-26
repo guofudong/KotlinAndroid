@@ -68,6 +68,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         picUrl = intent.getStringExtra("pic_big")
         duration = intent.getStringExtra("file_duration")
         colorBg = intent.getIntExtra("color", Color.GRAY)
+        ImageLoader.loadUrlImage(this@SongListDetailActivity, picUrl, ivLogo)
         headRoot.setBackgroundColor(colorBg)
         collapsingTbl.setContentScrimColor(colorBg)
         mRecyclerView.layoutManager = LinearLayoutManager(this@SongListDetailActivity, LinearLayoutManager.VERTICAL, false)
@@ -108,7 +109,6 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
     }
 
     override fun showHead(datas: SongTitleData) {
-        ImageLoader.loadUrlImage(this@SongListDetailActivity, picUrl, ivLogo)
         title = datas.title
         tvTitle.text = title
         tvTag.text = "编辑推荐：$datas.des"

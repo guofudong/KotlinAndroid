@@ -1,14 +1,11 @@
 package com.gfd.common.ui.fragment
 
 import android.app.Activity
-import android.os.Bundle
-import android.view.View
 import com.gfd.common.common.BaseApplication
 import com.gfd.common.injection.component.DaggerActivityComponent
 import com.gfd.common.injection.module.ActivityMoudle
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
-import com.gfd.common.utils.LoadingHelper
 import com.gfd.common.widgets.ProgressLoading
 import javax.inject.Inject
 
@@ -41,11 +38,14 @@ abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
     }
 
     override fun showLoading() {
-        LoadingHelper.showLoading(activity)
+        if(mProgressLoading == null && activity != null){
+            mProgressLoading = ProgressLoading(activity!!)
+        }
+        mProgressLoading?.showLoading()
     }
 
     override fun hideLoading() {
-        LoadingHelper.hideLoading(activity)
+        mProgressLoading?.hideLoading()
     }
 
     override fun error() {

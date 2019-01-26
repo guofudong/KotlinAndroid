@@ -4,7 +4,6 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
-import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.crosstalk.R
@@ -15,7 +14,6 @@ import com.gfd.crosstalk.injection.moudle.CrosstalkMoudle
 import com.gfd.crosstalk.mvp.contract.CrosstalkContract
 import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
 import com.gfd.crosstalk.ui.activity.WebViewActivity
-import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
@@ -49,7 +47,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
     }
 
     override fun initView() {
-        mSwipe.setColorSchemeColors(resources.getColor(R.color.common_red))
+        mSwipeCrosstalk.setColorSchemeColors(resources.getColor(R.color.common_red))
         mRecycler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mAdapter = VideoAdapter(activity!!)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mAdapter)
@@ -69,7 +67,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
     }
 
     override fun setListener() {
-        mSwipe.setOnRefreshListener {
+        mSwipeCrosstalk.setOnRefreshListener {
             page = 1
             mPresenter.getVideoList(page)
         }
@@ -106,7 +104,9 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
             mRecycler.refreshComplete(0)
         }else{
             mAdapter.updateData(datas)
-            mSwipe.isRefreshing = false
+            if (mSwipeCrosstalk != null) {
+                mSwipeCrosstalk.isRefreshing = false
+            }
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }
