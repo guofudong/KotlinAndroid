@@ -22,8 +22,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val rootView = LayoutInflater.from(this).inflate(getLayoutId(), null)
-        setContentView(rootView)
+        val layoutId = getLayoutId()
+        if(layoutId != -1){
+            val rootView = LayoutInflater.from(this).inflate(layoutId, null)
+            setContentView(rootView)
+        }
         AppManager.instance.addActivity(this)
         initOperate()
         initView()
@@ -72,7 +75,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     /**
      * 设置透明状态栏
-     * @param isDarkColor Boolean ：状态栏文字颜色是否为暗色
      */
     fun setStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上

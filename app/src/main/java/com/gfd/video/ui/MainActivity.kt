@@ -34,7 +34,6 @@ class MainActivity : BaseActivity() {
 
     override fun initOperate() {
         setStatusBar()
-        setTheme(R.style.AppActivityTheme)
     }
 
     override fun getLayoutId(): Int {

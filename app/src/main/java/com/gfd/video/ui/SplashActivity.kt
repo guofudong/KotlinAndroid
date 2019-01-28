@@ -3,9 +3,9 @@ package com.gfd.video.ui
 import android.content.Intent
 import android.os.Build
 import android.os.CountDownTimer
+import android.support.annotation.RequiresApi
 import android.view.View
 import com.gfd.common.ui.activity.BaseActivity
-import com.gfd.video.R
 
 
 /**
@@ -17,11 +17,13 @@ import com.gfd.video.R
 class SplashActivity : BaseActivity() {
 
     private val TIME_COUNTDOEN: Long = 4 * 1000
+
     override fun initView() {
     }
 
     override fun initData() {
         object : CountDownTimer(1000, TIME_COUNTDOEN) {
+            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onFinish() {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
@@ -36,7 +38,7 @@ class SplashActivity : BaseActivity() {
 
     override fun getLayoutId(): Int {
         hideBottomUIMenu()
-        return R.layout.app_activity_splash
+        return -1
     }
 
     /**

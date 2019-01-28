@@ -8,13 +8,9 @@
         <item name="colorAccent">@color/app_colorAccent</item>
     </style>
 
-    <style name="AppActivityTheme" parent="@style/MyAppTheme" tools:ignore="ResourceName">
-        <item name="android:windowIsTranslucent">false</item>
-    </style>
-
-    <style name="SplashTheme" parent="@style/MyAppTheme" tools:ignore="ResourceName">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="ResourceName">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/app_bitmap_splash_bg</item>
     </style>
 
 </resources>

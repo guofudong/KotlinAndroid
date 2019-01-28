@@ -16,6 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +26,11 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppActivityTheme"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppTheme"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
     </application>
 
 </manifest>
