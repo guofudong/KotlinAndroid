@@ -21,6 +21,7 @@ class WebViewActivity : BaseActivity() {
     private var mIsPageLoading: Boolean = false
 
     override fun initView() {
+        showDialogLoading()
         window.setFormat(PixelFormat.TRANSLUCENT)
         if (intent != null) {
             videoUrl = intent.getStringExtra("videoUrl")
@@ -64,6 +65,7 @@ class WebViewActivity : BaseActivity() {
             override fun onPageFinished(p0: WebView?, p1: String?) {
                 super.onPageFinished(p0, p1)
                 mIsPageLoading = false
+                hideDialogLoading()
             }
         }
         mWebView.webChromeClient = object : WebChromeClient() {

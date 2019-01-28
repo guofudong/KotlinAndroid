@@ -9,7 +9,7 @@
             android:mipMap="true"
             android:antialias="true"
             android:filter="true"
-            android:src="@drawable/app_logo">
+            android:src="@drawable/app_ic_splash">
         </bitmap>
     </item>
 </layer-list>

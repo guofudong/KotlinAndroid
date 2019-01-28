@@ -11,10 +11,10 @@
     <style name="AppActivityTheme" parent="@style/MyAppTheme" tools:ignore="ResourceName">
         <item name="android:windowIsTranslucent">false</item>
     </style>
-    
+
     <style name="SplashTheme" parent="@style/MyAppTheme" tools:ignore="ResourceName">
-        <item name="android:windowBackground">@drawable/app_bitmap_splash_bg</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
 </resources>

@@ -69,6 +69,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun initView() {
+        showDialogLoading()
         window.setFormat(PixelFormat.TRANSLUCENT)
         setWebView()
         ARouter.getInstance().inject(this)
@@ -97,10 +98,15 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
                 mWebView.loadUrl(url)
                 return true
             }
+
+            override fun onPageFinished(view: WebView, url: String) {
+                super.onPageFinished(view, url)
+                hideDialogLoading()
+            }
         }
         mWebView.webChromeClient = object : WebChromeClient() {
 
-            override fun onReceivedTitle(view: WebView, title: String) {
+            override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, videoName)
             }
 

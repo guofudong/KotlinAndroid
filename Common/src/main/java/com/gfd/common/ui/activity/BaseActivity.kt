@@ -1,8 +1,5 @@
 package com.gfd.common.ui.activity
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.gfd.common.common.AppManager
+import com.gfd.common.widgets.ProgressLoading
 
 /**
  * @Author : 郭富东
@@ -19,6 +17,8 @@ import com.gfd.common.common.AppManager
  * @descriptio：所有Activity的基类
  */
 abstract class BaseActivity : AppCompatActivity() {
+
+    private var mProgressLoading: ProgressLoading? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,20 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        mProgressLoading?.cancel()
+        mProgressLoading = null
         AppManager.instance.finishActivity(this)
+    }
+
+    protected fun showDialogLoading() {
+        if (mProgressLoading == null) {
+            mProgressLoading = ProgressLoading(this)
+        }
+        mProgressLoading?.showLoading()
+    }
+
+    protected fun hideDialogLoading() {
+        mProgressLoading?.hideLoading()
     }
 
     /**

@@ -167,17 +167,17 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
     public override fun onPause() {
         super.onPause()
-        if (homeVideoPlayer.isSystemFloatMode())
+        if (homeVideoPlayer.isSystemFloatMode)
             return
         //暂停
-        flag = homeVideoPlayer.isPlaying()
+        flag = homeVideoPlayer.isPlaying
         homeVideoPlayer.pause()
     }
 
 
     public override fun onStop() {
         super.onStop()
-        if (homeVideoPlayer.isSystemFloatMode())
+        if (homeVideoPlayer.isSystemFloatMode)
             return
         //不马上销毁 延时15秒
         handler.postDelayed(runnable, (1000 * 15).toLong())
@@ -185,7 +185,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
     public override fun onDestroy() {
         super.onDestroy()//销毁
-        if (homeVideoPlayer.isSystemFloatMode())
+        if (homeVideoPlayer.isSystemFloatMode)
             homeVideoPlayer.quitWindowFloat()
         homeVideoPlayer.release()
     }
@@ -193,8 +193,8 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
     internal var handler = Handler()
     internal var runnable: Runnable = Runnable {
-        if (homeVideoPlayer.getCurrentState() != IVideoPlayer.STATE_AUTO_COMPLETE)
-            position = homeVideoPlayer.getPosition()
+        if (homeVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE)
+            position = homeVideoPlayer.position
         homeVideoPlayer.release()
     }
 

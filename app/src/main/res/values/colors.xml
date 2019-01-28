@@ -7,5 +7,5 @@
     <!--主页底部tab文件颜色-->
     <color name="app_tab_select">#ff4081</color>
     <color name="app_tab_normal">#4b4a4a</color>
-    <color name="app_splash_bg">#ff0001</color>
+    <color name="app_splash_bg">#d83c34</color>
 </resources>

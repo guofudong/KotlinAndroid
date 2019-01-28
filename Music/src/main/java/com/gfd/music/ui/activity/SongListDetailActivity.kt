@@ -51,16 +51,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
                 .inject(this)
         setStatusBar()
         bindService(Intent(applicationContext, MusicPlayService::class.java),
-                object : ServiceConnection {
-                    override fun onServiceDisconnected(name: ComponentName) {
-
-                    }
-
-                    override fun onServiceConnected(name: ComponentName?, service: IBinder) {
-                        mPlayService = (service as MusicServiceStub).getService()
-                    }
-
-                }, Context.BIND_AUTO_CREATE)
+                connection, Context.BIND_AUTO_CREATE)
     }
 
     override fun initView() {
@@ -119,6 +110,20 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
     override fun onBackPressed() {
         mPlayService?.stop()
         super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService(connection)
+    }
+
+    val connection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+
+        }
+        override fun onServiceConnected(name: ComponentName?, service: IBinder) {
+            mPlayService = (service as MusicServiceStub).getService()
+        }
     }
 
 }

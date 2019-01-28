@@ -25,8 +25,6 @@ class SplashActivity : BaseActivity() {
             override fun onFinish() {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_right,
-                        R.anim.slide_out_left)
                 finish()
             }
 

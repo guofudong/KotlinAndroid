@@ -7,11 +7,10 @@
 
     <TextView
         android:id="@+id/tv_item_num"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dp_28"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:padding="@dimen/dp_6"
         android:textColor="@color/common_gray"
         android:textSize="@dimen/sp_16" />
 
