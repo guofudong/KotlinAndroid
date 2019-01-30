@@ -3,7 +3,7 @@ package com.gfd.provider.router.component
 /**
  * 组件加载，卸载接口
  */
-interface IApplicationLoad {
+interface IApplicationLike {
 
     /** 组件加载*/
     fun registered()

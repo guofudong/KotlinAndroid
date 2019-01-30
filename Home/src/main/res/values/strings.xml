@@ -1,4 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" tools:ignore="ResourceName">Home</string>
     <string name="home_SerachHint">全网VIP影视搜索</string>
+    <string name="home_head_category01">正在热映</string>
+    <string name="home_head_category02">即将上映</string>
+    <string name="home_head_category03">电影排行</string>
+    <string name="home_head_category04">随便看看</string>
 </resources>

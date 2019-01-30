@@ -5,6 +5,7 @@ dependencies {
 
     api dependence.libSupportV7
     api dependence.libSupportV4
+    api dependence.libLeakConstraintLayout
 
     api dependence.libKotlinJre7
     api dependence.libDesign

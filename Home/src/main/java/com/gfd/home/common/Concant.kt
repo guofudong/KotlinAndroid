@@ -26,6 +26,11 @@ class Concant {
         const val CATEGORY_MOVIE = 2
         const val CATEGORY_DINASHI = 3
         const val CATEGORY_ZONGYI = 4
+        //电影列表类型
+        const val TYPE_MOVIE_01 = 1
+        const val TYPE_MOVIE_02 = 2
+        const val TYPE_MOVIE_03 = 3
+        const val TYPE_MOVIE_04 = 4
     }
 
 }

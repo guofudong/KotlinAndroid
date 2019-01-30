@@ -10,7 +10,7 @@ class Router private constructor() {
 
     private val services = hashMapOf<String, Any>()
     //注册的组件的集合
-    private val components = hashMapOf<String, IApplicationLoad>()
+    private val components = hashMapOf<String, IApplicationLike>()
 
     private object RouterHolder {
         val holder = Router()
@@ -57,7 +57,7 @@ class Router private constructor() {
         }
         try {
             val clazz = Class.forName(classname)
-            val applicationLike = clazz.newInstance() as IApplicationLoad
+            val applicationLike = clazz.newInstance() as IApplicationLike
             applicationLike.registered()
             components[classname!!] = applicationLike
         } catch (e: Exception) {
@@ -82,7 +82,7 @@ class Router private constructor() {
         }
         try {
             val clazz = Class.forName(classname)
-            val applicationLike = clazz.newInstance() as IApplicationLoad
+            val applicationLike = clazz.newInstance() as IApplicationLike
             applicationLike.unregistered()
             components.remove(classname)
         } catch (e: Exception) {

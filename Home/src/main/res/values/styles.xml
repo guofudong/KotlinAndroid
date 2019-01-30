@@ -8,4 +8,35 @@
         <item name="colorAccent">@color/home_colorAccent</item>
     </style>
 
+    <style name="home_style_home_head_icon">
+        <item name="android:layout_width">@dimen/dp_42</item>
+        <item name="android:layout_height">@dimen/dp_42</item>
+    </style>
+
+    <style name="home_style_home_head_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_4</item>
+        <item name="android:textColor">@color/common_black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="home_style_home_head_llay">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="home_style_movie_list_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_12</item>
+        <item name="android:layout_marginTop">@dimen/dp_6</item>
+        <item name="android:textColor">@color/common_gray</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

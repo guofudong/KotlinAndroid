@@ -45,7 +45,7 @@ api project(':Music')
 >这样主Module在开发时不再依赖具体的业务模块，只是使用业务模块提供的服务，所以业务模块需要实现Provider模块定义的接口，提供具体的业务。
 
 ```
-interface IApplicationLoad {
+interface IApplicationLike {
 
     /** 组件加载*/
     fun registered()

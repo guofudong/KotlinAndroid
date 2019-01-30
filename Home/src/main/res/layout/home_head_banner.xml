@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_6">
+
+    <com.youth.banner.Banner
+        android:id="@+id/mBanner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:indicator_drawable_selected="@drawable/home_sp_indicator_select"
+        app:indicator_height="@dimen/dp_6"
+        app:indicator_width="@dimen/dp_6"
+        app:layout_constraintDimensionRatio="H,16:8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/home_linearlayout2"
+        style="@style/home_style_home_head_llay"
+        app:layout_constraintEnd_toStartOf="@+id/home_linearlayout3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mBanner">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/homeCategoty01"
+            style="@style/home_style_home_head_icon"
+            android:src="@drawable/home_ic_head_category01" />
+
+        <TextView
+            style="@style/home_style_home_head_tv"
+            android:text="@string/home_head_category01"
+            android:textColor="@color/common_red" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_linearlayout3"
+        style="@style/home_style_home_head_llay"
+        app:layout_constraintEnd_toStartOf="@+id/home_linearlayout4"
+        app:layout_constraintStart_toEndOf="@+id/home_linearlayout2"
+        app:layout_constraintTop_toBottomOf="@+id/mBanner">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/homeCategoty02"
+            style="@style/home_style_home_head_icon"
+            android:src="@drawable/home_ic_head_category02" />
+
+        <TextView
+            style="@style/home_style_home_head_tv"
+            android:text="@string/home_head_category02" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_linearlayout4"
+        style="@style/home_style_home_head_llay"
+        app:layout_constraintEnd_toStartOf="@+id/home_linearlayout5"
+        app:layout_constraintStart_toEndOf="@+id/home_linearlayout3"
+        app:layout_constraintTop_toBottomOf="@+id/mBanner">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/homeCategoty03"
+            style="@style/home_style_home_head_icon"
+            android:src="@drawable/home_ic_head_category03" />
+
+        <TextView
+            style="@style/home_style_home_head_tv"
+            android:text="@string/home_head_category03" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_linearlayout5"
+        style="@style/home_style_home_head_llay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_linearlayout4"
+        app:layout_constraintTop_toBottomOf="@+id/mBanner">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/homeCategoty04"
+            style="@style/home_style_home_head_icon"
+            android:src="@drawable/home_ic_head_category04" />
+
+        <TextView
+            style="@style/home_style_home_head_tv"
+            android:text="@string/home_head_category04" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

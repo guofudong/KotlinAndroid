@@ -149,7 +149,7 @@ class CompileCodeTransform extends Transform {
     private boolean isActivator(CtClass ctClass) {
         try {
             for (CtClass ctClassInter : ctClass.getInterfaces()) {
-                if ("com.gfd.provider.router.component.IApplicationLoad" == ctClassInter.name) {
+                if ("com.gfd.provider.router.component.IApplicationLike" == ctClassInter.name) {
                     return true
                 }
             }

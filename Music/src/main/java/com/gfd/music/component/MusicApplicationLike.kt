@@ -1,10 +1,10 @@
 package com.gfd.home.component
 
-import com.gfd.provider.router.component.IApplicationLoad
+import com.gfd.provider.router.component.IApplicationLike
 import com.gfd.provider.router.component.Router
 import com.gfd.provider.router.service.MusicService
 
-class MusicApplicationLoad : IApplicationLoad {
+class MusicApplicationLoad : IApplicationLike {
 
     var router = Router.instance
 

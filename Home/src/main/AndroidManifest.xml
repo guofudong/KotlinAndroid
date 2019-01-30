@@ -4,5 +4,6 @@
     <application>
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.CategoryActivity"/>
+        <activity android:name=".ui.activity.MovieListActivity"/>
     </application>
 </manifest>

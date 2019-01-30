@@ -23,7 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val layoutId = getLayoutId()
-        if(layoutId != -1){
+        if (layoutId != -1) {
             val rootView = LayoutInflater.from(this).inflate(layoutId, null)
             setContentView(rootView)
         }
@@ -57,7 +57,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mProgressLoading?.cancel()
+        mProgressLoading?.dismiss()
         mProgressLoading = null
         AppManager.instance.finishActivity(this)
     }

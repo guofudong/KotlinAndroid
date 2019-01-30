@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/homeMovieListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingBottom="@dimen/dp_6"
+        android:text="正在热映"
+        android:textColor="@color/common_black"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/homeTvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_12"
+        android:drawableRight="@drawable/home_ic_arrow_down"
+        android:gravity="center"
+        android:text="北京"
+        android:textColor="@color/common_black"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/homeMovieListTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homeMovieListTitle" />
+
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/homeMovieList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeMovieListTitle" />
+
+</android.support.constraint.ConstraintLayout>

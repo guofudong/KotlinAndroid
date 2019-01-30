@@ -20,13 +20,16 @@ import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.mvp.presenter.VedioPresenter
 import com.gfd.home.ui.activity.CategoryActivity
+import com.gfd.home.ui.activity.MovieListActivity
 import com.gfd.home.ui.activity.SearchActivity
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.kotlin.base.utils.AppPrefsUtils
 import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.home_fragment_home.*
+import kotlinx.android.synthetic.main.home_head_banner.*
 
 
 /**
@@ -48,6 +51,10 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     private lateinit var imageDatas: List<BinnerData>
     private lateinit var mVideoDatas: List<VideoItemData>
     private lateinit var path: String
+    private lateinit var homeCategoty01: CircleImageView
+    private lateinit var homeCategoty02: CircleImageView
+    private lateinit var homeCategoty03: CircleImageView
+    private lateinit var homeCategoty04: CircleImageView
 
     override fun injectComponent() {
         DaggerVideoComponent.builder().activityComponent(mActivityComponent)
@@ -67,9 +74,13 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         mRecyclerView.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         //添加Head View
-        val headView = LayoutInflater.from(context).inflate(R.layout.home_head_home, null, false)
-        mBanner = headView.findViewById(R.id.mBanner)
-        mLRecyclerViewAdapter.addHeaderView(headView)
+        val headViewBanner = LayoutInflater.from(context).inflate(R.layout.home_head_banner, null, false)
+        mBanner = headViewBanner.findViewById(R.id.mBanner)
+        homeCategoty01 = headViewBanner.findViewById(R.id.homeCategoty01)
+        homeCategoty02 = headViewBanner.findViewById(R.id.homeCategoty02)
+        homeCategoty03 = headViewBanner.findViewById(R.id.homeCategoty03)
+        homeCategoty04 = headViewBanner.findViewById(R.id.homeCategoty04)
+        mLRecyclerViewAdapter.addHeaderView(headViewBanner)
 
     }
 
@@ -122,6 +133,36 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
                 mPresenter.getVideoList(true)
             }
         })
+        //分类点击
+        homeCategoty01.setOnClickListener {
+            //正在热映
+            val intent = Intent(activity, MovieListActivity::class.java)
+            intent.putExtra("title", "正在热映")
+            intent.putExtra("movieType", Concant.TYPE_MOVIE_01)
+            startActivity(intent)
+
+        }
+        homeCategoty02.setOnClickListener {
+            //即将上映
+            val intent = Intent(activity, MovieListActivity::class.java)
+            intent.putExtra("title", "即将上映")
+            intent.putExtra("movieType", Concant.TYPE_MOVIE_02)
+            startActivity(intent)
+        }
+        homeCategoty03.setOnClickListener {
+            //电影排行
+            val intent = Intent(activity, MovieListActivity::class.java)
+            intent.putExtra("title", "电影排行")
+            intent.putExtra("movieType", Concant.TYPE_MOVIE_03)
+            startActivity(intent)
+        }
+        homeCategoty04.setOnClickListener {
+            //随便看看
+            val intent = Intent(activity, MovieListActivity::class.java)
+            intent.putExtra("title", "随便看看")
+            intent.putExtra("movieType", Concant.TYPE_MOVIE_04)
+            startActivity(intent)
+        }
     }
 
     override fun showVideoList(data: VideoListData) {

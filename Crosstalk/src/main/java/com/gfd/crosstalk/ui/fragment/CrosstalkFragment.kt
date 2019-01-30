@@ -25,12 +25,12 @@ import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
  * @Email：878749089@qq.com
  * @descriptio：
  */
-class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContract.View{
+class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContract.View {
 
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mAdapter: VideoAdapter
     private var isLoadMore = false
-    private var videoParent : ViewGroup? = null
+    private var videoParent: ViewGroup? = null
     private var page = 1
 
     override fun injectComponent() {
@@ -72,37 +72,37 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
             mPresenter.getVideoList(page)
         }
         mRecycler.setOnLoadMoreListener {
-            if(page > 10){
+            if (page > 10) {
                 mRecycler.setNoMore(true)
             }
             isLoadMore = true
             page++
             mPresenter.getVideoList(page)
         }
-        mAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener{
+        mAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
                 val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getDatas()[position].source_url
                 val videoImage = mAdapter.getDatas()[position].large_image_url
                 val videoName = mAdapter.getDatas()[position].name
-              /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
-                        .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
-                      //  .withString(RouterPath.Player.KEY_IMAGE, videoImage)
-                        .withString(RouterPath.Player.KEY_NAME, videoName)
-                        .navigation()*/
-                val intent = Intent(activity,WebViewActivity::class.java)
-                intent.putExtra("videoUrl",videoUrl)
-                intent.putExtra("videoName",videoName)
+                /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
+                          .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
+                        //  .withString(RouterPath.Player.KEY_IMAGE, videoImage)
+                          .withString(RouterPath.Player.KEY_NAME, videoName)
+                          .navigation()*/
+                val intent = Intent(activity, WebViewActivity::class.java)
+                intent.putExtra("videoUrl", videoUrl)
+                intent.putExtra("videoName", videoName)
                 startActivity(intent)
             }
         })
     }
 
     override fun showVideoList(datas: List<Video>) {
-        if(isLoadMore){
+        if (isLoadMore) {
             isLoadMore = false
             mAdapter.addAll(datas)
             mRecycler.refreshComplete(0)
-        }else{
+        } else {
             mAdapter.updateData(datas)
             if (mSwipeCrosstalk != null) {
                 mSwipeCrosstalk.isRefreshing = false
@@ -113,7 +113,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>() ,CrosstalkContra
 
     override fun onResume() {
         super.onResume()
-        if(videoParent != null){
+        if (videoParent != null) {
             val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
             videoParent?.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)

@@ -28,7 +28,7 @@ class VideoListAdapter(private var context: Context?) : BaseMultiAdapter<VideoIt
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {
-        val itemData = mDatas.get(position)
+        val itemData = mDatas[position]
         val itemType = itemData.getItemType()
         if(itemType == ITEM_TYPE_TITLE){
             bindTitleItem(holder,itemData)
