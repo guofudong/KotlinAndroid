@@ -57,6 +57,9 @@ interface MusicService {
 }
 ```
 
+>组件之间页面跳转（通信）使用的是路由：**ARouter**
+
+
 ### componentrelease：文件夹
 >该文件夹存放的是业务模块的.aar包，在执行业务Module的`assembleRelease`命令后会生成对应的.aar包，也可以上传到maven仓库。这样的话主Module只需要依赖.arr包。哪个业务Module改变只需要编译哪个生成对应的.aar包即可，实现真正的组件化。
 
