@@ -10,7 +10,7 @@ import groovy.xml.MarkupBuilder
 ext {
     versionName = rootProject.ext.android.versionName
     versionCode = rootProject.ext.android.versionCode
-    versionInfo = 'App的第1个版本，上线了一些最基础核心的功能,主要是要通过审核'
+    versionInfo = 'App的第2个版本，修复网络数据解析问题，处于稳定版本。'
     destFile = file('releasesInfo.xml')//指定输出文件
     if (destFile != null && !destFile.exists()) {
         destFile.createNewFile()
