@@ -118,12 +118,13 @@ interface MusicService {
 
 >Common为公共库，主要包含一些基类和常用的工具类，Provider依赖于Common，是模块真正依赖的库。其中业务模块包括：Home，Music，User，Player。每个业务模块对应一个Module。主模块APP和业务模块都依赖Provider，主模块APP在开发阶段不再依赖具体的业务模块，彻底隔离业务模块之间的耦合。业务模块统一实现Provider中定义的接口，暴露需要提供的服务。
 
-## 首页模块效果图
+## 效果图
+### 首页模块
 ![](/screenshot/home.png)  ![](/screenshot/player.png)
 
 ![](/screenshot/search2.png)  ![](/screenshot/search1.png)
 
-## 音乐模块效果图
+### 音乐模块
 
 ![](/screenshot/music1.png)  ![](/screenshot/music2.png)
 
@@ -133,6 +134,6 @@ interface MusicService {
 
  ![](/screenshot/music3.png)  
  
- ## 电视直播，相声模块
+ ### 电视直播，相声模块
  
 ![](/screenshot/play01.png)  ![](/screenshot/crosstalk01.png)  
