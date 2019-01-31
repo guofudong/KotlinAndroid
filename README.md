@@ -73,12 +73,7 @@ interface MusicService {
 
 [Jsoup](http://www.open-open.com/jsoup/)
 
-### 屏幕适配
-采用smallestWidth适配
-
->smallestWidth限定符适配和宽高限定符适配最大的区别在于，前者有很好的容错机制，如果没有对应dp文件夹，系统会向下寻找，比如离360dp最近的只有value-sw350dp，那么Android就会选择value-sw350dp文件夹下面的资源文件。这个特性就完美的解决了上文提到的宽高限定符的容错问题。
-
->[自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)   [AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
+### build文件
 
 #### [common.gradle](/common.gradle)：三方依赖库和版本管理，统一放在该文件中。
 
@@ -90,7 +85,32 @@ interface MusicService {
 
 #### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
 
+```
+//该文档自动生成，只需要在build中配置版本更新日志。
+<?xml version="1.0" encoding="GBK"?>
+<releases>
+  <release>
+    <versionCode>1</versionCode>
+    <versionName>1.0.0</versionName>
+    <versionInfo>App的第1个版本，上线了一些最基础核心的功能。</versionInfo>
+  </release>
+
+<release>
+  <versionCode>110</versionCode>
+  <versionName>1.1.0</versionName>
+  <versionInfo>App的第2个版本，修复网络数据解析问题，处于稳定版本。</versionInfo>
+</release>
+</releases>
+```
+
 >[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
+
+### 屏幕适配
+采用smallestWidth适配
+
+>smallestWidth限定符适配和宽高限定符适配最大的区别在于，前者有很好的容错机制，如果没有对应dp文件夹，系统会向下寻找，比如离360dp最近的只有value-sw350dp，那么Android就会选择value-sw350dp文件夹下面的资源文件。这个特性就完美的解决了上文提到的宽高限定符的容错问题。
+
+>[自动生成适配文件工具](https://github.com/ladingwu/dimens_sw)   [AndroidUI屏幕适配](https://www.jianshu.com/p/667cc6e0261a)
 
 ## 模块化结构图
 
