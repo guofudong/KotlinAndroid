@@ -2,12 +2,14 @@ package com.gfd.crosstalk.adapter
 
 import android.content.Context
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.common.utils.ImageLoader
 import com.gfd.common.utils.JSUtils
+import com.gfd.common.utils.JSUtils.excuteJs
 import com.gfd.crosstalk.R
 import com.gfd.crosstalk.entity.Video
 import com.gfd.crosstalk.entity.VideoPlayerData
@@ -41,76 +43,39 @@ class VideoAdapter(private val context: Context) : BaseAdapter<Video>(context) {
         val tvCommentCount = holder.getView<TextView>(R.id.tvCommentCount)
         val tvVideoTitle = holder.getView<TextView>(R.id.tvVideoTitle)
         val tvTime = holder.getView<TextView>(R.id.tvTime)
-        val videoView = holder.getView<NiceVideoPlayer>(R.id.videoView)
-        setVideoView(videoView, holder.itemView)
+        val videoDuration = holder.getView<TextView>(R.id.crosstalk_video_duration)
+        val videoImg = holder.getView<ImageView>(R.id.crosstalk_img_video)
         val data = mDatas[position]
         tvCommentCount.text = "${data.comment_count}评论"
         tvVideoTitle.text = data.name
         tvTime.text = data.datetime
-        //设置视频播放器
-        val controller = TxVideoPlayerController(context)
-        videoView.setController(controller)
-        controller.setTitle("")
-        controller.setLenght(data.video_duration.toLong())
-        ImageLoader.loadUrlImage(context, data.large_image_url, controller.imageView())
+        videoDuration.text = data.video_duration_str
+        ImageLoader.loadUrlImage(context, data.large_image_url, videoImg)
         val link = BaseConstant.CROSSTRALK_BASE_URL + data.source_url
-        val map = excuteJs(link)
-        OkGo.post<String>(BaseConstant.CROSSTRALK_URL_ANALYSIS)
-                .headers("Origin", "http://toutiao.iiilab.com")
-                .headers("Cookie", data.cookie)
-                .headers("Referer", "http://toutiao.iiilab.com/")
-                .params("link", link)
-                .params("r", map["r"])
-                .params("s", map["s"])
-                .execute(object : StringCallback() {
-                    override fun onSuccess(response: Response<String>) {
-                        val json = response.body().toString()
-                        Logger.e("视频播放地址数据：$json")
-                        val playerData = Gson().fromJson(json, VideoPlayerData::class.java)
-                        controller.setClarity(getClarites(playerData), 0)
-                    }
-                })
     }
 
     override fun getItemLayoutId(): Int {
         return R.layout.crosstalk_item_video
     }
 
-    private fun getClarites(playerData: VideoPlayerData): MutableList<Clarity> {
-        val datas = ArrayList<Clarity>()
-        if (playerData.data != null) {
-            playerData.data.video.link.forEachIndexed { index, linkBean ->
-                //linkBean.url 原来的解析网站已不能使用，这个使用默认的地址
-                datas.add(Clarity("高清$index", "480P", linkBean.url))
-            }
-        }
-        return datas
-    }
 
-    private fun setVideoView(videoView: NiceVideoPlayer, itemView: View) {
-        videoView.setPlayerType(NiceVideoPlayer.TYPE_NATIVE)
-        val params = videoView.layoutParams
-        params.width = itemView.resources.displayMetrics.widthPixels // 宽度为屏幕宽度
-        params.height = (params.width * 9f / 16f).toInt()    // 高度为宽度的9/16
-        videoView.layoutParams = params
-    }
-
-    @Throws(Exception::class)
-    private fun excuteJs(link: String): Map<String, String> {
-        val stream = context.assets.open("test.js")
-        stream.buffered().reader().use {
-            val jsStr = it.readText()
-            val inv = JSUtils.getJsInvocable(jsStr)
-            val hashMap = HashMap<String, String>()
-            if (inv != null) {
-                val r = inv.invokeFunction("getR")
-                val param = link + "@" + r.toString()
-                val s = inv.invokeFunction("getS", param)
-                hashMap["r"] = r.toString()
-                hashMap["s"] = s.toString()
-            }
-            return hashMap
-        }
-    }
+    //原来的解析地址已不能使用，所有不在调用，改用webview实现
+    /*  @Throws(Exception::class)
+      private fun excuteJs(link: String): Map<String, String> {
+          val stream = context.assets.open("test.js")
+          stream.buffered().reader().use {
+              val jsStr = it.readText()
+              val inv = JSUtils.getJsInvocable(jsStr)
+              val hashMap = HashMap<String, String>()
+              if (inv != null) {
+                  val r = inv.invokeFunction("getR")
+                  val param = link + "@" + r.toString()
+                  val s = inv.invokeFunction("getS", param)
+                  hashMap["r"] = r.toString()
+                  hashMap["s"] = s.toString()
+              }
+              return hashMap
+          }
+      }*/
 
 }

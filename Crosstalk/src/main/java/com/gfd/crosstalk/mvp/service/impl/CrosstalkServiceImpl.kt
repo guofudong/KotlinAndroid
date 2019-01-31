@@ -26,7 +26,7 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
 
     override fun getVideoList(page: Int, callback: CrosstalkService.IGetVideoListCallback) {
 
-        val url = "https://www.toutiao.com/search_content/?offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=$PAGE_COUNT&cur_tab=2&from=video"
+        val url = "https://www.toutiao.com/api/search/content/?aid=24&offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=$PAGE_COUNT&cur_tab=2&from=search_tab&pd=synthesis"
         OkGo.get<String>(url)
                 .tag(this)
                 .execute(object : StringCallback() {
@@ -55,7 +55,7 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
                                                             it.middle_image_url,
                                                             it.large_image_url,
                                                             it.source_url,
-                                                            it.video_duration_str,
+                                                            it.video_duration_str?: "00:00",
                                                             cookie)
                                                     datas.add(video)
                                                 }

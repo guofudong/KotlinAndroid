@@ -1,9 +1,8 @@
-package com.gfd.home.component
+package com.gfd.crosstalk.component
 
 import com.gfd.provider.router.component.IApplicationLike
 import com.gfd.provider.router.component.Router
 import com.gfd.provider.router.service.CrosstalkService
-import com.gfd.provider.router.service.HomeService
 
 class CrosstalkApplicationLike : IApplicationLike {
 

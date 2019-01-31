@@ -8,17 +8,35 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_220"
+        android:layout_height="@dimen/dp_200"
         app:cardCornerRadius="@dimen/dp_2">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.xiao.nicevideoplayer.NiceVideoPlayer
-                android:id="@+id/videoView"
+            <ImageView
+                android:id="@+id/crosstalk_img_video"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/crosstalk_video_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:textColor="@color/common_white"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/common_ic_player_center_start" />
 
         </RelativeLayout>
 
@@ -37,8 +55,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvCommentCount"
@@ -54,12 +72,12 @@
             android:id="@+id/tvTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="2"
             android:paddingTop="@dimen/dp_6"
             android:textColor="@color/common_black"
-            android:textSize="@dimen/sp_12"
-            android:layout_marginLeft="@dimen/dp_8"/>
+            android:textSize="@dimen/sp_12" />
 
     </LinearLayout>
 

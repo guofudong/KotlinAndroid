@@ -1,4 +1,4 @@
-package com.gfd.home.component
+package com.gfd.player.component
 
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.player.ui.fragment.LiveFragment

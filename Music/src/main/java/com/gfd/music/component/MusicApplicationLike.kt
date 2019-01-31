@@ -1,4 +1,4 @@
-package com.gfd.home.component
+package com.gfd.music.component
 
 import com.gfd.provider.router.component.IApplicationLike
 import com.gfd.provider.router.component.Router

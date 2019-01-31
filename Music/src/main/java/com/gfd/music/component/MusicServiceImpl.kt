@@ -1,6 +1,5 @@
-package com.gfd.home.component
+package com.gfd.music.component
 
-import android.support.v4.app.Fragment
 import com.gfd.common.ui.fragment.BaseFragment
 import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.provider.router.service.MusicService
