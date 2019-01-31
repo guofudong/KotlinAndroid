@@ -28,11 +28,6 @@ if(isHomeModule.toBoolean()){
 * **2.主Module在开发时不依赖业务模块，只要在运行打包时才依赖，彻底避免业务模块之间的耦合**
 >通过在build.gradle配置，通过字节码插桩来实现的。
 ```
-combuild {
-    applicationName = 'com.gfd.home.app.HomeApplication'
-    isRegisterAuto = false
-}
-
 主module依赖其他模块配置在该目录下的gradle.properties中配置：
 debugComponent=Home,Crosstalk,Music,Player //debug时依赖的
 compileComponent=Home,Crosstalk,Music,Player //release时依赖的
