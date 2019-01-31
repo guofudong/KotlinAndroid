@@ -90,6 +90,24 @@ interface MusicService {
 
 #### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
 
+```
+//该文档自动生成，只需要在build中配置版本更新日志。
+<?xml version="1.0" encoding="GBK"?>
+<releases>
+  <release>
+    <versionCode>1</versionCode>
+    <versionName>1.0.0</versionName>
+    <versionInfo>App的第1个版本，上线了一些最基础核心的功能。</versionInfo>
+  </release>
+
+<release>
+  <versionCode>110</versionCode>
+  <versionName>1.1.0</versionName>
+  <versionInfo>App的第2个版本，修复网络数据解析问题，处于稳定版本。</versionInfo>
+</release>
+</releases>
+```
+
 >[Gradle实战](https://www.jianshu.com/p/7e1c7164976b)
 
 ## 模块化结构图
