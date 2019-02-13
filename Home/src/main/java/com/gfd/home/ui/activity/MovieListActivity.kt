@@ -1,5 +1,7 @@
 package com.gfd.home.ui.activity
 
+import android.os.Trace
+import android.view.View
 import com.gfd.common.ext.listInit
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.home.R
@@ -54,7 +56,7 @@ class MovieListActivity : BaseMvpActivity<MovieListPresenter>(), MovieListContra
     }
 
     override fun setListener() {
-        mLRecyclerViewAdapter.setOnItemClickListener { view, position ->
+        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
             val movieId = mMovieListAdapter.getDatas()[position].movieId
         }
     }
@@ -64,3 +66,5 @@ class MovieListActivity : BaseMvpActivity<MovieListPresenter>(), MovieListContra
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }
 }
+
+

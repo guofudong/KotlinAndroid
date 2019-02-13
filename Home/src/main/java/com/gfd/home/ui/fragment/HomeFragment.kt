@@ -166,7 +166,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     }
 
     override fun showVideoList(data: VideoListData) {
-        if (swipeRefresh.isRefreshing) {
+        if (swipeRefresh != null && swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
         videoDatas.addAll(data.videoList)

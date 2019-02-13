@@ -34,6 +34,12 @@ abstract class BaseActivity : AppCompatActivity() {
         setListener()
     }
 
+    /**
+     * 设置布局id
+     */
+    abstract fun getLayoutId(): Int
+
+
     abstract fun initView()
 
     abstract fun initData()
@@ -49,11 +55,6 @@ abstract class BaseActivity : AppCompatActivity() {
     open fun initOperate() {
 
     }
-
-    /**
-     * 设置布局id
-     */
-    abstract fun getLayoutId(): Int
 
     override fun onDestroy() {
         super.onDestroy()

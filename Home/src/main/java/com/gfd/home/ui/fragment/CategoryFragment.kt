@@ -95,7 +95,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         categoryRecycler.setOnLoadMoreListener {
             currentPage++
             if (currentPage <= totalPager) {
-                mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_LOADMORE,false)
+                mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_LOADMORE, false)
             } else {
                 categoryRecycler.setNoMore(true)
             }
@@ -103,7 +103,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         //设置下拉刷新
         categoryRefresh.setOnRefreshListener {
             currentPage = DEFAULTPAGER
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH,false)
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH, false)
         }
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
@@ -123,12 +123,10 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
     override fun showVideos(datas: List<VideoItemData>, state: Int) {
         if (state == Concant.STATE_LOADMORE) {//加载更多
             mVideoAdapter.addAll(datas)
-            categoryRecycler.refreshComplete(datas.size)
+            categoryRecycler?.refreshComplete(datas.size)
         } else if (state == Concant.STATE_REFRESH) {//下拉刷新
             mVideoAdapter.updateData(datas)
-            if(categoryRefresh != null){
-                categoryRefresh.isRefreshing = false
-            }
+            categoryRefresh?.isRefreshing = false
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }

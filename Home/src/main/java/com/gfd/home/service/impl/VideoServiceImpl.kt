@@ -41,15 +41,18 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             for (element in e1) {
                                 val subE = element.selectFirst("a[href]")
                                 val title = subE.attr("title")
-                                var link = subE.attr("href")
-                                val style = subE.attr("style")
-                                val img = style.substring(style.indexOf("url") + 4, style.indexOf(")"))
-                                link = if (link[0] == '/') link else "/$link"
-                                Logger.e("轮播图数据：link = $link")
-                                binners.add(BinnerData(title, img, link))
+                                Logger.e("轮播图数据：title = $title")
+                                if (!title.contains("伦理")) {
+                                    var link = subE.attr("href")
+                                    val style = subE.attr("style")
+                                    val img = style.substring(style.indexOf("url") + 4, style.indexOf(")"))
+                                    link = if (link[0] == '/') link else "/$link"
+                                    Logger.e("轮播图数据：link = $link")
+                                    binners.add(BinnerData(title, img, link))
+                                }
                             }
                             //取出最后两个
-                            if(binners.size >= 3){
+                            if (binners.size >= 3) {
                                 binners.removeAt(binners.size - 1)
                                 binners.removeAt(binners.size - 1)
                                 binners.removeAt(binners.size - 1)

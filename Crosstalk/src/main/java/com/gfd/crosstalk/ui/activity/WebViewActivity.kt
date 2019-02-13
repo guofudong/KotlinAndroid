@@ -3,7 +3,6 @@ package com.gfd.crosstalk.ui.activity
 import android.graphics.Bitmap
 import android.graphics.PixelFormat
 import android.view.View
-import android.view.ViewGroup
 import com.gfd.common.ext.config
 import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity

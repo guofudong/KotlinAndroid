@@ -5,7 +5,6 @@ import com.gfd.common.injection.component.DaggerActivityComponent
 import com.gfd.common.injection.module.ActivityMoudle
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
-import com.gfd.common.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
