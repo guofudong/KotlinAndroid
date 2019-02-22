@@ -18,16 +18,13 @@ import com.gfd.home.entity.VideoItemData
  */
 class CategoryVideoAdapter(private var context: Context?) : BaseMultiAdapter<VideoItemData>(context) {
 
-
-
     init {
         addItemType(Concant.ITEM_TYPE_IMG,R.layout.home_item_home_video_list_img)
     }
 
     override fun onBindItemholder(holder: BaseViewHolder, position: Int) {
-        val itemData = mDatas.get(position)
+        val itemData = mDatas[position]
         bindImgItem(holder,itemData)
-
     }
 
     /**
@@ -43,6 +40,4 @@ class CategoryVideoAdapter(private var context: Context?) : BaseMultiAdapter<Vid
         tvVideoTag.text = itemData.tagName
         ImageLoader.loadUrlImage(this!!.context!!,itemData.videoImg,ivVideo)
     }
-
-
 }

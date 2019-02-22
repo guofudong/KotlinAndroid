@@ -132,7 +132,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
     }
 
 
-    fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
+    private fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
         ARouter.getInstance().build(path)
                 .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
                 .withString(RouterPath.Player.KEY_IMAGE, videoImage)

@@ -29,7 +29,6 @@ import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.home_fragment_home.*
-import kotlinx.android.synthetic.main.home_head_banner.*
 
 
 /**
@@ -185,7 +184,6 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mVideoAdapter.updateData(mVideoDatas)
         mLRecyclerViewAdapter.notifyDataSetChanged()
         mStatusLayoutManager.showContent()
-
     }
 
     /**
@@ -210,7 +208,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         mBanner.stopAutoPlay()
     }
 
-    fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
+    private fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
         Logger.e("跳转路径：path = $path")
         ARouter.getInstance().build(path)
                 .withString(RouterPath.Player.KEY_PLAYER, videoUrl)

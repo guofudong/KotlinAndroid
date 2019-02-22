@@ -34,6 +34,7 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                     .execute(object : StringCallback() {
                         override fun onSuccess(response: Response<String>) {
                             val json = response.body().toString()
+                            Logger.e("首页数据：$json")
                             val document = Jsoup.parse(json)
                             //轮播图
                             val e1 = document.select("div.hy-video-slide")
@@ -64,7 +65,8 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                             }
 
                             var videoList: MutableList<VideoItemData> = ArrayList()
-                            //新片抢先看
+                            //新片抢先看数据源已不存在
+                           /* //新片抢先看
                             val newVideoElement = document.selectFirst("div[class=hy-video-list cleafix]")
                                     .select("div[class=item] > div")
 
@@ -80,11 +82,11 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                 val link = href.substring(1, href.length)
                                 val img = subE.attr("src")
                                 videoList.add(VideoItemData(tag, Concant.ITEM_TYPE_IMG, name, img, link, types[0]))
-                            }
+                            }*/
 
                             val titleTypes = arrayOf(Concant.CATEGORY_MOVIE, Concant.CATEGORY_DINASHI, Concant.CATEGORY_ZONGYI, 0)
                             //其他分类
-                            var index = 1
+                            var index = 0
                             for (element in document.select("div[class=hy-layout clearfix]")) {
                                 var itemDatas: MutableList<VideoData> = ArrayList()
                                 for (element in element.select("div[class=clearfix] > div")) {
@@ -97,9 +99,9 @@ class VideoServiceImpl @Inject constructor() : VideoService {
                                     val img = subE.attr("src")
                                     itemDatas.add(VideoData(img, title, tag, link))
                                 }
-                                if (itemDatas.size > 3) {
+                                if (itemDatas.size >= 3) {
                                     //添加标题
-                                    val itemTitle = VideoItemData(titleTypes[index - 1])
+                                    val itemTitle = VideoItemData(titleTypes[index])
                                     itemTitle.type = Concant.ITEM_TYPE_TITLE
                                     itemTitle.title = types[index++]
                                     videoList.add(itemTitle)

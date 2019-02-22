@@ -8,6 +8,7 @@ import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.crosstalk.R
 import com.orhanobut.logger.Logger
+import com.tencent.bugly.proguard.u
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
@@ -61,8 +62,8 @@ class WebViewActivity : BaseActivity() {
                 mIsPageLoading = true
             }
 
-            override fun onPageFinished(p0: WebView?, p1: String?) {
-                super.onPageFinished(p0, p1)
+            override fun onPageFinished(p0: WebView?, url: String?) {
+                super.onPageFinished(p0, url)
                 mIsPageLoading = false
                 hideDialogLoading()
             }
