@@ -1,6 +1,7 @@
 package com.gfd.player.service.impl
 
 import com.gfd.common.common.BaseConstant
+import com.gfd.common.utils.ToastUtils
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.service.PlayService
 import com.google.gson.Gson
@@ -19,27 +20,33 @@ import javax.inject.Inject
  */
 class PlayServiceImpl @Inject constructor() : PlayService {
 
+    private val ERROT_INFO = "解析异常！"
+
     override fun getVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
         Logger.e("解析地址：${BaseConstant.BASE_URL + url}")
         OkGo.get<String>(BaseConstant.BASE_URL + url)
                 .tag(this)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
-                        val json = response.body().toString()
-                        val document = Jsoup.parse(json)
-                        val e = document.selectFirst("div[class=plot]")
-                        val plotText = e?.text() ?: ""
-                        val src = document.selectFirst("iframe#video").attr("src")
-                        Logger.e("解析出来的地址：$src")
-                        val split = src.split("url=")
-                        val videoUrl: String
-                        if (split.size < 3) {
-                            videoUrl = src
-                        } else {
-                            videoUrl = split[2]
+                        try {
+                            val json = response.body().toString()
+                            val document = Jsoup.parse(json)
+                            val e = document.selectFirst("div[class=plot]")
+                            val plotText = e?.text() ?: ""
+                            val src = document.selectFirst("iframe#video").attr("src")
+                            Logger.e("解析出来的地址：$src")
+                            val split = src.split("url=")
+                            val videoUrl: String
+                            if (split.size < 3) {
+                                videoUrl = src
+                            } else {
+                                videoUrl = split[2]
+                            }
+                            Logger.e("播放地址：$videoUrl")
+                            callBack.videoUrl(videoUrl, plotText)
+                        } catch (e: Exception) {
+                            ToastUtils.instance.showToast(ERROT_INFO)
                         }
-                        Logger.e("播放地址：$videoUrl")
-                        callBack.videoUrl(videoUrl, plotText)
                     }
                 })
     }
@@ -50,27 +57,31 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                 .tag(this)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
-                        val json = response.body().toString()
-                        val document = Jsoup.parse(json)
-                        val selectFirst = document.selectFirst("div[class=plot]")
-                        val videoDatas = ArrayList<VideoItemData>()
-                        if (selectFirst == null) {
-                            callBack.videoWebData(videoDatas, "")
-                            return
-                        }
-                        val plotText = selectFirst.text()
-                        val lis = document.select("div#playlist1 > ul > li")
-                        if (lis != null) {
-                            lis.forEach {
-                                val a = it.selectFirst("a")
-                                val count = a.text()//集数
-                                var link = BaseConstant.URL_ANALYZE + a.attr("href")
-                                videoDatas.add(VideoItemData(count, link))
+                        try {
+                            val json = response.body().toString()
+                            val document = Jsoup.parse(json)
+                            val selectFirst = document.selectFirst("div[class=plot]")
+                            val videoDatas = ArrayList<VideoItemData>()
+                            if (selectFirst == null) {
+                                callBack.videoWebData(videoDatas, "")
+                                return
                             }
-                            val jsonData = Gson().toJson(videoDatas)
-                            Logger.e("解析出来的剧集地址：$jsonData")
+                            val plotText = selectFirst.text()
+                            val lis = document.select("div#playlist1 > ul > li")
+                            if (lis != null) {
+                                lis.forEach {
+                                    val a = it.selectFirst("a")
+                                    val count = a.text()//集数
+                                    var link = BaseConstant.URL_ANALYZE + a.attr("href")
+                                    videoDatas.add(VideoItemData(count, link))
+                                }
+                                val jsonData = Gson().toJson(videoDatas)
+                                Logger.e("解析出来的剧集地址：$jsonData")
+                            }
+                            callBack.videoWebData(videoDatas, plotText)
+                        } catch (e: Exception) {
+                            ToastUtils.instance.showToast(ERROT_INFO)
                         }
-                        callBack.videoWebData(videoDatas, plotText)
                     }
                 })
     }
