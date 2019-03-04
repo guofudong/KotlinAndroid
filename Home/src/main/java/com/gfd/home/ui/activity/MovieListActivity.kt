@@ -1,7 +1,5 @@
 package com.gfd.home.ui.activity
 
-import android.os.Trace
-import android.view.View
 import com.gfd.common.ext.listInit
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.home.R

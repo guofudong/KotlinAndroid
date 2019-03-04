@@ -12,6 +12,11 @@ android {
     //规定资源命名前缀为home_
     resourcePrefix "home_"
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 }
 
 dependencies {

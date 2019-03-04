@@ -1,6 +1,12 @@
 apply plugin: 'com.android.library'
 apply from:rootProject.file('libbase.gradle')
 
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 dependencies {
 
     api dependence.libSupportV7
@@ -44,4 +50,5 @@ dependencies {
     implementation dependence.libLeakCanaryActivity
     implementation dependence.libLeakCanaryFragment
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }

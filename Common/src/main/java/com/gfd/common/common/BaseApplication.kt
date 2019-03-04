@@ -2,6 +2,7 @@ package com.gfd.common.common
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.BuildConfig
 import com.gfd.common.injection.component.DaggerAppComponent
 import com.gfd.common.injection.module.AppMoudle
@@ -13,7 +14,6 @@ import com.orhanobut.logger.Logger
 import com.squareup.leakcanary.LeakCanary
 import com.tencent.bugly.crashreport.CrashReport
 import okhttp3.OkHttpClient
-
 
 /**
  * @Author : 郭富东
@@ -38,7 +38,12 @@ open class BaseApplication : Application() {
         if (BuildConfig.DEBUG) {
             //初始化LeakCanary
             LeakCanary.install(this)
+            // 打印日志
+            ARouter.openLog()
+            //开启调试模式
+            ARouter.openDebug()
         }
+        ARouter.init(this)
     }
 
     private fun initInjection() {

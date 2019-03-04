@@ -55,7 +55,9 @@ class VideoServiceImpl1 @Inject constructor() : VideoService {
                             //影视列表中的分类 新片，电视剧，综艺等
                             var types: MutableList<String> = ArrayList()
                             for (typeElement in document.select("h3[class=margin-0]")) {
-                                types.add(typeElement.text())
+                                val tag = typeElement.text()
+                                types.add(tag)
+                                Logger.e("分类标签：$tag")
                             }
 
                             var videoList: MutableList<VideoItemData> = ArrayList()
@@ -97,7 +99,7 @@ class VideoServiceImpl1 @Inject constructor() : VideoService {
                                     //添加标题
                                     val itemTitle = VideoItemData(titleTypes[index])
                                     itemTitle.type = Concant.ITEM_TYPE_TITLE
-                                    itemTitle.title = types[index++]
+                                    itemTitle.title = types[++index]
                                     videoList.add(itemTitle)
                                     //添加内容
                                     itemDatas.forEach {

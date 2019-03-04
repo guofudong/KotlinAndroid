@@ -2,9 +2,20 @@
     package="com.gfd.home">
 
     <application>
-        <activity android:name=".ui.activity.SearchActivity" />
-        <activity android:name=".ui.activity.CategoryActivity"/>
-        <activity android:name=".ui.activity.MovieListActivity"/>
-        <activity android:name=".ui.activity.MovieDetailActivity"/>
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieFlutterActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

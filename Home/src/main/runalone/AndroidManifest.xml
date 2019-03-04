@@ -3,25 +3,38 @@
     package="com.gfd.home">
 
     <application
+        android:name=".app.HomeApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:name=".app.HomeApplication"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:label">
 
-        <activity android:name=".TestActivity">
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.CategoryActivity"/>
-        <activity android:name=".ui.activity.SearchActivity"/>
-        <activity android:name=".ui.activity.MovieListActivity"/>
-        <activity android:name=".ui.activity.MovieDetailActivity"/>
+        <activity
+            android:name=".ui.activity.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MovieFlutterActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
