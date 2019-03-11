@@ -80,7 +80,7 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         homeCategoty03 = headViewBanner.findViewById(R.id.homeCategoty03)
         homeCategoty04 = headViewBanner.findViewById(R.id.homeCategoty04)
         mLRecyclerViewAdapter.addHeaderView(headViewBanner)
-
+        val v = View(activity)
     }
 
     override fun initData() {

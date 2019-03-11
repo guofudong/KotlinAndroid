@@ -19,6 +19,11 @@ android {
 
 }
 
+this.beforeEvaluate {
+    println 'Home开始执行了'
+    delete buildDir
+}
+
 dependencies {
     api project(':Provider')
     kapt "com.google.dagger:dagger-compiler:$dagger_version"

@@ -88,6 +88,7 @@ class CompileCodeTransform extends Transform {
                 FileUtils.copyDirectory(directoryInput.file, dest)
             }
         }
+        //释放
     }
 
 

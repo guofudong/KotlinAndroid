@@ -16,6 +16,7 @@ ext {
         destFile.createNewFile()
     }
 }
+
 //挂在到应用构建的过程中
 this.project.afterEvaluate { project ->
     def buildTask = project.tasks.getByName('assembleRelease')

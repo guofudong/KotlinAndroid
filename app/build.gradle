@@ -12,7 +12,6 @@ kapt {
         arg("moduleName", project.getName())
     }
 }
-
 android {
 
     signingConfigs {
@@ -52,11 +51,11 @@ android {
     //自定义输出apk名字
     applicationVariants.all {
         variant ->
-            variant.outputs.all { output ->
-                if (buildType.name == 'release') {
-                    outputFileName = new File("app_v" + defaultConfig.versionName + "_" +
-                            new Date().format("yyyy-MM-dd") + "_" +
-                            buildType.name + ".apk")
+            variant.outputs.all {
+                if (variant.getBuildType().getName() == 'release') {
+                    outputFileName = new File("app_v" + variant.versionName + "_" +
+                            new Date().format("yyyy-MM-dd_HH", TimeZone.getTimeZone("UTC")) + "_" +
+                            variant.getBuildType().getName() + ".apk")
                 }
             }
     }
@@ -73,4 +72,12 @@ dependencies {
 combuild {
     applicationName = 'com.gfd.video.app.MainApplication'
     isRegisterAuto = true
+}
+//挂在到应用构建的过程中,执行module的 clean :解决Failed to delete \build\.......\classes.jar
+this.project.afterEvaluate { project ->
+    def buildTask1 = project.tasks.getByName('assembleDebug')
+    def buildTask2 = project.tasks.getByName('assembleRelease')
+    if (buildTask1 != null || buildTask2 != null) {
+        clean.execute()
+    }
 }

@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import com.gfd.plugin.exten.CompileExtension
+import org.gradle.api.tasks.Delete
 
 /**
  * 自定义插件实现功能如下：
