@@ -29,8 +29,3 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }
-
-combuild {
-    applicationName = 'com.gfd.home.app.HomeApplication'
-    isRegisterAuto = false
-}

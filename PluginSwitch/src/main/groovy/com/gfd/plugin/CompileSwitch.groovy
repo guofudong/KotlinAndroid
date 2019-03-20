@@ -3,8 +3,6 @@ package com.gfd.plugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import com.gfd.plugin.exten.CompileExtension
-import org.gradle.api.tasks.Delete
 
 /**
  * 自定义插件实现功能如下：
@@ -16,8 +14,6 @@ class CompileSwitch implements Plugin<Project> {
     String compilemodule = "app"
 
     void apply(Project project) {
-        //定义gradle配置的方法名字为：combuild，里面的属性为CompileExtension中的属性
-        project.extensions.create('combuild', CompileExtension)
         String taskNames = project.gradle.startParameter.taskNames.toString()
         System.out.println("当前运行的Task：" + taskNames)
         String module = project.path.replace(":", "")
@@ -52,6 +48,7 @@ class CompileSwitch implements Plugin<Project> {
         //根据配置添加各种组件依赖，并且自动化生成组件加载代码
         if (isRunAlone) {
             project.apply plugin: 'com.android.application'
+            boolean isMainModule = module == mainmodulename
             //不是app(空壳)，运行的是业务模块，是允许独立运行的
             if (module != mainmodulename) {
                 project.android.sourceSets {
@@ -67,7 +64,7 @@ class CompileSwitch implements Plugin<Project> {
             if (assembleTask.isAssemble && module == compilemodule) {
                 //运行的是app，自动去依赖其他业务模块的jar包（jar包自动生成在componentrelease文件中）
                 compileComponents(assembleTask, project)
-                project.android.registerTransform(new CompileCodeTransform(project))
+                project.android.registerTransform(new CompileCodeTransform(project,isMainModule))
             }
         } else {
             //不能独立运行，设置为library，并且生成jar放在componentrelease文件下，以供App运行时去依赖

@@ -21,7 +21,3 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation project(':nicevideoplayer')
 }
-
-combuild {
-    isRegisterAuto = false
-}

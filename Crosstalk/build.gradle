@@ -20,7 +20,3 @@ dependencies {
     implementation project(':nicevideoplayer')
     implementation rootProject.ext.dependence.libQSVideoPlayer
 }
-
-combuild {
-    isRegisterAuto = false
-}

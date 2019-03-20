@@ -11,15 +11,20 @@ class CompileCodeTransform extends Transform {
 
     private Project project
     ClassPool classPool
-    String applicationName
+    String applicationName = ""
 
-    CompileCodeTransform(Project project) {
+    CompileCodeTransform(Project project,boolean isMainModule) {
         this.project = project
+        if (isMainModule) {
+            if (!project.hasProperty("applicationName")) {
+                throw new RuntimeException("you should set applicationName in app gradle.properties")
+            }
+            applicationName = project.properties.get("applicationName").toString()
+        }
     }
 
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
-        getRealApplicationName(transformInvocation.getInputs())
         classPool = new ClassPool()
         project.android.bootClasspath.each {
             classPool.appendClassPath((String) it.absolutePath)
@@ -66,18 +71,15 @@ class CompileCodeTransform extends Transform {
             }
             //对类型为“文件夹”的input进行遍历
             input.directoryInputs.each { DirectoryInput directoryInput ->
-                boolean isRegisterAuto = project.extensions.combuild.isRegisterAuto
-                if (isRegisterAuto) {
-                    String fileName = directoryInput.file.absolutePath
-                    File dir = new File(fileName)
-                    dir.eachFileRecurse { File file ->
-                        String filePath = file.absolutePath
-                        String classNameTemp = filePath.replace(fileName, "").replace("\\", ".").replace("/", ".")
-                        if (classNameTemp.endsWith(".class")) {
-                            String className = classNameTemp.substring(1, classNameTemp.length() - 6)
-                            if (className == applicationName) {
-                                injectApplicationCode(applications.get(0), activators, fileName)
-                            }
+                String fileName = directoryInput.file.absolutePath
+                File dir = new File(fileName)
+                dir.eachFileRecurse { File file ->
+                    String filePath = file.absolutePath
+                    String classNameTemp = filePath.replace(fileName, "").replace("\\", ".").replace("/", ".")
+                    if (classNameTemp.endsWith(".class")) {
+                        String className = classNameTemp.substring(1, classNameTemp.length() - 6)
+                        if (className == applicationName) {
+                            injectApplicationCode(applications.get(0), activators, fileName)
                         }
                     }
                 }
@@ -90,18 +92,6 @@ class CompileCodeTransform extends Transform {
         }
         //释放
     }
-
-
-    private void getRealApplicationName(Collection<TransformInput> inputs) {
-        applicationName = project.extensions.combuild.applicationName
-        if (applicationName == null || applicationName.isEmpty()) {
-            boolean isRegisterAuto = project.extensions.combuild.isRegisterAuto
-            if(isRegisterAuto){
-                // throw new RuntimeException("必须在combuild中配置applicationName")
-            }
-        }
-    }
-
 
     private void injectApplicationCode(CtClass ctClassApplication, List<CtClass> activators, String patch) {
         System.out.println("开始加载提供服务的代码")

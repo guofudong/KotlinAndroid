@@ -88,7 +88,7 @@ ext {
                   'libBugly'                    : "com.tencent.bugly:crashreport:$versions.bugly",
                   'libLeakCanaryActivity'       : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
                   'libLeakCanaryFragment'       : "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary",
-                  'libLeakConstraintLayout'       : "com.android.support.constraint:constraint-layout:$versions.constraint"
+                  'libLeakConstraintLayout'     : "com.android.support.constraint:constraint-layout:$versions.constraint"
     ]
 
 }
