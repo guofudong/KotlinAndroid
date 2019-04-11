@@ -22,11 +22,9 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
 
     private val PAGE_COUNT = 12
 
-    //https://www.toutiao.com/search_content/?offset=&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=20&cur_tab=2&from=video
-
+    //https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=0&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=20&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415
     override fun getVideoList(page: Int, callback: CrosstalkService.IGetVideoListCallback) {
-
-        val url = "https://www.toutiao.com/api/search/content/?aid=24&offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=$PAGE_COUNT&cur_tab=2&from=search_tab&pd=synthesis"
+        val url = "https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=$PAGE_COUNT&&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415"
         OkGo.get<String>(url)
                 .tag(this)
                 .execute(object : StringCallback() {
