@@ -10,11 +10,11 @@ import java.util.regex.Pattern
 object CodeUtils{
     /**
      * unicode转中文
-     * @param str
+     * @param codeStr
      * @return
      */
-    fun unicodeToString(str: String): String {
-        var str = str
+    fun unicodeToString(codeStr: String): String {
+        var str = codeStr
         val pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))")
         val matcher = pattern.matcher(str)
         var ch: Char

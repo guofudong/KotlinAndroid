@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/9/15 - 11:03
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class CrosstalkPresenter @Inject constructor():CrosstalkContract.Presenter,CrosstalkService.IGetVideoListCallback {
 
@@ -27,8 +27,8 @@ class CrosstalkPresenter @Inject constructor():CrosstalkContract.Presenter,Cross
         mService.getVideoList(page,this)
     }
 
-    override fun onVideoList(datas: List<Video>) {
-        mView.showVideoList(datas)
+    override fun onVideoList(data: List<Video>) {
+        mView.showVideoList(data)
         if(isLoading){
             mView.hideLoading()
         }

@@ -11,11 +11,7 @@ import com.gfd.common.common.BaseApplication
  */
 class ToastUtils {
 
-    private var mToast: Toast
-
-    private constructor() {
-        mToast = Toast.makeText(BaseApplication.context, "", Toast.LENGTH_SHORT)
-    }
+    private var mToast: Toast = Toast.makeText(BaseApplication.context, "", Toast.LENGTH_SHORT)
 
     companion object {
         val instance: ToastUtils by lazy { ToastUtils() }
@@ -32,12 +28,12 @@ class ToastUtils {
     /**
      * 显示Toast
      */
-    fun showToast(tostMsg:String){
+    fun showToast(tostMsg: String) {
         mToast.setText(tostMsg)
         mToast.show()
     }
 
-    fun destroy(){
+    fun destroy() {
         mToast.cancel()
     }
 

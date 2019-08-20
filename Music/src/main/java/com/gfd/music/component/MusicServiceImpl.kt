@@ -5,7 +5,10 @@ import com.gfd.music.ui.fragment.MusicFragment
 import com.gfd.provider.router.service.MusicService
 
 /**
- * Crosstalk模块提供服务的具体实现者
+ * @Author：郭富东
+ * @Date：2019/8/20 : 15:22
+ * @Email：878749089@qq.com
+ * @description：Crosstalk模块提供服务的具体实现者
  */
 class MusicServiceImpl : MusicService {
 

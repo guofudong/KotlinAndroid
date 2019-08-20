@@ -8,7 +8,7 @@ import com.gfd.music.R
 import com.gfd.music.adapter.MvListAdapter
 import com.gfd.music.entity.MvData
 import com.gfd.music.injection.component.DaggerShortFilmComponent
-import com.gfd.music.injection.module.ShortFilmMoudle
+import com.gfd.music.injection.module.ShortFilmModule
 import com.gfd.music.mvp.contract.ShortFilmContract
 import com.gfd.music.mvp.preesnter.ShortFilmPresenter
 import com.gfd.music.ui.activity.MvDetailActivity
@@ -22,25 +22,24 @@ import kotlinx.android.synthetic.main.music_fragment_short_film.*
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:57
  * @Email：878749089@qq.com
- * @descriptio：短片Fragment
+ * @description：短片Fragment
  */
-class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContract.View{
+@Suppress("DEPRECATION")
+class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContract.View {
 
     private lateinit var mAdapter: MvListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
-    private lateinit var mMvDatas: List<MvData>
-    private var videoParent : ViewGroup? = null
+    private lateinit var mMvData: List<MvData>
+    private var videoParent: ViewGroup? = null
     private var offset = 0
     private var isLoadMore = false
     private var isSwitchVisible = false
-    override fun getLayoutId(): Int {
-        return R.layout.music_fragment_short_film
-    }
+    override fun getLayoutId(): Int = R.layout.music_fragment_short_film
 
     override fun injectComponent() {
         DaggerShortFilmComponent.builder()
                 .activityComponent(mActivityComponent)
-                .shortFilmMoudle(ShortFilmMoudle(this))
+                .shortFilmModule(ShortFilmModule(this))
                 .build()
                 .inject(this)
 
@@ -73,7 +72,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             mPresenter.getMvList(offset, false)
         }
         mMvRecycler.setOnLoadMoreListener {
-            if (mMvDatas.size > 12) {
+            if (mMvData.size > 12) {
                 mMvRecycler.setNoMore(true)
             } else {
                 isLoadMore = true
@@ -83,7 +82,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
         mAdapter.setOnTitleClickListener { _, data ->
             isSwitchVisible = false
             val intent = Intent(activity, MvDetailActivity::class.java)
-            intent.putExtra("json",data)
+            intent.putExtra("json", data)
             startActivity(intent)
         }
 
@@ -98,7 +97,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             mAdapter.updateData(datas)
             mMvSwipe.isRefreshing = false
         }
-        mMvDatas = mAdapter.getDatas()
+        mMvData = mAdapter.getData()
         mLRecyclerViewAdapter.notifyDataSetChanged()
 
     }
@@ -106,7 +105,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     override fun onResume() {
         super.onResume()
         isSwitchVisible = true
-        if(videoParent != null){
+        if (videoParent != null) {
             val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
             parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
             videoParent?.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)

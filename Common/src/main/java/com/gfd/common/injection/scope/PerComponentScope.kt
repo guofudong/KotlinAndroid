@@ -1,8 +1,5 @@
 package com.gfd.common.injection.scope
 
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
 import javax.inject.Scope
 
 /**
@@ -12,6 +9,6 @@ import javax.inject.Scope
  * @descriptio：组件级别作用域
  */
 @Scope
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
 annotation class PerComponentScope

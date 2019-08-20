@@ -8,7 +8,7 @@ import com.gfd.music.entity.SongData
  * @Author : 郭富东
  * @Date ：2018/8/10 - 14:01
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface RecommendService {
 
@@ -18,8 +18,8 @@ interface RecommendService {
     fun getRadioData(callBack: GetRecommendCallBack)
 
     interface GetRecommendCallBack {
-        fun onBanner(datas: List<BannerData>)
-        fun onSongList(datas: List<SongData>)
-        fun onRadioData(datas: List<RadioData>)
+        fun onBanner(data: List<BannerData>)
+        fun onSongList(data: List<SongData>)
+        fun onRadioData(data: List<RadioData>)
     }
 }

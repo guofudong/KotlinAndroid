@@ -8,7 +8,7 @@ import com.gfd.home.entity.VideoListData
  * @Author : 郭富东
  * @Date ：2018/8/2 - 18:05
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页视频列表-MVP-Contract
  */
 interface VideoListContract {
 

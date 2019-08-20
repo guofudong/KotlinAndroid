@@ -12,9 +12,9 @@ import android.view.ViewGroup
  * @Author : 郭富东
  * @Date ：2018/8/4 - 10:13
  * @Email：878749089@qq.com
- * @descriptio：多种item类型的Recycleview的适配器的基类
+ * @description：多种item类型的Recyclerview的适配器的基类
  */
-open abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: Context?) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseMultiAdapter<T : MultiItemEntity>(private val context: Context?) : RecyclerView.Adapter<BaseViewHolder>() {
 
     protected val mDatas = ArrayList<T>()
     /** 存储不同类型的item布局*/

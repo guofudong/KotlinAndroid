@@ -73,6 +73,8 @@ this.project.afterEvaluate { project ->
     def buildTask1 = project.tasks.getByName('assembleDebug')
     def buildTask2 = project.tasks.getByName('assembleRelease')
     if (buildTask1 != null || buildTask2 != null) {
-        clean.execute()
+        clean.onlyIf {
+            true
+        }
     }
 }

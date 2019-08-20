@@ -16,11 +16,13 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/9/15 - 11:34
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
 
-    private val PAGE_COUNT = 12
+  companion object{
+      private const val PAGE_COUNT = 12
+  }
 
     //https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=0&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=20&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415
     override fun getVideoList(page: Int, callback: CrosstalkService.IGetVideoListCallback) {
@@ -40,8 +42,9 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
                                         var cookie = headers.get("Set-Cookie").toString().split(";")[0].split("=")[1]
                                         Logger.e("cookie = $cookie")
                                         cookie = "iii_Session=f2gstd4ovdl4ait39i4aqco6f6;PHPSESSIID=$cookie"
-                                        val datas = ArrayList<Video>()
-                                        if (videoData.data != null) {
+                                        val data = ArrayList<Video>()
+                                        if(videoData.data == null) return
+                                        if (videoData.data.isNotEmpty()) {
                                             videoData.data.forEach {
                                                 if (!TextUtils.isEmpty(it.title)) {
                                                     val video = Video(
@@ -53,13 +56,13 @@ class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
                                                             it.middle_image_url,
                                                             it.large_image_url,
                                                             it.source_url,
-                                                            it.video_duration_str?: "00:00",
+                                                            it.video_duration_str ?: "00:00",
                                                             cookie)
-                                                    datas.add(video)
+                                                    data.add(video)
                                                 }
                                             }
                                         }
-                                        callback.onVideoList(datas)
+                                        callback.onVideoList(data)
                                     }
                                 })
 

@@ -9,12 +9,12 @@ import com.gfd.home.entity.VideoItemData
  * @Author : 郭富东
  * @Date ：2018/8/8 - 14:55
  * @Email：878749089@qq.com
- * @descriptio：电影详情相关协议
+ * @description：电影详情-MVP-Contract
  */
 interface MovieDetailContract {
 
     interface View : BaseView {
-        fun showMovieInfo(datas: List<MovieData>)
+        fun showMovieInfo(data: List<MovieData>)
     }
 
     interface Presenter : BasePresenter {

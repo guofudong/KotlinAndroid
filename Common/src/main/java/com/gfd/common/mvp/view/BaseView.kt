@@ -7,7 +7,7 @@ package com.gfd.common.mvp.view
  * @Email：878749089@qq.com
  * @descriptio：
  */
-open interface BaseView {
+interface BaseView {
 
     /**
      * 显示Loading

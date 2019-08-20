@@ -10,7 +10,7 @@ import dagger.Component
  * @Author : 郭富东
  * @Date ：2018/8/8 - 16:02
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-更多页面-Dagger2-Component
  */
 @PerComponentScope
 @Component(dependencies = [(ActivityComponent::class)], modules = [(CategoryModule::class)])

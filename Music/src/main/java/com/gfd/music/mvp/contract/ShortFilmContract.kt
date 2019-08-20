@@ -8,12 +8,12 @@ import com.gfd.music.entity.MvData
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:56
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface ShortFilmContract {
     interface View : BaseView {
 
-        fun showMvList(datas: List<MvData>)
+        fun showMvList(data: List<MvData>)
 
     }
 

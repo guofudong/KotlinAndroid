@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/6 - 14:39
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class PlayPresenter @Inject constructor() : PlayContract.Presenter, PlayService.GetVideoUrlCallBack {
 
@@ -30,9 +30,9 @@ class PlayPresenter @Inject constructor() : PlayContract.Presenter, PlayService.
         mView.playVideo(url)
     }
 
-    override fun videoWebData(datas: List<VideoItemData>, plotText: String) {
+    override fun videoWebData(data: List<VideoItemData>, plotText: String) {
         mView.showVideoPlot(plotText)
-        mView.playWebVideo(datas)
+        mView.playWebVideo(data)
     }
 
 

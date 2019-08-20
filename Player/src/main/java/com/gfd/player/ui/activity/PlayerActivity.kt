@@ -17,7 +17,7 @@ import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.player.R
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
-import com.gfd.player.injection.moudle.PlayMoudle
+import com.gfd.player.injection.moudle.PlayModule
 import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.player.widgets.VideoPlayer
@@ -33,7 +33,7 @@ import org.song.videoplayer.media.AndroidMedia
  * @Author : 郭富东
  * @Date ：2018/8/4 - 16:37
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 @Route(path = RouterPath.Player.PATH_PLAYER)
 class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
@@ -63,7 +63,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     override fun injectComponent() {
         DaggerPlayComponent.builder()
                 .activityComponent(mActivityComponent)
-                .playMoudle(PlayMoudle(this))
+                .playModule(PlayModule(this))
                 .build()
                 .inject(this)
         ARouter.getInstance().inject(this)
@@ -90,7 +90,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         play(homeVideoPlayer, videoUrl)
     }
 
-    override fun playWebVideo(datas: List<VideoItemData>) {
+    override fun playWebVideo(data: List<VideoItemData>) {
 
     }
 
@@ -162,8 +162,8 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         }
     }
 
-    internal var flag: Boolean = false//记录退出时播放状态 回来的时候继续播放
-    internal var position: Int = 0//记录销毁时的进度 回来继续盖进度播放
+    private var flag: Boolean = false//记录退出时播放状态 回来的时候继续播放
+    private var position: Int = 0//记录销毁时的进度 回来继续盖进度播放
 
     public override fun onPause() {
         super.onPause()
@@ -191,8 +191,8 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
 
-    internal var handler = Handler()
-    internal var runnable: Runnable = Runnable {
+    private var handler = Handler()
+    private var runnable: Runnable = Runnable {
         if (homeVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE)
             position = homeVideoPlayer.position
         homeVideoPlayer.release()

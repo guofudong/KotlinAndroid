@@ -18,14 +18,14 @@ import kotlinx.android.synthetic.main.player_activity_play_webview.*
  * @Author : 郭富东
  * @Date ：2018/8/6 - 18:19
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 @Route(path = RouterPath.Player.PATH_PLAYER_MV)
 class PlayMvActivity : BaseActivity() {
 
     @Autowired(name = RouterPath.Player.KEY_PLAYER)
     @JvmField
-    var mvurl: String? = null
+    var mvUrl: String? = null
 
     @Autowired(name = RouterPath.Player.KEY_NAME)
     @JvmField
@@ -42,7 +42,7 @@ class PlayMvActivity : BaseActivity() {
     }
 
     override fun initData() {
-        mWebView.loadUrl(mvurl)
+        mWebView.loadUrl(mvUrl)
     }
 
     private fun setWebView() {

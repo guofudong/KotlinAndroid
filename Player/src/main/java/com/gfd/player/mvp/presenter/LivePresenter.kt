@@ -1,6 +1,7 @@
 package com.gfd.player.mvp.presenter
 
 import android.content.Context
+import com.gfd.player.entity.Live
 import com.gfd.player.entity.LiveDataDto
 import com.gfd.player.entity.TimeTableData
 import com.gfd.player.mvp.contract.LiveContract
@@ -11,7 +12,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/20 - 16:28
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class LivePresenter @Inject constructor(): LiveContract.Presenter,LiveApiService.IGetLiveCallback{
     @Inject
@@ -25,8 +26,8 @@ class LivePresenter @Inject constructor(): LiveContract.Presenter,LiveApiService
         mService.getLiveInfo(context,this)
     }
 
-    override fun onLive(datas: List<LiveDataDto.LiveData>) {
-        mView.showLiveInfo(datas)
+    override fun onLive(data: List<Live>) {
+        mView.showLiveInfo(data)
         mView.hideLoading()
     }
 
@@ -35,7 +36,7 @@ class LivePresenter @Inject constructor(): LiveContract.Presenter,LiveApiService
         mService.getPlayUrl(context,url,this)
     }
 
-    override fun onTimeTables(datas: List<TimeTableData>) {
+    override fun onTimeTables(data: List<TimeTableData>) {
     }
 
     override fun onPlayUrl(url: String) {

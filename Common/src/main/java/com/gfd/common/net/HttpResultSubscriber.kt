@@ -56,14 +56,13 @@ abstract class HttpResultSubscriber<T> : Observer<Result<T>> {
         }
     }
 
-    fun onException(reason: ExceptionReason) {
+    private fun onException(reason: ExceptionReason) {
         when (reason) {
             ExceptionReason.CONNECT_ERROR -> ToastUtils.instance.showToast(R.string.connect_error)
             ExceptionReason.CONNECT_TIMEOUT -> ToastUtils.instance.showToast(R.string.connect_timeout)
             ExceptionReason.BAD_NETWORK -> ToastUtils.instance.showToast(R.string.bad_network)
             ExceptionReason.PARSE_ERROR -> ToastUtils.instance.showToast(R.string.parse_error)
             ExceptionReason.UNKNOWN_ERROR -> ToastUtils.instance.showToast(R.string.unknown_error)
-            else -> ToastUtils.instance.showToast(R.string.unknown_error)
         }
     }
 

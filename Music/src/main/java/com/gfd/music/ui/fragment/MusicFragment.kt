@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.music_fragment_music.*
  * @Author : 郭富东
  * @Date ：2018/8/10 - 9:54
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class MusicFragment : BaseFragment() {
 
@@ -28,9 +28,7 @@ class MusicFragment : BaseFragment() {
     private val mFragments = ArrayList<BaseFragment>()
     private lateinit var toggle: ActionBarDrawerToggle
 
-    override fun getLayoutId(): Int {
-        return R.layout.music_fragment_music
-    }
+    override fun getLayoutId(): Int = R.layout.music_fragment_music
 
     override fun initView() {
         toggle = ActionBarDrawerToggle(activity, drawerLayout,

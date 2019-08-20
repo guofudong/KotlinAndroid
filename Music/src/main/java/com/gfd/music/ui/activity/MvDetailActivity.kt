@@ -11,12 +11,12 @@ import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.music.R
 import com.gfd.music.adapter.MvCommentAdapter
 import com.gfd.music.adapter.MvTagAdapter
-import com.gfd.music.adapter.SimiMvAdapter
+import com.gfd.music.adapter.SimilarMvAdapter
 import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
 import com.gfd.music.entity.MvDetailData
 import com.gfd.music.injection.component.DaggerMvDetailComponent
-import com.gfd.music.injection.module.MvDetialMoudle
+import com.gfd.music.injection.module.MvDetailMaude
 import com.gfd.music.mvp.contract.MvDetailContract
 import com.gfd.music.mvp.preesnter.MvDetailPresenter
 import com.google.android.flexbox.AlignItems
@@ -24,11 +24,8 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import com.xiao.nicevideoplayer.NiceTextureView
-import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.music_activity_mv_detail.*
 import kotlinx.android.synthetic.main.music_layout_mv_detail_top.*
 
@@ -36,23 +33,22 @@ import kotlinx.android.synthetic.main.music_layout_mv_detail_top.*
  * @Author : 郭富东
  * @Date ：2018/8/17 - 16:25
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：MV详情页面
  */
 class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.View {
 
-    private lateinit var mSimiMvAdapter: SimiMvAdapter
+    private lateinit var mSimilarMvAdapter: SimilarMvAdapter
     private lateinit var mMvCommentAdapter: MvCommentAdapter
-    private lateinit var mSimiMvDatas: List<MvData>
+    private var mSimilarMvData: List<MvData>? = null
     private lateinit var mMvTagAdapter: MvTagAdapter
-    private lateinit var niceTextureView: NiceTextureView
     private lateinit var mvId: String
     private lateinit var mvName: String
-    private val tagDatas = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
+    private val tagData = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
 
     override fun injectComponent() {
         DaggerMvDetailComponent.builder()
                 .activityComponent(mActivityComponent)
-                .mvDetialMoudle(MvDetialMoudle(this))
+                .mvDetailMaude(MvDetailMaude(this))
                 .build()
                 .inject(this)
     }
@@ -68,8 +64,8 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         content.visibility = View.GONE
         //相似MV列表
         recommendList.layoutManager = LinearLayoutManager(this@MvDetailActivity, LinearLayoutManager.VERTICAL, false)
-        mSimiMvAdapter = SimiMvAdapter(this@MvDetailActivity)
-        recommendList.adapter = mSimiMvAdapter
+        mSimilarMvAdapter = SimilarMvAdapter(this@MvDetailActivity)
+        recommendList.adapter = mSimilarMvAdapter
         //mv评论列表
         commentList.layoutManager = LinearLayoutManager(this@MvDetailActivity, LinearLayoutManager.VERTICAL, false)
         mMvCommentAdapter = MvCommentAdapter(this)
@@ -81,7 +77,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         flexManager.flexWrap = FlexWrap.WRAP
         mvTagList.layoutManager = flexManager
         mMvTagAdapter = MvTagAdapter(this@MvDetailActivity)
-        mMvTagAdapter.updateData(tagDatas.toList())
+        mMvTagAdapter.updateData(tagData.toList())
         mvTagList.adapter = mMvTagAdapter
         //原来mvAPI已不能使用，这里改用webview播放mv
         //val parentView = NiceVideoPlayerManager.instance().currentNiceVideoPlayer.parent as ViewGroup
@@ -99,7 +95,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         //原来的API已不能使用，这个用假数据代替
         mPresenter.getMvComment(mvId)
         //原来的API已不能使用，这个使用搜索相同的名字来代替相似的MV
-        mPresenter.getSimiMv(mvName)
+        mPresenter.getSimilarMv(mvName)
         mPresenter.getMvDetail(mvId)
     }
 
@@ -111,10 +107,8 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 topLayout.visibility = View.GONE
             }
         })
-        mSimiMvAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
+        mSimilarMvAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-
-
             }
 
         })
@@ -138,17 +132,15 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         tvMvDetailCollent.text = "2568"
     }
 
-    override fun showSimiMv(datas: List<MvData>) {
-        mSimiMvDatas = datas
-        mSimiMvAdapter.updateData(datas)
+    override fun showSimilarMv(datas: List<MvData>) {
+        mSimilarMvData = datas
+        mSimilarMvAdapter.updateData(datas)
         loading.visibility = View.GONE
         content.visibility = View.VISIBLE
     }
 
     override fun showMvComment(datas: List<CommentData>) {
         mMvCommentAdapter.updateData(datas)
-        val a = 1
-
     }
 
     private fun setWebView() {

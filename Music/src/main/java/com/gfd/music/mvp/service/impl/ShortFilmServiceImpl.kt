@@ -15,7 +15,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/14 - 17:32
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class ShortFilmServiceImpl @Inject constructor() : ShortFilmService {
 
@@ -25,17 +25,22 @@ class ShortFilmServiceImpl @Inject constructor() : ShortFilmService {
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
+                        val mvData = ArrayList<MvData>()
                         Logger.e("mv数据:$json")
-                        val mvDto = Gson().fromJson(json, MvDto::class.java)
-                        val mvDatas = ArrayList<MvData>()
-                        if (mvDto.data != null) {
-                            mvDto.data.forEach {
-                                mvDatas.add(MvData(it.name, it.id, it.pic, it.desc
-                                        ?: "", it.singer,
-                                        it.playCount, videoUrl = it.url))
+                        try {
+                            val mvDto = Gson().fromJson(json, MvDto::class.java)
+
+                            if (mvDto.data != null) {
+                                mvDto.data.forEach {
+                                    mvData.add(MvData(it.name, it.id, it.pic, it.desc
+                                            ?: "", it.singer,
+                                            it.playCount, videoUrl = it.url))
+                                }
                             }
+                            callBack.onMvData(mvData)
+                        }catch (e:Exception){
+                            callBack.onMvData(mvData)
                         }
-                        callBack.onMvData(mvDatas)
                     }
                 })
     }

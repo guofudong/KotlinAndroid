@@ -14,7 +14,7 @@ import com.gfd.common.widgets.ProgressLoading
  * @Author : 郭富东
  * @Date ：2018/8/1 - 16:11
  * @Email：878749089@qq.com
- * @descriptio：所有Activity的基类
+ * @description：所有Activity的基类
  */
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -67,11 +67,16 @@ abstract class BaseActivity : AppCompatActivity() {
         if (mProgressLoading == null) {
             mProgressLoading = ProgressLoading(this)
         }
-        mProgressLoading?.showLoading()
+        if (!mProgressLoading!!.isShowing) {
+            mProgressLoading!!.showLoading()
+        }
     }
 
     protected fun hideDialogLoading() {
-        mProgressLoading?.hideLoading()
+        if (mProgressLoading?.isShowing == true) {
+            mProgressLoading?.hideLoading()
+        }
+
     }
 
     /**

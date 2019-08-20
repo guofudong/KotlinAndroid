@@ -9,17 +9,13 @@ import com.gfd.home.ui.fragment.CategoryFragment
  * @Author : 郭富东
  * @Date ：2018/8/8 - 15:28
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-更多页面列表适配器
  */
-class CategoryPagerAdapter(val fragments: List<CategoryFragment>, val titles: Array<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class CategoryPagerAdapter(private val fragments: List<CategoryFragment>, private val titles: Array<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment {
-        return fragments[position]
-    }
+    override fun getItem(position: Int): Fragment = fragments[position]
 
-    override fun getCount(): Int {
-        return fragments.size
-    }
+    override fun getCount(): Int = fragments.size
 
     override fun getPageTitle(position: Int): CharSequence? {
         return titles[position]

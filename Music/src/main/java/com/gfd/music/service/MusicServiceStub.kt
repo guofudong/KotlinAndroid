@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
  * @Author : 郭富东
  * @Date ：2018/8/14 - 11:17
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class MusicServiceStub(service: MusicPlayService) : IMusicService.Stub() {
 

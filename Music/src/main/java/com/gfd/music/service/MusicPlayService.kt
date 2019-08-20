@@ -14,7 +14,7 @@ import org.json.JSONObject
  * @Author : 郭富东
  * @Date ：2018/8/14 - 10:56
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class MusicPlayService : Service() {
 

@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:51
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class SongListDetailPresenter @Inject constructor() : SongListContract.Presenter, SongListService.GetSongListCallBack {
 
@@ -25,13 +25,13 @@ class SongListDetailPresenter @Inject constructor() : SongListContract.Presenter
         mService.getSongList(id, offset, this)
     }
 
-    override fun onSongList(datas: List<SongItemData>) {
-        mView.showSongList(datas)
+    override fun onSongList(data: List<SongItemData>) {
+        mView.showSongList(data)
         mView.hideLoading()
     }
 
-    override fun onTitle(titles: SongTitleData) {
-        mView.showHead(titles)
+    override fun onTitle(title: SongTitleData) {
+        mView.showHead(title)
     }
 
 }

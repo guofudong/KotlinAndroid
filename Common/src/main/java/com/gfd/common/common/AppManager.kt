@@ -9,7 +9,7 @@ import java.lang.System
  * @Author : 郭富东
  * @Date ：2018/8/1 - 15:46
  * @Email：878749089@qq.com
- * @descriptio：Activity管理器
+ * @description：Activity管理器
  */
 class AppManager private constructor(){
 

@@ -7,7 +7,7 @@ import com.gfd.home.entity.SearchItemData
  * @Author : 郭富东
  * @Date ：2018/8/7 - 15:58
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface SearchService {
 
@@ -33,7 +33,7 @@ interface SearchService {
     interface SearchCallBack {
 
         /** 搜索成功回调*/
-        fun onSearch(datas: List<SearchItemData>)
+        fun onSearch(data: List<SearchItemData>)
 
         /** 获取历史搜索记录成功回调*/
         fun onHistory(history: List<String>)

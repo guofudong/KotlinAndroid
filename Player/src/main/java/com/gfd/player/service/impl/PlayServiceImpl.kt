@@ -16,11 +16,13 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/6 - 14:46
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class PlayServiceImpl @Inject constructor() : PlayService {
 
-    private val ERROT_INFO = "解析异常！"
+   companion object{
+       private const val ERROT_INFO = "解析异常！"
+   }
 
     override fun getVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
         Logger.e("解析地址：${BaseConstant.BASE_URL + url}")
@@ -37,11 +39,7 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                             Logger.e("解析出来的地址：$src")
                             val split = src.split("url=")
                             val videoUrl: String
-                            if (split.size < 3) {
-                                videoUrl = src
-                            } else {
-                                videoUrl = split[2]
-                            }
+                            videoUrl = if (split.size == 2) split[1] else ""
                             Logger.e("播放地址：$videoUrl")
                             callBack.videoUrl(videoUrl, plotText)
                         } catch (e: Exception) {
@@ -72,7 +70,7 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                                 lis.forEach {
                                     val a = it.selectFirst("a")
                                     val count = a.text()//集数
-                                    var link = BaseConstant.URL_ANALYZE + a.attr("href")
+                                    val link = BaseConstant.URL_ANALYZE + a.attr("href")
                                     videoDatas.add(VideoItemData(count, link))
                                 }
                                 val jsonData = Gson().toJson(videoDatas)

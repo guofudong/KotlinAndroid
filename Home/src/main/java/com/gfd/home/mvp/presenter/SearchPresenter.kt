@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/7 - 16:27
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：视频搜索页面-MVP-Presenter
  */
 class SearchPresenter @Inject constructor() : SearchContract.Presenter, SearchService.SearchCallBack {
 
@@ -25,19 +25,20 @@ class SearchPresenter @Inject constructor() : SearchContract.Presenter, SearchSe
         mView.showSearchData(datas)
     }
 
-    override fun search(context: Context,keyWord: String) {
+    override fun search(context: Context, keyWord: String) {
         mView.showLoading()
-        mSearchService.search(context,keyWord, this)
+        mSearchService.search(context, keyWord, this)
     }
 
     override fun getSearchHistory(context: Context) {
         mView.showLoading()
-        mSearchService.getSearchHistory(context,this)
+        mSearchService.getSearchHistory(context, this)
     }
 
     override fun deleteHistory(context: Context) {
-        mSearchService.deleteHistory(context,this)
+        mSearchService.deleteHistory(context, this)
     }
+
     override fun onHistory(history: List<String>) {
         mView.hideLoading()
         mView.showSearchHistory(history)

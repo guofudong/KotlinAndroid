@@ -1,6 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 package com.gfd.common.ext
 
 import android.content.Context
+import android.os.Build
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -20,11 +23,10 @@ import java.lang.reflect.Field
  * @Author : 郭富东
  * @Date ：2018/8/10 - 11:08
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 fun ViewPager.noScroll() {
-    var mScroller: Field? = null
-    mScroller = ViewPager::class.java.getDeclaredField("mScroller")
+    val mScroller: Field? = ViewPager::class.java.getDeclaredField("mScroller")
     mScroller!!.isAccessible = true
     val scroller = FixedSpeedScroller(this.context)
     mScroller.set(this, scroller)

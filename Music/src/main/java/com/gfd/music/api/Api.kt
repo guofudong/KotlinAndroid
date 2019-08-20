@@ -1,6 +1,5 @@
 package com.gfd.music.api
 
-import com.gfd.common.utils.AESTools
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 
@@ -8,7 +7,7 @@ import java.net.URLEncoder
  * @Author : 郭富东
  * @Date ：2018/8/9 - 16:58
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 object Api {
     var URL_BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json&method="
@@ -95,16 +94,6 @@ object Api {
         return "https://api.bzqll.com/music/netease/search?key=579621905&type=radio&limit=100&offset=0&s=%E6%83%85%E6%84%9F"
     }
 
-
-    /**
-     * 获取歌曲的信息和下载地址
-     * @param songid String ： 歌曲id
-     * @return String
-     */
-    fun getSongInfo(songid: String): String {
-        var params = "songid=$songid&ts=${System.currentTimeMillis()}"
-        return URL_BASE + URL_SONG_INFO + "&$params&e=${AESTools.encrpty(params)}"
-    }
 
     /**
      * 获取排行榜分类
@@ -217,7 +206,7 @@ object Api {
      * @return String
      */
     fun getChannelSongList(tag: Int, count: Int): String {
-        return "$URL_BASE$URL_CHANNEL_SONG_LIST&tag_id=tag&num=$count"
+        return "$URL_BASE$URL_CHANNEL_SONG_LIST&tag_id=$tag&num=$count"
     }
 
     /**

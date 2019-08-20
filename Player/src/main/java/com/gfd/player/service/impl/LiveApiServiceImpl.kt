@@ -1,8 +1,10 @@
 package com.gfd.player.service.impl
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.webkit.JavascriptInterface
+import com.gfd.player.entity.Live
 import com.gfd.player.entity.LiveDataDto
 import com.gfd.player.service.LiveApiService
 import com.google.gson.Gson
@@ -16,8 +18,9 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/21 - 14:16
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
+@Suppress("DEPRECATION")
 class LiveApiServiceImpl @Inject constructor() : LiveApiService {
 
     private var wb: WebView? = null
@@ -32,7 +35,7 @@ class LiveApiServiceImpl @Inject constructor() : LiveApiService {
         mCallBack = callback
         val assetManager = context.assets
         val inputStream = assetManager.open("live.txt")
-        var byteArray = ByteArray(inputStream.available())
+        val byteArray = ByteArray(inputStream.available())
         inputStream.read(byteArray)
         inputStream.close()
         val json = String(byteArray)
@@ -63,6 +66,7 @@ class LiveApiServiceImpl @Inject constructor() : LiveApiService {
      * 设置WebView
      * @param context Context
      */
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(context: Context, url: String) {
         (context as Activity).runOnUiThread {
             wb = WebView(context)
@@ -88,13 +92,13 @@ class LiveApiServiceImpl @Inject constructor() : LiveApiService {
         @JavascriptInterface
         fun processHTML(html: String) {
             val doc = Jsoup.parse(html)
-            val liveDatas = ArrayList<LiveDataDto.LiveData>()
+            val liveData = ArrayList<Live>()
             doc.getElementsByClass("tv-item").forEach {
-                val name = it.text()
-                val link = it.attr("_href")
-                val img = it.selectFirst("img").attr("src")
+             //   val name = it.text()
+              //  val link = it.attr("_href")
+              //  val img = it.selectFirst("img").attr("src")
             }
-            mCallBack.onLive(liveDatas)
+            mCallBack.onLive(liveData)
             wb = null
         }
     }

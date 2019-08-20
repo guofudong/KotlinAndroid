@@ -10,7 +10,7 @@ import com.gfd.music.entity.SongItemData
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:49
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface SearchContract{
 

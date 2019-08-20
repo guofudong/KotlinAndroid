@@ -73,13 +73,13 @@ public class VideoPlayer extends QSVideoViewHelp {
     }
 
     protected void initView() {
-        this.topContainer = (ViewGroup)this.findViewById(org.song.videoplayer.R.id.layout_top);
-        this.bottomContainer = (ViewGroup)this.findViewById(org.song.videoplayer.R.id.layout_bottom);
-        this.bufferingContainer = (ViewGroup)this.findViewById(org.song.videoplayer.R.id.buffering_container);
-        this.loadingContainer = (ViewGroup)this.findViewById(org.song.videoplayer.R.id.loading_container);
-        this.errorContainer = (ViewGroup)this.findViewById(org.song.videoplayer.R.id.error_container);
-        this.coverImageView = (ImageView)this.findViewById(org.song.videoplayer.R.id.cover);
-        this.titleTextView = (TextView)this.findViewById(org.song.videoplayer.R.id.title);
+        this.topContainer = this.findViewById(org.song.videoplayer.R.id.layout_top);
+        this.bottomContainer = this.findViewById(org.song.videoplayer.R.id.layout_bottom);
+        this.bufferingContainer = this.findViewById(org.song.videoplayer.R.id.buffering_container);
+        this.loadingContainer = this.findViewById(org.song.videoplayer.R.id.loading_container);
+        this.errorContainer = this.findViewById(org.song.videoplayer.R.id.error_container);
+        this.coverImageView = this.findViewById(org.song.videoplayer.R.id.cover);
+        this.titleTextView = this.findViewById(org.song.videoplayer.R.id.title);
         this.changeViews = new ArrayList();
         this.changeViews.add(this.topContainer);
         this.changeViews.add(this.bottomContainer);

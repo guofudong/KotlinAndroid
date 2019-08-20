@@ -3,6 +3,7 @@ package com.gfd.video.common
 import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import com.gfd.video.entity.VersionData
 import com.google.gson.Gson
 import com.lzy.okgo.OkGo
@@ -10,6 +11,13 @@ import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import com.orhanobut.logger.Logger
 
+/**
+ * @Author：郭富东
+ * @Date：2019/8/19 : 15:36
+ * @Email：878749089@qq.com
+ * @description：版本更新工具类
+ */
+@Suppress("DEPRECATION")
 class UpdateManager private constructor() {
 
     companion object {
@@ -23,8 +31,8 @@ class UpdateManager private constructor() {
                         val json = response.body()
                         Logger.e("版本更新数据：$json")
                         val versionData = Gson().fromJson(json, VersionData::class.java)
-                        var currentCode = getVersionCode(context)
-                        var serverCode = versionData.data.versionCode
+                        val currentCode = getVersionCode(context)
+                        val serverCode = versionData.data.versionCode
                         if (serverCode > currentCode) {
                             //有新版本
                             showDownLoadDialog(context, versionData.data.url)
@@ -43,7 +51,11 @@ class UpdateManager private constructor() {
         var versionCode = 0
         try {
             //获取软件版本号，对应AndroidManifest.xml下android:versionCode
-            versionCode = context.packageManager.getPackageInfo(context.packageName, 0).versionCode
+            versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                context.packageManager.getPackageInfo(context.packageName, 0).longVersionCode.toInt()
+            } else {
+                context.packageManager.getPackageInfo(context.packageName, 0).versionCode
+            }
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }

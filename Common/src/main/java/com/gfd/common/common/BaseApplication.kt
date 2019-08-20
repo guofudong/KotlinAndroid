@@ -19,7 +19,7 @@ import okhttp3.OkHttpClient
  * @Author : 郭富东
  * @Date ：2018/8/2 - 9:49
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 open class BaseApplication : Application() {
         lateinit var appComponent: DaggerAppComponent

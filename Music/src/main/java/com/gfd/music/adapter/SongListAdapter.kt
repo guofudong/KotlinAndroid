@@ -11,22 +11,18 @@ import com.gfd.music.entity.SongItemData
  * @Author : 郭富东
  * @Date ：2018/8/13 - 14:02
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class SongListAdapter(context: Context) : BaseAdapter<SongItemData>(context) {
 
-    override fun getItemLayoutId(): Int {
-        return R.layout.music_item_songlist
-
-    }
+    override fun getItemLayoutId(): Int = R.layout.music_item_songlist
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
-        val songItemData = mDatas[position]
-        val tvNum = holder.getView<TextView>(R.id.tv_item_num)
-        val tvName = holder.getView<TextView>(R.id.tv_item_name)
-        val tvAutor = holder.getView<TextView>(R.id.tv_item_autor)
-        tvNum.text = (position + 1).toString()
-        tvName.text = songItemData.name
-        tvAutor.text = songItemData.autor
+        val songItemData = mData[position]
+        holder.apply {
+            setText(R.id.tv_item_num, (position + 1).toString())
+            setText(R.id.tv_item_name, songItemData.name)
+            setText(R.id.tv_item_autor, songItemData.autor)
+        }
     }
 }

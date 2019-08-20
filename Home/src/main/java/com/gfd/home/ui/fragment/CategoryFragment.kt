@@ -9,7 +9,7 @@ import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.common.utils.ToastUtils
 import com.gfd.home.R
 import com.gfd.home.adapter.CategoryVideoAdapter
-import com.gfd.home.common.Concant
+import com.gfd.home.common.Constant
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.injection.component.DaggerCategoryComponent
 import com.gfd.home.injection.module.CategoryModule
@@ -24,23 +24,24 @@ import kotlinx.android.synthetic.main.home_fragment_category.*
  * @Author : 郭富东
  * @Date ：2018/8/8 - 15:24
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-更多页面-Fragment
  */
+@Suppress("DEPRECATION")
 class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.View {
 
     private var category = 0
-    /** 默认加载的页数*/
-    private val DEFAULTPAGER = 2
     private lateinit var videoUrl: String
     private lateinit var mVideoAdapter: CategoryVideoAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
-    private var currentPage = DEFAULTPAGER
+    private var currentPage = DEFAULT_PAGER
     private val totalPager = 20
     private lateinit var path: String
-    /** GridView 列表的列数 */
-    private val GRID_COLUMNS = 3
 
     companion object {
+        /** 默认加载的页数*/
+        private const val DEFAULT_PAGER = 2
+        /** GridView 列表的列数 */
+        private const val GRID_COLUMNS = 3
         const val CATEGORY = "category"
         const val CATEGORY_NEW = 1
         const val CATEGORY_MOVIE = 2
@@ -64,7 +65,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         //设置刷新
         categoryRefresh.setColorSchemeColors(resources.getColor(R.color.home_colorRefresh))
         categoryRefresh.setSize(SwipeRefreshLayout.DEFAULT)
-        mVideoAdapter = CategoryVideoAdapter(activity)
+        mVideoAdapter = CategoryVideoAdapter(activity!!)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         categoryRecycler.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         categoryRecycler.setLoadMoreEnabled(true)
@@ -83,7 +84,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
             else -> ""
         }
         if (!TextUtils.isEmpty(videoUrl)) {
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH, true)
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Constant.STATE_REFRESH, false)
         } else {
             ToastUtils.instance.showToast("类型不匹配")
             activity?.finish()
@@ -95,15 +96,15 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         categoryRecycler.setOnLoadMoreListener {
             currentPage++
             if (currentPage <= totalPager) {
-                mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_LOADMORE, false)
+                mPresenter.getCategoryVideos(videoUrl, currentPage, Constant.STATE_LOAD_MORE, false)
             } else {
                 categoryRecycler.setNoMore(true)
             }
         }
         //设置下拉刷新
         categoryRefresh.setOnRefreshListener {
-            currentPage = DEFAULTPAGER
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Concant.STATE_REFRESH, false)
+            currentPage = DEFAULT_PAGER
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Constant.STATE_REFRESH, false)
         }
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
@@ -120,12 +121,12 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         }
     }
 
-    override fun showVideos(datas: List<VideoItemData>, state: Int) {
-        if (state == Concant.STATE_LOADMORE) {//加载更多
-            mVideoAdapter.addAll(datas)
-            categoryRecycler?.refreshComplete(datas.size)
-        } else if (state == Concant.STATE_REFRESH) {//下拉刷新
-            mVideoAdapter.updateData(datas)
+    override fun showVideos(data: List<VideoItemData>, state: Int) {
+        if (state == Constant.STATE_LOAD_MORE) {//加载更多
+            mVideoAdapter.addAll(data)
+            categoryRecycler?.refreshComplete(data.size)
+        } else if (state == Constant.STATE_REFRESH) {//下拉刷新
+            mVideoAdapter.updateData(data)
             categoryRefresh?.isRefreshing = false
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()

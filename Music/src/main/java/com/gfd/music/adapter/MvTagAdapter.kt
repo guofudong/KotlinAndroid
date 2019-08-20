@@ -11,20 +11,18 @@ import com.google.android.flexbox.FlexboxLayoutManager
  * @Author : 郭富东
  * @Date ：2018/8/18 - 11:01
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
-class MvTagAdapter(val context: Context):BaseAdapter<String>(context){
-    override fun getItemLayoutId(): Int {
-        return R.layout.music_item_mvdetail_tag
-
-    }
+class MvTagAdapter(val context: Context) : BaseAdapter<String>(context) {
+    override fun getItemLayoutId(): Int = R.layout.music_item_mvdetail_tag
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
-        val tvTag = holder.getView<TextView>(R.id.tv_item_tag)
-        tvTag.text = mDatas[position]
-        val lp = tvTag.layoutParams
-        if(lp is FlexboxLayoutManager.LayoutParams){
-            lp.flexGrow = 1.0f
+        holder.apply {
+            setText(R.id.tv_item_tag, mData[position])
+            val lp = getView<TextView>(R.id.tv_item_tag).layoutParams
+            if (lp is FlexboxLayoutManager.LayoutParams) {
+                lp.flexGrow = 1.0f
+            }
         }
     }
 

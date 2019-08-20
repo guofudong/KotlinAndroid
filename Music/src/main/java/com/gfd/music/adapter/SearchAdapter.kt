@@ -13,21 +13,18 @@ import com.gfd.music.entity.SearchData
  * @Author : 郭富东
  * @Date ：2018/8/23 - 17:29
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：音乐搜索结构列表适配器
  */
-class SearchAdapter(val context: Context):BaseAdapter<SearchData>(context){
-    override fun getItemLayoutId(): Int {
-        return R.layout.musis_item_search_result
-    }
+class SearchAdapter(val context: Context) : BaseAdapter<SearchData>(context) {
+    override fun getItemLayoutId(): Int = R.layout.musis_item_search_result
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
-        val searchData = mDatas[position]
-        val tvSongName = holder.getView<TextView>(R.id.tvSongName)
-        val tvSongArtist = holder.getView<TextView>(R.id.tvSongArtist)
-        val ivSongPic = holder.getView<ImageView>(R.id.ivItemSearch)
-        ImageLoader.loadUrlImage(context,searchData.pic,ivSongPic)
-        tvSongArtist.text = searchData.singer
-        tvSongName.text = searchData.name
+        val searchData = mData[position]
+        holder.apply {
+            setText(R.id.tvSongName, searchData.name)
+            setText(R.id.tvSongArtist, searchData.singer)
+            setImageUrl(R.id.ivItemSearch, searchData.pic)
+        }
     }
 
 }

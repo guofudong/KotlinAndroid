@@ -1,7 +1,7 @@
 package com.gfd.home.service.impl
 
 import com.gfd.home.api.Api
-import com.gfd.home.common.Concant
+import com.gfd.home.common.Constant
 import com.gfd.home.entity.MovieData
 import com.gfd.home.entity.MovieEntity
 import com.gfd.home.service.MovieListService
@@ -31,12 +31,12 @@ class MovieListServiceImpl @Inject constructor() : MovieListService {
                         var datas = ArrayList<MovieData>()
                         if (movieDatas.isNotEmpty()) {
                             movieDatas.forEach {
-                                if (type == Concant.TYPE_MOVIE_01) {
+                                if (type == Constant.TYPE_MOVIE_01) {
                                     if (it.r > 0) {
                                         datas.add(MovieData(it.movieId, it.t, it.dn, it.aN1
                                                 , it.isIs3D, it.isIsIMAX, it.isIsHot, it.movieType, it.img, it.wantedCount, it.r))
                                     }
-                                } else if (type == Concant.TYPE_MOVIE_02) {
+                                } else if (type == Constant.TYPE_MOVIE_02) {
                                     if (it.r <= 0) {
                                         datas.add(MovieData(it.movieId, it.t, it.dn, it.aN1
                                                 , it.isIs3D, it.isIsIMAX, it.isIsHot, it.movieType, it.img, it.wantedCount, 0.0))

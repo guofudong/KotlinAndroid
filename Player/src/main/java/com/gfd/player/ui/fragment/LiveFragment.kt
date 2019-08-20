@@ -11,14 +11,14 @@ import com.gfd.common.ext.gridInit
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.player.R
 import com.gfd.player.adapter.ProgramAdapter
-import com.gfd.player.common.Concant
-import com.gfd.player.entity.LiveDataDto
+import com.gfd.player.common.Conant
+import com.gfd.player.entity.Live
 import com.gfd.player.entity.TimeTableData
 import com.gfd.player.ext.init
 import com.gfd.player.ext.play
 import com.gfd.player.ext.setUrl
 import com.gfd.player.injection.component.DaggerLiveComponent
-import com.gfd.player.injection.moudle.LiveMoudle
+import com.gfd.player.injection.moudle.LiveModule
 import com.gfd.player.mvp.contract.LiveContract
 import com.gfd.player.mvp.presenter.LivePresenter
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
@@ -30,14 +30,16 @@ import org.song.videoplayer.IVideoPlayer
  * @Author : 郭富东
  * @Date ：2018/8/20 - 16:24
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
 
-    /** GridView 列表的列数 */
-    private val GRID_COLUMNS = 3
+    companion object{
+        /** GridView 列表的列数 */
+        private const val GRID_COLUMNS = 3
+    }
     private lateinit var mLeftAdapter: ProgramAdapter
-    private lateinit var mLeftDatas: List<LiveDataDto.LiveData>
+    private lateinit var mLeftDatas: List<Live>
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var videoUrl: String
 
@@ -51,7 +53,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     override fun injectComponent() {
         DaggerLiveComponent.builder()
                 .activityComponent(mActivityComponent)
-                .liveMoudle(LiveMoudle(this))
+                .liveModule(LiveModule(this))
                 .build()
                 .inject(this)
 
@@ -92,28 +94,23 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
         }
     }
 
-    override fun showLiveInfo(datas: List<LiveDataDto.LiveData>) {
+    override fun showLiveInfo(data: List<Live>) {
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
-            var index = 0
-            if (position == datas.size) {
-                index = datas.size - 1
-            } else {
-                index = position
-            }
-            val type = datas[index].getItemType()
-            if (type == Concant.ITEM_TYPE_TITLE) {
+            val index = if (position == data.size) data.size - 1 else position
+            val type = data[index].getItemType()
+            if (type == Conant.ITEM_TYPE_TITLE) {
                 GRID_COLUMNS
             } else {
                 1
             }
         }
-        mLeftDatas = datas
-        mLeftAdapter.updateData(datas)
+        mLeftDatas = data
+        mLeftAdapter.updateData(data)
         videoUrl = mLeftDatas[1].live
         mPlayerVideoPlayer.setUrl(videoUrl)
     }
 
-    override fun showTimeTable(datas: List<TimeTableData>) {
+    override fun showTimeTable(data: List<TimeTableData>) {
     }
 
     override fun showVideo(url: String) {
@@ -137,8 +134,8 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN) //显示状态栏
     }
 
-    internal var flag: Boolean = false//记录退出时播放状态 回来的时候继续播放
-    internal var position: Int = 0//记录销毁时的进度 回来继续盖进度播放
+    private var flag: Boolean = false//记录退出时播放状态 回来的时候继续播放
+    private var position: Int = 0//记录销毁时的进度 回来继续盖进度播放
 
     override fun onPause() {
         super.onPause()
@@ -171,8 +168,8 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     }
 
 
-    internal var handler = Handler()
-    internal var runnable: Runnable = Runnable {
+    private var handler = Handler()
+    private var runnable: Runnable = Runnable {
         if (mPlayerVideoPlayer != null && mPlayerVideoPlayer.currentState != IVideoPlayer.STATE_AUTO_COMPLETE) {
             position = mPlayerVideoPlayer.position
             mPlayerVideoPlayer.release()

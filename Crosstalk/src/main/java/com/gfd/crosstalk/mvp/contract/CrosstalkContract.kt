@@ -8,12 +8,12 @@ import com.gfd.crosstalk.entity.Video
  * @Author : 郭富东
  * @Date ：2018/9/15 - 11:01
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface CrosstalkContract {
 
     interface View : BaseView {
-        fun showVideoList(datas:List<Video>)
+        fun showVideoList(data:List<Video>)
     }
 
     interface Presenter: BasePresenter {

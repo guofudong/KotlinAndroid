@@ -8,7 +8,7 @@ import com.gfd.player.entity.VideoItemData
  * @Author : 郭富东
  * @Date ：2018/8/6 - 14:33
  * @Email：878749089@qq.com
- * @descriptio：视频播放页面协议
+ * @description：视频播放页面协议
  */
 interface PlayContract {
 
@@ -22,9 +22,9 @@ interface PlayContract {
 
         /**
          * 播放网页数据集合
-         * @param videoUrl List<VideoItemData> ： 视频地址
+         * @param data List<VideoItemData> ： 视频地址
          */
-        fun playWebVideo(datas: List<VideoItemData>)
+        fun playWebVideo(data: List<VideoItemData>)
 
         /**
          * 显示剧情简介

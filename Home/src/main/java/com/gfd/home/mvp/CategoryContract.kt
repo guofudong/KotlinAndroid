@@ -8,14 +8,12 @@ import com.gfd.home.entity.VideoItemData
  * @Author : 郭富东
  * @Date ：2018/8/8 - 14:55
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-更多-MVP-Contract
  */
 interface CategoryContract {
 
     interface View : BaseView {
-
-        fun showVideos(datas: List<VideoItemData>,state:Int)
-
+        fun showVideos(data: List<VideoItemData>,state:Int)
     }
 
     interface Presenter : BasePresenter {

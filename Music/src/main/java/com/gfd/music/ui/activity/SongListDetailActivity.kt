@@ -17,12 +17,11 @@ import com.gfd.music.adapter.SongListAdapter
 import com.gfd.music.entity.SongItemData
 import com.gfd.music.entity.SongTitleData
 import com.gfd.music.injection.component.DaggerSongListDetailComponent
-import com.gfd.music.injection.module.SongListDetailMoudle
+import com.gfd.music.injection.module.SongListDetailModule
 import com.gfd.music.mvp.contract.SongListContract
 import com.gfd.music.mvp.preesnter.SongListDetailPresenter
 import com.gfd.music.service.MusicPlayService
 import com.gfd.music.service.MusicServiceStub
-import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.music_activity_song_list.*
 import kotlinx.android.synthetic.main.music_head_songlist_top.*
 import kotlinx.android.synthetic.main.music_layout_play_contral.*
@@ -46,7 +45,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
     override fun injectComponent() {
         DaggerSongListDetailComponent.builder()
                 .activityComponent(mActivityComponent)
-                .songListDetailMoudle(SongListDetailMoudle(this))
+                .songListDetailModule(SongListDetailModule(this))
                 .build()
                 .inject(this)
         setStatusBar()
@@ -73,7 +72,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
     }
 
     override fun setListener() {
-        headRoot.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        headRoot.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, _ ->
 
         })
         songListAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
@@ -94,16 +93,16 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
 
     }
 
-    override fun showSongList(datas: List<SongItemData>) {
-        songList = datas
-        songListAdapter.updateData(datas)
+    override fun showSongList(data: List<SongItemData>) {
+        songList = data
+        songListAdapter.updateData(data)
     }
 
-    override fun showHead(datas: SongTitleData) {
-        title = datas.title
+    override fun showHead(data: SongTitleData) {
+        title = data.title
         tvTitle.text = title
-        tvTag.text = "编辑推荐：$datas.des"
-        tvType.text = datas.type
+        tvTag.text = "编辑推荐：$data.des"
+        tvType.text = data.type
         tvSongTag.text = duration + "万"
     }
 
@@ -117,7 +116,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         unbindService(connection)
     }
 
-    val connection = object : ServiceConnection {
+    private val connection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName) {
 
         }

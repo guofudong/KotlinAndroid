@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:54
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class RecommendPresenter @Inject constructor() : RecommendContract.Presenter, RecommendService.GetRecommendCallBack {
 
@@ -39,17 +39,17 @@ class RecommendPresenter @Inject constructor() : RecommendContract.Presenter, Re
         mService.getRadioData(this)
     }
 
-    override fun onBanner(datas: List<BannerData>) {
-        mView.showBanner(datas)
+    override fun onBanner(data: List<BannerData>) {
+        mView.showBanner(data)
     }
 
-    override fun onSongList(datas: List<SongData>) {
-        mView.showSongList(datas)
+    override fun onSongList(data: List<SongData>) {
+        mView.showSongList(data)
         mView.hideLoading()
     }
 
-    override fun onRadioData(datas: List<RadioData>) {
-        mView.showRadioData(datas)
+    override fun onRadioData(data: List<RadioData>) {
+        mView.showRadioData(data)
         mView.hideLoading()
     }
 

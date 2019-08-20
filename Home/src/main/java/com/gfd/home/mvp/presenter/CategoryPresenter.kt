@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/8 - 14:54
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-更多页面-MVP-Presenter
  */
 class CategoryPresenter @Inject constructor() : CategoryContract.Presenter, CategoryService.GetCategoryVideoCallBack {
 
@@ -29,9 +29,9 @@ class CategoryPresenter @Inject constructor() : CategoryContract.Presenter, Cate
         mService.getCategoryVideos(url, page, state, this)
     }
 
-    override fun onCategoryVideos(datas: List<VideoItemData>, state: Int) {
-        mView.showVideos(datas, state)
-        if(isLoading){
+    override fun onCategoryVideos(data: List<VideoItemData>, state: Int) {
+        mView.showVideos(data, state)
+        if (isLoading) {
             mView.hideLoading()
         }
     }

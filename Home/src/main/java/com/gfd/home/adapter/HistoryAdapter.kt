@@ -11,20 +11,19 @@ import com.google.android.flexbox.FlexboxLayoutManager
  * @Author : 郭富东
  * @Date ：2018/8/8 - 10:03
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：搜索页面-历史记录列表适配器
  */
 class HistoryAdapter(context: Context) : BaseAdapter<String>(context) {
 
-    override fun getItemLayoutId(): Int {
-        return R.layout.home_item_search_history
-    }
+    override fun getItemLayoutId(): Int = R.layout.home_item_search_history
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
-        var tvHsitory = holder.getView<TextView>(R.id.tv_item_history)
-        tvHsitory.text = mDatas[position]
-        val lp = tvHsitory.layoutParams
-        if(lp is FlexboxLayoutManager.LayoutParams){
-            lp.flexGrow = 1.0f
+        holder.apply {
+            setText(R.id.tv_item_history, mData[position])
+            val lp = getView<TextView>(R.id.tv_item_history).layoutParams
+            if (lp is FlexboxLayoutManager.LayoutParams) {
+                lp.flexGrow = 1.0f
+            }
         }
     }
 

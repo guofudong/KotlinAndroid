@@ -20,7 +20,7 @@ import java.util.*
  * @Author : 郭富东
  * @Date ：2018/8/2 - 15:22
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：app-主页面
  */
 class MainActivity : BaseActivity() {
 
@@ -28,9 +28,12 @@ class MainActivity : BaseActivity() {
     private var mMusicFragment: BaseFragment? = null
     private var mLiveFragment: BaseFragment? = null
     private var mCrosstalkFragment: BaseFragment? = null
-    private val STATUSBAR_POSITION = 1
     private var clickTime: Long = 0
     private val mStack = Stack<BaseFragment>()
+
+    companion object {
+        private const val STATE_BAR_POSITION = 1
+    }
 
     override fun initOperate() {
         setStatusBar()
@@ -119,7 +122,7 @@ class MainActivity : BaseActivity() {
             return
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//android6.0以后可以对状态栏文字颜色和图标进行修改
-            window.decorView.systemUiVisibility = if (position == STATUSBAR_POSITION) {
+            window.decorView.systemUiVisibility = if (position == STATE_BAR_POSITION) {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             } else {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

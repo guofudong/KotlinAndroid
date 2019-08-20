@@ -11,14 +11,14 @@ import com.gfd.common.net.status.OnStatusLayoutClickListener
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.home.R
 import com.gfd.home.adapter.VideoListAdapter
-import com.gfd.home.common.Concant
-import com.gfd.home.entity.BinnerData
+import com.gfd.home.common.Constant
+import com.gfd.home.entity.BannerData
 import com.gfd.home.entity.VideoItemData
 import com.gfd.home.entity.VideoListData
 import com.gfd.home.injection.component.DaggerVideoComponent
 import com.gfd.home.injection.module.VideoModule
 import com.gfd.home.mvp.VideoListContract
-import com.gfd.home.mvp.presenter.VedioPresenter
+import com.gfd.home.mvp.presenter.VideoPresenter
 import com.gfd.home.ui.activity.CategoryActivity
 import com.gfd.home.ui.activity.MovieListActivity
 import com.gfd.home.ui.activity.SearchActivity
@@ -35,25 +35,26 @@ import kotlinx.android.synthetic.main.home_fragment_home.*
  * @Author : 郭富东
  * @Date ：2018/8/2 - 17:55
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
-class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
+class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
 
-    /** GridView 列表的列数 */
-    private val GRID_COLUMNS = 3
-    /** 轮播图切换时间 */
-    private val BANNER_TIME = 3 * 1000
-    private val videoDatas = ArrayList<VideoItemData>()
+    private val videoData = ArrayList<VideoItemData>()
     private lateinit var mVideoAdapter: VideoListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mBanner: Banner
-    private lateinit var imageDatas: List<BinnerData>
-    private lateinit var mVideoDatas: List<VideoItemData>
+    private lateinit var imageData: List<BannerData>
+    private lateinit var mVideoData: List<VideoItemData>
     private lateinit var path: String
-    private lateinit var homeCategoty01: CircleImageView
-    private lateinit var homeCategoty02: CircleImageView
-    private lateinit var homeCategoty03: CircleImageView
-    private lateinit var homeCategoty04: CircleImageView
+    private lateinit var homeCategory01: CircleImageView
+    private lateinit var homeCategory02: CircleImageView
+    private lateinit var homeCategory03: CircleImageView
+    private lateinit var homeCategory04: CircleImageView
+
+    companion object {
+        /** GridView 列表的列数 */
+        private const val GRID_COLUMNS = 3
+    }
 
     override fun injectComponent() {
         DaggerVideoComponent.builder().activityComponent(mActivityComponent)
@@ -61,26 +62,23 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.home_fragment_home
-    }
-
+    override fun getLayoutId(): Int = R.layout.home_fragment_home
     override fun initView() {
         //设置刷新
         swipeRefresh.setColorSchemeColors(resources.getColor(R.color.home_colorRefresh))
         swipeRefresh.setSize(SwipeRefreshLayout.DEFAULT)
-        mVideoAdapter = VideoListAdapter(activity)
+        mVideoAdapter = VideoListAdapter(activity!!)
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         mRecyclerView.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         //添加Head View
         val headViewBanner = LayoutInflater.from(context).inflate(R.layout.home_head_banner, null, false)
         mBanner = headViewBanner.findViewById(R.id.mBanner)
-        homeCategoty01 = headViewBanner.findViewById(R.id.homeCategoty01)
-        homeCategoty02 = headViewBanner.findViewById(R.id.homeCategoty02)
-        homeCategoty03 = headViewBanner.findViewById(R.id.homeCategoty03)
-        homeCategoty04 = headViewBanner.findViewById(R.id.homeCategoty04)
+        homeCategory01 = headViewBanner.findViewById(R.id.homeCategoty01)
+        homeCategory02 = headViewBanner.findViewById(R.id.homeCategoty02)
+        homeCategory03 = headViewBanner.findViewById(R.id.homeCategoty03)
+        homeCategory04 = headViewBanner.findViewById(R.id.homeCategoty04)
         mLRecyclerViewAdapter.addHeaderView(headViewBanner)
-        val v = View(activity)
+        //val v = View(activity)
     }
 
     override fun initData() {
@@ -90,28 +88,28 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
     override fun setListener() {
         //轮播图点击事件
         mBanner.setOnBannerListener {
-            val imgData = imageDatas[it]
+            val imgData = imageData[it]
             path = RouterPath.Player.PATH_PLAYER
             toPlayer(imgData.link, imgData.imgUrl, imgData.name)
             Logger.e("banner ：${imgData.link}")
         }
         swipeRefresh.setOnRefreshListener {
-            AppPrefsUtils.remove(Concant.KEY_JSON)
+            AppPrefsUtils.remove(Constant.KEY_JSON)
             mPresenter.getVideoList(false)
         }
         //item点击监听
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
-            val itemData = mVideoDatas[position]
-            if (itemData.getItemType() == Concant.ITEM_TYPE_TITLE) {//点击标题
+            val itemData = mVideoData[position]
+            if (itemData.getItemType() == Constant.ITEM_TYPE_TITLE) {//点击标题
                 val intent = Intent(activity, CategoryActivity::class.java)
-                intent.putExtra(Concant.CATEGORY, itemData.titleType)
+                intent.putExtra(Constant.CATEGORY, itemData.titleType)
                 startActivity(intent)
                 Logger.e("TitleType : ${itemData.titleType}")
             } else {//点击图片
-                if (itemData.title == mVideoDatas[0].title) {
-                    path = RouterPath.Player.PATH_PLAYER
+                path = if (itemData.title == mVideoData[0].title) {
+                    RouterPath.Player.PATH_PLAYER
                 } else {
-                    path = RouterPath.Player.PATH_PLAYER_WEB
+                    RouterPath.Player.PATH_PLAYER_WEB
                 }
                 toPlayer(itemData.videoLink, itemData.videoImg, itemData.videoName)
                 Logger.e("list ：${itemData.videoLink}")
@@ -133,33 +131,33 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
             }
         })
         //分类点击
-        homeCategoty01.setOnClickListener {
+        homeCategory01.setOnClickListener {
             //正在热映
             val intent = Intent(activity, MovieListActivity::class.java)
             intent.putExtra("title", "正在热映")
-            intent.putExtra("movieType", Concant.TYPE_MOVIE_01)
+            intent.putExtra("movieType", Constant.TYPE_MOVIE_01)
             startActivity(intent)
 
         }
-        homeCategoty02.setOnClickListener {
+        homeCategory02.setOnClickListener {
             //即将上映
             val intent = Intent(activity, MovieListActivity::class.java)
             intent.putExtra("title", "即将上映")
-            intent.putExtra("movieType", Concant.TYPE_MOVIE_02)
+            intent.putExtra("movieType", Constant.TYPE_MOVIE_02)
             startActivity(intent)
         }
-        homeCategoty03.setOnClickListener {
+        homeCategory03.setOnClickListener {
             //电影排行
             val intent = Intent(activity, MovieListActivity::class.java)
             intent.putExtra("title", "电影排行")
-            intent.putExtra("movieType", Concant.TYPE_MOVIE_03)
+            intent.putExtra("movieType", Constant.TYPE_MOVIE_03)
             startActivity(intent)
         }
-        homeCategoty04.setOnClickListener {
+        homeCategory04.setOnClickListener {
             //随便看看
             val intent = Intent(activity, MovieListActivity::class.java)
             intent.putExtra("title", "随便看看")
-            intent.putExtra("movieType", Concant.TYPE_MOVIE_04)
+            intent.putExtra("movieType", Constant.TYPE_MOVIE_04)
             startActivity(intent)
         }
     }
@@ -168,20 +166,20 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
         if (swipeRefresh != null && swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
-        videoDatas.addAll(data.videoList)
+        videoData.addAll(data.videoList)
         //设置轮播图数据
         setBanner(data.bannerUrls)
         //设置列表数据
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             val type = data.videoList[position].type
-            if (type == Concant.ITEM_TYPE_TITLE) {
+            if (type == Constant.ITEM_TYPE_TITLE) {
                 GRID_COLUMNS
             } else {
                 1
             }
         }
-        mVideoDatas = data.videoList
-        mVideoAdapter.updateData(mVideoDatas)
+        mVideoData = data.videoList
+        mVideoAdapter.updateData(mVideoData)
         mLRecyclerViewAdapter.notifyDataSetChanged()
         mStatusLayoutManager.showContent()
     }
@@ -190,8 +188,8 @@ class HomeFragment : BaseMvpFragment<VedioPresenter>(), VideoListContract.View {
      * 设置轮播图数据
      * @param data VideoListData
      */
-    private fun setBanner(data: List<BinnerData>) {
-        imageDatas = data
+    private fun setBanner(data: List<BannerData>) {
+        imageData = data
         val bannerImages = ArrayList<String>()
         val titles = ArrayList<String>()
         for (bannerUrl in data) {

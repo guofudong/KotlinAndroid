@@ -9,11 +9,11 @@ import com.gfd.common.ext.player
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.music.R
 import com.gfd.music.adapter.RecommendAdapter
-import com.gfd.music.common.Concant
+import com.gfd.music.common.Constant
 import com.gfd.music.entity.BannerData
 import com.gfd.music.entity.SongData
 import com.gfd.music.injection.component.DaggerMusicComponent
-import com.gfd.music.injection.module.MusicMoudle
+import com.gfd.music.injection.module.MusicModule
 import com.gfd.music.mvp.contract.RecommendContract
 import com.gfd.music.mvp.preesnter.RecommendPresenter
 import com.gfd.music.ui.activity.SongListDetailActivity
@@ -26,7 +26,7 @@ import java.util.*
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:48
  * @Email：878749089@qq.com
- * @descriptio：推荐Fragment
+ * @description：推荐Fragment
  */
 class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.View {
 
@@ -35,14 +35,12 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     private lateinit var mSongAdapter: RecommendAdapter
     private lateinit var mBanner: Banner
     private lateinit var mSongData: List<SongData>
-    override fun getLayoutId(): Int {
-        return R.layout.music_fragment_recommend
-    }
+    override fun getLayoutId(): Int = R.layout.music_fragment_recommend
 
     override fun injectComponent() {
         DaggerMusicComponent.builder()
                 .activityComponent(mActivityComponent)
-                .musicMoudle(MusicMoudle(this))
+                .musicModule(MusicModule(this))
                 .build()
                 .inject(this)
 
@@ -70,7 +68,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
     override fun setListener() {
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
             val songData = mSongData[position]
-            if (Concant.ITEM_TYPE_IMG == songData.getItemType()) {//点击内容
+            if (Constant.ITEM_TYPE_IMG == songData.getItemType()) {//点击内容
                 val intent = Intent(activity, SongListDetailActivity::class.java)
                 intent.putExtra("id", songData.song_id)
                 intent.putExtra("pic_big", songData.pic_big)
@@ -99,7 +97,7 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
         mSongData = songDatas
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             val type = songDatas[position].getItemType()
-            if (type == Concant.ITEM_TYPE_TITLE) {
+            if (type == Constant.ITEM_TYPE_TITLE) {
                 3
             } else {
                 1

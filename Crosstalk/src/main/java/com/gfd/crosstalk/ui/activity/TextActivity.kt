@@ -12,7 +12,7 @@ import com.gfd.crosstalk.ui.fragment.CrosstalkFragment
  * @Author : 郭富东
  * @Date ：2018/9/21 - 17:10
  * @Email：878749089@qq.com
- * @descriptio：测试Activit，单独运行模块中的内容
+ * @description：测试Activit，单独运行模块中的内容
  */
 class TextActivity : AppCompatActivity(){
 

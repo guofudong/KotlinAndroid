@@ -13,13 +13,13 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/2 - 11:47
  * @Email：878749089@qq.com
- * @descriptio：MVP架构 Fragment的基类
+ * @description：MVP架构 Fragment的基类
  */
 abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
-    private  var mProgressLoading: ProgressLoading? = null
+    private var mProgressLoading: ProgressLoading? = null
     protected lateinit var mActivityComponent: DaggerActivityComponent
 
     override fun initOperate() {
@@ -38,14 +38,14 @@ abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
     }
 
     override fun showLoading() {
-        if(mProgressLoading == null && activity != null){
+       /* if (mProgressLoading == null && activity != null) {
             mProgressLoading = ProgressLoading(activity!!)
         }
-        mProgressLoading?.showLoading()
+        mProgressLoading?.showLoading()*/
     }
 
     override fun hideLoading() {
-        mProgressLoading?.hideLoading()
+       // mProgressLoading?.hideLoading()
     }
 
     override fun error() {

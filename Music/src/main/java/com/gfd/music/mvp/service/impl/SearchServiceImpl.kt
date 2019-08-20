@@ -26,7 +26,7 @@ import kotlin.collections.ArrayList
  * @Author : 郭富东
  * @Date ：2018/8/23 - 16:44
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class SearchServiceImpl @Inject constructor() : SearchService {
 
@@ -38,16 +38,16 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                         val json = response.body().toString()
                         Logger.e("热门标签：$json")
                         val hotSearchDto = Gson().fromJson(json, HotSearch::class.java)
-                        val datas = ArrayList<String>()
+                        val data = ArrayList<String>()
                         if (hotSearchDto.result != null) {
                             hotSearchDto.result.forEach {
-                                datas.add(it.word)
+                                data.add(it.word)
                             }
-                            datas.removeAt(datas.size - 1)
-                            datas.removeAt(datas.size - 1)
-                            datas.removeAt(datas.size - 1)
+                            data.removeAt(data.size - 1)
+                            data.removeAt(data.size - 1)
+                            data.removeAt(data.size - 1)
                         }
-                        callback.onHotSearch(datas)
+                        callback.onHotSearch(data)
                     }
                 })
 
@@ -55,9 +55,9 @@ class SearchServiceImpl @Inject constructor() : SearchService {
 
     override fun getSearchHistory(context: Context, callback: SearchService.IGetSearchCallBack) {
         context.database.use {
-            val historyDatas = select(SearHistoryTable.TABLE_NAME, SearHistoryTable.NAME).parseList(StringParser)
-            Collections.reverse(historyDatas)
-            callback.onSearchHistory(historyDatas)
+            val historyData = select(SearHistoryTable.TABLE_NAME, SearHistoryTable.NAME).parseList(StringParser)
+            Collections.reverse(historyData)
+            callback.onSearchHistory(historyData)
         }
     }
 
@@ -86,7 +86,7 @@ class SearchServiceImpl @Inject constructor() : SearchService {
                         Logger.e("搜索音乐结果数据：$json")
                         val searchData = Gson().fromJson(json, SongSearch::class.java).data
                         val musicList = ArrayList<SearchData>()
-                        if (searchData != null && searchData.size > 0) {
+                        if (searchData != null && searchData.isNotEmpty()) {
                             searchData.forEach {
                                 musicList.add(SearchData(it.name, it.pic,it.id, it.singer,it.url))
                             }

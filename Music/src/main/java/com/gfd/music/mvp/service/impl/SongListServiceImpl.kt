@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/13 - 13:50
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class SongListServiceImpl @Inject constructor() : SongListService {
 
@@ -27,18 +27,18 @@ class SongListServiceImpl @Inject constructor() : SongListService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         Logger.e("歌单-歌曲列表：id = $id - $json")
-                        val datas = ArrayList<SongItemData>()
+                        val data = ArrayList<SongItemData>()
                         val jsonData = Gson().fromJson(json, SongItemBean::class.java).data
                         if (jsonData != null) {
                             val titleData = SongTitleData(jsonData.songListName, "", jsonData.songListDescription)
                             callBack.onTitle(titleData)
-                            if (jsonData.songs != null && jsonData.songs.size > 0) {
+                            if (jsonData.songs != null && jsonData.songs.isNotEmpty()) {
                                 jsonData.songs.forEach {
-                                    datas.add(SongItemData(it.name, it.time, it.id, it.pic, it.url, it.singer))
+                                    data.add(SongItemData(it.name, it.time, it.id, it.pic, it.url, it.singer))
                                 }
                             }
                         }
-                        callBack.onSongList(datas)
+                        callBack.onSongList(data)
                     }
                 })
     }

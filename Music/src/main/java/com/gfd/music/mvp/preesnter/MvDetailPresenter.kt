@@ -4,16 +4,14 @@ import com.gfd.music.entity.CommentData
 import com.gfd.music.entity.MvData
 import com.gfd.music.entity.MvDetailData
 import com.gfd.music.mvp.contract.MvDetailContract
-import com.gfd.music.mvp.contract.RadioContract
 import com.gfd.music.mvp.service.MvDetailService
-import com.gfd.music.mvp.service.impl.MvDetailServiceImpl
 import javax.inject.Inject
 
 /**
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:51
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class MvDetailPresenter @Inject constructor() : MvDetailContract.Presenter, MvDetailService.GetMvDetailCallBack {
 
@@ -22,8 +20,8 @@ class MvDetailPresenter @Inject constructor() : MvDetailContract.Presenter, MvDe
     @Inject
     lateinit var mService: MvDetailService
 
-    override fun getSimiMv(mvId: String) {
-        mService.getSimlMv(mvId, this)
+    override fun getSimilarMv(mvId: String) {
+        mService.getSimilarMv(mvId, this)
     }
 
     override fun getMvComment(mvId: String) {
@@ -34,13 +32,13 @@ class MvDetailPresenter @Inject constructor() : MvDetailContract.Presenter, MvDe
         mService.getMvDetail(mvId, this)
     }
 
-    override fun onSimiMv(datas: List<MvData>) {
-        mView.showSimiMv(datas)
+    override fun onSimilarMv(data: List<MvData>) {
+        mView.showSimilarMv(data)
 
     }
 
-    override fun onMvCommnet(datas: List<CommentData>) {
-        mView.showMvComment(datas)
+    override fun onMvComment(data: List<CommentData>) {
+        mView.showMvComment(data)
     }
 
     override fun onMvDetail(data: MvDetailData) {

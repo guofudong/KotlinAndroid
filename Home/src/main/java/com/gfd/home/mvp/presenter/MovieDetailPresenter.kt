@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @Author ：郭富东
  * @Date：2019/1/30:13:33
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-视频详情页面-MVP-Presenter
  */
 class MovieDetailPresenter @Inject constructor() : MovieDetailContract.Presenter, MovieDetailService.GetMovieDetailCallBack {
 
@@ -31,8 +31,8 @@ class MovieDetailPresenter @Inject constructor() : MovieDetailContract.Presenter
 
     }
 
-    override fun onMovieInfos(datas: List<MovieData>) {
-        mView.showMovieInfo(datas)
+    override fun onMovieInfo(data: List<MovieData>) {
+        mView.showMovieInfo(data)
         if (this.isLoading) {
             mView.hideLoading()
         }

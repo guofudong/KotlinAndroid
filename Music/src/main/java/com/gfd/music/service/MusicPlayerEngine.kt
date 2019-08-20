@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference
  * @Author : 郭富东
  * @Date ：2018/8/14 - 15:04
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class MusicPlayerEngine(service: MusicPlayService) : MediaPlayer.OnPreparedListener, MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {

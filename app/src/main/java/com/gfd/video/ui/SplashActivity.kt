@@ -7,22 +7,24 @@ import android.support.annotation.RequiresApi
 import android.view.View
 import com.gfd.common.ui.activity.BaseActivity
 
-
 /**
  * @Author : 郭富东
  * @Date ：2018/8/7 - 10:28
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：app-启动页面
  */
 class SplashActivity : BaseActivity() {
 
-    private val TIME_COUNTDOEN: Long = 4 * 1000
+    companion object {
+        private const val TIME_COUNTDOWN: Long = 4 * 1000
+    }
 
     override fun initView() {
     }
 
     override fun initData() {
-        object : CountDownTimer(1000, TIME_COUNTDOEN) {
+        //开启倒计时
+        object : CountDownTimer(1000, TIME_COUNTDOWN) {
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onFinish() {
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)

@@ -22,7 +22,9 @@ this.project.afterEvaluate { project ->
     def buildTask = project.tasks.getByName('assembleRelease')
     if (buildTask != null) {
         buildTask.doLast {//assembleRelease 之后执行
-            releaseInfoTask.execute()
+            releaseInfoTask.onlyIf {
+                true
+            }
         }
     }
 }

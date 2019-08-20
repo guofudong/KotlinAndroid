@@ -5,12 +5,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import com.gfd.common.common.BaseConstant
+import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.crosstalk.R
 import com.gfd.crosstalk.adapter.VideoAdapter
 import com.gfd.crosstalk.entity.Video
 import com.gfd.crosstalk.injection.component.DaggerCrosstalkComponent
-import com.gfd.crosstalk.injection.moudle.CrosstalkMoudle
+import com.gfd.crosstalk.injection.moudle.CrosstalkModule
 import com.gfd.crosstalk.mvp.contract.CrosstalkContract
 import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
 import com.gfd.crosstalk.ui.activity.WebViewActivity
@@ -23,8 +24,9 @@ import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
  * @Author : 郭富东
  * @Date ：2018/9/15 - 10:59
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
+@Suppress("DEPRECATION")
 class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContract.View {
 
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
@@ -36,7 +38,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
     override fun injectComponent() {
         DaggerCrosstalkComponent.builder()
                 .activityComponent(mActivityComponent)
-                .crosstalkMoudle(CrosstalkMoudle(this))
+                .crosstalkModule(CrosstalkModule(this))
                 .build()
                 .inject(this)
 
@@ -79,11 +81,11 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
             page++
             mPresenter.getVideoList(page)
         }
-        mAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
+        mAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-                val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getDatas()[position].source_url
-                val videoImage = mAdapter.getDatas()[position].large_image_url
-                val videoName = mAdapter.getDatas()[position].name
+                val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getData()[position].source_url
+             //   val videoImage = mAdapter.getData()[position].large_image_url
+                val videoName = mAdapter.getData()[position].name
                 /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
                           .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
                         //  .withString(RouterPath.Player.KEY_IMAGE, videoImage)
@@ -97,13 +99,13 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
         })
     }
 
-    override fun showVideoList(datas: List<Video>) {
+    override fun showVideoList(data: List<Video>) {
         if (isLoadMore) {
             isLoadMore = false
-            mAdapter.addAll(datas)
+            mAdapter.addAll(data)
             mRecycler.refreshComplete(0)
         } else {
-            mAdapter.updateData(datas)
+            mAdapter.updateData(data)
             if (mSwipeCrosstalk != null) {
                 mSwipeCrosstalk.isRefreshing = false
             }

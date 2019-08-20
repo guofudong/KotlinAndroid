@@ -9,14 +9,14 @@ import org.jetbrains.anko.db.*
  * @Author : 郭富东
  * @Date ：2018/8/8 - 10:47
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class DatabaseOpenHelper private constructor(context: Context = BaseApplication.context)
     : ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     companion object {
-        val DB_NAME = "musicData"
-        val DB_VERSION = 1
+        const val DB_NAME = "musicData"
+        const val DB_VERSION = 1
         val instance by lazy { DatabaseOpenHelper() }
     }
 

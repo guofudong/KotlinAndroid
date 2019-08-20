@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:51
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class SearchPresenter @Inject constructor():SearchContract.Presenter,SearchService.IGetSearchCallBack{
 
@@ -38,16 +38,16 @@ class SearchPresenter @Inject constructor():SearchContract.Presenter,SearchServi
         mService.search(context,keyword,this)
     }
 
-    override fun onSearchHistory(datas: List<String>) {
-        mView.showSearchHistory(datas)
+    override fun onSearchHistory(data: List<String>) {
+        mView.showSearchHistory(data)
     }
 
-    override fun onSearchResult(datas: List<SearchData>) {
-        mView.showSearchResult(datas)
+    override fun onSearchResult(data: List<SearchData>) {
+        mView.showSearchResult(data)
     }
 
-    override fun onHotSearch(datas: List<String>) {
-        mView.showHotSearch(datas)
+    override fun onHotSearch(data: List<String>) {
+        mView.showHotSearch(data)
         mView.hideLoading()
     }
 

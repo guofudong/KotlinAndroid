@@ -10,7 +10,7 @@ import dagger.Provides
  * @Author : 郭富东
  * @Date ：2018/8/8 - 15:58
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：Dagger2-Module
  */
 @Module
 class MovieListModule(val view: MovieListContract.View) {

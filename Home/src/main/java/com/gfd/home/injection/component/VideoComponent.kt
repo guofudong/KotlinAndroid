@@ -10,10 +10,10 @@ import dagger.Component
  * @Author : 郭富东
  * @Date ：2018/8/3 - 10:38
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：Dagger2-Component
  */
 @PerComponentScope
-@Component(modules = arrayOf(VideoModule::class),dependencies = arrayOf(ActivityComponent::class))
+@Component(modules = [VideoModule::class],dependencies = [ActivityComponent::class])
 interface VideoComponent{
     fun inject(fragment: HomeFragment)
 }

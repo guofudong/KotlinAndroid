@@ -1,41 +1,32 @@
 package com.gfd.home.adapter
 
 import android.content.Context
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
-import com.gfd.common.utils.ImageLoader
 import com.gfd.home.R
 import com.gfd.home.entity.MovieData
-import com.gfd.home.entity.SearchItemData
 
 /**
  * @Author : 郭富东
  * @Date ：2018/8/7 - 16:49
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：首页-top分类-电影列表页面列表适配器
  */
 class MovieListAdapter(var context: Context) : BaseAdapter<MovieData>(context) {
 
-    override fun getItemLayoutId(): Int {
-        return R.layout.home_item_movie_list
-    }
+    override fun getItemLayoutId(): Int = R.layout.home_item_movie_list
 
 
     override fun onBindView(holder: BaseViewHolder, position: Int) {
-        val data = mDatas[position]
-        val name = holder.getView<TextView>(R.id.home_item_movie_list_title)
-        val fraction = holder.getView<TextView>(R.id.home_item_movie_list_fraction)
-        val director = holder.getView<TextView>(R.id.home_item_movie_list_director)
-        val starring = holder.getView<TextView>(R.id.home_item_movie_list_Starring)
-        val img = holder.getView<ImageView>(R.id.home_item_movie_list_pic)
-        ImageLoader.loadUrlImage(context, data.img, img)
-        name.text = data.movieName
-        fraction.text = data.fraction.toString()
-        director.text = "导演：${data.director}"
-        starring.text = "主演：${data.starring}"
+        val data = mData[position]
+        holder.apply {
+            //设置电影信息
+            setText(R.id.home_item_movie_list_title, data.movieName)
+            setText(R.id.home_item_movie_list_fraction, data.fraction.toString())
+            setText(R.id.home_item_movie_list_director, "导演：${data.director}")
+            setText(R.id.home_item_movie_list_Starring, "主演：${data.starring}")
+            setImageUrl(R.id.home_item_movie_list_pic, data.img)
+        }
     }
 
 }

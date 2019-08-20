@@ -15,7 +15,7 @@ import com.gfd.home.adapter.HistoryAdapter
 import com.gfd.home.adapter.SearchDataAdapter
 import com.gfd.home.entity.SearchItemData
 import com.gfd.home.injection.component.DaggerSearchComponent
-import com.gfd.home.injection.module.SearchMoudle
+import com.gfd.home.injection.module.SearchModule
 import com.gfd.home.mvp.SearchContract
 import com.gfd.home.mvp.presenter.SearchPresenter
 import com.gfd.provider.router.RouterPath
@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.home_layout_serach_history.*
  * @Author : 郭富东
  * @Date ：2018/8/7 - 15:28
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：搜索页面
  */
 @Route(path = RouterPath.Home.PATH_SERACH)
 class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
@@ -42,14 +42,14 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     private var isSearch = false
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mDataAdapter: SearchDataAdapter
-    private lateinit var mDatas: List<SearchItemData>
-    private lateinit var mHistoryDatas: List<String>
+    private lateinit var mData: List<SearchItemData>
+    private lateinit var mHistoryData: List<String>
     private lateinit var mHistoryAdapter: HistoryAdapter
 
     override fun injectComponent() {
         DaggerSearchComponent.builder()
                 .activityComponent(mActivityComponent)
-                .searchMoudle(SearchMoudle(this))
+                .searchModule(SearchModule(this))
                 .build()
                 .inject(this)
         ARouter.getInstance().inject(this)
@@ -75,20 +75,17 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             search()
         }
         //立即播放按钮
-        mDataAdapter.setOnPlayClickListener(object : SearchDataAdapter.OnPlayClickListener {
-            override fun onPlayClick(positon: Int) {
-                val data = mDatas[positon]
-                ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
-                        .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
-                        .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
-                        .withString(RouterPath.Player.KEY_NAME, data.name)
-                        .navigation()
-            }
-
-        })
+        mDataAdapter.setOnPlayClickListener { position ->
+            val data = mData[position]
+            ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
+                    .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
+                    .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
+                    .withString(RouterPath.Player.KEY_NAME, data.name)
+                    .navigation()
+        }
         mHistoryAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-                serach(mHistoryDatas[position])
+                serach(mHistoryData[position])
             }
         })
         //删除历史搜索记录
@@ -159,27 +156,27 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         mVideoList.addItemDecoration(divider)
     }
 
-    override fun showSearchData(datas: List<SearchItemData>) {
-        mDatas = datas
+    override fun showSearchData(data: List<SearchItemData>) {
+        mData = data
         isSearch = false//状态重置
-        if (mDatas.isEmpty()) {
+        if (mData.isEmpty()) {
             rootSearchEmpy.visibility = View.VISIBLE
             mVideoList.visibility = View.GONE
         } else {
-            mDataAdapter.updateData(datas)
+            mDataAdapter.updateData(data)
             mLRecyclerViewAdapter.notifyDataSetChanged()
         }
 
     }
 
-    override fun showSearchHistory(historys: List<String>) {
-        mHistoryDatas = historys
-        if (mHistoryDatas.isEmpty()) {
+    override fun showSearchHistory(history: List<String>) {
+        mHistoryData = history
+        if (mHistoryData.isEmpty()) {
             rootHistory.visibility = View.GONE
         } else {
             rootHistory.visibility = View.VISIBLE
         }
-        mHistoryAdapter.updateData(historys)
+        mHistoryAdapter.updateData(history)
     }
 
 }

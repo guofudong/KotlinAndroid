@@ -9,7 +9,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:57
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class ShortFilmPresenter @Inject constructor() : ShortFilmContract.Presenter,
         ShortFilmService.GetMvCallBack {
@@ -30,8 +30,8 @@ class ShortFilmPresenter @Inject constructor() : ShortFilmContract.Presenter,
         mService.getMvList(offset, this)
     }
 
-    override fun onMvData(datas: List<MvData>) {
-        mView.showMvList(datas)
+    override fun onMvData(data: List<MvData>) {
+        mView.showMvList(data)
         if(isLoading){
             mView.hideLoading()
         }

@@ -10,16 +10,16 @@ import android.view.ViewGroup
  * @Author : 郭富东
  * @Date ：2018/8/7 - 13:59
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
-open abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    protected val mDatas = ArrayList<T>()
+    protected val mData = ArrayList<T>()
 
     private var listener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): BaseViewHolder {
-        var itemView = LayoutInflater.from(context).inflate(getItemLayoutId(), parent, false)
+        val itemView = LayoutInflater.from(context).inflate(getItemLayoutId(), parent, false)
         return BaseViewHolder(itemView)
     }
 
@@ -30,7 +30,7 @@ open abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.
     abstract fun getItemLayoutId(): Int
 
     override fun getItemCount(): Int {
-        return mDatas.size
+        return mData.size
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -51,7 +51,7 @@ open abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.
     abstract fun onBindView(holder: BaseViewHolder, position: Int)
 
     interface OnClickListener {
-        fun onClick(view: View, data: Int)
+        fun onClick(view: View, position: Int)
     }
 
     fun seOnClickListener(listener: OnClickListener) {
@@ -60,28 +60,28 @@ open abstract class BaseAdapter<T>(private var context: Context) : RecyclerView.
 
     /**
      * 添加数据，局部刷新
-     * @param datas List<T>
+     * @param data List<T>
      */
-    fun addAll(datas: List<T>) {
-        val lastIndex = mDatas.size
-        if (mDatas.addAll(datas)) {
-            notifyItemRangeInserted(lastIndex, mDatas.size)
+    fun addAll(data: List<T>) {
+        val lastIndex = mData.size
+        if (mData.addAll(data)) {
+            notifyItemRangeInserted(lastIndex, mData.size)
         }
     }
 
 
     /**
      * 更新数据
-     * @param datas List<T>
+     * @param data List<T>
      */
-    fun updateData(datas: List<T>) {
-        mDatas.clear()
-        mDatas.addAll(datas)
+    fun updateData(data: List<T>) {
+        mData.clear()
+        mData.addAll(data)
         notifyDataSetChanged()
     }
 
-    fun getDatas():List<T>{
-        return mDatas
+    fun getData():List<T>{
+        return mData
     }
 
 }

@@ -18,13 +18,12 @@ import com.gfd.player.R
 import com.gfd.player.adapter.EpisodeAdapter
 import com.gfd.player.entity.VideoItemData
 import com.gfd.player.injection.component.DaggerPlayComponent
-import com.gfd.player.injection.moudle.PlayMoudle
+import com.gfd.player.injection.moudle.PlayModule
 import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.player_activity_play_webview.*
@@ -34,8 +33,9 @@ import kotlinx.android.synthetic.main.player_activity_play_webview.*
  * @Author : 郭富东
  * @Date ：2018/8/6 - 18:19
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
+@Suppress("DEPRECATION")
 @Route(path = RouterPath.Player.PATH_PLAYER_WEB)
 class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
@@ -62,7 +62,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     override fun injectComponent() {
         DaggerPlayComponent.builder()
                 .activityComponent(mActivityComponent)
-                .playMoudle(PlayMoudle(this))
+                .playModule(PlayModule(this))
                 .build()
                 .inject(this)
 
@@ -84,7 +84,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         episodeList.adapter = mLRecyclerViewAdapter
         episodeList.setLoadMoreEnabled(false)
         episodeList.setPullRefreshEnabled(false)
-        var headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.player_head_playweb, null, false)
+        val headView = LayoutInflater.from(this@PlayWebActivity).inflate(R.layout.player_head_playweb, null, false)
         mTvPlot = headView.findViewById(R.id.tvPlot)
         mLRecyclerViewAdapter.addHeaderView(headView)
     }
@@ -127,10 +127,10 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
     override fun setListener() {
         episodeAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
-            override fun onClick(view: View, positon: Int) {
-                episodeAdapter.setSelect(positon)
+            override fun onClick(view: View, position: Int) {
+                episodeAdapter.setSelect(position)
                 mLRecyclerViewAdapter.notifyDataSetChanged()
-                mWebView.loadUrl(mDatas[positon].videoUrl)
+                mWebView.loadUrl(mDatas[position].videoUrl)
             }
         })
     }
@@ -139,13 +139,13 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     override fun playVideo(videoUrl: String) {
     }
 
-    override fun playWebVideo(datas: List<VideoItemData>) {
-        if (datas.isEmpty()) {
+    override fun playWebVideo(data: List<VideoItemData>) {
+        if (data.isEmpty()) {
             ToastUtils.instance.showToast("视频还没上映,请等待")
             finish()
         } else {
-            mDatas = datas
-            mWebView.loadUrl(datas[0].videoUrl)
+            mDatas = data
+            mWebView.loadUrl(data[0].videoUrl)
             episodeAdapter.addAll(mDatas)
         }
     }

@@ -1,16 +1,16 @@
 package com.gfd.home.entity
 
 import com.gfd.common.ui.adapter.MultiItemEntity
-import com.gfd.home.common.Concant
+import com.gfd.home.common.Constant
 
 /**
  * @Author : 郭富东
  * @Date ：2018/8/3 - 11:02
  * @Email：878749089@qq.com
- * @descriptio：首页视频列表item数据实体类
+ * @description：首页视频列表item数据实体类
  */
 data class VideoItemData(var tagName: String = "",//视频标签
-                         var type: Int = Concant.ITEM_TYPE_IMG,//item类型
+                         var type: Int = Constant.ITEM_TYPE_IMG,//item类型
                          var videoName: String,//视频的名字
                          var videoImg: String,//视频图片
                          var videoLink: String,//视频链接

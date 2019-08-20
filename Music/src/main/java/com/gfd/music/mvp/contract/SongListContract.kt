@@ -9,13 +9,13 @@ import com.gfd.music.entity.SongTitleData
  * @Author : 郭富东
  * @Date ：2018/8/13 - 11:47
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface SongListContract {
 
     interface View : BaseView {
-        fun showSongList(datas: List<SongItemData>)
-        fun showHead(datas: SongTitleData)
+        fun showSongList(data: List<SongItemData>)
+        fun showHead(data: SongTitleData)
 
     }
 

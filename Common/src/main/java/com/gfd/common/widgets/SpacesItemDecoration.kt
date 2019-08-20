@@ -15,13 +15,12 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
  * @Email：878749089@qq.com
  * @descriptio：Grid分割线，最左和左右都有
  */
-class SpacesItemDecoration private constructor(private val itemSplitMarginEven: Int, private val itemSplitMarginLarge: Int, private val itemSplitMarginSmall: Int, private val verticalSpacing: Int, color: Int) : RecyclerView.ItemDecoration() {
+open class SpacesItemDecoration private constructor(private val itemSplitMarginEven: Int, private val itemSplitMarginLarge: Int, private val itemSplitMarginSmall: Int, private val verticalSpacing: Int, color: Int) : RecyclerView.ItemDecoration() {
 
-    private val mPaint: Paint
+    private val mPaint: Paint = Paint()
 
     init {
-        mPaint = Paint()
-        mPaint.setColor(color)
+        mPaint.color = color
     }
 
     /**
@@ -107,12 +106,12 @@ class SpacesItemDecoration private constructor(private val itemSplitMarginEven: 
         val itemPosition = layoutParams.viewLayoutPosition
         val childCount = parent.adapter!!.itemCount
 
-        val spanLookup = getSpanLookup(view, parent)
+        val spanLookup = getSpanLookup(parent)
         applyItemHorizontalOffsets(spanLookup, itemPosition, outRect)
         applyItemVerticalOffsets(outRect, itemPosition, childCount, spanLookup.spanCount, spanLookup, lRecyclerViewAdapter)
     }
 
-    protected fun getSpanLookup(view: View, parent: RecyclerView): com.gfd.common.widgets.SpanLookup {
+    protected fun getSpanLookup(parent: RecyclerView): SpanLookup {
         val layoutManager = parent.layoutManager
         return if (layoutManager is GridLayoutManager) {
             SpanLookupFactory.gridLayoutSpanLookup((layoutManager as GridLayoutManager?)!!)

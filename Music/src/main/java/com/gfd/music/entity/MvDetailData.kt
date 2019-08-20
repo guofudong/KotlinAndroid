@@ -12,5 +12,5 @@ package com.gfd.music.entity
  * @constructor
  */
 data class MvDetailData(var id: String, var name: String, var singer: String,
-                        var playCount: String, var publishTime: String, var url: String = "",
+                        var playCount: Int, var publishTime: String, var url: String = "",
                         var pic: String = "")

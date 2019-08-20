@@ -10,21 +10,21 @@ import com.gfd.music.entity.MvDetailData
  * @Author : 郭富东
  * @Date ：2018/8/10 - 10:49
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 interface MvDetailContract{
 
     interface View :BaseView{
 
         fun showMvDetail(data: MvDetailData)
-        fun showSimiMv(datas:List<MvData>)
+        fun showSimilarMv(datas:List<MvData>)
         fun showMvComment(datas: List<CommentData>)
 
     }
 
     interface Presenter:BasePresenter{
 
-        fun getSimiMv(mvId:String)
+        fun getSimilarMv(mvId:String)
         fun getMvComment(mvId:String)
         fun getMvDetail(mvId:String)
 

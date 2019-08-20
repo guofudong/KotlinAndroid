@@ -12,7 +12,7 @@
 实现了两个功能：
 * **1.自动切换library和Application**
 >如果gradle.properties中配置了isRunAlone=true，也就是能够独立运行，那么点击运行按钮可以选择该模块自动运行,无需在build.gradle文件中配置。如果运行的是主module，不管其依赖的module是否可以独立运行，插件自动设置为library。实现真正的自动切换。
-```
+```groovy
 //不需要再通过变量来控制了
 if(isHomeModule.toBoolean()){
     apply plugin: 'com.android.library'
@@ -35,11 +35,11 @@ compileComponent=Home,Crosstalk,Music,Player //release时依赖的
 不需要在build.gradle中依赖了
 api project(':Home')
 api project(':Music')
-......
+.....
 ```
 >这样主Module在开发时不再依赖具体的业务模块，只是使用业务模块提供的服务，所以业务模块需要实现Provider模块定义的接口，提供具体的业务。
 
-```
+```kotlin
 interface IApplicationLike {
 
     /** 组件加载*/
@@ -49,7 +49,7 @@ interface IApplicationLike {
     fun unregistered()
 }
 
-定义Music模块提供的服务
+//定义Music模块提供的服务
 interface MusicService {
 
     fun getMusicFragment(): BaseFragment
@@ -83,9 +83,9 @@ interface MusicService {
 
 #### [releaseinfo.gradle](/releaseinfo.gradle)：版本发布文档自动维护脚本
 
-```
-//该文档自动生成，只需要在build中配置版本更新日志。
+```xml
 <?xml version="1.0" encoding="GBK"?>
+<!-- 该文档自动生成，只需要在build中配置版本更新日志。-->
 <releases>
   <release>
     <versionCode>1</versionCode>

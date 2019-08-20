@@ -8,7 +8,7 @@ import java.util.List;
  * @Author ：郭富东
  * @Date：2019/1/30:14:09
  * @Email：878749089@qq.com
- * @descriptio：
+ * @descriptio：电影数据实体类
  */
 public class MovieEntity {
 

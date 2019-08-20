@@ -14,7 +14,7 @@ import org.song.videoplayer.media.AndroidMedia
  * @Author : 郭富东
  * @Date ：2018/8/22 - 16:29
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 fun VideoPlayer.init(context: Context){
     val videoView = this

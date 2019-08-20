@@ -20,7 +20,7 @@ import com.gfd.music.adapter.HotSearchAdapter
 import com.gfd.music.adapter.SearchAdapter
 import com.gfd.music.entity.SearchData
 import com.gfd.music.injection.component.DaggerSearchComponent
-import com.gfd.music.injection.module.SearchMoudle
+import com.gfd.music.injection.module.SearchModule
 import com.gfd.music.mvp.contract.SearchContract
 import com.gfd.music.mvp.preesnter.SearchPresenter
 import com.gfd.music.service.MusicPlayService
@@ -43,8 +43,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     private lateinit var mHotSearchAdapter: HotSearchAdapter
     private lateinit var mHistoryAdapter: HistoryAdapter
     private lateinit var mSearchAdapter: SearchAdapter
-    private lateinit var mHotDatas: List<String>
-    private lateinit var mHistoryDatas: List<String>
+    private lateinit var mHotData: List<String>
+    private lateinit var mHistoryData: List<String>
     private var mPlayService: MusicPlayService? = null
     override fun getLayoutId(): Int {
         return R.layout.music_activity_search
@@ -53,7 +53,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     override fun injectComponent() {
         DaggerSearchComponent.builder()
                 .activityComponent(mActivityComponent)
-                .searchMoudle(SearchMoudle(this))
+                .searchModule(SearchModule(this))
                 .build()
                 .inject(this)
         setStatusBar()
@@ -87,13 +87,12 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         edKeyword.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEND || (keyEvent != null && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) {
                 searchSong(edKeyword.text.toString().trim())
-                true
             }
             false
         }
         mSearchAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-                val song = mSearchAdapter.getDatas()[position]
+                val song = mSearchAdapter.getData()[position]
                 ImageLoader.loadUrlImage(this@SearchActivity, song.pic, album)
                 songName.text = song.name
                 songaAtist.text = song.singer
@@ -103,7 +102,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         })
         mHistoryAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-                val keyword = mHistoryDatas[position]
+                val keyword = mHistoryData[position]
                 searchSong(keyword)
             }
 
@@ -157,14 +156,14 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun showSearchHistory(datas: List<String>) {
-        mHistoryDatas = datas
-        mHistoryAdapter.updateData(mHistoryDatas)
+        mHistoryData = datas
+        mHistoryAdapter.updateData(mHistoryData)
 
     }
 
     override fun showHotSearch(datas: List<String>) {
-        mHotDatas = datas
-        mHotSearchAdapter.updateData(mHotDatas)
+        mHotData = datas
+        mHotSearchAdapter.updateData(mHotData)
     }
 
     override fun showSearchResult(datas: List<SearchData>) {

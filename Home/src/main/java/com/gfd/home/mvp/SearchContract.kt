@@ -9,14 +9,14 @@ import com.gfd.home.entity.SearchItemData
  * @Author : 郭富东
  * @Date ：2018/8/7 - 15:59
  * @Email：878749089@qq.com
- * @descriptio：搜索页面协议
+ * @descriptio：搜索页面-MVP-Contract
  */
 interface SearchContract {
 
     interface View : BaseView {
-        fun showSearchData(datas: List<SearchItemData>)
+        fun showSearchData(data: List<SearchItemData>)
 
-        fun showSearchHistory(historys: List<String>)
+        fun showSearchHistory(history: List<String>)
 
     }
 

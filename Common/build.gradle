@@ -41,8 +41,8 @@ dependencies {
     api dependence.libBanner
     api dependence.libArouter
     api dependence.libFlexbox
-    api dependence.libAnkoSqlite
     api dependence.libCardview
+    api dependence.libAnkoSqlite
     api dependence.libPalette
     api dependence.libCircleImageView
     api dependence.libBugly
