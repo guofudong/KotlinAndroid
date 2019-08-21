@@ -1,5 +1,6 @@
 package com.gfd.music.mvp.service.impl
 
+import com.gfd.common.common.BaseApplication
 import com.gfd.music.api.Api
 import com.gfd.music.common.Constant
 import com.gfd.music.entity.*
@@ -49,8 +50,8 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body().toString()
                         val data = ArrayList<SongData>()
-                        Logger.e("推荐歌曲：$json")
                         try {
+                            Logger.e("推荐歌曲：$json")
                             val songData = Gson().fromJson(json, Song::class.java)
                             if (songData.data != null && songData.data.isNotEmpty()) {
                                 data.add(SongData(Constant.ITEM_TYPE_TITLE, "推荐歌单"))
@@ -71,7 +72,7 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
                                 }
                             }
                             callBack.onSongList(data)
-                        }catch (e:Exception){
+                        } catch (e: Exception) {
                             callBack.onSongList(data)
                         }
                     }
@@ -79,65 +80,37 @@ class RecommendServiceImpl @Inject constructor() : RecommendService {
     }
 
     override fun getRadioData(callBack: RecommendService.GetRecommendCallBack) {
-        OkGo.get<String>(Api.getRadioData())
-                .tag(this)
-                .execute(object : StringCallback() {
-                    override fun onSuccess(response: Response<String>) {
-                        val json = response.body().toString()
-                        Logger.e("热门电台：$json")
-                        val radio1 = Gson().fromJson(json, Radio::class.java)
-                        val data = ArrayList<RadioData>()
-                        if (radio1.data != null) {
-                            val radioData = radio1.data.djRadios
-                            if (radioData.isNotEmpty()) {
-                                data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "今日优选", "", ""))
-                                radioData.forEachWithIndex { index, value ->
-                                    if (index <= 3) {
-                                        data.add(RadioData(Constant.ITEM_TYPE_LIST, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(),
-                                                value.dj.avatarUrl, id = value.id))
-                                    } else {
-                                        if (index == 4) {
-                                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "电台推荐", "", ""))
-                                        }
-                                        if (index == 7) {
-                                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "情感调频", "", ""))
-                                        }
-                                        data.add(RadioData(Constant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(), id = value.id))
-                                    }
-                                }
-                            }
+        //原来的API已不能使用，用读取本地数据代替
+        val assetManager = BaseApplication.context.assets
+        val inputStream = assetManager.open("radio.json")
+        val byteArray = ByteArray(inputStream.available())
+        inputStream.read(byteArray)
+        inputStream.close()
+        val json = String(byteArray)
+        Logger.e("热门电台：$json")
+        val radio1 = Gson().fromJson(json, Radio::class.java)
+        val data = ArrayList<RadioData>()
+        if (radio1.data != null) {
+            val radioData = radio1.data.djRadios
+            if (radioData.isNotEmpty()) {
+                data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "今日优选", "", ""))
+                radioData.forEachWithIndex { index, value ->
+                    if (index <= 3) {
+                        data.add(RadioData(Constant.ITEM_TYPE_LIST, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(),
+                                value.dj.avatarUrl, id = value.id))
+                    } else {
+                        if (index == 4) {
+                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "电台推荐", "", ""))
                         }
-                        OkGo.get<String>(Api.getRadioData2())
-                                .tag(this)
-                                .execute(object : StringCallback() {
-                                    override fun onSuccess(response: Response<String>) {
-                                        val json = response.body().toString()
-                                        Logger.e("热门电台：$json")
-                                        val radio2 = Gson().fromJson(json, Radio::class.java)
-                                        if (radio2.data != null) {
-                                            val radioData2 = radio2.data.djRadios
-                                            if (radioData2.isNotEmpty()) {
-                                                data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "音乐故事", "", ""))
-                                                radioData2.forEachWithIndex { index, value ->
-                                                    if (index < 9) {
-                                                        if (index == 3) {
-                                                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "二次元", "", ""))
-                                                        }
-                                                        if (index == 6) {
-                                                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "3D|电子", "", ""))
-                                                        }
-                                                        data.add(RadioData(Constant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(), id = value.id))
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        callBack.onRadioData(data)
-                                    }
-
-                                })
-                        callBack.onRadioData(data)
+                        if (index == 7) {
+                            data.add(RadioData(Constant.ITEM_TYPE_TITLE, "", "情感调频", "", ""))
+                        }
+                        data.add(RadioData(Constant.ITEM_TYPE_IMG, value.picUrl, value.name, value.dj.nickname, value.subCount.toString(), id = value.id))
                     }
-                })
+                }
+            }
+        }
+        callBack.onRadioData(data)
     }
 
 }

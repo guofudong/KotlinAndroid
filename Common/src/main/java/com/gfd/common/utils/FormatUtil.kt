@@ -1,5 +1,7 @@
 package com.gfd.common.utils
 
+import com.orhanobut.logger.Logger
+import java.security.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,11 +49,12 @@ object FormatUtil {
     /**
      * 格式化时间
      *
-     * @param time 时间值 (00:00 -23:59:59)
+     * @param time 时间戳
      * @return 时间
      */
     fun formatDate(time: Long): String {
         val duration = System.currentTimeMillis() - time
+        Logger.e("time：$time")
         return when {
             duration < 60 * 1000 -> "${duration / 1000}秒前"
             duration < 60 * 1000 * 60 -> "${duration / 1000 / 60}分钟前"

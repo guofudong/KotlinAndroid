@@ -61,15 +61,19 @@ interface MusicService {
 
 
 ### componentrelease：文件夹
->该文件夹存放的是业务模块的.aar包，在执行业务Module的`assembleRelease`命令后会生成对应的.aar包，也可以上传到maven仓库。这样的话主Module只需要依赖.arr包。哪个业务Module改变只需要编译哪个生成对应的.aar包即可，实现真正的组件化。
+>该文件夹存放的是业务模块的`.aar`包，在执行业务Module的`assembleRelease`命令后会生成对应的`.aar`包，也可以上传到**maven**仓库。这样的话主**Module**只需要依赖`.arr包`。
+哪个业务**Module**改变只需要编译哪个生成对应的`.aar`包即可，实现真正的组件化。
 
->如果项目中的module很多，gradle在编译的时候会去检测module的依赖链，gradle会帮助我们层层梳理module之间的关系，避免因为module之间相互引用而来带的问题。这些梳理工作和module的合并工作都会带来build的时间，会造成build十分缓慢，所以将稳定的module打包为aar，上传到公司的maven仓库，借此来加快build速度。
+>如果项目中的**module**很多，`gradle`在编译的时候会去检测**module**的依赖链，`gradle`会帮助我们层层梳理**module**之间的关系，避免因为**module**之间相互引用而来带的问题。
+这些梳理工作和**module**的合并工作都会带来`build`的时间，会造成`build`十分缓慢，所以将稳定的**module**打包为`aar`，上传到公司的**maven**仓库，借此来加快`build`速度。
 
 
 ### API说明
 >项目中用到的数据都是通过解析网站数据而来，所以没有固定的接口格式。因此没有封装统一的网络工具类，而使用三方库[okhttp-OkGo](https://github.com/jeasonlzy/okhttp-OkGo)来请求，便于解析数据。
 
 [Jsoup](http://www.open-open.com/jsoup/)
+
+[音乐API](https://www.bzqll.com/2019/01/262.html)
 
 ### build文件
 

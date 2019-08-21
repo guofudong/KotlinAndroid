@@ -87,7 +87,6 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
             val mvUrl = intent.getStringExtra("mvUrl")
             mvId = intent.getStringExtra("mvId") ?: "1"
             mvName = intent.getStringExtra("mvName") ?: ""
-            mWebView.loadUrl(mvUrl)
         }
     }
 
@@ -115,6 +114,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     }
 
     override fun showMvDetail(data: MvDetailData) {
+        mWebView.loadUrl(data.url)
         //发布时间
         tvPublishTime.text = data.publishTime
         //播放数量

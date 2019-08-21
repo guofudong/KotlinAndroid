@@ -11,6 +11,7 @@ android {
 
     //规定资源命名前缀为music_
     resourcePrefix "music_"
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 dependencies {

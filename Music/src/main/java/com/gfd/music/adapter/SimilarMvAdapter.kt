@@ -28,7 +28,7 @@ class SimilarMvAdapter(val context: Context) : BaseAdapter<MvData>(context) {
             val title = getView<TextView>(R.id.tv_item_mvdetail_simi_name)
             title.text = if (TextUtils.isEmpty(mvData.des)) mvData.name else mvData.des
             if (title.text == "null") title.text = "慕涵盛华"
-            setText(R.id.tv_item_mvdetail_simi_author, "${FormatUtil.formatTime(mvData.duration.toLong())} by ${mvData.artistName}")
+            setText(R.id.tv_item_mvdetail_simi_author, "${FormatUtil.formatDate(mvData.duration)} by ${mvData.artistName}")
             setImageUrl(R.id.iv_item_mvdetail_simi, mvData.pic)
 
         }

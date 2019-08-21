@@ -28,17 +28,22 @@ class SongListServiceImpl @Inject constructor() : SongListService {
                         val json = response.body().toString()
                         Logger.e("歌单-歌曲列表：id = $id - $json")
                         val data = ArrayList<SongItemData>()
-                        val jsonData = Gson().fromJson(json, SongItemBean::class.java).data
-                        if (jsonData != null) {
-                            val titleData = SongTitleData(jsonData.songListName, "", jsonData.songListDescription)
-                            callBack.onTitle(titleData)
-                            if (jsonData.songs != null && jsonData.songs.isNotEmpty()) {
-                                jsonData.songs.forEach {
-                                    data.add(SongItemData(it.name, it.time, it.id, it.pic, it.url, it.singer))
+                        try {
+                            val jsonData = Gson().fromJson(json, SongItemBean::class.java).data
+                            if (jsonData != null) {
+                                val titleData = SongTitleData(jsonData.songListName, "", jsonData.songListDescription)
+                                callBack.onTitle(titleData)
+                                if (jsonData.songs != null && jsonData.songs.isNotEmpty()) {
+                                    jsonData.songs.forEach {
+                                        data.add(SongItemData(it.name, it.time, it.id, it.pic, it.url, it.singer))
+                                    }
                                 }
                             }
+                            callBack.onSongList(data)
+                        }catch (e:Exception){
+                            callBack.onSongList(data)
                         }
-                        callBack.onSongList(data)
+
                     }
                 })
     }

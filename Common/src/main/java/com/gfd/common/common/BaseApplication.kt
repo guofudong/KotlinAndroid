@@ -22,8 +22,7 @@ import okhttp3.OkHttpClient
  * @description：
  */
 open class BaseApplication : Application() {
-        lateinit var appComponent: DaggerAppComponent
-
+    lateinit var appComponent: DaggerAppComponent
     override fun onCreate() {
         super.onCreate()
         initInjection()

@@ -29,16 +29,16 @@ class ShortFilmServiceImpl @Inject constructor() : ShortFilmService {
                         Logger.e("mv数据:$json")
                         try {
                             val mvDto = Gson().fromJson(json, MvDto::class.java)
-
-                            if (mvDto.data != null) {
-                                mvDto.data.forEach {
+                            if (mvDto.data.list != null) {
+                                mvDto.data.list.forEach {
                                     mvData.add(MvData(it.name, it.id, it.pic, it.desc
-                                            ?: "", it.singer,
-                                            it.playCount, videoUrl = it.url))
+                                            ?: "", it.singer ?: "",
+                                            it.playCount, videoUrl = it.url ?: ""))
                                 }
                             }
                             callBack.onMvData(mvData)
-                        }catch (e:Exception){
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                             callBack.onMvData(mvData)
                         }
                     }

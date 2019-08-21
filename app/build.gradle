@@ -67,14 +67,3 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
-
-//挂在到应用构建的过程中,执行module的 clean :解决Failed to delete \build\.......\classes.jar
-this.project.afterEvaluate { project ->
-    def buildTask1 = project.tasks.getByName('assembleDebug')
-    def buildTask2 = project.tasks.getByName('assembleRelease')
-    if (buildTask1 != null || buildTask2 != null) {
-        clean.onlyIf {
-            true
-        }
-    }
-}

@@ -1,5 +1,7 @@
 package com.gfd.music.entity
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * @Author : 郭富东
  * @Date ：2018/8/10 - 17:19
@@ -9,15 +11,15 @@ package com.gfd.music.entity
 data class Song(
         val `data`: List<SData>?,
         val code: Int,
-        val result: String
+        val msg: String
 )
 
 data class SData(
-        val coverImgUrl: String,
-        val creator: String,
-        val description: String,
-        val id: Long,
-        val playCount: Int,
-        val songNum: Int,
-        val title: String
+        @SerializedName("coverImgUrl") val coverImgUrl: String,
+        @SerializedName("description") val description: String,
+        @SerializedName("id") val id: Long,
+        @SerializedName("playCount") val playCount: Int,
+        @SerializedName("trackCount") val songNum: Int,
+        @SerializedName("name") val title: String
 )
+

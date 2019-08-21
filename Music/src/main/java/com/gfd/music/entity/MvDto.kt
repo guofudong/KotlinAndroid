@@ -1,5 +1,7 @@
 package com.gfd.music.entity
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * @Author : 郭富东
  * @Date ：2018/8/14 - 17:37
@@ -8,17 +10,22 @@ package com.gfd.music.entity
  */
 
 data class MvDto(
-        val `data`: List<Dto>?,
-        val code: Int,
-        val result: String
+        @SerializedName("data") val `data`: MvDataList,
+        @SerializedName("code") val code: Int,
+        @SerializedName("result") val result: String
+)
+
+data class MvDataList(
+        @SerializedName("list") val list: List<Dto>?
 )
 
 data class Dto(
-        val desc: String?,
-        val id: String,
-        val name: String,
-        val pic: String,
-        val playCount: Int,
-        val singer: String,
-        val url: String
+        @SerializedName("desc") val desc: String?,
+        @SerializedName("vid") val id: String,
+        @SerializedName("title") val name: String,
+        @SerializedName("picurl") val pic: String,
+        @SerializedName("playcnt") val playCount: Int,
+        @SerializedName("singer") val singer: String?,
+        @SerializedName("url") val url: String?,
+        @SerializedName("pubdate") val pubdate: Long
 )

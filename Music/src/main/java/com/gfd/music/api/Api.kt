@@ -59,9 +59,9 @@ object Api {
      */
     fun getRecommend(count: Int): String {
         //return URL_BASE + URL_RECOMMEND + count :原来的API，可以使用但是里面的列表歌曲无，只有封面
-        val url = "https://api.bzqll.com/music/netease/hotSongList?key=579621905&limit=$count&offset=$recommendListOffset"
-        recommendListOffset += count
-        if (recommendListOffset > count * 4) {
+        val url = "https://v1.itooi.cn/netease/songList/hot?cat=%E6%8E%A8%E8%8D%90&pageSize=$count&page=$recommendListOffset"
+        recommendListOffset++
+        if (recommendListOffset > 4) {
             recommendListOffset = 0
         }
         return url
@@ -253,8 +253,8 @@ object Api {
      * @param size Int
      * @return String
      */
-    fun getRecommendMV(offset: Int = 0, size: Int = 12): String {
-        return "https://api.bzqll.com/music/netease/topMvList?key=579621905&limit=$size&offset=$offset"
+    fun getRecommendMV(offset: Int = 0, size: Int = 6): String {
+        return "https://v1.itooi.cn/tencent/mv/hot?&pageSize=$size&page=$offset"
     }
 
     fun getMVDetail(mvId: Int): String {
@@ -267,8 +267,8 @@ object Api {
      * @return String
      */
     fun getSimilarMv(mvId: String): String {
-        //return URL_MV_BASE + "simi/mv?mvid=$mvId"改API已不能使用
-        return "https://api.bzqll.com/music/netease/search?key=579621905&type=video&limit=8&offset=0&s=$mvId"
+        //原来的API已不能使用，改用热门mv
+        return "https://v1.itooi.cn/tencent/mv/hot?&pageSize=5&page=0"
     }
 
     /**
@@ -277,7 +277,7 @@ object Api {
      * @return String
      */
     fun getMvComment(mvId: String): String {
-        return URL_MV_BASE + "comment/mv?id=$mvId"
+        return "https://v1.itooi.cn/tencent/comment/mv?id=$mvId&page=0&pageSize=16"
     }
 
     /**
@@ -286,7 +286,7 @@ object Api {
      * @return String
      */
     fun getMvDetail(mvId: String): String {
-        return "https://api.bzqll.com/music/netease/mv?key=579621905&id=$mvId"
+        return "https://v1.itooi.cn/tencent/mv?id=$mvId"
     }
 
     /**

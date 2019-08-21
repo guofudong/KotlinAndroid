@@ -29,7 +29,6 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     private lateinit var mAdapter: MvListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
-    private lateinit var mMvData: List<MvData>
     private var videoParent: ViewGroup? = null
     private var offset = 0
     private var isLoadMore = false
@@ -72,11 +71,11 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             mPresenter.getMvList(offset, false)
         }
         mMvRecycler.setOnLoadMoreListener {
-            if (mMvData.size > 12) {
-                mMvRecycler.setNoMore(true)
+            if (offset > 10) {
+                offset = 0
             } else {
                 isLoadMore = true
-                mPresenter.getMvList(mAdapter.getItemSize(), false)
+                mPresenter.getMvList(++offset, false)
             }
         }
         mAdapter.setOnTitleClickListener { _, data ->
@@ -88,16 +87,15 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     }
 
-    override fun showMvList(datas: List<MvData>) {
+    override fun showMvList(data: List<MvData>) {
         if (isLoadMore) {
             isLoadMore = false
-            mAdapter.addAll(datas)
+            mAdapter.addAll(data)
             mMvRecycler.refreshComplete(0)
         } else {
-            mAdapter.updateData(datas)
+            mAdapter.updateData(data)
             mMvSwipe.isRefreshing = false
         }
-        mMvData = mAdapter.getData()
         mLRecyclerViewAdapter.notifyDataSetChanged()
 
     }
