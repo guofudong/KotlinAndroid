@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.support.annotation.RequiresApi
 import android.view.View
 import com.gfd.common.ui.activity.BaseActivity
+import com.gfd.video.R
 
 /**
  * @Author : 郭富东
@@ -16,11 +17,12 @@ import com.gfd.common.ui.activity.BaseActivity
 class SplashActivity : BaseActivity() {
 
     companion object {
-        private const val TIME_COUNTDOWN: Long = 4 * 1000
+        private const val TIME_COUNTDOWN: Long = 3 * 1000
     }
 
-    override fun initView() {
-    }
+    override fun isSetPaddingTop(): Boolean = false
+
+    override fun initView() {}
 
     override fun initData() {
         //开启倒计时
@@ -40,7 +42,7 @@ class SplashActivity : BaseActivity() {
 
     override fun getLayoutId(): Int {
         hideBottomUIMenu()
-        return -1
+        return R.layout.app_activity_splash
     }
 
     /**

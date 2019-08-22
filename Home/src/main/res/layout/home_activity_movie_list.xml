@@ -32,12 +32,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/homeMovieListTitle" />
 
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:id="@+id/homeMovieList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@id/content_id"
+        android:layout_width="0px"
+        android:layout_height="0px"
         android:paddingBottom="@dimen/dp_8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeMovieListTitle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeMovieListTitle">
+
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:id="@+id/homeMovieList"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

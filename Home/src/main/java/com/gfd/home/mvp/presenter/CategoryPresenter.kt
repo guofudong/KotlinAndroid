@@ -32,7 +32,7 @@ class CategoryPresenter @Inject constructor() : CategoryContract.Presenter, Cate
     override fun onCategoryVideos(data: List<VideoItemData>, state: Int) {
         mView.showVideos(data, state)
         if (isLoading) {
-            mView.hideLoading()
+            mView.showContent()
         }
     }
 

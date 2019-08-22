@@ -27,7 +27,7 @@ class SongListDetailPresenter @Inject constructor() : SongListContract.Presenter
 
     override fun onSongList(data: List<SongItemData>) {
         mView.showSongList(data)
-        mView.hideLoading()
+        mView.showContent()
     }
 
     override fun onTitle(title: SongTitleData) {

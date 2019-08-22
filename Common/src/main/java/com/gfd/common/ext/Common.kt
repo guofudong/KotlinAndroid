@@ -2,6 +2,7 @@
 
 package com.gfd.common.ext
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.support.v4.view.ViewPager
@@ -17,6 +18,8 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.youth.banner.Banner
+import com.youth.banner.BannerConfig
+import com.youth.banner.Transformer
 import java.lang.reflect.Field
 
 /**
@@ -68,28 +71,29 @@ fun Banner.player(titles: List<String>?, bannerImages: List<String>?) {
     val isNotEmptyImages = bannerImages?.isNotEmpty() ?: false
     if (isNotEmptyImages) {
         if (null != titles) {
-            this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR_TITLE)
+            this.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE)
             this.setBannerTitles(titles)
         } else {
-            this.setBannerStyle(com.youth.banner.BannerConfig.CIRCLE_INDICATOR)
+            this.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
         }
         this.setImageLoader(com.gfd.common.utils.GlideImageLoader())
         this.setImages(bannerImages)
         this.setDelayTime(BANNER_TIME)
         this.isAutoPlay(true)
-        this.setIndicatorGravity(com.youth.banner.BannerConfig.CENTER)
-        this.setBannerAnimation(com.youth.banner.Transformer.Default)
+        this.setIndicatorGravity(BannerConfig.CENTER)
+        this.setBannerAnimation(Transformer.Default)
         this.start()
     }
 }
 
+@SuppressLint("SetJavaScriptEnabled")
 fun WebSettings.config() {
     this.javaScriptEnabled = true
     this.useWideViewPort = true // 关键点
     this.allowFileAccess = true
     this.setSupportZoom(true)
     this.loadWithOverviewMode = true
-    this.cacheMode = WebSettings.LOAD_NO_CACHE; // 不加载缓存内容
+    this.cacheMode = WebSettings.LOAD_NO_CACHE// 不加载缓存内容
     this.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
     //自动播放视频
     this.mediaPlaybackRequiresUserGesture = false

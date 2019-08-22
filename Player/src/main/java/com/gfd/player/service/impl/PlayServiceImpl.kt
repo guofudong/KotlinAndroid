@@ -37,7 +37,7 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                             val plotText = e?.text() ?: ""
                             val src = document.selectFirst("iframe#video").attr("src")
                             Logger.e("解析出来的地址：$src")
-                            val split = src.split("url=")
+                            val split = src.split("/jx.php?url=")
                             val videoUrl: String
                             videoUrl = if (split.size == 2) split[1] else ""
                             Logger.e("播放地址：$videoUrl")

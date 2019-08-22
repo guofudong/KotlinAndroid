@@ -5,43 +5,26 @@
     android:background="@color/common_white"
     android:orientation="vertical">
 
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/edSearch"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_32"
         android:layout_marginTop="@dimen/dp_4"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_8"
-        android:paddingRight="@dimen/dp_8">
-
-        <EditText
-            android:id="@+id/edSearch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/home_sp_edit_search_bg"
-            android:drawableLeft="@drawable/home_ic_search"
-            android:drawablePadding="@dimen/dp_6"
-            android:gravity="center_vertical"
-            android:hint="@string/home_SerachHint"
-            android:maxLines="1"
-            android:paddingLeft="@dimen/dp_6"
-            android:textSize="@dimen/sp_14" />
-
-        <TextView
-            android:id="@+id/tvSearchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:gravity="center"
-            android:text="搜索"
-            android:textColor="@color/common_black"
-            android:textSize="@dimen/sp_14" />
-
-    </LinearLayout>
+        android:background="@drawable/home_sp_edit_search_bg"
+        android:drawableLeft="@drawable/home_ic_search"
+        android:drawablePadding="@dimen/dp_6"
+        android:hint="@string/home_SerachHint"
+        android:maxLines="1"
+        android:maxLength="12"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:paddingLeft="@dimen/dp_6"
+        android:textSize="@dimen/sp_14"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"/>
 
     <RelativeLayout
+        android:id="@id/content_id"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -56,6 +39,7 @@
         <include layout="@layout/home_layout_serach_history" />
 
         <include layout="@layout/home_layout_search_empty" />
+
     </RelativeLayout>
 
 </LinearLayout>

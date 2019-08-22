@@ -35,7 +35,7 @@ class UpdateManager private constructor() {
                         val serverCode = versionData.data.versionCode
                         if (serverCode > currentCode) {
                             //有新版本
-                            showDownLoadDialog(context, versionData.data.url)
+                            showDownLoadDialog(context)
                         }
                     }
                 })
@@ -66,9 +66,8 @@ class UpdateManager private constructor() {
     /**
      * 显示更新提示对话框
      * @param context Context
-     * @param url String
      */
-    private fun showDownLoadDialog(context: Context, url: String) {
+    private fun showDownLoadDialog(context: Context) {
         val dialog = AlertDialog.Builder(context)
                 .setTitle("发现新版本")
                 .setMessage("github:https://github.com/guofudong/KotlinAndroid")

@@ -2,7 +2,7 @@ package com.gfd.home.injection.module
 
 import com.gfd.home.mvp.VideoListContract
 import com.gfd.home.service.VideoService
-import com.gfd.home.service.impl.VideoServiceImpl1
+import com.gfd.home.service.impl.VideoServiceImpl
 import dagger.Module
 import dagger.Provides
 
@@ -16,7 +16,7 @@ import dagger.Provides
 class VideoModule(private val view: VideoListContract.View) {
 
     @Provides
-    fun provideVideoService(videoService: VideoServiceImpl1): VideoService {
+    fun provideVideoService(videoService: VideoServiceImpl): VideoService {
         return videoService
     }
 

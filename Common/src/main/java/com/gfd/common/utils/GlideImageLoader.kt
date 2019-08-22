@@ -8,7 +8,7 @@ import com.youth.banner.loader.ImageLoader
  * @Author : 郭富东
  * @Date ：2018/8/3 - 17:36
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：
  */
 class GlideImageLoader : ImageLoader() {
     override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {

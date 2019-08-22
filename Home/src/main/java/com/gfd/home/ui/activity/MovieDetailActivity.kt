@@ -14,18 +14,13 @@ import com.gfd.home.mvp.presenter.MovieDetailPresenter
  */
 class MovieDetailActivity : BaseMvpActivity<MovieDetailPresenter>(), MovieDetailContract.View {
 
-    override fun injectComponent() {
-
-    }
+    override fun injectComponent() {}
 
     override fun getLayoutId(): Int = R.layout.home_activity_movie_detail
 
-    override fun initView() {
-    }
+    override fun initView() {}
 
-    override fun initData() {
-    }
+    override fun initData() {}
 
-    override fun showMovieInfo(data: List<MovieData>) {
-    }
+    override fun showMovieInfo(data: List<MovieData>) {}
 }

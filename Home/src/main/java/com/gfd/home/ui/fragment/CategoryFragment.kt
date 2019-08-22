@@ -84,7 +84,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
             else -> ""
         }
         if (!TextUtils.isEmpty(videoUrl)) {
-            mPresenter.getCategoryVideos(videoUrl, currentPage, Constant.STATE_REFRESH, false)
+            mPresenter.getCategoryVideos(videoUrl, currentPage, Constant.STATE_REFRESH, true)
         } else {
             ToastUtils.instance.showToast("类型不匹配")
             activity?.finish()

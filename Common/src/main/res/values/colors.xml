@@ -8,6 +8,7 @@
     <color name="common_blue">#03a9f4</color>
     <color name="common_blue_dark">#0288d1</color>
     <color name="common_blue_light">#039be5</color>
+    <color name="common_app_Gray">#F4F4F4</color>
     <color name="common_disable">#d9d9d9</color>
     <color name="common_divider">#d4d4d4</color>
     <color name="common_gray">#787676</color>
@@ -15,6 +16,7 @@
     <color name="common_red">#f11919</color>
     <color name="common_white">#ffffff</color>
     <color name="common_yellow">#fe9c2f</color>
+    <color name="common_loading">#FF5858</color>
     <color name="colorItemDecoration">#ffffff</color>
     <color name="text_dark">#999999</color>
     <color name="LightGray">#eff2f2</color>

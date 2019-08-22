@@ -3,7 +3,6 @@ package com.gfd.home.mvp.presenter
 import com.gfd.home.entity.MovieData
 import com.gfd.home.mvp.MovieDetailContract
 import com.gfd.home.service.MovieDetailService
-import com.gfd.home.service.MovieListService
 import javax.inject.Inject
 
 /**
@@ -34,7 +33,7 @@ class MovieDetailPresenter @Inject constructor() : MovieDetailContract.Presenter
     override fun onMovieInfo(data: List<MovieData>) {
         mView.showMovieInfo(data)
         if (this.isLoading) {
-            mView.hideLoading()
+            mView.showContent()
         }
     }
 

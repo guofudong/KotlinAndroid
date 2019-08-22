@@ -3,7 +3,7 @@ apply from:rootProject.file('libbase.gradle')
 
 kapt {
     arguments {
-        arg("moduleName", project.getName())
+        arg(arouter_module_name, project.getName())
     }
 }
 
@@ -29,12 +29,12 @@ dependencies {
     api dependence.libRxkotlin
 
     api dependence.libRxlifecycle2
-
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     api dependence.libDagger
     api dependence.libLogger
 
     api dependence.libBottomBar
+    api dependence.libStatusBar
     api dependence.libLRecyclerView
     api dependence.libLJsoup
     api dependence.libOkgo
@@ -47,8 +47,6 @@ dependencies {
     api dependence.libCircleImageView
     api dependence.libBugly
     api dependence.libRhinoAndroid
-    implementation dependence.libLeakCanaryActivity
-    implementation dependence.libLeakCanaryFragment
     api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }

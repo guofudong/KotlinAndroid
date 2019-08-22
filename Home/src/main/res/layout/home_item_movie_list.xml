@@ -13,6 +13,7 @@
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_140"
         app:cardCornerRadius="@dimen/dp_4"
+        app:cardElevation="0px"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

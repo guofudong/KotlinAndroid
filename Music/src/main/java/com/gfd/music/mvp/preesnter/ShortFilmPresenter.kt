@@ -33,7 +33,7 @@ class ShortFilmPresenter @Inject constructor() : ShortFilmContract.Presenter,
     override fun onMvData(data: List<MvData>) {
         mView.showMvList(data)
         if(isLoading){
-            mView.hideLoading()
+            mView.showContent()
         }
     }
 

@@ -30,6 +30,8 @@ class MusicFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.music_fragment_music
 
+    override fun isSetStateView(): Boolean = false
+
     override fun initView() {
         toggle = ActionBarDrawerToggle(activity, drawerLayout,
                 R.string.music_navigation_drawer_open, R.string.music_navigation_drawer_close)
@@ -39,7 +41,7 @@ class MusicFragment : BaseFragment() {
         mFragments.add(RadioFragment())
         mFragments.add(ShortFilmFragment())
         mViewPager.noScroll()
-        mViewPager.offscreenPageLimit = 2
+        mViewPager.offscreenPageLimit = 0
         mViewPager.adapter = MusicPagerAdapter(fragmentManager!!, mTabTitles, mFragments)
         mTabLayout.setupWithViewPager(mViewPager)
         for (i in 0..mTabLayout.tabCount) {

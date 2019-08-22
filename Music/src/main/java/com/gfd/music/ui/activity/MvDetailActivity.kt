@@ -52,7 +52,6 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 .build()
                 .inject(this)
     }
-
     override fun getLayoutId(): Int {
         return R.layout.music_activity_mv_detail
     }
@@ -84,7 +83,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         //parentView.removeView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
         //videoContainer.addView(NiceVideoPlayerManager.instance().currentNiceVideoPlayer)
         if (intent != null) {
-            val mvUrl = intent.getStringExtra("mvUrl")
+            //val mvUrl = intent.getStringExtra("mvUrl")
             mvId = intent.getStringExtra("mvId") ?: "1"
             mvName = intent.getStringExtra("mvName") ?: ""
         }

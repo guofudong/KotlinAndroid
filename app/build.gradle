@@ -9,7 +9,7 @@ apply from: rootProject.file('libbase.gradle')
 
 kapt {
     arguments {
-        arg("moduleName", project.getName())
+        arg(arouter_module_name, project.getName())
     }
 }
 android {

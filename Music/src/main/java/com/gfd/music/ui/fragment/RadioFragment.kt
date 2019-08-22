@@ -32,6 +32,7 @@ class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.V
     private lateinit var mRadioAdapter: RadioAdapter
     private lateinit var mBanner: Banner
     private lateinit var mRadioData: List<RadioData>
+
     override fun getLayoutId(): Int = R.layout.music_fragment_radio
 
     override fun injectComponent() {
@@ -62,16 +63,16 @@ class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.V
 
     override fun setListener() {
         mLRecyclerViewAdapter.setOnItemClickListener { _, _ ->
-          /*  val radioData = mRadioData[position]
-            val type = radioData.getItemType()
-            if (Constant.ITEM_TYPE_IMG == type || type == Constant.ITEM_TYPE_LIST) {//点击内容
-                val intent = Intent(activity, SongListDetailActivity::class.java)
-                intent.putExtra("id", radioData.id.toString())
-                intent.putExtra("pic_big", radioData.logo)
-                intent.putExtra("file_duration", radioData.count)
-                intent.putExtra("color", radioData.color)
-                startActivity(intent)
-            }*/
+            /*  val radioData = mRadioData[position]
+              val type = radioData.getItemType()
+              if (Constant.ITEM_TYPE_IMG == type || type == Constant.ITEM_TYPE_LIST) {//点击内容
+                  val intent = Intent(activity, SongListDetailActivity::class.java)
+                  intent.putExtra("id", radioData.id.toString())
+                  intent.putExtra("pic_big", radioData.logo)
+                  intent.putExtra("file_duration", radioData.count)
+                  intent.putExtra("color", radioData.color)
+                  startActivity(intent)
+              }*/
         }
     }
 

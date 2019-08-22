@@ -8,7 +8,6 @@ import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.crosstalk.R
 import com.orhanobut.logger.Logger
-import com.tencent.bugly.proguard.u
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
@@ -21,7 +20,7 @@ class WebViewActivity : BaseActivity() {
     private var mIsPageLoading: Boolean = false
 
     override fun initView() {
-        showDialogLoading()
+        showLoading()
         window.setFormat(PixelFormat.TRANSLUCENT)
         if (intent != null) {
             videoUrl = intent.getStringExtra("videoUrl")
@@ -65,7 +64,7 @@ class WebViewActivity : BaseActivity() {
             override fun onPageFinished(p0: WebView?, url: String?) {
                 super.onPageFinished(p0, url)
                 mIsPageLoading = false
-                hideDialogLoading()
+                showContent()
             }
         }
         mWebView.webChromeClient = object : WebChromeClient() {

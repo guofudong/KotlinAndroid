@@ -20,9 +20,9 @@ class SearchPresenter @Inject constructor() : SearchContract.Presenter, SearchSe
     @Inject
     lateinit var mView: SearchContract.View
 
-    override fun onSearch(datas: List<SearchItemData>) {
-        mView.hideLoading()
-        mView.showSearchData(datas)
+    override fun onSearch(data: List<SearchItemData>) {
+        mView.showContent()
+        mView.showSearchData(data)
     }
 
     override fun search(context: Context, keyWord: String) {
@@ -40,7 +40,7 @@ class SearchPresenter @Inject constructor() : SearchContract.Presenter, SearchSe
     }
 
     override fun onHistory(history: List<String>) {
-        mView.hideLoading()
+        mView.showContent()
         mView.showSearchHistory(history)
     }
 

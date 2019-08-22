@@ -23,7 +23,7 @@ class ProgressLoading constructor(context: Context) : Dialog(context,R.style.Lig
         setContentView(R.layout.progress_dialog)
         setCancelable(true)
         setCanceledOnTouchOutside(false)
-        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         //获取动画
         val loadingView = findViewById<ImageView>(R.id.iv_loading)
         animDrawable = loadingView.background as AnimationDrawable

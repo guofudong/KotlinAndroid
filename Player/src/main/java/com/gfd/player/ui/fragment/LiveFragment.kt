@@ -44,6 +44,7 @@ class LiveFragment : BaseMvpFragment<LivePresenter>(), LiveContract.View {
     private lateinit var videoUrl: String
 
 
+    override fun isSetStateView(): Boolean  = false
     override fun getLayoutId(): Int {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         return R.layout.player_fragment_live

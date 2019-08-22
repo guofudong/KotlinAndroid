@@ -1,5 +1,6 @@
 package com.gfd.player.ui.activity
 
+import android.annotation.SuppressLint
 import android.graphics.PixelFormat
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.player_activity_play_webview.*
  * @Email：878749089@qq.com
  * @description：
  */
+@Suppress("DEPRECATION")
 @Route(path = RouterPath.Player.PATH_PLAYER_MV)
 class PlayMvActivity : BaseActivity() {
 
@@ -45,6 +47,7 @@ class PlayMvActivity : BaseActivity() {
         mWebView.loadUrl(mvUrl)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
         //去掉qq浏览器的推广
         window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -62,10 +65,6 @@ class PlayMvActivity : BaseActivity() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 mWebView.loadUrl(url)
                 return true
-            }
-
-            override fun onPageFinished(p0: WebView?, p1: String?) {
-                super.onPageFinished(p0, p1)
             }
         }
         mWebView.webChromeClient = object : WebChromeClient() {

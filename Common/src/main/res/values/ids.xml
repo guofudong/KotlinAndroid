@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--多状态布局id，用于指定内容区域-->
+    <item name="content_id" type="id" tools:ignore="ResourceName" />
+</resources>

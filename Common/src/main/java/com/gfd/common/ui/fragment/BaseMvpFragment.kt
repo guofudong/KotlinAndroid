@@ -6,7 +6,6 @@ import com.gfd.common.injection.component.DaggerActivityComponent
 import com.gfd.common.injection.module.ActivityMoudle
 import com.gfd.common.mvp.presenter.BasePresenter
 import com.gfd.common.mvp.view.BaseView
-import com.gfd.common.widgets.ProgressLoading
 import javax.inject.Inject
 
 /**
@@ -19,7 +18,6 @@ abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
 
     @Inject
     lateinit var mPresenter: T
-    private var mProgressLoading: ProgressLoading? = null
     protected lateinit var mActivityComponent: DaggerActivityComponent
 
     override fun initOperate() {
@@ -36,24 +34,4 @@ abstract class BaseMvpFragment<T : BasePresenter> : BaseFragment(), BaseView {
                 .activityMoudle(ActivityMoudle(activity as Activity))
                 .build() as DaggerActivityComponent
     }
-
-    override fun showLoading() {
-       /* if (mProgressLoading == null && activity != null) {
-            mProgressLoading = ProgressLoading(activity!!)
-        }
-        mProgressLoading?.showLoading()*/
-    }
-
-    override fun hideLoading() {
-       // mProgressLoading?.hideLoading()
-    }
-
-    override fun error() {
-        mStatusLayoutManager.showErrorLayout()
-    }
-
-    override fun empty() {
-        mStatusLayoutManager.showEmptyLayout()
-    }
-
 }

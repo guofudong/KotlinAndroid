@@ -38,9 +38,9 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
     private var mPlayService: MusicPlayService? = null
     private var offset = 0
 
-    override fun getLayoutId(): Int {
-        return R.layout.music_activity_song_list
-    }
+    override fun getLayoutId(): Int = R.layout.music_activity_song_list
+
+    override fun isSetStateView(): Boolean = true
 
     override fun injectComponent() {
         DaggerSongListDetailComponent.builder()
@@ -120,6 +120,7 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         override fun onServiceDisconnected(name: ComponentName) {
 
         }
+
         override fun onServiceConnected(name: ComponentName?, service: IBinder) {
             mPlayService = (service as MusicServiceStub).getService()
         }

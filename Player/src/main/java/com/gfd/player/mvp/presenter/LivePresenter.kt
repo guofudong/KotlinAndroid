@@ -2,7 +2,6 @@ package com.gfd.player.mvp.presenter
 
 import android.content.Context
 import com.gfd.player.entity.Live
-import com.gfd.player.entity.LiveDataDto
 import com.gfd.player.entity.TimeTableData
 import com.gfd.player.mvp.contract.LiveContract
 import com.gfd.player.service.LiveApiService
@@ -28,7 +27,7 @@ class LivePresenter @Inject constructor(): LiveContract.Presenter,LiveApiService
 
     override fun onLive(data: List<Live>) {
         mView.showLiveInfo(data)
-        mView.hideLoading()
+        mView.showContent()
     }
 
     override fun getPlayUrl(context: Context, url: String) {
@@ -41,6 +40,6 @@ class LivePresenter @Inject constructor(): LiveContract.Presenter,LiveApiService
 
     override fun onPlayUrl(url: String) {
         mView.showVideo(url)
-        mView.hideLoading()
+        mView.showContent()
     }
 }

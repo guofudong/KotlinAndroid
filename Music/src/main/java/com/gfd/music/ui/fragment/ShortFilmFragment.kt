@@ -30,7 +30,7 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
     private lateinit var mAdapter: MvListAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private var videoParent: ViewGroup? = null
-    private var offset = 0
+    private var offset = 1
     private var isLoadMore = false
     private var isSwitchVisible = false
     override fun getLayoutId(): Int = R.layout.music_fragment_short_film
@@ -67,12 +67,12 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
 
     override fun setListener() {
         mMvSwipe.setOnRefreshListener {
-            offset = 0
+            offset = 1
             mPresenter.getMvList(offset, false)
         }
         mMvRecycler.setOnLoadMoreListener {
             if (offset > 10) {
-                offset = 0
+                mMvRecycler.setNoMore(true)
             } else {
                 isLoadMore = true
                 mPresenter.getMvList(++offset, false)

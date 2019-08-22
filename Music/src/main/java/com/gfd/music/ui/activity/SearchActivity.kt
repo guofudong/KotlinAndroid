@@ -6,14 +6,10 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.support.v7.widget.LinearLayoutManager
-import android.text.TextUtils
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
+import com.gfd.common.ext.setOnActionListener
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.utils.ImageLoader
-import com.gfd.common.utils.ToastUtils
 import com.gfd.music.R
 import com.gfd.music.adapter.HistoryAdapter
 import com.gfd.music.adapter.HotSearchAdapter
@@ -36,7 +32,7 @@ import kotlinx.android.synthetic.main.music_layout_play_contral.*
  * @Author : 郭富东
  * @Date ：2018/8/23 - 16:43
  * @Email：878749089@qq.com
- * @descriptio：搜索歌曲页面
+ * @description：搜索歌曲页面
  */
 class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
@@ -46,9 +42,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     private lateinit var mHotData: List<String>
     private lateinit var mHistoryData: List<String>
     private var mPlayService: MusicPlayService? = null
-    override fun getLayoutId(): Int {
-        return R.layout.music_activity_search
-    }
+
+    override fun getLayoutId(): Int = R.layout.music_activity_search
 
     override fun injectComponent() {
         DaggerSearchComponent.builder()
@@ -84,11 +79,10 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     override fun setListener() {
         //监听回车键
-        edKeyword.setOnEditorActionListener { _, actionId, keyEvent ->
-            if (actionId == EditorInfo.IME_ACTION_SEND || (keyEvent != null && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER)) {
-                searchSong(edKeyword.text.toString().trim())
+        edKeyword.setOnActionListener {
+            onSearch {
+                search(it)
             }
-            false
         }
         mSearchAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
@@ -103,7 +97,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         mHistoryAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
                 val keyword = mHistoryData[position]
-                searchSong(keyword)
+                search(keyword)
             }
 
         })
@@ -112,19 +106,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         }
     }
 
-    private fun searchSong(keyword: String) {
-        if (TextUtils.isEmpty(keyword)) {
-            ToastUtils.instance.showToast("搜索内容不能为空")
-            return
-        } else {
-            //隐藏键盘
-            val manager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            manager.hideSoftInputFromWindow(edKeyword.windowToken, 0)
-            serach(keyword)
-        }
-    }
 
-    private fun serach(keyword: String) {
+    private fun search(keyword: String) {
         hotRootLayout.visibility = View.VISIBLE
         mSearchResultList.visibility = View.GONE
         playContralRoot.visibility = View.GONE
@@ -167,7 +150,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun showSearchResult(datas: List<SearchData>) {
-        if (!datas.isEmpty()) {
+        if (datas.isNotEmpty()) {
             mSearchResultList.visibility = View.VISIBLE
             hotRootLayout.visibility = View.GONE
             playContralRoot.visibility = View.VISIBLE

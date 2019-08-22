@@ -1,19 +1,15 @@
 package com.gfd.common.common
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.BuildConfig
 import com.gfd.common.injection.component.DaggerAppComponent
 import com.gfd.common.injection.module.AppMoudle
-import com.lzy.okgo.OkGo
-import com.lzy.okgo.cookie.CookieJarImpl
-import com.lzy.okgo.cookie.store.SPCookieStore
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import com.squareup.leakcanary.LeakCanary
 import com.tencent.bugly.crashreport.CrashReport
-import okhttp3.OkHttpClient
 
 /**
  * @Author : 郭富东
@@ -35,8 +31,6 @@ open class BaseApplication : Application() {
         //初始化腾讯Bugly
         CrashReport.initCrashReport(this, BaseConstant.BUGLY_APPID, true)
         if (BuildConfig.DEBUG) {
-            //初始化LeakCanary
-            LeakCanary.install(this)
             // 打印日志
             ARouter.openLog()
             //开启调试模式
@@ -52,6 +46,7 @@ open class BaseApplication : Application() {
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
 }

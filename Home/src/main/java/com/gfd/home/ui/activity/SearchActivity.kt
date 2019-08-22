@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gfd.common.ext.setOnActionListener
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.utils.ToastUtils
@@ -39,7 +40,6 @@ import kotlinx.android.synthetic.main.home_layout_serach_history.*
 @Route(path = RouterPath.Home.PATH_SERACH)
 class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
-    private var isSearch = false
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mDataAdapter: SearchDataAdapter
     private lateinit var mData: List<SearchItemData>
@@ -56,9 +56,9 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.home_activity_serach
-    }
+    override fun isSetStateView(): Boolean = true
+
+    override fun getLayoutId(): Int = R.layout.home_activity_serach
 
     override fun initView() {
         setSearchList()
@@ -71,9 +71,6 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     }
 
     override fun setListener() {
-        tvSearchBtn.setOnClickListener {
-            search()
-        }
         //立即播放按钮
         mDataAdapter.setOnPlayClickListener { position ->
             val data = mData[position]
@@ -85,7 +82,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         }
         mHistoryAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
-                serach(mHistoryData[position])
+                search(mHistoryData[position])
             }
         })
         //删除历史搜索记录
@@ -93,35 +90,19 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             mPresenter.deleteHistory(this)
         }
         //监听回车键
-        edSearch.setOnEditorActionListener { _, actionId, keyEvent ->
-            if (actionId == EditorInfo.IME_ACTION_SEND
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || (keyEvent != null && KeyEvent.KEYCODE_ENTER == keyEvent.keyCode && KeyEvent.ACTION_DOWN == keyEvent.action)) {
-                search()
-            }
-            true
-        }
-
-    }
-
-    /** 搜索*/
-    private fun search() {
-        if (!isSearch) {
-            if (TextUtils.isEmpty(edSearch.text.toString())) {
-                ToastUtils.instance.showToast("搜索内容不能为空")
-                return
-            } else {
-                serach(edSearch.text.toString())
+        edSearch.setOnActionListener {
+            onSearch {
+                search(it)
             }
         }
+
     }
 
     /**
      * 以关键字进行搜索
      * @param keyWord String
      */
-    private fun serach(keyWord: String) {
-        isSearch = true
+    private fun search(keyWord: String) {
         rootHistory.visibility = View.GONE
         rootSearchEmpy.visibility = View.GONE
         mVideoList.visibility = View.VISIBLE
@@ -158,7 +139,6 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
 
     override fun showSearchData(data: List<SearchItemData>) {
         mData = data
-        isSearch = false//状态重置
         if (mData.isEmpty()) {
             rootSearchEmpy.visibility = View.VISIBLE
             mVideoList.visibility = View.GONE

@@ -30,7 +30,7 @@ class CrosstalkPresenter @Inject constructor():CrosstalkContract.Presenter,Cross
     override fun onVideoList(data: List<Video>) {
         mView.showVideoList(data)
         if(isLoading){
-            mView.hideLoading()
+            mView.showContent()
         }
     }
 }

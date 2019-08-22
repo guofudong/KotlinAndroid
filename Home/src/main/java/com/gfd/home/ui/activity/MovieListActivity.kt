@@ -33,8 +33,9 @@ class MovieListActivity : BaseMvpActivity<MovieListPresenter>(), MovieListContra
                 .build().inject(this)
     }
 
-    override fun getLayoutId(): Int = R.layout.home_activity_movie_list
+    override fun isSetStateView(): Boolean = true
 
+    override fun getLayoutId(): Int = R.layout.home_activity_movie_list
 
     override fun initView() {
         if (intent != null) {
@@ -52,7 +53,7 @@ class MovieListActivity : BaseMvpActivity<MovieListPresenter>(), MovieListContra
     }
 
     override fun setListener() {
-        mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
+        mLRecyclerViewAdapter.setOnItemClickListener { _, _ ->
             //val movieId = mMovieListAdapter.getData()[position].movieId
         }
     }

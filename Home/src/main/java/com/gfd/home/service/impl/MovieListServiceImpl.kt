@@ -27,24 +27,24 @@ class MovieListServiceImpl @Inject constructor() : MovieListService {
                     override fun onSuccess(response: Response<String>) {
                         val json = response.body()
                         Logger.e("电影数据：$json")
-                        val movieDatas = Gson().fromJson(json, MovieEntity::class.java).ms
-                        var datas = ArrayList<MovieData>()
-                        if (movieDatas.isNotEmpty()) {
-                            movieDatas.forEach {
+                        val movieData = Gson().fromJson(json, MovieEntity::class.java).ms
+                        val data = ArrayList<MovieData>()
+                        if (movieData.isNotEmpty()) {
+                            movieData.forEach {
                                 if (type == Constant.TYPE_MOVIE_01) {
                                     if (it.r > 0) {
-                                        datas.add(MovieData(it.movieId, it.t, it.dn, it.aN1
+                                        data.add(MovieData(it.movieId, it.t, it.dn, it.aN1
                                                 , it.isIs3D, it.isIsIMAX, it.isIsHot, it.movieType, it.img, it.wantedCount, it.r))
                                     }
                                 } else if (type == Constant.TYPE_MOVIE_02) {
                                     if (it.r <= 0) {
-                                        datas.add(MovieData(it.movieId, it.t, it.dn, it.aN1
+                                        data.add(MovieData(it.movieId, it.t, it.dn, it.aN1
                                                 , it.isIs3D, it.isIsIMAX, it.isIsHot, it.movieType, it.img, it.wantedCount, 0.0))
                                     }
                                 }
 
                             }
-                            callBack.onMovieList(datas)
+                            callBack.onMovieList(data)
                         }
                     }
 

@@ -69,7 +69,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
     override fun initView() {
-        showDialogLoading()
+        showLoading()
         window.setFormat(PixelFormat.TRANSLUCENT)
         setWebView()
         ARouter.getInstance().inject(this)
@@ -101,7 +101,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
 
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
-                hideDialogLoading()
+                showContent()
             }
         }
         mWebView.webChromeClient = object : WebChromeClient() {

@@ -28,6 +28,7 @@ import java.util.*
  * @Email：878749089@qq.com
  * @description：推荐Fragment
  */
+@Suppress("DEPRECATION")
 class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.View {
 
 

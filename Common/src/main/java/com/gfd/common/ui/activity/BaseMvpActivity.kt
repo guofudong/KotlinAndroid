@@ -11,7 +11,7 @@ import javax.inject.Inject
  * @Author : 郭富东
  * @Date ：2018/8/1 - 16:13
  * @Email：878749089@qq.com
- * @descriptio：
+ * @description：MVP模式下-Activity的基类
  */
 abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
 
@@ -30,14 +30,6 @@ abstract class BaseMvpActivity<T : BasePresenter> : BaseActivity(), BaseView {
                 .activityMoudle(ActivityMoudle(this))
                 .appComponent((application as BaseApplication).appComponent)
                 .build() as DaggerActivityComponent
-    }
-
-    override fun showLoading() {
-        showDialogLoading()
-    }
-
-    override fun hideLoading() {
-        hideDialogLoading()
     }
 
     /**

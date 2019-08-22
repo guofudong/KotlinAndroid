@@ -1,24 +1,25 @@
 package com.gfd.common.ui.activity
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
+import android.view.ViewGroup
+import com.gfd.common.R
 import com.gfd.common.common.AppManager
-import com.gfd.common.widgets.ProgressLoading
+import com.gfd.common.widgets.StateView
+import com.gyf.immersionbar.ImmersionBar
+import org.jetbrains.anko.find
 
 /**
  * @Author : 郭富东
  * @Date ：2018/8/1 - 16:11
  * @Email：878749089@qq.com
- * @description：所有Activity的基类
+ * @description：Activity的基类
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    private var mProgressLoading: ProgressLoading? = null
+    /** 多状态布局View*/
+    private var statusView: StateView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,71 +29,83 @@ abstract class BaseActivity : AppCompatActivity() {
             setContentView(rootView)
         }
         AppManager.instance.addActivity(this)
+        setStatusBar()
         initOperate()
+        if (isSetStateView()) {
+            setStatusLayout()
+        }
         initView()
         initData()
         setListener()
     }
 
+    /** 配置多状态布局*/
+    private fun setStatusLayout() {
+        statusView = StateView.inject(find(R.id.content_id))
+    }
+
     /**
-     * 设置布局id
+     * 是否设置多状态View 默认为false
+     * @return Boolean true:设置
      */
+    open fun isSetStateView(): Boolean = false
+
+    /** 初始化操作，在onCreate中调用*/
+    open fun initOperate() {}
+
+    /** 设置布局id*/
     abstract fun getLayoutId(): Int
 
-
+    /**初始化视图*/
     abstract fun initView()
 
+    /** 初始化数据*/
     abstract fun initData()
 
     /** 设置监听 */
-    open fun setListener() {
+    open fun setListener() {}
 
+    /** 显示Loading*/
+    fun showLoading() {
+        statusView?.showLoading()
     }
 
-    /**
-     * 初始化操作，在onCreate中调用
-     */
-    open fun initOperate() {
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mProgressLoading?.dismiss()
-        mProgressLoading = null
-        AppManager.instance.finishActivity(this)
-    }
-
-    protected fun showDialogLoading() {
-        if (mProgressLoading == null) {
-            mProgressLoading = ProgressLoading(this)
-        }
-        if (!mProgressLoading!!.isShowing) {
-            mProgressLoading!!.showLoading()
-        }
-    }
-
-    protected fun hideDialogLoading() {
-        if (mProgressLoading?.isShowing == true) {
-            mProgressLoading?.hideLoading()
-        }
-
+    /** 显示内容*/
+    fun showContent() {
+        statusView?.showContent()
     }
 
     /**
      * 设置透明状态栏
      */
     fun setStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-            val decorView = window.decorView
-            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            decorView.systemUiVisibility = option
-            //根据上面设置是否对状态栏单独设置颜色
-            window.statusBarColor = Color.TRANSPARENT
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-            val localLayoutParams = window.attributes
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags)
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true, 0.2f)
+                .navigationBarColor(R.color.common_app_Gray)
+                .keyboardEnable(true)
+                .init()
+        //添加内容布局距离屏幕的距离
+        if (isSetPaddingTop()) {
+            val rootView = this.window.decorView.findViewById(android.R.id.content) as ViewGroup
+            rootView.setPadding(
+                    0,
+                    ImmersionBar.getStatusBarHeight(this),
+                    0,
+                    0
+            )
+            rootView.setBackgroundColor(resources.getColor(R.color.common_white))
         }
+    }
+
+    /**
+     * 是否设置布局与状态栏之间的paddingTop,默认值为true
+     * @return Boolean
+     */
+    open fun isSetPaddingTop(): Boolean = true
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppManager.instance.finishActivity(this)
     }
 
 }

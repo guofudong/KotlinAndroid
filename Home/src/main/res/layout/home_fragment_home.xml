@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_white"
-    android:orientation="vertical"
     android:paddingTop="@dimen/dp_4">
 
     <TextView
         android:id="@+id/tvSearch"
-        android:layout_width="match_parent"
+        android:layout_width="0px"
         android:layout_height="@dimen/dp_32"
         android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginTop="@dimen/padding_top"
         android:layout_marginRight="@dimen/dp_8"
         android:background="@drawable/home_sp_edit_search_bg"
         android:drawableLeft="@drawable/home_ic_search"
@@ -20,29 +21,43 @@
         android:paddingLeft="@dimen/dp_6"
         android:text="@string/home_SerachHint"
         android:textSize="@dimen/sp_14"
-        android:layout_marginTop="@dimen/padding_top"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <android.support.constraint.ConstraintLayout
+        android:id="@id/content_id"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSearch">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.github.jdsjlzx.recyclerview.LRecyclerView
-                android:id="@+id/mRecyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:layout_marginBottom="@dimen/dp_4"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <com.github.jdsjlzx.recyclerview.LRecyclerView
+                    android:id="@+id/mRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginBottom="@dimen/dp_4" />
+            </LinearLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
+    </android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

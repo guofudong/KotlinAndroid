@@ -3,11 +3,9 @@ package com.gfd.home.ui.fragment
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
-import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ext.gridInit
 import com.gfd.common.ext.player
-import com.gfd.common.net.status.OnStatusLayoutClickListener
 import com.gfd.common.ui.fragment.BaseMvpFragment
 import com.gfd.home.R
 import com.gfd.home.adapter.VideoListAdapter
@@ -37,6 +35,7 @@ import kotlinx.android.synthetic.main.home_fragment_home.*
  * @Email：878749089@qq.com
  * @description：
  */
+@Suppress("DEPRECATION")
 class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
 
     private val videoData = ArrayList<VideoItemData>()
@@ -61,8 +60,8 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
                 .videoModule(VideoModule(this)).build().inject(this)
 
     }
-
     override fun getLayoutId(): Int = R.layout.home_fragment_home
+
     override fun initView() {
         //设置刷新
         swipeRefresh.setColorSchemeColors(resources.getColor(R.color.home_colorRefresh))
@@ -78,7 +77,6 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
         homeCategory03 = headViewBanner.findViewById(R.id.homeCategoty03)
         homeCategory04 = headViewBanner.findViewById(R.id.homeCategoty04)
         mLRecyclerViewAdapter.addHeaderView(headViewBanner)
-        //val v = View(activity)
     }
 
     override fun initData() {
@@ -120,16 +118,6 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
             startActivity(Intent(activity, SearchActivity::class.java))
         }
 
-        mStatusLayoutManager.setOnStatusLayoutClickListener(object : OnStatusLayoutClickListener {
-            override fun onEmptyViewClick(view: View) {
-
-            }
-
-            override fun onErrorViewClick(view: View) {
-                Logger.e("点击错误布局")
-                mPresenter.getVideoList(true)
-            }
-        })
         //分类点击
         homeCategory01.setOnClickListener {
             //正在热映
@@ -181,7 +169,6 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
         mVideoData = data.videoList
         mVideoAdapter.updateData(mVideoData)
         mLRecyclerViewAdapter.notifyDataSetChanged()
-        mStatusLayoutManager.showContent()
     }
 
     /**
@@ -214,5 +201,4 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
                 .withString(RouterPath.Player.KEY_NAME, videoName)
                 .navigation()
     }
-
 }

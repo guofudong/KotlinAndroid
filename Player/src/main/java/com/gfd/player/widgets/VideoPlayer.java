@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.gfd.player.R;
 
+import org.song.videoplayer.QSVideo;
 import org.song.videoplayer.QSVideoViewHelp;
 import org.song.videoplayer.Util;
 
@@ -73,14 +74,14 @@ public class VideoPlayer extends QSVideoViewHelp {
     }
 
     protected void initView() {
-        this.topContainer = this.findViewById(org.song.videoplayer.R.id.layout_top);
-        this.bottomContainer = this.findViewById(org.song.videoplayer.R.id.layout_bottom);
-        this.bufferingContainer = this.findViewById(org.song.videoplayer.R.id.buffering_container);
-        this.loadingContainer = this.findViewById(org.song.videoplayer.R.id.loading_container);
-        this.errorContainer = this.findViewById(org.song.videoplayer.R.id.error_container);
-        this.coverImageView = this.findViewById(org.song.videoplayer.R.id.cover);
-        this.titleTextView = this.findViewById(org.song.videoplayer.R.id.title);
-        this.changeViews = new ArrayList();
+        this.topContainer = this.findViewById(R.id.layout_top);
+        this.bottomContainer = this.findViewById(R.id.layout_bottom);
+        this.bufferingContainer = this.findViewById(R.id.buffering_container);
+        this.loadingContainer = this.findViewById(R.id.loading_container);
+        this.errorContainer = this.findViewById(R.id.error_container);
+        this.coverImageView = this.findViewById(R.id.cover);
+        this.titleTextView = this.findViewById(R.id.tvTitle);
+        this.changeViews = new ArrayList<>();
         this.changeViews.add(this.topContainer);
         this.changeViews.add(this.bottomContainer);
         this.changeViews.add(this.loadingContainer);
@@ -88,14 +89,6 @@ public class VideoPlayer extends QSVideoViewHelp {
         this.changeViews.add(this.coverImageView);
         this.changeViews.add(this.startButton);
         this.changeViews.add(this.progressBar);
-    }
-
-    public void setUp(String url, Object... objects) {
-        super.setUp(url, objects);
-        if (objects != null && objects.length > 0) {
-            this.titleTextView.setText(String.valueOf(objects[0]));
-        }
-
     }
 
     protected void changeUiWithStateAndMode(int status, int mode) {
@@ -199,6 +192,11 @@ public class VideoPlayer extends QSVideoViewHelp {
 
     protected void doubleClick() {
         this.clickFull();
+    }
+
+    @Override
+    protected void popDefinition(View view, List<QSVideo> qsVideos, int index) {
+
     }
 
     protected boolean showProgressDialog(int delta, int position, int duration) {

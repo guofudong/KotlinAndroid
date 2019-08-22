@@ -6,8 +6,10 @@ import android.graphics.Color
 import android.support.v7.graphics.Palette
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.gfd.common.ui.adapter.BaseMultiAdapter
 import com.gfd.common.ui.adapter.BaseViewHolder
 import com.gfd.music.R
@@ -84,8 +86,12 @@ class RadioAdapter(val context: Context) : BaseMultiAdapter<RadioData>(context) 
      * @param img ImageView
      */
     private fun setPaletteColor(itemData: RadioData, img: ImageView) {
-        Glide.with(context).load(itemData.logo).asBitmap().error(R.drawable.ic_songlist_error).into(object : SimpleTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
+        Glide.with(context).asBitmap().load(itemData.logo).error(R.drawable.ic_songlist_error).listener(object : RequestListener<Bitmap> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
+                return false
+            }
+
+            override fun onResourceReady(resource: Bitmap, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                 Palette.from(resource).generate { palette ->
                     if (palette == null) return@generate
                     //palette取色不一定取得到某些特定的颜色，这里通过取多种颜色来避免取不到颜色的情况
@@ -97,10 +103,11 @@ class RadioAdapter(val context: Context) : BaseMultiAdapter<RadioData>(context) 
                         vibrantColor = palette.getMutedColor(Color.TRANSPARENT)
                     }
                     itemData.color = vibrantColor
-                    img.setImageBitmap(resource)
                 }
+                return false
             }
-        })
+
+        }).into(img)
     }
 
 }

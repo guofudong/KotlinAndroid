@@ -33,7 +33,7 @@ class MovieListPresenter @Inject constructor() : MovieListContract.Presenter, Mo
     override fun onMovieList(data: List<MovieData>) {
         mView.showMovies(data)
         if (this.isLoading) {
-            mView.hideLoading()
+            mView.showContent()
         }
     }
 

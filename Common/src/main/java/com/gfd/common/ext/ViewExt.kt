@@ -2,10 +2,12 @@
 
 package com.gfd.common.ext
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.support.annotation.DrawableRes
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -13,6 +15,9 @@ import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.gfd.common.dsl.EditorActionDSL
+import com.gfd.common.utils.SoftKeyboardUtils
+import com.gfd.common.utils.ToastUtils
 
 /**
  * @Author ：郭富东
@@ -118,4 +123,21 @@ fun WebView.init(): WebView {
  */
 fun EditText.text(): String {
     return this.text.toString()
+}
+
+/**
+ * EditText按键监听
+ * @receiver EditText
+ * @param dsl EditorActionDSL.() -> Unit：DSL接收者
+ */
+fun EditText.setOnActionListener(dsl: EditorActionDSL.() -> Unit) {
+    val action = EditorActionDSL().apply(dsl)
+    this.setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            SoftKeyboardUtils.closeInoutDecorView(context as Activity)
+            action.onSearch?.invoke(this.text())
+            this.setText("")
+        }
+        false
+    }
 }

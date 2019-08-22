@@ -44,9 +44,9 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.crosstalk_fragment_crosstalk
-    }
+    override fun isSetStateView(): Boolean = false
+
+    override fun getLayoutId(): Int = R.layout.crosstalk_fragment_crosstalk
 
     override fun initView() {
         mSwipeCrosstalk.setColorSchemeColors(resources.getColor(R.color.common_red))
@@ -84,7 +84,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
         mAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
                 val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getData()[position].source_url
-             //   val videoImage = mAdapter.getData()[position].large_image_url
+                //   val videoImage = mAdapter.getData()[position].large_image_url
                 val videoName = mAdapter.getData()[position].name
                 /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
                           .withString(RouterPath.Player.KEY_PLAYER, videoUrl)

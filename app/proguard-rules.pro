@@ -147,34 +147,9 @@ public *;
 -keep class com.google.**{*;}
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
-# FastJson
--dontwarn com.alibaba.fastjson.**
--keep class com.alibaba.fastjson.** { *; }
-# 百度地图（jar包换成自己的版本，记得签名要匹配）
--keep class com.baidu.** {*;}
--keep class vi.com.** {*;}
--keep class com.sinovoice.** {*;}
--keep class pvi.com.** {*;}
--dontwarn com.baidu.**
--dontwarn vi.com.**
--dontwarn pvi.com.**
 # Bugly
 -dontwarn com.tencent.bugly.**
 -keep class com.tencent.bugly.** {*;}
-#ScriptEngine
--dontwarn javax.script.**
--keep class javax.script.** {*;}
-# ButterKnife
--keep public class * implements butterknife.Unbinder {
-    public <init>(**, android.view.View);
-}
--keep class butterknife.*
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
 # EventBus
 -keepclassmembers class ** {
     @org.greenrobot.eventbus.Subscribe <methods>;
@@ -186,18 +161,6 @@ public *;
   **[] $VALUES;
   public *;
 }
-### greenDAO 3
--keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
-public static java.lang.String TABLENAME;
-}
--keep class **$Properties
--dontwarn org.greenrobot.greendao.database.**
--dontwarn rx.**
-# 极光推送
--dontoptimize
--dontpreverify
--dontwarn cn.jpush.**
--keep class cn.jpush.** { *; }
 # OkHttp
 -dontwarn okio.**
 -dontwarn okhttp3.**
@@ -208,16 +171,6 @@ public static java.lang.String TABLENAME;
 #jsoup
 -dontwarn org.jsoup.**
 -keep class org.jsoup.**{*;}
-# OrmLite
--keepattributes *DatabaseField*
--keepattributes *DatabaseTable*
--keepattributes *SerializedName*
--keep class com.j256.**
--keepclassmembers class com.j256.** { *; }
--keep enum com.j256.**
--keepclassmembers enum com.j256.** { *; }
--keep interface com.j256.**
--keepclassmembers interface com.j256.** { *; }
 # Retrofit
 -keep class retrofit2.** { *; }
 -dontwarn retrofit2.**
@@ -237,36 +190,4 @@ public static java.lang.String TABLENAME;
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 -dontnote rx.internal.util.PlatformDependent
-# 微信支付
--dontwarn com.tencent.mm.**
--dontwarn com.tencent.wxop.stat.**
--keep class com.tencent.mm.** {*;}
--keep class com.tencent.wxop.stat.**{*;}
-# 新浪微博
--keep class com.sina.weibo.sdk.* { *; }
--keep class android.support.v4.* { *; }
--keep class com.tencent.* { *; }
--keep class com.baidu.* { *; }
--keep class lombok.ast.ecj.* { *; }
--dontwarn android.support.v4.**
--dontwarn com.tencent.**s
--dontwarn com.baidu.**
-# 友盟统计分析
--keepclassmembers class * { public <init>(org.json.JSONObject); }
--keepclassmembers enum com.umeng.analytics.** {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-# 支付宝钱包
--dontwarn com.alipay.**
--dontwarn HttpUtils.HttpFetcher
--dontwarn com.ta.utdid2.**
--dontwarn com.ut.device.**
--keep class com.alipay.android.app.IAlixPay{*;}
--keep class com.alipay.android.app.IAlixPay$Stub{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback{*;}
--keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
--keep class com.alipay.sdk.app.PayTask{ public *;}
--keep class com.alipay.sdk.app.AuthTask{ public *;}
--keep class com.alipay.mobilesecuritysdk.*
--keep class com.ut.*
+

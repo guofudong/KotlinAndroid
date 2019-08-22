@@ -21,36 +21,55 @@ class RecommendPresenter @Inject constructor() : RecommendContract.Presenter, Re
     @Inject
     lateinit var mService: RecommendServiceImpl
 
+    private var isLoading = false
+
+
     override fun getBanner() {
+        if (!isLoading) {
+            isLoading = true
+        }
+        if (isLoading) mView.showLoading()
         mService.getBanner(this)
 
     }
 
     override fun getSongList(isLoading: Boolean) {
-        if (isLoading) {
-            mView.showLoading()
-        }
+        this.isLoading = isLoading
+        if (this.isLoading) mView.showLoading()
         mService.getSongList(this)
     }
 
 
     override fun getRadioData() {
-        mView.showLoading()
+        if (!isLoading) {
+            isLoading = true
+        }
+        if (isLoading) mView.showLoading()
         mService.getRadioData(this)
     }
 
     override fun onBanner(data: List<BannerData>) {
         mView.showBanner(data)
+        if (isLoading) {
+            isLoading = false
+            mView.showContent()
+        }
     }
 
     override fun onSongList(data: List<SongData>) {
         mView.showSongList(data)
-        mView.hideLoading()
+        if (isLoading) {
+            isLoading = false
+            mView.showContent()
+        }
     }
 
     override fun onRadioData(data: List<RadioData>) {
         mView.showRadioData(data)
-        mView.hideLoading()
+        if (isLoading) {
+            isLoading = false
+            mView.showContent()
+        }
     }
 
 }

@@ -31,12 +31,10 @@ class MainActivity : BaseActivity() {
     private var clickTime: Long = 0
     private val mStack = Stack<BaseFragment>()
 
+    override fun isSetPaddingTop(): Boolean = false
+
     companion object {
         private const val STATE_BAR_POSITION = 1
-    }
-
-    override fun initOperate() {
-        setStatusBar()
     }
 
     override fun getLayoutId(): Int {

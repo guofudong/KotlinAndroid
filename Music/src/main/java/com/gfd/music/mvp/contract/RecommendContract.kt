@@ -21,7 +21,7 @@ interface RecommendContract {
 
     interface Presenter : BasePresenter {
         fun getBanner()
-        fun getSongList(isLoading: Boolean = true)
+        fun getSongList(isLoading:Boolean = true)
         fun getRadioData()
     }
 
