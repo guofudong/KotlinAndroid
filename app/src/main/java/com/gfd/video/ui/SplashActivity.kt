@@ -40,10 +40,11 @@ class SplashActivity : BaseActivity() {
         }.start()
     }
 
-    override fun getLayoutId(): Int {
+    override fun initOperate() {
         hideBottomUIMenu()
-        return R.layout.app_activity_splash
     }
+
+    override fun getLayoutId(): Int = R.layout.app_activity_splash
 
     /**
      * 隐藏底部虚拟键并全屏

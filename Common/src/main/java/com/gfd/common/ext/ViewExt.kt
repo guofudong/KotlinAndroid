@@ -2,6 +2,7 @@
 
 package com.gfd.common.ext
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Build
@@ -17,7 +18,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.gfd.common.dsl.EditorActionDSL
 import com.gfd.common.utils.SoftKeyboardUtils
-import com.gfd.common.utils.ToastUtils
+import com.tencent.smtt.sdk.WebChromeClient
 
 /**
  * @Author ：郭富东
@@ -139,5 +140,28 @@ fun EditText.setOnActionListener(dsl: EditorActionDSL.() -> Unit) {
             this.setText("")
         }
         false
+    }
+}
+
+/**
+ * 视频播放页面-WebView初始化方法
+ * @receiver com.tencent.smtt.sdk.WebView
+ * @param videoName String
+ */
+@SuppressLint("SetJavaScriptEnabled")
+fun com.tencent.smtt.sdk.WebView.init(videoName: String?) {
+    val webSettings = this.settings
+    webSettings.javaScriptEnabled = true
+    webSettings.useWideViewPort = true // 关键点
+    this.webViewClient = object : com.tencent.smtt.sdk.WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: com.tencent.smtt.sdk.WebView, url: String): Boolean {
+            this@init.loadUrl(url)
+            return true
+        }
+    }
+    this.webChromeClient = object : WebChromeClient() {
+        override fun onReceivedTitle(view: com.tencent.smtt.sdk.WebView, title: String) {
+            super.onReceivedTitle(view, videoName)
+        }
     }
 }

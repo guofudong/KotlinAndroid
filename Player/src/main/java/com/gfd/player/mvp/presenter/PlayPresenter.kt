@@ -20,19 +20,25 @@ class PlayPresenter @Inject constructor() : PlayContract.Presenter, PlayService.
     lateinit var mPlayService: PlayService
 
     override fun getVideoUrl(url: String) {
+        mView.showLoading()
         mPlayService.getVideoUrl(url, this)
     }
+
     override fun getWebVideoUrl(url: String) {
-        mPlayService.getWebVideoUrl(url,this)
+        mView.showLoading()
+        mPlayService.getWebVideoUrl(url, this)
     }
+
     override fun videoUrl(url: String, plotText: String) {
         mView.showVideoPlot(plotText)
         mView.playVideo(url)
+        mView.showContent()
     }
 
     override fun videoWebData(data: List<VideoItemData>, plotText: String) {
         mView.showVideoPlot(plotText)
         mView.playWebVideo(data)
+        mView.showContent()
     }
 
 

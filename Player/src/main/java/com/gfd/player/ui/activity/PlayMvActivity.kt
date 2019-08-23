@@ -6,6 +6,7 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gfd.common.ext.init
 import com.gfd.common.ui.activity.BaseActivity
 import com.gfd.player.R
 import com.gfd.provider.router.RouterPath
@@ -13,6 +14,8 @@ import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.player_activity_play_webview.*
+import kotlinx.android.synthetic.main.player_activity_play_webview.mWebView
+import kotlinx.android.synthetic.main.player_activity_player.*
 
 
 /**
@@ -33,10 +36,9 @@ class PlayMvActivity : BaseActivity() {
     @JvmField
     var videoName: String? = null
 
+    override fun isSetPaddingTop(): Boolean = false
 
-    override fun getLayoutId(): Int {
-        return R.layout.player_activity_play_webview
-    }
+    override fun getLayoutId(): Int = R.layout.player_activity_play_webview
 
     override fun initView() {
         setWebView()
@@ -58,19 +60,6 @@ class PlayMvActivity : BaseActivity() {
             }
         }
         window.setFormat(PixelFormat.TRANSLUCENT)
-        val webSettings = mWebView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.useWideViewPort = true // 关键点
-        mWebView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                mWebView.loadUrl(url)
-                return true
-            }
-        }
-        mWebView.webChromeClient = object : WebChromeClient() {
-            override fun onReceivedTitle(view: WebView, title: String) {
-                super.onReceivedTitle(view, videoName)
-            }
-        }
+        mWebView.init(videoName)
     }
 }

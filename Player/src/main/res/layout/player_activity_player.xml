@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.gfd.player.widgets.VideoPlayer
-        android:id="@+id/homeVideoPlayer"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_300"
-        android:background="@color/common_black"/>
+    <LinearLayout
+        android:id="@id/content_id"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/common_black"
-        android:text="简介"
-        android:textStyle="bold"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"/>
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/mWebView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_300"
+            android:background="@color/common_black"/>
 
-    <TextView
-        android:id="@+id/tvPlot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_14"
-        android:textColor="@color/common_black"
-        android:ellipsize="end"
-        android:padding="@dimen/dp_10"
-        android:lineSpacingMultiplier="1.5"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/common_black"
+            android:text="简介"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvPlot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/common_black"
+            android:ellipsize="end"
+            android:padding="@dimen/dp_10"
+            android:lineSpacingMultiplier="1.5"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

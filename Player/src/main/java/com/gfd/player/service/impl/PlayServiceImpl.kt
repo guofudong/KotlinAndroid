@@ -50,7 +50,8 @@ class PlayServiceImpl @Inject constructor() : PlayService {
     }
 
     override fun getWebVideoUrl(url: String, callBack: PlayService.GetVideoUrlCallBack) {
-        Logger.e("解析地址：${BaseConstant.BASE_URL + url}")
+        val analyzeUrl = "${BaseConstant.BASE_URL + url}"
+        Logger.e("解析地址：$analyzeUrl")
         OkGo.get<String>(BaseConstant.BASE_URL + url)
                 .tag(this)
                 .execute(object : StringCallback() {
@@ -59,9 +60,9 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                             val json = response.body().toString()
                             val document = Jsoup.parse(json)
                             val selectFirst = document.selectFirst("div[class=plot]")
-                            val videoDatas = ArrayList<VideoItemData>()
+                            val videoData = ArrayList<VideoItemData>()
                             if (selectFirst == null) {
-                                callBack.videoWebData(videoDatas, "")
+                                callBack.videoWebData(videoData, "")
                                 return
                             }
                             val plotText = selectFirst.text()
@@ -70,13 +71,13 @@ class PlayServiceImpl @Inject constructor() : PlayService {
                                 lis.forEach {
                                     val a = it.selectFirst("a")
                                     val count = a.text()//集数
-                                    val link = BaseConstant.URL_ANALYZE + a.attr("href")
-                                    videoDatas.add(VideoItemData(count, link))
+                                    val link = BaseConstant.URL_VIDEO_ANALYZE + a.attr("href")
+                                    videoData.add(VideoItemData(count,link))
                                 }
-                                val jsonData = Gson().toJson(videoDatas)
+                                val jsonData = Gson().toJson(videoData)
                                 Logger.e("解析出来的剧集地址：$jsonData")
                             }
-                            callBack.videoWebData(videoDatas, plotText)
+                            callBack.videoWebData(videoData, plotText)
                         } catch (e: Exception) {
                             ToastUtils.instance.showToast(ERROT_INFO)
                         }

@@ -16,6 +16,7 @@ import org.jetbrains.anko.find
  * @Email：878749089@qq.com
  * @description：Activity的基类
  */
+@Suppress("DEPRECATION")
 abstract class BaseActivity : AppCompatActivity() {
 
     /** 多状态布局View*/
@@ -29,7 +30,9 @@ abstract class BaseActivity : AppCompatActivity() {
             setContentView(rootView)
         }
         AppManager.instance.addActivity(this)
-        setStatusBar()
+        if (isSetStateBar()) {
+            setStatusBar()
+        }
         initOperate()
         if (isSetStateView()) {
             setStatusLayout()
@@ -38,6 +41,9 @@ abstract class BaseActivity : AppCompatActivity() {
         initData()
         setListener()
     }
+
+    /** 是都设置沉浸式状态来，true：设置，默认为设置*/
+    open fun isSetStateBar() = true
 
     /** 配置多状态布局*/
     private fun setStatusLayout() {

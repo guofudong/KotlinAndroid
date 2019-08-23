@@ -45,6 +45,8 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
     private lateinit var mvName: String
     private val tagData = arrayOf("慕涵盛华", "Kotlin-Android", "简书", "微信公众号", "Android行动派")
 
+    override fun isSetPaddingTop(): Boolean = false
+
     override fun injectComponent() {
         DaggerMvDetailComponent.builder()
                 .activityComponent(mActivityComponent)

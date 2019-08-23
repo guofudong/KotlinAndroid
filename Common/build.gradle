@@ -8,31 +8,23 @@ kapt {
 }
 
 dependencies {
-
     api dependence.libSupportV7
     api dependence.libSupportV4
     api dependence.libLeakConstraintLayout
-
     api dependence.libKotlinJre7
     api dependence.libDesign
     api dependence.libRecyclerview
-
     api dependence.libGlide
-
     api dependence.libRetrofit
     api dependence.libRetrofitConvert
     api dependence.libRetrofitAdapter
-
     api dependence.libOkhttp
     api dependence.libokhttp3LoggingInterceptor
-
     api dependence.libRxkotlin
-
     api dependence.libRxlifecycle2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     api dependence.libDagger
     api dependence.libLogger
-
     api dependence.libBottomBar
     api dependence.libStatusBar
     api dependence.libLRecyclerView
@@ -47,6 +39,6 @@ dependencies {
     api dependence.libCircleImageView
     api dependence.libBugly
     api dependence.libRhinoAndroid
-    api files('libs/tbs_sdk_thirdapp_v3.6.0.jar')
+    api files('libs/tbs_sdk_thirdapp_v4.3.0.jar')
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }

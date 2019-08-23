@@ -51,13 +51,14 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     private val SPAN_EPISODE = 6
     private lateinit var episodeAdapter: EpisodeAdapter
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
-    private lateinit var mDatas: List<VideoItemData>
+    private lateinit var mData: List<VideoItemData>
     private lateinit var mTvPlot: TextView
 
+    override fun isSetPaddingTop(): Boolean = false
 
-    override fun getLayoutId(): Int {
-        return R.layout.player_activity_play_webview
-    }
+    override fun isSetStateView(): Boolean = true
+
+    override fun getLayoutId(): Int = R.layout.player_activity_play_webview
 
     override fun injectComponent() {
         DaggerPlayComponent.builder()
@@ -130,7 +131,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
             override fun onClick(view: View, position: Int) {
                 episodeAdapter.setSelect(position)
                 mLRecyclerViewAdapter.notifyDataSetChanged()
-                mWebView.loadUrl(mDatas[position].videoUrl)
+                mWebView.loadUrl(mData[position].videoUrl)
             }
         })
     }
@@ -144,9 +145,9 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
             ToastUtils.instance.showToast("视频还没上映,请等待")
             finish()
         } else {
-            mDatas = data
+            mData = data
             mWebView.loadUrl(data[0].videoUrl)
-            episodeAdapter.addAll(mDatas)
+            episodeAdapter.addAll(mData)
         }
     }
 
