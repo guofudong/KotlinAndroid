@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ext.config
+import com.gfd.common.ext.init
 import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.common.ui.adapter.BaseAdapter
@@ -94,24 +95,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         window.setFormat(PixelFormat.TRANSLUCENT)
         val webSettings = mWebView.settings
         webSettings.config()
-        mWebView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                mWebView.loadUrl(url)
-                return true
-            }
-
-            override fun onPageFinished(view: WebView, url: String) {
-                super.onPageFinished(view, url)
-                showContent()
-            }
-        }
-        mWebView.webChromeClient = object : WebChromeClient() {
-
-            override fun onReceivedTitle(view: WebView?, title: String?) {
-                super.onReceivedTitle(view, videoName)
-            }
-
-        }
+        mWebView.init(videoName)
         //去掉qq浏览器的推广
         window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val outView = ArrayList<View>()
@@ -137,8 +121,7 @@ class PlayWebActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
     }
 
 
-    override fun playVideo(videoUrl: String) {
-    }
+    override fun playVideo(videoUrl: String) {}
 
     override fun playWebVideo(data: List<VideoItemData>) {
         if (data.isEmpty()) {

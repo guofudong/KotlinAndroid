@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@id/content_id"
         android:layout_width="0px"
         android:layout_height="0px"
+        android:layout_marginBottom="@dimen/dp_10"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.tencent.smtt.sdk.WebView
             android:id="@+id/mWebView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_300"
-            android:background="@color/common_black"/>
+            android:background="@color/common_black" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textSize="@dimen/sp_16"
-            android:textColor="@color/common_black"
-            android:text="简介"
-            android:textStyle="bold"
             android:paddingLeft="@dimen/dp_10"
-            android:paddingTop="@dimen/dp_10"/>
+            android:paddingTop="@dimen/dp_10"
+            android:text="简介"
+            android:textColor="@color/common_black"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvPlot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_14"
-            android:textColor="@color/common_black"
             android:ellipsize="end"
-            android:padding="@dimen/dp_10"
-            android:lineSpacingMultiplier="1.5"/>
+            android:lineSpacingMultiplier="1.5"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:textColor="@color/common_black"
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

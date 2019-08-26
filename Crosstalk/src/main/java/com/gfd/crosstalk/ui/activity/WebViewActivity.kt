@@ -1,23 +1,21 @@
 package com.gfd.crosstalk.ui.activity
 
-import android.graphics.Bitmap
 import android.graphics.PixelFormat
+import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.gfd.common.ext.config
+import com.gfd.common.ext.init
 import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity
-import com.gfd.crosstalk.R
 import com.orhanobut.logger.Logger
-import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebView
-import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.crosstalk_webview.*
+
 
 class WebViewActivity : BaseActivity() {
 
     private var videoName = ""
     private var videoUrl = ""
-    private var mIsPageLoading: Boolean = false
 
     override fun initView() {
         showLoading()
@@ -34,7 +32,7 @@ class WebViewActivity : BaseActivity() {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.crosstalk_webview
+        return com.gfd.crosstalk.R.layout.crosstalk_webview
     }
 
     override fun setListener() {
@@ -44,36 +42,7 @@ class WebViewActivity : BaseActivity() {
         window.setFormat(PixelFormat.TRANSLUCENT)
         val webSettings = mWebView.settings
         webSettings.config()
-        mWebView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
-                if (mIsPageLoading) {
-                    return false
-                }
-                if (url != null && url.startsWith("http")) {
-                    mWebView.loadUrl(url)
-                    return true
-                }
-                return true
-            }
-
-            override fun onPageStarted(p0: WebView?, p1: String?, p2: Bitmap?) {
-                super.onPageStarted(p0, p1, p2)
-                mIsPageLoading = true
-            }
-
-            override fun onPageFinished(p0: WebView?, url: String?) {
-                super.onPageFinished(p0, url)
-                mIsPageLoading = false
-                showContent()
-            }
-        }
-        mWebView.webChromeClient = object : WebChromeClient() {
-
-            override fun onReceivedTitle(view: WebView, title: String) {
-                super.onReceivedTitle(view, videoName)
-            }
-
-        }
+        mWebView.init(videoName)
         //去掉qq浏览器的推广
         window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val outView = ArrayList<View>()

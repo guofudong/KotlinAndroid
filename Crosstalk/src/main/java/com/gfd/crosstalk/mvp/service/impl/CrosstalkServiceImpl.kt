@@ -1,6 +1,5 @@
 package com.gfd.crosstalk.mvp.service.impl
 
-import android.text.TextUtils
 import com.gfd.common.utils.CodeUtils
 import com.gfd.crosstalk.entity.CrosstalkVideoData
 import com.gfd.crosstalk.entity.Video
@@ -20,56 +19,57 @@ import javax.inject.Inject
  */
 class CrosstalkServiceImpl @Inject constructor() : CrosstalkService {
 
-  companion object{
-      private const val PAGE_COUNT = 12
-  }
+    companion object {
+        private const val PAGE_COUNT = 20
+    }
 
-    //https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=0&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=20&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415
     override fun getVideoList(page: Int, callback: CrosstalkService.IGetVideoListCallback) {
-        val url = "https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0%E6%BC%94%E4%B9%89&autoload=true&count=$PAGE_COUNT&&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415"
+        val url = "https://www.toutiao.com/api/search/content/?aid=24&app_name=web_search&offset=${(page - 1) * PAGE_COUNT}&format=json&keyword=%E7%9B%B8%E5%A3%B0&autoload=true&count=$PAGE_COUNT&&en_qc=1&cur_tab=2&from=video&pd=video&timestamp=1554889280415"
+        OkGo.get<String>("https://www.fastmock.site/mock/6f83f4af5228f968862b5958800c653f/kotlin/cookit")
+                .execute(object : StringCallback() {
+                    override fun onSuccess(response: Response<String>) {
+                        val cookie = response.body().toString()
+                        Logger.e("相声视频cookie：$cookie")
+                        getData(url, cookie, callback)
+                    }
+                })
+    }
+
+    private fun getData(url: String, cookie: String, callback: CrosstalkService.IGetVideoListCallback) {
         OkGo.get<String>(url)
                 .tag(this)
+                .headers("cookie", cookie)
                 .execute(object : StringCallback() {
+                    val data = ArrayList<Video>()
                     override fun onSuccess(response: Response<String>) {
                         val json = CodeUtils.unicodeToString(response.body().toString())
                         Logger.e("相声视频数据：$json")
                         val videoData = Gson().fromJson(json, CrosstalkVideoData::class.java)
-                        //获取Cookie
-                        OkGo.get<String>("http://toutiao.iiilab.com")
-                                .execute(object : StringCallback() {
-                                    override fun onSuccess(response: Response<String>) {
-                                        val headers = response.headers()
-                                        var cookie = headers.get("Set-Cookie").toString().split(";")[0].split("=")[1]
-                                        Logger.e("cookie = $cookie")
-                                        cookie = "iii_Session=f2gstd4ovdl4ait39i4aqco6f6;PHPSESSIID=$cookie"
-                                        val data = ArrayList<Video>()
-                                        if(videoData.data == null) return
-                                        if (videoData.data.isNotEmpty()) {
-                                            videoData.data.forEach {
-                                                if (!TextUtils.isEmpty(it.title)) {
-                                                    val video = Video(
-                                                            it.title,
-                                                            it.create_time,
-                                                            it.datetime,
-                                                            it.video_duration,
-                                                            it.comment_count,
-                                                            it.middle_image_url,
-                                                            it.large_image_url,
-                                                            it.source_url,
-                                                            it.video_duration_str ?: "00:00",
-                                                            cookie)
-                                                    data.add(video)
-                                                }
-                                            }
-                                        }
-                                        callback.onVideoList(data)
-                                    }
-                                })
+                        if (videoData.data == null) return
+                        if (videoData.data.isNotEmpty()) {
+                            videoData.data.forEach {
+                                if (it.source_url != null) {
+                                    val video = Video(
+                                            it.title ?: "",
+                                            it.create_time ?: "",
+                                            it.datetime ?: "",
+                                            it.video_duration,
+                                            it.comment_count,
+                                            it.middle_image_url ?: "",
+                                            it.large_image_url ?: "",
+                                            it.source_url,
+                                            it.video_duration_str ?: "00:00",
+                                            "")
+                                    data.add(video)
+                                }
+                            }
+                        }
+                    }
 
+                    override fun onFinish() {
+                        callback.onVideoList(data)
                     }
                 })
-
     }
-
 
 }

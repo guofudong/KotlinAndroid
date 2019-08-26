@@ -1,12 +1,14 @@
 package com.gfd.player.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.graphics.PixelFormat
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gfd.common.ext.init
+import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseMvpActivity
 import com.gfd.player.R
 import com.gfd.player.entity.VideoItemData
@@ -15,9 +17,6 @@ import com.gfd.player.injection.moudle.PlayModule
 import com.gfd.player.mvp.contract.PlayContract
 import com.gfd.player.mvp.presenter.PlayPresenter
 import com.gfd.provider.router.RouterPath
-import com.tencent.smtt.sdk.WebChromeClient
-import com.tencent.smtt.sdk.WebView
-import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.android.synthetic.main.player_activity_player.*
 
 /**
@@ -72,9 +71,7 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         mWebView.loadUrl(videoUrl)
     }
 
-    override fun playWebVideo(data: List<VideoItemData>) {
-
-    }
+    override fun playWebVideo(data: List<VideoItemData>) {}
 
     override fun showVideoPlot(plotText: String) {
         tvPlot.text = plotText
@@ -94,4 +91,16 @@ class PlayerActivity : BaseMvpActivity<PlayPresenter>(), PlayContract.View {
         mWebView.init(videoName)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mWebView.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            finish()
+        } else {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+    }
 }

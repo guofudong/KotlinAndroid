@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
+import com.gfd.common.common.BaseApplication
 import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.fragment.BaseMvpFragment
@@ -17,6 +18,7 @@ import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
 import com.gfd.crosstalk.ui.activity.WebViewActivity
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
+import com.tencent.smtt.sdk.TbsVideo
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
 
@@ -84,13 +86,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
         mAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
                 val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getData()[position].source_url
-                //   val videoImage = mAdapter.getData()[position].large_image_url
                 val videoName = mAdapter.getData()[position].name
-                /*  ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
-                          .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
-                        //  .withString(RouterPath.Player.KEY_IMAGE, videoImage)
-                          .withString(RouterPath.Player.KEY_NAME, videoName)
-                          .navigation()*/
                 val intent = Intent(activity, WebViewActivity::class.java)
                 intent.putExtra("videoUrl", videoUrl)
                 intent.putExtra("videoName", videoName)
