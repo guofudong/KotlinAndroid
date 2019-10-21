@@ -139,3 +139,5 @@ interface MusicService {
  ### 电视直播，相声模块
  
 ![](/screenshot/play01.png)  ![](/screenshot/crosstalk01.png)  
+
+![关注公众号，获取更多资源](/screenshot/qcode.jpg)
