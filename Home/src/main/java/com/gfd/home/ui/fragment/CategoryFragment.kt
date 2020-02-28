@@ -56,10 +56,7 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
                 .build().inject(this)
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.home_fragment_category
-    }
-
+    override fun getLayoutId(): Int = R.layout.home_fragment_category
 
     override fun initView() {
         //设置刷新
@@ -69,7 +66,6 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         mLRecyclerViewAdapter = LRecyclerViewAdapter(mVideoAdapter)
         categoryRecycler.gridInit(activity!!, GRID_COLUMNS, mLRecyclerViewAdapter)
         categoryRecycler.setLoadMoreEnabled(true)
-
     }
 
     override fun initData() {
@@ -110,14 +106,8 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
             val videoDatas = mVideoAdapter.getDatas()
             val itemData = videoDatas[position]
-            path = if (category == CATEGORY_NEW) {
-                RouterPath.Player.PATH_PLAYER
-            } else {
-                RouterPath.Player.PATH_PLAYER_WEB
-            }
+            path = if (category == CATEGORY_NEW) RouterPath.Player.PATH_PLAYER else RouterPath.Player.PATH_PLAYER_WEB
             toPlayer(itemData.videoLink, itemData.videoImg, itemData.videoName)
-            Logger.e("list ：${itemData.videoLink}")
-
         }
     }
 
@@ -132,7 +122,12 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }
 
-
+    /**
+     * 跳转到视频播放页面
+     * @param videoUrl String：视频播放地址
+     * @param videoImage String：视频海报
+     * @param videoName String：视频标题
+     */
     private fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
         ARouter.getInstance().build(path)
                 .withString(RouterPath.Player.KEY_PLAYER, videoUrl)
@@ -140,5 +135,4 @@ class CategoryFragment : BaseMvpFragment<CategoryPresenter>(), CategoryContract.
                 .withString(RouterPath.Player.KEY_NAME, videoName)
                 .navigation()
     }
-
 }

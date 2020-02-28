@@ -80,9 +80,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
     override fun setListener() {
         //监听回车键
         edKeyword.setOnActionListener {
-            onSearch {
-                search(it)
-            }
+            onSearch(::search)
         }
         mSearchAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
@@ -92,20 +90,17 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
                 songaAtist.text = song.singer
                 mPlayService?.playMusic(song.playerUrl)
             }
-
         })
         mHistoryAdapter.seOnClickListener(object : com.gfd.common.ui.adapter.BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
                 val keyword = mHistoryData[position]
                 search(keyword)
             }
-
         })
         ivBack.setOnClickListener {
             finish()
         }
     }
-
 
     private fun search(keyword: String) {
         hotRootLayout.visibility = View.VISIBLE

@@ -15,7 +15,6 @@ class MusicServiceStub(service: MusicPlayService) : IMusicService.Stub() {
 
     override fun playMusic(path: String) {
         mService.get()?.playMusic(path)
-
     }
 
     override fun playMusicById(id: String) {

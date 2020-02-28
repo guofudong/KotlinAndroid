@@ -31,17 +31,17 @@ class CateGoryServiceImpl @Inject constructor() : CategoryService {
                         val videoDatas = ArrayList<VideoItemData>()
                         document.select("div[class=item] > ul > div").forEach {
                             val a = it.selectFirst("a")
-                            var videoName = a.attr("title")
-                            var imgUrl = a.attr("src")
+                            val videoName = a.attr("title")
+                            val imgUrl = a.attr("src")
                             var link = a.attr("href")
-                            if (!link.contains("vod")) {
-                                link = link.substring(1, link.length)
+                            link = if (!link.contains("vod")) {
+                                link.substring(1, link.length)
                             } else {
-                                link = "/$link"
+                                "/$link"
                             }
                             videoDatas.add(VideoItemData(videoName = videoName, videoImg = imgUrl, videoLink = link))
                         }
-                        var jsonData = Gson().toJson(videoDatas)
+                        val jsonData = Gson().toJson(videoDatas)
                         AppPrefsUtils.putString(encode(url), jsonData)
                         Logger.e("解析结果集：$jsonData")
                         callBack.onCategoryVideos(videoDatas, state)

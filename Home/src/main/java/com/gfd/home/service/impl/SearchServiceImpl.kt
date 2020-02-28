@@ -34,7 +34,6 @@ class SearchServiceImpl @Inject constructor() : SearchService {
             delete(SearHistoryTable.TABLE_NAME)
             callback.onHistory(ArrayList())
         }
-
     }
 
     override fun getSearchHistory(context: Context, callback: SearchService.SearchCallBack) {
@@ -43,21 +42,19 @@ class SearchServiceImpl @Inject constructor() : SearchService {
             Collections.reverse(historyData)
             callback.onHistory(historyData)
         }
-
     }
 
     override fun search(context: Context, keyWord: String, callback: SearchService.SearchCallBack) {
         //将搜索关键字保存到数据库
         context.database.use {
             insert(SearHistoryTable.TABLE_NAME, SearHistoryTable.NAME to keyWord)
-
         }
         OkGo.post<String>(BaseConstant.URL_SEARCH)
                 .tag(this)
                 .params("wd", keyWord)
                 .execute(object : StringCallback() {
                     override fun onSuccess(response: Response<String>?) {
-                        var datas = ArrayList<SearchItemData>()
+                        val datas = ArrayList<SearchItemData>()
                         val html = response!!.body().toString()
                         val document = Jsoup.parse(html)
                         document.select("div[class=item clearfix]").forEach {

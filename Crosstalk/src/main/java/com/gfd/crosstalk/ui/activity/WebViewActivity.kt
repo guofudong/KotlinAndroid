@@ -1,21 +1,21 @@
 package com.gfd.crosstalk.ui.activity
 
 import android.graphics.PixelFormat
-import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.gfd.common.ext.config
 import com.gfd.common.ext.init
 import com.gfd.common.ext.onDestroy
 import com.gfd.common.ui.activity.BaseActivity
+import com.gfd.crosstalk.R
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.crosstalk_webview.*
-
 
 class WebViewActivity : BaseActivity() {
 
     private var videoName = ""
     private var videoUrl = ""
+
+    override fun getLayoutId(): Int = R.layout.crosstalk_webview
 
     override fun initView() {
         showLoading()
@@ -31,10 +31,6 @@ class WebViewActivity : BaseActivity() {
     override fun initData() {
     }
 
-    override fun getLayoutId(): Int {
-        return com.gfd.crosstalk.R.layout.crosstalk_webview
-    }
-
     override fun setListener() {
     }
 
@@ -47,9 +43,7 @@ class WebViewActivity : BaseActivity() {
         window.decorView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val outView = ArrayList<View>()
             window.decorView.findViewsWithText(outView, "QQ浏览器", View.FIND_VIEWS_WITH_TEXT)
-            if (outView.size > 0) {
-                outView[0].visibility = View.GONE
-            }
+            if (outView.size > 0) outView[0].visibility = View.GONE
         }
         mWebView.loadUrl(videoUrl)
     }

@@ -1,6 +1,5 @@
 package com.gfd.home.ui.fragment
 
-import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import com.alibaba.android.arouter.launcher.ARouter
@@ -27,6 +26,7 @@ import com.orhanobut.logger.Logger
 import com.youth.banner.Banner
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.home_fragment_home.*
+import org.jetbrains.anko.startActivity
 
 
 /**
@@ -89,7 +89,6 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
             val imgData = imageData[it]
             path = RouterPath.Player.PATH_PLAYER
             toPlayer(imgData.link, imgData.imgUrl, imgData.name)
-            Logger.e("banner ：${imgData.link}")
         }
         swipeRefresh.setOnRefreshListener {
             AppPrefsUtils.remove(Constant.KEY_JSON)
@@ -99,72 +98,54 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
         mLRecyclerViewAdapter.setOnItemClickListener { _, position ->
             val itemData = mVideoData[position]
             if (itemData.getItemType() == Constant.ITEM_TYPE_TITLE) {//点击标题
-                val intent = Intent(activity, CategoryActivity::class.java)
-                intent.putExtra(Constant.CATEGORY, itemData.titleType)
-                startActivity(intent)
-                Logger.e("TitleType : ${itemData.titleType}")
+                activity?.startActivity<CategoryActivity>(Constant.CATEGORY to itemData.titleType)
             } else {//点击图片
-                path = if (itemData.title == mVideoData[0].title) {
-                    RouterPath.Player.PATH_PLAYER
-                } else {
-                    RouterPath.Player.PATH_PLAYER_WEB
-                }
+                path = if (itemData.title == mVideoData[0].title) RouterPath.Player.PATH_PLAYER else RouterPath.Player.PATH_PLAYER_WEB
                 toPlayer(itemData.videoLink, itemData.videoImg, itemData.videoName)
-                Logger.e("list ：${itemData.videoLink}")
             }
         }
         //搜索
         tvSearch.setOnClickListener {
-            startActivity(Intent(activity, SearchActivity::class.java))
+            activity?.startActivity<SearchActivity>()
         }
 
         //分类点击
         homeCategory01.setOnClickListener {
             //正在热映
-            val intent = Intent(activity, MovieListActivity::class.java)
-            intent.putExtra("title", "正在热映")
-            intent.putExtra("movieType", Constant.TYPE_MOVIE_01)
-            startActivity(intent)
-
+            toMovieListActivity("正在热映",Constant.TYPE_MOVIE_01)
         }
         homeCategory02.setOnClickListener {
             //即将上映
-            val intent = Intent(activity, MovieListActivity::class.java)
-            intent.putExtra("title", "即将上映")
-            intent.putExtra("movieType", Constant.TYPE_MOVIE_02)
-            startActivity(intent)
+            toMovieListActivity("即将上映",Constant.TYPE_MOVIE_02)
         }
         homeCategory03.setOnClickListener {
             //电影排行
-            val intent = Intent(activity, MovieListActivity::class.java)
-            intent.putExtra("title", "电影排行")
-            intent.putExtra("movieType", Constant.TYPE_MOVIE_03)
-            startActivity(intent)
+            toMovieListActivity("电影排行",Constant.TYPE_MOVIE_03)
         }
         homeCategory04.setOnClickListener {
             //随便看看
-            val intent = Intent(activity, MovieListActivity::class.java)
-            intent.putExtra("title", "随便看看")
-            intent.putExtra("movieType", Constant.TYPE_MOVIE_04)
-            startActivity(intent)
+            toMovieListActivity("随便看看",Constant.TYPE_MOVIE_04)
         }
     }
 
+    /**
+     * 跳转到电影列表页面
+     * @param title String：电影类型title
+     * @param type Int：电影类型tag
+     */
+    private fun toMovieListActivity(title:String,type:Int){
+        activity?.startActivity<MovieListActivity>("title" to title,"movieType" to type)
+    }
+
     override fun showVideoList(data: VideoListData) {
-        if (swipeRefresh != null && swipeRefresh.isRefreshing) {
-            swipeRefresh.isRefreshing = false
-        }
+        if (swipeRefresh != null && swipeRefresh.isRefreshing) swipeRefresh.isRefreshing = false
         videoData.addAll(data.videoList)
         //设置轮播图数据
         setBanner(data.bannerUrls)
         //设置列表数据
         mLRecyclerViewAdapter.setSpanSizeLookup { _, position ->
             val type = data.videoList[position].type
-            if (type == Constant.ITEM_TYPE_TITLE) {
-                GRID_COLUMNS
-            } else {
-                1
-            }
+            if (type == Constant.ITEM_TYPE_TITLE) GRID_COLUMNS else 1
         }
         mVideoData = data.videoList
         mVideoAdapter.updateData(mVideoData)
@@ -193,6 +174,12 @@ class HomeFragment : BaseMvpFragment<VideoPresenter>(), VideoListContract.View {
         mBanner.stopAutoPlay()
     }
 
+    /**
+     * 跳转到视频播放页面
+     * @param videoUrl String：视频播放地址
+     * @param videoImage String：视频海报
+     * @param videoName String：视频标题
+     */
     private fun toPlayer(videoUrl: String, videoImage: String, videoName: String) {
         Logger.e("跳转路径：path = $path")
         ARouter.getInstance().build(path)

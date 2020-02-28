@@ -13,7 +13,6 @@ import io.reactivex.Observable
 interface VideoService {
 
     interface GetVideoCallBack {
-
         fun onVideoDataSuccess(data: VideoListData)
     }
 

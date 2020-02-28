@@ -1,10 +1,8 @@
 package com.gfd.crosstalk.ui.fragment
 
-import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
-import com.gfd.common.common.BaseApplication
 import com.gfd.common.common.BaseConstant
 import com.gfd.common.ui.adapter.BaseAdapter
 import com.gfd.common.ui.fragment.BaseMvpFragment
@@ -18,15 +16,15 @@ import com.gfd.crosstalk.mvp.presenter.CrosstalkPresenter
 import com.gfd.crosstalk.ui.activity.WebViewActivity
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
-import com.tencent.smtt.sdk.TbsVideo
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import kotlinx.android.synthetic.main.crosstalk_fragment_crosstalk.*
+import org.jetbrains.anko.startActivity
 
 /**
  * @Author : 郭富东
  * @Date ：2018/9/15 - 10:59
  * @Email：878749089@qq.com
- * @description：
+ * @description：相声模块首页Fragment
  */
 @Suppress("DEPRECATION")
 class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContract.View {
@@ -43,7 +41,6 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
                 .crosstalkModule(CrosstalkModule(this))
                 .build()
                 .inject(this)
-
     }
 
     override fun isSetStateView(): Boolean = false
@@ -76,9 +73,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
             mPresenter.getVideoList(page)
         }
         mRecycler.setOnLoadMoreListener {
-            if (page > 10) {
-                mRecycler.setNoMore(true)
-            }
+            if (page > 10) mRecycler.setNoMore(true)
             isLoadMore = true
             page++
             mPresenter.getVideoList(page)
@@ -87,10 +82,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
             override fun onClick(view: View, position: Int) {
                 val videoUrl = BaseConstant.CROSSTRALK_BASE_URL + mAdapter.getData()[position].source_url
                 val videoName = mAdapter.getData()[position].name
-                val intent = Intent(activity, WebViewActivity::class.java)
-                intent.putExtra("videoUrl", videoUrl)
-                intent.putExtra("videoName", videoName)
-                startActivity(intent)
+                activity?.startActivity<WebViewActivity>("videoUrl" to videoUrl,"videoName" to videoName)
             }
         })
     }
@@ -102,9 +94,7 @@ class CrosstalkFragment : BaseMvpFragment<CrosstalkPresenter>(), CrosstalkContra
             mRecycler.refreshComplete(0)
         } else {
             mAdapter.updateData(data)
-            if (mSwipeCrosstalk != null) {
-                mSwipeCrosstalk.isRefreshing = false
-            }
+            if (mSwipeCrosstalk != null) mSwipeCrosstalk.isRefreshing = false
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()
     }

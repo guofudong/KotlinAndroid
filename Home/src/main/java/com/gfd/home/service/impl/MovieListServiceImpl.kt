@@ -47,7 +47,6 @@ class MovieListServiceImpl @Inject constructor() : MovieListService {
                             callBack.onMovieList(data)
                         }
                     }
-
                 })
     }
 

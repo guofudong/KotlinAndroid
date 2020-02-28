@@ -64,7 +64,6 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         mRecyclerView.layoutManager = LinearLayoutManager(this@SongListDetailActivity, LinearLayoutManager.VERTICAL, false)
         songListAdapter = SongListAdapter(this@SongListDetailActivity)
         mRecyclerView.adapter = songListAdapter
-
     }
 
     override fun initData() {
@@ -73,7 +72,6 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
 
     override fun setListener() {
         headRoot.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, _ ->
-
         })
         songListAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
@@ -90,7 +88,6 @@ class SongListDetailActivity : BaseMvpActivity<SongListDetailPresenter>(), SongL
         iv_back.setOnClickListener {
             finish()
         }
-
     }
 
     override fun showSongList(data: List<SongItemData>) {

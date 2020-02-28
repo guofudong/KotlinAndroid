@@ -27,7 +27,6 @@ import java.util.*
  */
 class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.View {
 
-
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mRadioAdapter: RadioAdapter
     private lateinit var mBanner: Banner
@@ -41,7 +40,6 @@ class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.V
                 .musicModule(MusicModule(this))
                 .build()
                 .inject(this)
-
     }
 
     override fun initView() {
@@ -85,7 +83,6 @@ class RadioFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.V
     }
 
     override fun showSongList(songDatas: List<SongData>) {
-
     }
 
     override fun showRadioData(radioDatas: List<RadioData>) {

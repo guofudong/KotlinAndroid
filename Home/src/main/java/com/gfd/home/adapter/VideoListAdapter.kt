@@ -31,7 +31,6 @@ class VideoListAdapter(private var context: Context) : BaseMultiAdapter<VideoIte
             //内容类型
             bindImgItem(holder, itemData)
         }
-
     }
 
     /**

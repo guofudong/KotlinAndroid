@@ -31,11 +31,11 @@ import java.util.*
 @Suppress("DEPRECATION")
 class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContract.View {
 
-
     private lateinit var mLRecyclerViewAdapter: LRecyclerViewAdapter
     private lateinit var mSongAdapter: RecommendAdapter
     private lateinit var mBanner: Banner
     private lateinit var mSongData: List<SongData>
+
     override fun getLayoutId(): Int = R.layout.music_fragment_recommend
 
     override fun injectComponent() {
@@ -44,7 +44,6 @@ class RecommendFragment : BaseMvpFragment<RecommendPresenter>(), RecommendContra
                 .musicModule(MusicModule(this))
                 .build()
                 .inject(this)
-
     }
 
     override fun initView() {

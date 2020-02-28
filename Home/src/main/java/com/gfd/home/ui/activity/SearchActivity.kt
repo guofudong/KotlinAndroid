@@ -53,7 +53,6 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
                 .build()
                 .inject(this)
         ARouter.getInstance().inject(this)
-
     }
 
     override fun isSetStateView(): Boolean = true
@@ -65,8 +64,8 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         setHistoryList()
     }
 
-
     override fun initData() {
+        //获取搜索历史记录
         mPresenter.getSearchHistory(this@SearchActivity)
     }
 
@@ -74,11 +73,7 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         //立即播放按钮
         mDataAdapter.setOnPlayClickListener { position ->
             val data = mData[position]
-            ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
-                    .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
-                    .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
-                    .withString(RouterPath.Player.KEY_NAME, data.name)
-                    .navigation()
+            toPlayActivity(data)
         }
         mHistoryAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
@@ -91,11 +86,20 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
         }
         //监听回车键
         edSearch.setOnActionListener {
-            onSearch {
-                search(it)
-            }
+            onSearch(::search)
         }
+    }
 
+    /**
+     * 跳转到播放页面
+     * @param data SearchItemData
+     */
+    private fun toPlayActivity(data: SearchItemData) {
+        ARouter.getInstance().build(RouterPath.Player.PATH_PLAYER_WEB)
+                .withString(RouterPath.Player.KEY_PLAYER, data.videoUrl)
+                .withString(RouterPath.Player.KEY_IMAGE, data.imgUrl)
+                .withString(RouterPath.Player.KEY_NAME, data.name)
+                .navigation()
     }
 
     /**
@@ -146,16 +150,11 @@ class SearchActivity : BaseMvpActivity<SearchPresenter>(), SearchContract.View {
             mDataAdapter.updateData(data)
             mLRecyclerViewAdapter.notifyDataSetChanged()
         }
-
     }
 
     override fun showSearchHistory(history: List<String>) {
         mHistoryData = history
-        if (mHistoryData.isEmpty()) {
-            rootHistory.visibility = View.GONE
-        } else {
-            rootHistory.visibility = View.VISIBLE
-        }
+        rootHistory.visibility = if (mHistoryData.isEmpty()) View.GONE else View.VISIBLE
         mHistoryAdapter.updateData(history)
     }
 

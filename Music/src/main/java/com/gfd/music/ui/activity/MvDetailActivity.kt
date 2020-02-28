@@ -54,9 +54,7 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 .build()
                 .inject(this)
     }
-    override fun getLayoutId(): Int {
-        return R.layout.music_activity_mv_detail
-    }
+    override fun getLayoutId(): Int = R.layout.music_activity_mv_detail
 
     override fun initView() {
         window.setFormat(PixelFormat.TRANSLUCENT)
@@ -110,7 +108,6 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         mSimilarMvAdapter.seOnClickListener(object : BaseAdapter.OnClickListener {
             override fun onClick(view: View, position: Int) {
             }
-
         })
     }
 
@@ -153,7 +150,6 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
                 mWebView.loadUrl(url)
                 return true
             }
-
         }
         mWebView.webChromeClient = object : WebChromeClient() {
             override fun onReceivedTitle(view: WebView, title: String) {
@@ -177,5 +173,4 @@ class MvDetailActivity : BaseMvpActivity<MvDetailPresenter>(), MvDetailContract.
         }
         super.onDestroy()
     }
-
 }

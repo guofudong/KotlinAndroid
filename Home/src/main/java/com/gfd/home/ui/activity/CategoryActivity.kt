@@ -26,9 +26,8 @@ class CategoryActivity : BaseActivity() {
     private val categoryTitles = arrayOf("抢先看", "电视剧", "电影", "综艺")
     private val mFragments = ArrayList<CategoryFragment>()
     private var currentPosition = 0
-    override fun getLayoutId(): Int {
-        return R.layout.home_activity_category
-    }
+
+    override fun getLayoutId(): Int = R.layout.home_activity_category
 
     override fun initView() {
         currentPosition = when (intent.getIntExtra(Constant.CATEGORY, 0)) {

@@ -41,7 +41,6 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
                 .shortFilmModule(ShortFilmModule(this))
                 .build()
                 .inject(this)
-
     }
 
     override fun initView() {
@@ -84,7 +83,6 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             intent.putExtra("json", data)
             startActivity(intent)
         }
-
     }
 
     override fun showMvList(data: List<MvData>) {
@@ -97,7 +95,6 @@ class ShortFilmFragment : BaseMvpFragment<ShortFilmPresenter>(), ShortFilmContra
             mMvSwipe.isRefreshing = false
         }
         mLRecyclerViewAdapter.notifyDataSetChanged()
-
     }
 
     override fun onResume() {

@@ -6,7 +6,7 @@ import com.gfd.provider.router.service.MusicService
 
 class MusicApplicationLoad : IApplicationLike {
 
-    var router = Router.instance
+    private var router = Router.instance
 
     override fun registered() {
         router.addService(MusicService::class.java.simpleName, MusicServiceImpl())

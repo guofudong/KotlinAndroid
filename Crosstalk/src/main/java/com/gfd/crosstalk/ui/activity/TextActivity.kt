@@ -12,10 +12,9 @@ import com.gfd.crosstalk.ui.fragment.CrosstalkFragment
  * @Author : 郭富东
  * @Date ：2018/9/21 - 17:10
  * @Email：878749089@qq.com
- * @description：测试Activit，单独运行模块中的内容
+ * @description：测试Activity，单独运行模块中的内容
  */
 class TextActivity : AppCompatActivity(){
-
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {

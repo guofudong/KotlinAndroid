@@ -33,8 +33,7 @@ class MusicFragment : BaseFragment() {
     override fun isSetStateView(): Boolean = false
 
     override fun initView() {
-        toggle = ActionBarDrawerToggle(activity, drawerLayout,
-                R.string.music_navigation_drawer_open, R.string.music_navigation_drawer_close)
+        toggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.music_navigation_drawer_open, R.string.music_navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         mFragments.add(RecommendFragment())
@@ -82,7 +81,6 @@ class MusicFragment : BaseFragment() {
             drawerLayout.openDrawer(Gravity.LEFT, true)
         }
     }
-
 
     /**
      * 获取自定义的tab View
