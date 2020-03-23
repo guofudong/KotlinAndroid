@@ -1,9 +1,6 @@
 # KotlinAndroid
 基于组件化 + MVP + Retrofit + RxKotlin + Dagger2实现的一款用Kotlin语言编写的影视类应用。
 
-## APK下载
-[点击下载](/screenshot/app-release.apk)
-
 ## 说明
 
 ### PluginSwitch：插件项目
